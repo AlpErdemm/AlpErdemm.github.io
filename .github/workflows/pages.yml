@@ -47,10 +47,13 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      # This repo's own copy: scripts/site-sync.mjs (in the private
+      # KitchenTactics repo) flattens site/ into this repo's root, so the
+      # artifact path here is the checkout root, not a site/ subfolder.
       - name: Upload the site as it is authored
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: .
 
       - name: Deploy
         id: deployment
