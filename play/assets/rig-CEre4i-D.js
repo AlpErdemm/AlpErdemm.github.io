@@ -1,0 +1,156 @@
+const r=`<!-- Zeytin · Pazar 2 ✦ · Suikastçi · yakın dövüş\r
+     attackSpeed 0.88 → round(20/0.88) = 23 tick = 1.15 sn\r
+\r
+     Karakter sayfasına göre yeniden çizildi. Eski rig silahı "çekirdeği —\r
+     küçük, sert, sivri" diyordu ve eli boştu; sayfa TERAZİ BIÇAKLARI istiyor:\r
+     altın boyunduruktan zincirle sarkan, alt kenarı çelik ağız olmuş iki\r
+     terazi kefesi. Yanında altın kese, defter, pazar şalı ve fidan.\r
+\r
+     ARKETİP \`stab\` OLARAK KALDI, ve bu sefer kalması bir karar. Kestane,\r
+     Bamya ve Kahve'yi sayfaları biçtirdiği için \`swing\`e taşıdım; burada\r
+     taşıyamam. \`swing\` temasta +56° ekliyor, ve zincirden sarkan bir kefe\r
+     yukarı bakamaz — yerçekimi öyle çizdirmiyor. Aşağı asılı bir ağız\r
+     \`swing\`de temasta +96°'ye gider, \`setAim\`in düzeltmek için isteyeceği\r
+     -109° de AIM_MAX 95'in dışında kalır. \`stab\` ile kefe hafif önde durur\r
+     (-6°), temas +0°, nişan -13°: hedefin gövdesiyle aynı hiza.\r
+\r
+     Sayfanın üçüncü karesindeki kırmızı yayı \`fx\` taşıyor, gövde değil.\r
+\r
+     PAZAR ORTAK TABAN korundu: pirinç ve sikke. Kadronun en KOYU gövdesi;\r
+     Karpuz'un devasa yeşiliyle ve Nar'ın kırmızısıyla karışmıyor. -->\r
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"\r
+     class="rig" data-atk="stab" data-unit="zeytin" style="--dur-atk:1.15s">\r
+\r
+  <ellipse class="shadow" cx="52" cy="137" rx="24" ry="5.4" fill="#000" opacity=".33"/>\r
+\r
+  <g class="armB" style="transform-origin:30px 92px">\r
+    <path d="M30 92 L20 94" stroke="#12120C" stroke-width="11" stroke-linecap="round"/>\r
+    <path d="M30 92 L20 94" stroke="#3E3E30" stroke-width="7.5" stroke-linecap="round"/>\r
+    <circle cx="18" cy="95" r="4.8" fill="#3E3E30" stroke="#12120C" stroke-width="2.4"/>\r
+    <path d="M18 92 L12 80" stroke="#A8762E" stroke-width="3.4" stroke-linecap="round"/>\r
+    <circle cx="11" cy="77" r="3" fill="none" stroke="#D9A93C" stroke-width="2.4"/>\r
+    <path d="M11 80 L12 90 M11 80 L30 86" stroke="#A8762E" stroke-width="2" stroke-linecap="round"/>\r
+    <path d="M10 90 C17 100 27 100 33 88 C26 95 17 95 10 90 Z"\r
+          fill="#C8CCD6" stroke="#12120C" stroke-width="2.6" stroke-linejoin="round"/>\r
+    <path d="M10 90 C17 96 27 96 33 88 L31 84 C25 90 17 90 12 86 Z"\r
+          fill="#D9A93C" stroke="#12120C" stroke-width="2.2" stroke-linejoin="round"/>\r
+  </g>\r
+\r
+  <g class="legB" style="transform-origin:44px 116px">\r
+    <path d="M44 106 L41 126" stroke="#12120C" stroke-width="11" stroke-linecap="round"/>\r
+    <path d="M44 106 L41 126" stroke="#2E2E24" stroke-width="7.5" stroke-linecap="round"/>\r
+    <path d="M35 126 Q30 131 33 136 L46 136 Q47 130 43 125 Z"\r
+          fill="#3E3E30" stroke="#12120C" stroke-width="2.6" stroke-linejoin="round"/>\r
+    <path d="M36 130 L45 129" stroke="#D9A93C" stroke-width="2.2" stroke-linecap="round"/>\r
+  </g>\r
+  <g class="legF" style="transform-origin:60px 116px">\r
+    <path d="M60 106 L63 126" stroke="#12120C" stroke-width="11" stroke-linecap="round"/>\r
+    <path d="M60 106 L63 126" stroke="#3E3E30" stroke-width="7.5" stroke-linecap="round"/>\r
+    <path d="M61 125 Q56 130 59 136 L73 136 Q75 131 71 126 Z"\r
+          fill="#4A4A3A" stroke="#12120C" stroke-width="2.6" stroke-linejoin="round"/>\r
+    <path d="M62 130 L71 130" stroke="#D9A93C" stroke-width="2.2" stroke-linecap="round"/>\r
+  </g>\r
+\r
+  <g class="body" style="transform-origin:52px 120px">\r
+    <path d="M28 72 Q14 64 8 74 Q16 84 26 80 Z"\r
+          fill="#F2E8D0" stroke="#12120C" stroke-width="2.8" stroke-linejoin="round"/>\r
+    <path d="M20 68 L17 78 M13 69 L11 78" stroke="#A8322A" stroke-width="4"/>\r
+    <circle cx="10" cy="80" r="2.8" fill="#D9A93C" stroke="#12120C" stroke-width="1.8"/>\r
+    <circle cx="16" cy="84" r="2.4" fill="#D9A93C" stroke="#12120C" stroke-width="1.6"/>\r
+\r
+    <path d="M52 56 L52 38" stroke="#12120C" stroke-width="4.4" stroke-linecap="round"/>\r
+    <path d="M52 42 C44 40 39 33 41 27 C48 28 52 34 52 42 Z"\r
+          fill="#5A6B32" stroke="#12120C" stroke-width="2.6" stroke-linejoin="round"/>\r
+    <path d="M52 45 C60 42 65 35 63 29 C56 31 52 37 52 45 Z"\r
+          fill="#7A8F42" stroke="#12120C" stroke-width="2.6" stroke-linejoin="round"/>\r
+\r
+    <ellipse cx="52" cy="82" rx="26" ry="27" fill="#35352A" stroke="#12120C" stroke-width="4"/>\r
+    <ellipse cx="41" cy="68" rx="7.5" ry="5" fill="#5E5E4A" opacity=".55"/>\r
+\r
+    <path d="M23.8 73.7 A30 30 0 0 1 80.2 73.7 L69.9 77.5 A19 19 0 0 0 34.1 77.5 Z"\r
+          fill="#F2E8D0" stroke="#12120C" stroke-width="3.4" stroke-linejoin="round"/>\r
+    <path d="M36.4 73.1 L27.4 66.8 M44 66.8 L39.3 56.8 M53.7 65.1 L54.6 54.1\r
+             M62.9 68.4 L69.2 59.4 M69.2 76 L79.2 71.3"\r
+          stroke="#A8322A" stroke-width="6"/>\r
+    <path d="M23.8 73.7 A30 30 0 0 1 80.2 73.7" fill="none" stroke="#12120C" stroke-width="3.2"/>\r
+    <circle cx="52" cy="60" r="4" fill="#D9A93C" stroke="#12120C" stroke-width="2.2"/>\r
+\r
+    <path d="M33 78 L46 85 L44 90 L32 84 Z" fill="#12120C"/>\r
+    <path d="M71 78 L58 85 L60 90 L72 84 Z" fill="#12120C"/>\r
+    <ellipse cx="43" cy="92" rx="6.5" ry="7.5" fill="#fff" stroke="#12120C" stroke-width="2.3"/>\r
+    <ellipse cx="61" cy="92" rx="6.5" ry="7.5" fill="#fff" stroke="#12120C" stroke-width="2.3"/>\r
+    <ellipse cx="44.3" cy="93" rx="3.6" ry="4.8" fill="#12120C"/>\r
+    <ellipse cx="62.3" cy="93" rx="3.6" ry="4.8" fill="#12120C"/>\r
+    <circle cx="42.6" cy="89.6" r="1.6" fill="#fff"/>\r
+    <circle cx="60.6" cy="89.6" r="1.6" fill="#fff"/>\r
+    <path d="M47 101 L57 101 L52 106 Z" fill="#D9A93C" stroke="#12120C" stroke-width="1.8"\r
+          stroke-linejoin="round"/>\r
+\r
+    <path d="M33 100 L71 100 L69 111 L35 111 Z"\r
+          fill="#F2E8D0" stroke="#12120C" stroke-width="2.8" stroke-linejoin="round"/>\r
+    <path d="M40 100 L39 111 M51 100 L50 111 M62 100 L61 111"\r
+          stroke="#A8322A" stroke-width="6"/>\r
+    <circle cx="52" cy="105" r="6.4" fill="#D9A93C" stroke="#12120C" stroke-width="2.8"/>\r
+    <path d="M52 101 L53.2 104 L56.4 104 L53.8 106 L54.8 109 L52 107.2 L49.2 109\r
+             L50.2 106 L47.6 104 L50.8 104 Z" fill="#A8762E"/>\r
+\r
+    <path d="M19 110 Q27 106 35 110 L33 124 Q26 128 21 124 Z"\r
+          fill="#6B4A28" stroke="#12120C" stroke-width="2.8" stroke-linejoin="round"/>\r
+    <path d="M20 112 Q27 109 34 112" stroke="#4A3218" stroke-width="2.2" fill="none"/>\r
+    <circle cx="27" cy="118" r="3.4" fill="#D9A93C" stroke="#12120C" stroke-width="1.8"/>\r
+\r
+    <path d="M71 108 L83 108 L83 122 L71 122 Z"\r
+          fill="#A8322A" stroke="#12120C" stroke-width="2.8" stroke-linejoin="round"/>\r
+    <path d="M71 108 L71 122" stroke="#F2E8D0" stroke-width="3.4"/>\r
+    <path d="M74 110 L81 110 M74 114 L81 114 M74 118 L80 118" stroke="#7A1E18" stroke-width="1.4"/>\r
+    <circle cx="78" cy="126" r="0.01" fill="#D9A93C" stroke="#12120C" stroke-width="1.6"/>\r
+\r
+    <!-- Olive skin specular, leaf veins and cool reflected rim strengthen the glossy fruit. -->\r
+    <path d="M34 63 Q40 57 48 57" fill="none" stroke="#8E8E73" stroke-width="2.2"\r
+          stroke-linecap="round" opacity=".72"/>\r
+    <path d="M68 91 Q62 103 50 108" fill="none" stroke="#1C1E18" stroke-width="2"\r
+          stroke-linecap="round" opacity=".8"/>\r
+    <path d="M44 31 L51 40 M60 33 L53 42" stroke="#B7C56D" stroke-width="1.4"/>\r
+    <circle cx="35" cy="75" r="1.2" fill="#B7B78C"/><circle cx="67" cy="97" r="1" fill="#5E5E4A"/>\r
+\r
+    <g data-expression="cute">\r
+      <path d="M33 84 Q39 79 46 84 M58 84 Q65 79 71 84" fill="none" stroke="#35352A" stroke-width="8" stroke-linecap="round"/>\r
+      <path d="M33 84 Q39 79 46 84 M58 84 Q65 79 71 84" fill="none" stroke="#12120C" stroke-width="2.8" stroke-linecap="round"/>\r
+      <ellipse cx="33" cy="101" rx="3" ry="1.8" fill="#D47A65" opacity=".58"/><ellipse cx="71" cy="101" rx="3" ry="1.8" fill="#D47A65" opacity=".58"/>\r
+      <path d="M45 100 Q52 107 59 100 Q58 109 52 110 Q46 109 45 100 Z" fill="#2A1B18" stroke="#12120C" stroke-width="2.1"/>\r
+      <path d="M49 105 Q52 107 55 105" fill="none" stroke="#E48873" stroke-width="1.7" stroke-linecap="round"/>\r
+    </g>\r
+\r
+    <path class="crack" d="M36 64 L48 78 L38 92 L50 104 L40 116"\r
+          stroke="#0A0A06" stroke-width="2.8" fill="none" stroke-linejoin="round"/>\r
+  </g>\r
+\r
+  <g class="armF" style="transform-origin:74px 92px">\r
+    <path d="M74 92 L84 94" stroke="#12120C" stroke-width="12" stroke-linecap="round"/>\r
+    <path d="M74 92 L84 94" stroke="#4A4A3A" stroke-width="8" stroke-linecap="round"/>\r
+    <circle cx="86" cy="95" r="5.2" fill="#4A4A3A" stroke="#12120C" stroke-width="2.6"/>\r
+    <path d="M86 92 L96 78" stroke="#A8762E" stroke-width="3.8" stroke-linecap="round"/>\r
+    <circle cx="97" cy="75" r="3.4" fill="none" stroke="#D9A93C" stroke-width="2.6"/>\r
+    <path d="M97 78 L86 88 M97 78 L110 86" stroke="#A8762E" stroke-width="2.2"\r
+          stroke-linecap="round"/>\r
+    <path d="M84 90 C92 102 106 102 114 88 C106 96 92 96 84 90 Z"\r
+          fill="#C8CCD6" stroke="#12120C" stroke-width="2.8" stroke-linejoin="round"/>\r
+    <path d="M84 90 C92 97 106 97 114 88 L112 83 C104 90 93 90 86 85 Z"\r
+          fill="#D9A93C" stroke="#12120C" stroke-width="2.4" stroke-linejoin="round"/>\r
+    <path d="M88 92 C95 97 104 97 110 92" stroke="#EFEFF4" stroke-width="1.8"\r
+          fill="none" stroke-linecap="round"/>\r
+  </g>\r
+\r
+  <g class="fx" style="transform-origin:108px 90px">\r
+    <path d="M92 58 Q130 88 96 122" fill="none" stroke="#7A1E18" stroke-width="10"\r
+          stroke-linecap="round" opacity=".4"/>\r
+    <path d="M94 62 Q126 89 98 118" fill="none" stroke="#D93A2C" stroke-width="5.5"\r
+          stroke-linecap="round" opacity=".85"/>\r
+    <path d="M97 68 Q120 89 100 112" fill="none" stroke="#FFB07A" stroke-width="2.4"\r
+          stroke-linecap="round"/>\r
+    <circle cx="128" cy="72" r="3.4" fill="#D9A93C" stroke="#12120C" stroke-width="1.6"/>\r
+    <circle cx="133" cy="96" r="3" fill="#D9A93C" stroke="#12120C" stroke-width="1.6"/>\r
+    <circle cx="124" cy="112" r="2.6" fill="#D9A93C" stroke="#12120C" stroke-width="1.4"/>\r
+  </g>\r
+</svg>\r
+`;export{r as default};

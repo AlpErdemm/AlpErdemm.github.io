@@ -1,0 +1,190 @@
+/**
+ * The page itself: reset, type scale, the ground, focus, and the one column
+ * every section is laid out in.
+ *
+ * Not one colour is authored here — every paint is `var(--token)` out of
+ * `tokens.css`, and `site/js/shell.test.ts` fails this file if a hex, an
+ * `rgb()` or an `hsl()` ever appears in it. That rule holds for all six
+ * sprints' stylesheets, which is what keeps the site one object rather than
+ * six agents' idea of brown.
+ *
+ * The ground is the game's own stall counter: the same three values at the
+ * same pitch as `ui.css:130-137` and the board canvas, so the page a player
+ * lands on is the surface the game is played on.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font: 16px/1.6 var(--sans);
+  background-color: var(--counter);
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--counter) 0 calc(var(--plank-w) - var(--plank-gap)),
+    var(--counter-seam) calc(var(--plank-w) - var(--plank-gap)) var(--plank-w),
+    var(--counter-plank) var(--plank-w) calc(var(--plank-w) * 2 - var(--plank-gap)),
+    var(--counter-seam) calc(var(--plank-w) * 2 - var(--plank-gap)) calc(var(--plank-w) * 2)
+  );
+  overscroll-behavior-y: none;
+}
+
+/* ------------------------------------------------------------------ type
+   A serif display face for anything with a name, the system sans for prose.
+   `clamp` rather than breakpoints: the suite shoots 390px and 1280px, and a
+   scale that steps between them has two sizes to get wrong instead of one. */
+
+h1, h2, h3, h4 {
+  margin: 0 0 .5rem;
+  font-family: var(--display);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+h1 { font-size: clamp(1.75rem, 1.2rem + 2.4vw, 3rem); }
+h2 { font-size: clamp(1.4rem, 1.05rem + 1.5vw, 2.15rem); }
+h3 { font-size: clamp(1.1rem, .98rem + .6vw, 1.4rem); }
+
+p { margin: 0 0 1rem; }
+
+a {
+  color: var(--brass-lit);
+  text-decoration-color: var(--brass);
+  text-underline-offset: .18em;
+}
+
+a:hover { color: var(--star-3); }
+
+code, kbd, samp { font-family: var(--mono); }
+
+/* --------------------------------------------------------------- layout
+   One column, one width, one gutter. `main > section` gets it by default so
+   a sprint writing inside its own section inherits the page's measure
+   without restating it — and without being able to disagree with it. */
+
+.masthead,
+.colophon,
+main > section {
+  width: 100%;
+  max-width: 68rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, .5rem + 2.5vw, 2.5rem);
+}
+
+main > section:not(:empty) {
+  padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+}
+
+/* ------------------------------------------------------------- masthead
+   The awning is the site's signature motif and it is used exactly once — in
+   the wordmark, above the letters. It is deliberately not repeated as a page
+   banner: a motif used twice on one screen is a pattern, not a mark. */
+
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: .5rem clamp(.75rem, .4rem + 1.4vw, 2rem);
+  padding-block: 1rem 1.25rem;
+  border-bottom: 2px solid var(--wood-rim);
+}
+
+.masthead__mark {
+  margin: 0;
+  margin-inline-end: auto;
+  font-size: 0;
+  line-height: 0;
+}
+
+.wordmark {
+  display: block;
+  height: clamp(2.5rem, 1.9rem + 2.6vw, 3.5rem);
+  width: auto;
+}
+
+.wordmark__stripe--sign { fill: var(--sign); }
+.wordmark__stripe--paper { fill: var(--paper); }
+
+.wordmark__word {
+  fill: var(--ink);
+  font-family: var(--display);
+  font-size: 54px;
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+
+.masthead__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem 1.1rem;
+  font-family: var(--display);
+  font-size: .95rem;
+}
+
+.masthead__nav a {
+  color: var(--dim);
+  text-decoration: none;
+  padding-block: .25rem;
+  border-bottom: 2px solid transparent;
+}
+
+.masthead__nav a:hover,
+.masthead__nav a:focus-visible {
+  color: var(--ink);
+  border-bottom-color: var(--brass);
+}
+
+/* --------------------------------------------------------------- footer */
+
+.colophon {
+  margin-block-start: clamp(2rem, 1rem + 4vw, 4rem);
+  padding-block: 1.5rem 2rem;
+  border-top: 2px solid var(--wood-rim);
+  color: var(--dim);
+  font-size: .9rem;
+}
+
+.colophon p { margin: 0 0 .35rem; }
+.colophon p:last-child { margin-bottom: 0; }
+.colophon__studio { font-family: var(--display); }
+
+/* ---------------------------------------------------------------- focus
+   One ring, on every focusable thing, at a contrast that survives being on
+   brown. Keyboard-only: `:focus-visible`, never `:focus`. */
+
+:focus-visible {
+  outline: 3px solid var(--brass-lit);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ------------------------------------------------------- reduced motion
+   Global, and set here so no later sprint has to remember it. Durations are
+   collapsed rather than zeroed so any `animationend` a sprint listens for
+   still fires; the animation is finished before the first frame paints. */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    transition-delay: 0ms !important;
+  }
+}

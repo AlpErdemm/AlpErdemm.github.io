@@ -1,0 +1,470 @@
+/**
+ * Ortak animasyon katmanı — tüm rig'ler bunu kullanır.
+ *
+ * Süreler `--dur-*` değişkenlerinden gelir; hepsi motorun tick sayılarından türetilmiş
+ * (bkz. README.md). `--sp` yavaşlatma çarpanıdır, yalnızca inceleme için.
+ *
+ * Saldırı süresi birime göre değişir: `attackTicks = round(20 / attackSpeed)`.
+ * Rig kökü kendi süresini `style="--dur-atk: 1.05s"` ile bildirir.
+ */
+
+/* `--sp` yalnızca kökte tanımlı: `.rig` üzerinde de tanımlansaydı yerel değer
+   kökteki hız ayarını gölgeler, hız düğmeleri hiçbir şey yapmazdı. */
+:root { --sp: 1; }
+
+.rig {
+  --dur-idle: 1.6s;
+  --dur-walk: 0.6s;
+  --dur-atk: 1.05s;   /* birim başına ezilir */
+  --dur-hit: 1.2s;    /* darbe ilk %17'de — 4 tick, 0.20 sn */
+  --dur-die: 1.8s;    /* ölüm ilk %42'de — 15 tick, 0.75 sn */
+  --dur-leap: 1.2s;   /* dalış ilk %21'de — 5 tick, 0.25 sn */
+  --dur-land: 1.0s;   /* iniş ilk %20'de — 4 tick, 0.20 sn */
+}
+
+.shadow, .body, .armF, .armB, .legF, .legB, .fx, .ammo, .cooked {
+  transform-box: view-box;
+}
+
+/* Varsayılan pivotlar. Birime özel olanlar rig.svg içinde `style` ile ezilir. */
+.shadow { transform-origin: 52px 137px; }
+.body   { transform-origin: 52px 118px; }
+.armB   { transform-origin: 24px 88px; }
+.legB   { transform-origin: 44px 114px; }
+.legF   { transform-origin: 62px 114px; }
+.armF   { transform-origin: 80px 96px; }
+.fx     { transform-origin: 52px 82px; opacity: 0; }
+.crack  { opacity: 0; }
+/* Ocak'ın ikinci hâli. Motorda bir KLİP değil bir MANDAL: `trait:ocak`
+   olayında `UnitRig.cook` beş tikte açar ve bir daha kapanmaz, o yüzden
+   burada bir `.st-cook` kuralı YOK — durum makinesine girseydi ilk darbe onu
+   ezerdi. Önizlemede görmek için düğmesi var (`preview.html`), o düğme sadece
+   opaklığı 1'e çekiyor. Pivot birime göre `rig.svg` içinde eziliyor. */
+.cooked { transform-origin: 52px 118px; opacity: 0; }
+.st-cook .cooked { opacity: 1; }
+
+.paused * { animation-play-state: paused !important; }
+
+/* ============================================================ BEKLEME */
+
+.st-idle .body   { animation: idleBody   calc(var(--dur-idle) * var(--sp)) ease-in-out infinite; }
+.st-idle .shadow { animation: idleShadow calc(var(--dur-idle) * var(--sp)) ease-in-out infinite; }
+.st-idle .armF   { animation: idleArmF   calc(var(--dur-idle) * var(--sp)) ease-in-out infinite; }
+.st-idle .armB   { animation: idleArmB   calc(var(--dur-idle) * var(--sp)) ease-in-out infinite; }
+
+@keyframes idleBody   { 0%,100% { transform: translateY(0) scaleY(1) }
+                        50%     { transform: translateY(-3px) scaleY(1.015) } }
+@keyframes idleShadow { 0%,100% { transform: scale(1) }
+                        50%     { transform: scale(.93,.88) } }
+@keyframes idleArmF   { 0%,100% { transform: rotate(-2deg) }
+                        50%     { transform: rotate(3.5deg) } }
+@keyframes idleArmB   { 0%,100% { transform: rotate(2deg) }
+                        50%     { transform: rotate(-3deg) } }
+
+/* ============================================================= YÜRÜME
+   Sim 6 tick'te bir hex ilerler, render 4 tick'te varır. Yani her adım
+   0.2 sn kayma + 0.1 sn oturma. Döngü iki adımı kapsar. */
+
+.st-walk .body   { animation: walkBody   calc(var(--dur-walk) * var(--sp)) linear infinite; }
+.st-walk .shadow { animation: walkShadow calc(var(--dur-walk) * var(--sp)) linear infinite; }
+.st-walk .legB   { animation: walkLegB   calc(var(--dur-walk) * var(--sp)) ease-in-out infinite; }
+.st-walk .legF   { animation: walkLegF   calc(var(--dur-walk) * var(--sp)) ease-in-out infinite; }
+.st-walk .armF   { animation: walkArmF   calc(var(--dur-walk) * var(--sp)) ease-in-out infinite; }
+.st-walk .armB   { animation: walkArmB   calc(var(--dur-walk) * var(--sp)) ease-in-out infinite; }
+
+@keyframes walkBody {
+  0%   { transform: translateY(0) rotate(-2deg) }
+  17%  { transform: translateY(-6px) rotate(0deg) }
+  33%  { transform: translateY(0) rotate(2deg) }
+  50%  { transform: translateY(0) rotate(1deg) }
+  67%  { transform: translateY(-6px) rotate(0deg) }
+  83%  { transform: translateY(0) rotate(-2deg) }
+  100% { transform: translateY(0) rotate(-2deg) }
+}
+@keyframes walkShadow { 0%,33%,100% { transform: scale(1) }
+                        17%,67%     { transform: scale(.86,.8) } }
+@keyframes walkLegB { 0%,100% { transform: rotate(18deg) }  50% { transform: rotate(-18deg) } }
+@keyframes walkLegF { 0%,100% { transform: rotate(-18deg) } 50% { transform: rotate(18deg) } }
+@keyframes walkArmF { 0%,100% { transform: rotate(-8deg) }  50% { transform: rotate(9deg) } }
+@keyframes walkArmB { 0%,100% { transform: rotate(9deg) }   50% { transform: rotate(-8deg) } }
+
+/* ============================================================ SALDIRI
+   Faz oranları her arketipte aynı:
+     hazırlık %24 · vuruş %12 · temas %10 · toparlanma %54
+   Değişen tek şey `.armF`'in ne yaptığı.
+
+   Arketip seçici BİTİŞİK yazılır: `data-atk` durum sınıfıyla aynı elemanda,
+   `<svg class="rig st-attack" data-atk="swing">`. Araya boşluk konursa torun
+   seçicisi olur ve hiçbir zaman eşleşmez. */
+
+.st-attack:not([data-atk="none"]) .body   { animation: atkBody   calc(var(--dur-atk) * var(--sp)) infinite; }
+.st-attack:not([data-atk="none"]) .shadow { animation: atkShadow calc(var(--dur-atk) * var(--sp)) infinite; }
+.st-attack:not([data-atk="none"]) .armB   { animation: atkArmB   calc(var(--dur-atk) * var(--sp)) infinite; }
+.st-attack:not([data-atk="none"]) .fx     { animation: atkFx     calc(var(--dur-atk) * var(--sp)) infinite; }
+
+@keyframes atkBody {
+  0%   { transform: translateX(0) rotate(0deg) }
+  24%  { transform: translateX(-5px) rotate(-4deg) }
+  36%  { transform: translateX(7px) rotate(5deg) }
+  50%  { transform: translateX(3px) rotate(2deg) }
+  100% { transform: translateX(0) rotate(0deg) }
+}
+@keyframes atkShadow {
+  0%,100% { transform: scale(1) }
+  24%     { transform: scale(.94,.95) translateX(-4px) }
+  36%     { transform: scale(1.08,1) translateX(6px) }
+}
+@keyframes atkArmB {
+  0%,100% { transform: rotate(0deg) }
+  24%     { transform: rotate(16deg) }
+  36%     { transform: rotate(-14deg) }
+}
+@keyframes atkFx {
+  0%,26% { opacity: 0; transform: scale(.62) rotate(-16deg) }
+  33%    { opacity: .95; transform: scale(1) rotate(0deg) }
+  44%    { opacity: 0; transform: scale(1.16) rotate(10deg) }
+  100%   { opacity: 0 }
+}
+
+/* ---- arketip: SAVURMA — geniş yay ---- */
+.st-attack[data-atk="swing"] .armF { animation: atkSwing calc(var(--dur-atk) * var(--sp)) infinite; }
+/* Kol temas anında biraz da ileri gidiyor: sadece dönüş, komşu karedeki gövdeye
+   ~1.5px yetişemiyordu. Motor tarafında `rigAnim.ts` > ATTACK_BY_ARCHETYPE.swing. */
+@keyframes atkSwing {
+  0%   { transform: translateX(0) rotate(0deg);      animation-timing-function: ease-in }
+  24%  { transform: translateX(-4px) rotate(-42deg); animation-timing-function: cubic-bezier(.2,.9,.3,1) }
+  36%  { transform: translateX(10px) rotate(56deg);  animation-timing-function: ease-out }
+  46%  { transform: translateX(8px) rotate(48deg) }
+  100% { transform: translateX(0) rotate(0deg) }
+}
+
+/* ---- arketip: SAPLAMA — geri çek, ileri sok ---- */
+.st-attack[data-atk="stab"] .armF { animation: atkStab calc(var(--dur-atk) * var(--sp)) infinite; }
+@keyframes atkStab {
+  0%   { transform: translate(0,0) rotate(0deg); animation-timing-function: ease-in }
+  24%  { transform: translate(-11px,3px) rotate(-14deg); animation-timing-function: cubic-bezier(.15,.95,.3,1) }
+  34%  { transform: translate(16px,-2px) rotate(6deg);   animation-timing-function: ease-out }
+  46%  { transform: translate(11px,-1px) rotate(4deg) }
+  100% { transform: translate(0,0) rotate(0deg) }
+}
+
+/* ---- arketip: FIRLATMA — savur, bırak ---- */
+.st-attack[data-atk="throw"] .armF  { animation: atkThrow calc(var(--dur-atk) * var(--sp)) infinite; }
+.st-attack[data-atk="throw"] .ammo  { animation: atkAmmo  calc(var(--dur-atk) * var(--sp)) infinite; }
+@keyframes atkThrow {
+  0%   { transform: rotate(0deg);   animation-timing-function: ease-in }
+  26%  { transform: rotate(-56deg); animation-timing-function: cubic-bezier(.2,.9,.3,1) }
+  36%  { transform: rotate(38deg);  animation-timing-function: ease-out }
+  48%  { transform: rotate(28deg) }
+  100% { transform: rotate(0deg) }
+}
+/* Mermi elden çıkar çıkmaz gizlenir — uçuşu artık effects katmanının işi.
+   %42'deki kare şart: eli boşaldıktan sonra mermi GÖRÜNMEZKEN ele döner, sonra
+   yerinde belirir. Doğrudan %92 → %100 geçişi onu havadan geri uçuruyordu. */
+@keyframes atkAmmo {
+  0%,35%  { opacity: 1; transform: translate(0,0) }
+  38%     { opacity: 1; transform: translate(26px,-8px) }
+  40%     { opacity: 0; transform: translate(26px,-8px) }
+  42%,70% { opacity: 0; transform: translate(0,0) }
+  84%,100%{ opacity: 1; transform: translate(0,0) }
+}
+
+/* ---- arketip: ÇEVİRME — değirmen, sürekli ---- */
+.st-attack[data-atk="crank"] .armF { animation: atkCrank calc(var(--dur-atk) * var(--sp)) linear infinite; }
+@keyframes atkCrank {
+  0%   { transform: rotate(-6deg) }
+  25%  { transform: rotate(4deg) }
+  50%  { transform: rotate(-4deg) }
+  75%  { transform: rotate(6deg) }
+  100% { transform: rotate(-6deg) }
+}
+
+/* ---- arketip: PÜSKÜRTME — gövde sıkışır ---- */
+.st-attack[data-atk="spray"] .body { animation: atkSprayBody calc(var(--dur-atk) * var(--sp)) infinite; }
+.st-attack[data-atk="spray"] .armF { animation: atkSprayArm  calc(var(--dur-atk) * var(--sp)) infinite; }
+/* Ağızdan çıkan sıkma. Domates'in `ammo`'su ketçap damlası; bu kural olmadan
+   damla bütün dövüş boyunca şişenin ağzında asılı kalıyordu. Acı Sos'un `ammo`
+   grubu yok — kuralın ona bir maliyeti de yok. */
+.st-attack[data-atk="spray"] .ammo { animation: atkSprayAmmo calc(var(--dur-atk) * var(--sp)) infinite; }
+@keyframes atkSprayBody {
+  0%   { transform: scale(1,1) }
+  24%  { transform: scale(.97,1.04) }
+  34%  { transform: scale(1.08,.9) }
+  50%  { transform: scale(1.02,.97) }
+  100% { transform: scale(1,1) }
+}
+@keyframes atkSprayArm {
+  0%,100% { transform: rotate(0deg) }
+  24%     { transform: rotate(-9deg) }
+  34%     { transform: rotate(11deg) }
+}
+@keyframes atkSprayAmmo {
+  0%,30%  { opacity: 1; transform: translate(0,0) }
+  36%     { opacity: 1; transform: translate(16px,-5px) }
+  40%     { opacity: 0; transform: translate(22px,-7px) }
+  42%,68% { opacity: 0; transform: translate(0,0) }
+  82%,100%{ opacity: 1; transform: translate(0,0) }
+}
+
+/* ---- arketip: ATIŞ — yukarı savur ---- */
+.st-attack[data-atk="lob"] .armF { animation: atkLob  calc(var(--dur-atk) * var(--sp)) infinite; }
+.st-attack[data-atk="lob"] .ammo { animation: atkLobAmmo calc(var(--dur-atk) * var(--sp)) infinite; }
+@keyframes atkLob {
+  0%   { transform: rotate(0deg);   animation-timing-function: ease-in }
+  26%  { transform: rotate(34deg);  animation-timing-function: cubic-bezier(.2,.9,.3,1) }
+  36%  { transform: rotate(-48deg); animation-timing-function: ease-out }
+  48%  { transform: rotate(-34deg) }
+  100% { transform: rotate(0deg) }
+}
+@keyframes atkLobAmmo {
+  0%,34%  { opacity: 1; transform: translate(0,0) }
+  40%     { opacity: 1; transform: translate(20px,-30px) }
+  44%     { opacity: 0; transform: translate(30px,-42px) }
+  46%,72% { opacity: 0; transform: translate(0,0) }
+  86%,100%{ opacity: 1; transform: translate(0,0) }
+}
+
+/* ---- arketip: YUMRUK — bir-iki ----
+   Kadronun İKİ KOLU BİRDEN vuran tek arketipi: Dövüşçü silah taşımaz, eller
+   silahtır, ve tek kolun çalıştığı bir yumruk dürtme gibi okunuyor.
+
+   `.armB` kuralı ortak karşı-salınımın YERİNE geçiyor. Özgüllük eşit
+   (0,3,0 — `:not([data-atk="none"])` argümanının ağırlığını taşıyor), o yüzden
+   kazanan SIRA: bu blok ortak kuralların altında durmalı. Yukarı taşınırsa
+   arka kol iki animasyonu birden değil, YANLIŞ olanı oynatır.
+
+   Çapraz %58'de, yani toparlanmanın içinde. `fx` bilerek ezilmedi: tek savurma
+   tek vuruştur ve tek hasar sayısı taşır; ikinci bir kıvılcım ekranda dövüşte
+   olmayan bir vuruş gösterirdi. Motor tarafı: `rigAnim.ts` > punch. */
+.st-attack[data-atk="punch"] .armF { animation: atkPunchF calc(var(--dur-atk) * var(--sp)) infinite; }
+.st-attack[data-atk="punch"] .armB { animation: atkPunchB calc(var(--dur-atk) * var(--sp)) infinite; }
+@keyframes atkPunchF {
+  0%   { transform: translate(0,0) rotate(0deg);        animation-timing-function: ease-in }
+  24%  { transform: translate(-9px,-2px) rotate(-18deg); animation-timing-function: cubic-bezier(.15,.95,.3,1) }
+  36%  { transform: translate(18px,1px) rotate(10deg);   animation-timing-function: ease-out }
+  46%  { transform: translate(10px,0) rotate(6deg) }
+  100% { transform: translate(0,0) rotate(0deg) }
+}
+@keyframes atkPunchB {
+  0%   { transform: translateX(0) rotate(0deg);      animation-timing-function: ease-in }
+  24%  { transform: translateX(-4px) rotate(14deg) }
+  36%  { transform: translateX(-6px) rotate(20deg);  animation-timing-function: cubic-bezier(.15,.95,.3,1) }
+  58%  { transform: translateX(14px) rotate(-22deg); animation-timing-function: ease-out }
+  70%  { transform: translateX(8px) rotate(-14deg) }
+  100% { transform: translateX(0) rotate(0deg) }
+}
+
+/* ======================================================== VURUŞ YEME
+   Artık bir DURUM değil bir KATMAN — `applyRecoil`/`applySag` gibi, canlı
+   track'in üstüne biniyor. `.armF`/`.armB`/`.legF`/`.legB` kuralı bilerek YOK:
+   bir katman kolu da çevirseydi üstünde bindiği savuruyu ezerdi, ve kol bir
+   saldırının okunduğu tek yer. Gövde ve gölge darbeyi taşıyor, kollar canlı
+   track ne diyorsa onu yapmaya devam ediyor. Motor tarafı: `rigAnim.ts` >
+   `HIT`, `UnitRig.applyFlinch`. */
+
+.st-hit .body   { animation: hitBody   calc(var(--dur-hit) * var(--sp)) linear infinite; }
+.st-hit .shadow { animation: hitShadow calc(var(--dur-hit) * var(--sp)) linear infinite; }
+
+/* Darbe 4 tick (0.20 sn) — süre içindeki payı %29 değil %17. Doz bilerek
+   azaltıldı: eskiden bir DURUM olarak gövdeyi tek başına devralıyordu, artık
+   canlı bir saldırı pozunun üstüne biniyor, o yüzden aynı genlik gövdeyi
+   ikiye katlanıyormuş gibi okutuyordu. Tepe ezilme 1.34/.74 → 1.15/.90.
+   Ezilme, geri sekme, oturma sırası aynı. */
+@keyframes hitBody {
+  0%   { transform: translateX(3px) rotate(0deg) scale(1.15, .90);    filter: brightness(3.4) }
+  3.7% { transform: translateX(2.4px) rotate(-2deg) scale(1.08, .95); filter: brightness(2.46) }
+  8%   { transform: translateX(.6px) rotate(1.2deg) scale(.93, 1.08); filter: brightness(1.65) }
+  12%  { transform: translateX(0) rotate(-.6deg) scale(1.03, .98);    filter: brightness(1.19) }
+  16.7% { transform: translateX(0) rotate(0deg) scale(1);             filter: brightness(1) }
+  100% { transform: translateX(0) rotate(0deg) scale(1);              filter: brightness(1) }
+}
+@keyframes hitShadow {
+  0%   { transform: scale(1.11, 1.08) }
+  8%   { transform: scale(.93, .95) }
+  16.7%,100% { transform: scale(1) }
+}
+
+/* ============================================================== ÖLÜM
+   `k = 1 - age / 6` → 6 tick = 0.3 sn, alfa ve ölçek düşer.
+   Çatlak saf çizim — yeni olay gerektirmiyor. */
+
+.st-death .body  { animation: dieBody  calc(var(--dur-die) * var(--sp)) linear infinite; }
+.st-death .crack { animation: dieCrack calc(var(--dur-die) * var(--sp)) linear infinite; }
+.st-death .shadow{ animation: dieShadow calc(var(--dur-die) * var(--sp)) linear infinite; }
+.st-death .armF  { animation: dieArmF calc(var(--dur-die) * var(--sp)) linear infinite; }
+.st-death .armB  { animation: dieArmB calc(var(--dur-die) * var(--sp)) linear infinite; }
+.st-death .legF  { animation: dieLegF calc(var(--dur-die) * var(--sp)) linear infinite; }
+.st-death .legB  { animation: dieLegB calc(var(--dur-die) * var(--sp)) linear infinite; }
+
+/* Ölüm 15 tick (0.75 sn) — süre içindeki payı %22 değil %42.
+   Dört evre: darbe, tahtadan havalanma, sert iniş, devrilme. Alfa yarıyı
+   geçene kadar tam: ölüm izlenmek içindir, sessizce küçülmek için değil. */
+@keyframes dieCrack {
+  0%   { opacity: 0;  transform: scale(.55) }
+  3.4% { opacity: .6; transform: scale(.8) }
+  12.6%{ opacity: 1;  transform: scale(1.1) }
+  31.5%{ opacity: 1;  transform: scale(1.2) }
+  42%,100% { opacity: 0; transform: scale(1.2) }
+}
+@keyframes dieBody {
+  0%   { opacity: 1;   transform: translateY(0) rotate(0deg) scale(1.3, .72) }
+  5%   { opacity: 1;   transform: translateY(-9px) rotate(-4deg) scale(.84, 1.24) }
+  12.6%{ opacity: 1;   transform: translateY(-3px) rotate(6deg) scale(1.12, .9) }
+  19.3%{ opacity: 1;   transform: translateY(2px) rotate(12deg) scale(1.2, .82) }
+  30.2%{ opacity: .72; transform: translateY(3px) rotate(26deg) scale(1.04, .86) }
+  42%  { opacity: 0;   transform: translateY(5px) rotate(46deg) scale(.82, .7) }
+  99%  { opacity: 0;   transform: translateY(5px) rotate(46deg) scale(.82, .7) }
+  100% { opacity: 1;   transform: translateY(0) rotate(0deg) scale(1) }
+}
+/* Kollar savrulup gevşiyor; hepsi aynı karede yok olmuyor. */
+@keyframes dieArmF {
+  0%   { opacity: 1; transform: rotate(-34deg) }
+  7.6% { opacity: 1; transform: rotate(42deg) }
+  21%  { opacity: 1; transform: rotate(58deg) }
+  32.8%{ opacity: .8; transform: rotate(70deg) }
+  42%,99% { opacity: 0; transform: rotate(84deg) }
+  100% { opacity: 1; transform: rotate(0deg) }
+}
+@keyframes dieArmB {
+  0%   { opacity: 1; transform: rotate(30deg) }
+  7.6% { opacity: 1; transform: rotate(-46deg) }
+  21%  { opacity: 1; transform: rotate(-62deg) }
+  32.8%{ opacity: .8; transform: rotate(-74deg) }
+  42%,99% { opacity: 0; transform: rotate(-88deg) }
+  100% { opacity: 1; transform: rotate(0deg) }
+}
+@keyframes dieLegF {
+  0%   { opacity: 1; transform: rotate(16deg) }
+  12.6%{ opacity: 1; transform: rotate(-22deg) }
+  30.2%{ opacity: .8; transform: rotate(-34deg) }
+  42%,99% { opacity: 0; transform: rotate(-40deg) }
+  100% { opacity: 1; transform: rotate(0deg) }
+}
+@keyframes dieLegB {
+  0%   { opacity: 1; transform: rotate(-14deg) }
+  12.6%{ opacity: 1; transform: rotate(26deg) }
+  30.2%{ opacity: .8; transform: rotate(38deg) }
+  42%,99% { opacity: 0; transform: rotate(44deg) }
+  100% { opacity: 1; transform: rotate(0deg) }
+}
+@keyframes dieShadow{
+  0%   { opacity: .35; transform: scale(1.25, 1.2) }
+  5%   { opacity: .28; transform: scale(.78, .72) }
+  19.3%{ opacity: .35; transform: scale(1.18, 1.1) }
+  42%  { opacity: 0;   transform: scale(.45, .4) }
+  99%  { opacity: 0 }
+  100% { opacity: .35; transform: scale(1) }
+}
+
+/* ============================================================== DALIŞ
+   Suikastçi tahtayı bir sıçrayışta geçer: 5 tick havada (0.25 sn), sonra 4 tick
+   iniş (0.20 sn). İki ayrı durum, çünkü ikisinin süresini iki ayrı şey belirler
+   — sıçrayışı `tempo.ts`'teki `DIVE_TICKS`, inişi `rigAnim.ts`'teki
+   `LAND_TICKS`.
+
+   **Yükseklik burada değil.** Yedi sıralık bir atlayış tahtada 315px eder; bu
+   kare listeleri rig biriminde ve yaklaşık yarı ölçekte. Yayı `unitView.ts`
+   çiziyor — mesafeyi bilen o. Burada olan şey *poz*: toplanan bacaklar, geriye
+   savrulan kollar, gittiği yöne yatan gövde, ve gölgenin kalkış/iniş anındaki
+   kendi vuruşu. Oyunda gölge ayrıca yükseklikle küçülüp soluyor (`setAir`), o da
+   burada yok: gölge tahtada kalır, gövde kalkar.
+
+   Sıçrayışın son karesi dinlenme pozu değil — iniş oradan devralır — bu yüzden
+   ölüm bloğundaki gibi %99'a kadar tutulup %100'de dinlenmeye dönüyor. */
+
+.st-leap .body   { animation: leapBody   calc(var(--dur-leap) * var(--sp)) ease-out infinite; }
+.st-leap .shadow { animation: leapShadow calc(var(--dur-leap) * var(--sp)) ease-out infinite; }
+.st-leap .armF   { animation: leapArmF   calc(var(--dur-leap) * var(--sp)) ease-out infinite; }
+.st-leap .armB   { animation: leapArmB   calc(var(--dur-leap) * var(--sp)) ease-out infinite; }
+.st-leap .legF   { animation: leapLegF   calc(var(--dur-leap) * var(--sp)) ease-out infinite; }
+.st-leap .legB   { animation: leapLegB   calc(var(--dur-leap) * var(--sp)) ease-out infinite; }
+
+@keyframes leapBody {
+  0%    { transform: translateY(0) rotate(0deg) scale(1.16, .82) }
+  3.4%  { transform: translateY(-4px) rotate(-6deg) scale(.86, 1.2) }
+  10.5% { transform: translateY(-7px) rotate(-10deg) scale(.94, 1.08) }
+  17.6% { transform: translateY(-3px) rotate(-2deg) scale(1.02, .98) }
+  21%,99% { transform: translateY(0) rotate(4deg) scale(1.08, .94) }
+  100%  { transform: translateY(0) rotate(0deg) scale(1) }
+}
+@keyframes leapShadow {
+  0%    { transform: scale(1.22, 1.16) }
+  3.4%  { transform: scale(.9, .84) }
+  21%,100% { transform: scale(1) }
+}
+@keyframes leapArmF {
+  0%    { transform: rotate(-30deg) }
+  3.4%  { transform: rotate(46deg) }
+  12.6% { transform: rotate(38deg) }
+  21%,99% { transform: rotate(8deg) }
+  100%  { transform: rotate(0deg) }
+}
+@keyframes leapArmB {
+  0%    { transform: rotate(26deg) }
+  3.4%  { transform: rotate(-40deg) }
+  12.6% { transform: rotate(-34deg) }
+  21%,99% { transform: rotate(-6deg) }
+  100%  { transform: rotate(0deg) }
+}
+@keyframes leapLegF {
+  0%    { transform: rotate(22deg) }
+  3.4%  { transform: rotate(-34deg) }
+  13%   { transform: rotate(-28deg) }
+  21%,99% { transform: rotate(26deg) }
+  100%  { transform: rotate(0deg) }
+}
+@keyframes leapLegB {
+  0%    { transform: rotate(-18deg) }
+  3.4%  { transform: rotate(30deg) }
+  13%   { transform: rotate(26deg) }
+  21%,99% { transform: rotate(-20deg) }
+  100%  { transform: rotate(0deg) }
+}
+
+/* İniş bilerek `hit` değil: darbe *alınan* bir şeydir, beyaz parlamayı ve yan
+   savrulmayı taşır. Bu ise gelen ağırlık — dümdüz eziliyor, dinlenmeyi aşarak
+   geri fırlıyor, oturuyor; gölge altında yayılıyor. Son kare dinlenme pozunun
+   kendisi, o yüzden %20'den sonrası düz duruyor. */
+
+.st-land .body   { animation: landBody   calc(var(--dur-land) * var(--sp)) ease-out infinite; }
+.st-land .shadow { animation: landShadow calc(var(--dur-land) * var(--sp)) ease-out infinite; }
+.st-land .armF   { animation: landArmF   calc(var(--dur-land) * var(--sp)) ease-out infinite; }
+.st-land .armB   { animation: landArmB   calc(var(--dur-land) * var(--sp)) ease-out infinite; }
+.st-land .legF   { animation: landLegF   calc(var(--dur-land) * var(--sp)) ease-out infinite; }
+.st-land .legB   { animation: landLegB   calc(var(--dur-land) * var(--sp)) ease-out infinite; }
+
+@keyframes landBody {
+  0%   { transform: translateY(0) scale(1.3, .72) }
+  7%   { transform: translateY(-3px) scale(.94, 1.1) }
+  14%  { transform: translateY(0) scale(1.04, .97) }
+  20%,100% { transform: translateY(0) scale(1) }
+}
+@keyframes landShadow {
+  0%   { transform: scale(1.34, 1.26) }
+  7%   { transform: scale(.92, .9) }
+  20%,100% { transform: scale(1) }
+}
+@keyframes landArmF {
+  0%   { transform: rotate(18deg) }
+  8%   { transform: rotate(-10deg) }
+  20%,100% { transform: rotate(0deg) }
+}
+@keyframes landArmB {
+  0%   { transform: rotate(-16deg) }
+  8%   { transform: rotate(9deg) }
+  20%,100% { transform: rotate(0deg) }
+}
+@keyframes landLegF {
+  0%   { transform: rotate(-20deg) }
+  9%   { transform: rotate(8deg) }
+  20%,100% { transform: rotate(0deg) }
+}
+@keyframes landLegB {
+  0%   { transform: rotate(18deg) }
+  9%   { transform: rotate(-7deg) }
+  20%,100% { transform: rotate(0deg) }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rig * { animation: none !important; }
+}

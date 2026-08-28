@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "shots": [
+    {
+      "name": "placement",
+      "file": "assets/shots/placement.png",
+      "width": 860,
+      "height": 1920,
+      "note": "Round one — the counter, the shop, and the first two cards down."
+    },
+    {
+      "name": "merge",
+      "file": "assets/shots/merge.png",
+      "width": 860,
+      "height": 1920,
+      "note": "Three of the same card resolve into a two-star on the spot."
+    },
+    {
+      "name": "fight",
+      "file": "assets/shots/fight.png",
+      "width": 860,
+      "height": 1920,
+      "note": "A real round in progress — cards traded, the fight underway."
+    },
+    {
+      "name": "unit-card",
+      "file": "assets/shots/unit-card.png",
+      "width": 612,
+      "height": 788,
+      "note": "The full stat sheet a tap on any card opens."
+    },
+    {
+      "name": "traits",
+      "file": "assets/shots/traits.png",
+      "width": 860,
+      "height": 1920,
+      "note": "The trait tracker, lit up by a matched pair of origins."
+    },
+    {
+      "name": "run-end",
+      "file": "assets/shots/run-end.png",
+      "width": 860,
+      "height": 1920,
+      "note": "The run card: place, standings, and the seed to run it back."
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+/**
+ * The palette, lifted from the game.
+ *
+ * Every value here is a byte-for-byte copy of a declaration in
+ * `src/ui/ui.css`'s `:root` block, and `site/js/shell.test.ts` reads both
+ * files and compares them so it stays that way. This is the whole reason the
+ * site and the game read as one object: the awning red on this page is not
+ * "close to" the awning red in the screenshots beside it, it is the same
+ * number.
+ *
+ * Nothing else lives in this file. No layout, no type sizes, no components —
+ * and the sibling test refuses any hex, `rgb()` or `hsl()` authored in any
+ * other stylesheet under `site/css/`, for all six sprints.
+ *
+ * The game ships no web font, and neither does this page (binding rule 6).
+ * The three stacks below are what the captures were taken in.
+ */
+
+:root {
+  /* The stall counter — the page's ground. ui.css:30-32 */
+  --counter: #8a6a45;
+  --counter-plank: #7d5f3d;
+  --counter-seam: #63492a;
+
+  /* The plank pitch the canvas and the page both count from. ui.css:33-34 */
+  --plank-w: 48px;
+  --plank-gap: 2px;
+
+  /* Frames and rims. ui.css:35-38 */
+  --wood: #795c3e;
+  --wood-dark: #52402f;
+  --wood-rim: #4a3722;
+  --wood-lit: #9a7748;
+
+  /* The merge metals: silver, gold, and ice. ui.css:54, 55, 58 */
+  --star-2: #e9eef6;
+  --star-3: #f7d774;
+  --star-4: #7ef9ff;
+
+  /* The enamel sign, and the awning above it. The signature motif. ui.css:74-75 */
+  --sign: #c8402f;
+  --sign-dark: #8f2a1d;
+
+  /* Paper: card and page surfaces, and the ink on them. ui.css:78, 80 */
+  --paper: #fdf6e6;
+  --paper-ink: #2a2114;
+
+  /* Brass. Mana amber — accents and links. ui.css:84-85 */
+  --brass: #c9973f;
+  --brass-lit: #f0c368;
+
+  /* Text on dark ground. ui.css:89-90 */
+  --ink: #fdf6e6;
+  --dim: #e0cba4;
+
+  /* Type. A serif for names, a mono for counts, system sans for the rest.
+     ui.css:92, 93, 97 */
+  --display: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --mono: Consolas, "SF Mono", ui-monospace, monospace;
+  --sans: "Segoe UI", system-ui, sans-serif;
+}

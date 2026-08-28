@@ -1,0 +1,238 @@
+<!-- Mısır · Ocak 3 ✦ · Nişancı · menzil 3
+     attackSpeed 1.11 → round(20/1.11) = 18 tick = 0.90 sn
+
+     Karakter sayfasına göre yeniden çizildi. Eski rig "kendi koçanı — tanesini
+     fırlatıyor" diyordu ve elleri boştu; sayfa zırhlı bir topçu istiyor: közde
+     kavrulmuş koçan, yanlardan açılmış kavuz, tepede püskül, köz yarıklı omuz
+     zırhı, kırmızı boyunluk ve önlük, kalçada tane kazanı, ve ağzı alev alev
+     bir karabina.
+
+     ARKETİP `throw` DEĞİL `stab`, Simit'le aynı gerekçe: `throw` armF'i
+     -56°'den +38°'ye savuruyor, omuzlanmış bir namlu bunu yapmaz. `stab` kolu
+     16px ileri itip 6° döndürüyor — geri tepme. Bırakma anı 0.34, ki
+     `ATTACK_COMMON` `fx`i tam orada patlatıyor: namlu alevi.
+
+     `.ammo` grubu KALDIRILDI. `throw`un ammo pisti mermiyi bırakma anında
+     gizliyordu; `stab`de öyle bir pist yok, grup kalsaydı tane namlunun
+     ucunda sürekli asılı dururdu. `MUZZLE` bunun yerine `part: 'armF'`
+     kullanıyor — elde taşınan mermi yok, atış namlu ağzından çıkıyor.
+
+     SİLUET: DİK ve DAR, tepesi püsküllü, iki yana kavuz. Ocak'ın diğer ikisi
+     küçük-yuvarlak (kestane) ve dikey-çubuk (şiş). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="stab" data-unit="misir" style="--dur-atk:0.90s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="26" ry="5.8" fill="#000" opacity=".33"/>
+
+  <g class="armB" style="transform-origin:30px 90px">
+    <path d="M30 92 L22 104" stroke="#2A2418" stroke-width="13" stroke-linecap="round"/>
+    <path d="M30 92 L22 104" stroke="#3A3228" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="20" cy="107" r="6" fill="#2E2820" stroke="#2A2418" stroke-width="2.8"/>
+    <path d="M16 84 A12 12 0 0 1 40 84 Q28 89 16 84 Z"
+          fill="#3A3228" stroke="#2A2418" stroke-width="3.2" stroke-linejoin="round"/>
+    <path d="M22 80 L34 80" stroke="#E06020" stroke-width="3.4" stroke-linecap="round"/>
+    <path d="M23.5 80 L32.5 80" stroke="#FFB050" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 100 L41 126" stroke="#2A2418" stroke-width="13" stroke-linecap="round"/>
+    <path d="M44 100 L41 126" stroke="#3A3228" stroke-width="9" stroke-linecap="round"/>
+    <path d="M36 114 L47 113" stroke="#7A5A34" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M34 126 Q29 131 32 136 L46 136 Q48 130 43 125 Z"
+          fill="#2E2820" stroke="#2A2418" stroke-width="2.8" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 100 L65 126" stroke="#2A2418" stroke-width="13" stroke-linecap="round"/>
+    <path d="M62 100 L65 126" stroke="#453C30" stroke-width="9" stroke-linecap="round"/>
+    <path d="M59 113 L70 114" stroke="#7A5A34" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M63 125 Q58 130 61 136 L75 136 Q78 131 72 126 Z"
+          fill="#3A3228" stroke="#2A2418" stroke-width="2.8" stroke-linejoin="round"/>
+  </g>
+
+  <g class="body" style="transform-origin:52px 120px">
+    <path d="M36 92 C24 76 16 58 14 44 C24 54 34 72 38 90 Z"
+          fill="#6B7A32" stroke="#2A2418" stroke-width="3.2" stroke-linejoin="round"/>
+    <path d="M36 100 C26 92 20 80 18 70 C26 76 34 88 38 98 Z"
+          fill="#57662A" stroke="#2A2418" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M68 92 C80 76 88 58 90 44 C80 54 70 72 66 90 Z"
+          fill="#6B7A32" stroke="#2A2418" stroke-width="3.2" stroke-linejoin="round"/>
+    <path d="M68 100 C78 92 84 80 86 70 C78 76 70 88 66 98 Z"
+          fill="#57662A" stroke="#2A2418" stroke-width="3" stroke-linejoin="round"/>
+
+    <path d="M44 34 C42 22 46 12 52 10 C58 12 62 22 60 34 Z"
+          fill="#D9A83A" stroke="#2A2418" stroke-width="2.8" stroke-linejoin="round"/>
+    <path d="M48 30 L46 17 M52 30 L52 13 M56 30 L58 17" stroke="#B8892A" stroke-width="2"
+          stroke-linecap="round"/>
+
+    <path d="M52 30 C38 30 32 46 32 64 C32 86 40 100 52 100 C64 100 72 86 72 64
+             C72 46 66 30 52 30 Z"
+          fill="#E0B33A" stroke="#2A2418" stroke-width="4.2" stroke-linejoin="round"/>
+    <path d="M34 44 Q52 50 70 44 M33 56 Q52 62 71 56 M33 68 Q52 74 71 68
+             M34 80 Q52 86 70 80 M36 92 Q52 97 68 92"
+          stroke="#A87C22" stroke-width="2.6" fill="none"/>
+    <path d="M42 32 C40 52 40 80 44 98 M52 30 L52 100 M62 32 C64 52 64 80 60 98"
+          stroke="#A87C22" stroke-width="2.4" fill="none" opacity=".85"/>
+    <!-- Tane tümsekleri. Izgara çizgileri tek başına 40 px'te düz sarı bir
+         gövde okutuyordu; koçanı koçan yapan şey doku. Yüzün oturduğu bant
+         (y 52..82) boş bırakıldı. -->
+    <ellipse cx="42" cy="39" rx="4" ry="3.4" fill="#EFC960"/>
+    <ellipse cx="52" cy="37" rx="4.2" ry="3.5" fill="#EFC960"/>
+    <ellipse cx="62" cy="39" rx="4" ry="3.4" fill="#EFC960"/>
+    <ellipse cx="38" cy="48" rx="3.8" ry="3.2" fill="#EFC960"/>
+    <ellipse cx="48" cy="46" rx="4" ry="3.3" fill="#F0D98A"/>
+    <ellipse cx="58" cy="46" rx="4" ry="3.3" fill="#EFC960"/>
+    <ellipse cx="67" cy="48" rx="3.6" ry="3.1" fill="#EFC960"/>
+    <ellipse cx="35" cy="60" rx="3" ry="3.4" fill="#EFC960"/>
+    <ellipse cx="69" cy="60" rx="3" ry="3.4" fill="#EFC960"/>
+    <ellipse cx="35" cy="72" rx="3" ry="3.2" fill="#EFC960"/>
+    <ellipse cx="69" cy="72" rx="3" ry="3.2" fill="#EFC960"/>
+    <ellipse cx="40" cy="87" rx="4" ry="3.3" fill="#EFC960"/>
+    <ellipse cx="50" cy="89" rx="4.2" ry="3.4" fill="#F0D98A"/>
+    <ellipse cx="60" cy="87" rx="4" ry="3.3" fill="#EFC960"/>
+    <ellipse cx="45" cy="95" rx="3.6" ry="3" fill="#EFC960"/>
+    <ellipse cx="56" cy="95" rx="3.6" ry="3" fill="#EFC960"/>
+    <ellipse cx="37" cy="44" rx="3" ry="2.4" fill="#3A2A18" opacity=".85"/>
+    <ellipse cx="66" cy="46" rx="2.6" ry="2.2" fill="#3A2A18" opacity=".85"/>
+    <ellipse cx="52" cy="36" rx="2.6" ry="2.1" fill="#3A2A18" opacity=".8"/>
+    <ellipse cx="35" cy="78" rx="2.8" ry="2.3" fill="#3A2A18" opacity=".85"/>
+    <ellipse cx="68" cy="72" rx="2.4" ry="2" fill="#3A2A18" opacity=".8"/>
+    <ellipse cx="44" cy="94" rx="2.6" ry="2.1" fill="#3A2A18" opacity=".8"/>
+    <ellipse cx="61" cy="94" rx="2.4" ry="2" fill="#3A2A18" opacity=".75"/>
+
+    <path d="M34 52 L48 59 L46 64 L33 58 Z" fill="#2A2418"/>
+    <path d="M70 52 L56 59 L58 64 L71 58 Z" fill="#2A2418"/>
+    <ellipse cx="43" cy="67" rx="6.5" ry="7.5" fill="#fff" stroke="#2A2418" stroke-width="2.3"/>
+    <ellipse cx="61" cy="67" rx="6.5" ry="7.5" fill="#fff" stroke="#2A2418" stroke-width="2.3"/>
+    <ellipse cx="44.3" cy="68" rx="3.6" ry="4.8" fill="#2A2418"/>
+    <ellipse cx="62.3" cy="68" rx="3.6" ry="4.8" fill="#2A2418"/>
+    <circle cx="42.6" cy="64.6" r="1.6" fill="#fff"/>
+    <circle cx="60.6" cy="64.6" r="1.6" fill="#fff"/>
+    <path d="M46 79 Q52 75 58 79" stroke="#2A2418" stroke-width="2.8" fill="none"
+          stroke-linecap="round"/>
+
+    <path d="M34 87 Q52 95 70 87 L71 96 Q52 104 33 96 Z"
+          fill="#C4502A" stroke="#2A2418" stroke-width="3.2" stroke-linejoin="round"/>
+    <path d="M37 93 Q52 100 67 93" stroke="#9E3A1E" stroke-width="2.4" fill="none"/>
+
+    <path d="M40 100 L64 100 L62 120 Q52 125 42 120 Z"
+          fill="#C4502A" stroke="#2A2418" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M52 105 L52 116 M52 107 L49 105 M52 107 L55 105 M52 112 L49 110 M52 112 L55 110"
+          stroke="#E8C36A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <path d="M32 99 Q52 105 72 99" stroke="#7A5A34" stroke-width="6" fill="none"
+          stroke-linecap="round"/>
+    <path d="M38 102 L40 98 M46 104 L48 100 M58 104 L60 100 M66 102 L68 98"
+          stroke="#54401F" stroke-width="2.1" stroke-linecap="round"/>
+
+    <path d="M12 104 L32 104 L30 118 Q22 123 14 118 Z"
+          fill="#3A3228" stroke="#2A2418" stroke-width="3" stroke-linejoin="round"/>
+    <ellipse cx="16" cy="103" rx="2.8" ry="2.2" fill="#E0B33A"/>
+    <ellipse cx="22" cy="102" rx="3" ry="2.3" fill="#EFC960"/>
+    <ellipse cx="28" cy="103" rx="2.8" ry="2.2" fill="#E0B33A"/>
+
+    <!-- İKİNCİ HÂL: kavrulmuş koçan. `rigLoader`'ın `cooked` parçası — motorda
+         `opacity 0` başlar, `trait:ocak` olayında beş tikte açılır ve bir daha
+         kapanmaz (`UnitRig.cook`). Kartlarda hiç görünmez (`rigSource.chipSvg`).
+
+         YÜZE VE ÖNLÜĞE DOKUNULMUYOR, ve bu bir kural: bu katman `body`'nin
+         ÜSTÜNE çiziliyor, yani buraya konan her şey altındakini siler. Gözler
+         birimin kimliği — ham da olsa pişmiş de olsa Mısır Mısır'dır — ve
+         kırmızı önlük 40 px'te siluetin yarısı. Kavrulan şey koçanın kendisi:
+         tepe kabuğu, patlamış taneler, kabarmış boşluklar, ve kenarlardan
+         çıkan köz.
+
+         `transform-origin` koçanın ortasında (52,66), gövdenin tabanında
+         değil: açılışın %18'lik taşması oradan patlıyor, ayaklardan değil. -->
+    <g class="cooked" style="transform-origin:52px 66px">
+      <path d="M52 30 C38 30 32 46 32 56 Q52 63 72 56 C72 46 66 30 52 30 Z"
+            fill="#5A3A18" stroke="#2A2418" stroke-width="3.4" stroke-linejoin="round"/>
+      <path d="M34 47 Q52 54 70 47" stroke="#2A1A10" stroke-width="2.6" fill="none" opacity=".8"/>
+      <path d="M35 39 Q52 45 69 39" stroke="#2A1A10" stroke-width="2.2" fill="none" opacity=".7"/>
+
+      <path d="M40 36 C36 32 37 27 41 26 C45 25 48 28 47 32 C46 35 43 37 40 36 Z"
+            fill="#F4E3B4" stroke="#2A2418" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M53 32 C49 29 50 23 54 22 C59 21 62 25 60 29 C59 32 56 34 53 32 Z"
+            fill="#F4E3B4" stroke="#2A2418" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M64 41 C61 38 62 33 66 33 C70 33 72 37 70 40 C69 42 66 43 64 41 Z"
+            fill="#F4E3B4" stroke="#2A2418" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M36 53 C33 51 33 47 37 46 C41 46 43 49 41 52 C40 54 38 54 36 53 Z"
+            fill="#F4E3B4" stroke="#2A2418" stroke-width="1.8" stroke-linejoin="round"/>
+      <circle cx="43" cy="30" r="1.5" fill="#fff" opacity=".8"/>
+      <circle cx="56" cy="26" r="1.4" fill="#fff" opacity=".8"/>
+
+      <ellipse cx="48" cy="41" rx="3" ry="2.4" fill="#1A1008"/>
+      <ellipse cx="60" cy="48" rx="2.6" ry="2.1" fill="#1A1008"/>
+      <ellipse cx="38" cy="34" rx="2.4" ry="2" fill="#1A1008" opacity=".9"/>
+
+      <path d="M36 92 C24 76 16 58 14 44 C24 54 34 72 38 90 Z"
+            fill="#3E3A18" opacity=".72"/>
+      <path d="M68 92 C80 76 88 58 90 44 C80 54 70 72 66 90 Z"
+            fill="#3E3A18" opacity=".72"/>
+      <path d="M44 34 C42 22 46 12 52 10 C58 12 62 22 60 34 Z"
+            fill="#4A3210" opacity=".85"/>
+
+      <path d="M33 62 C29 68 31 74 34 78" stroke="#E06020" stroke-width="3"
+            fill="none" stroke-linecap="round" opacity=".95"/>
+      <path d="M34 64 C31 69 32 73 34 76" stroke="#FFC060" stroke-width="1.3"
+            fill="none" stroke-linecap="round"/>
+      <path d="M71 60 C75 66 73 73 70 77" stroke="#E06020" stroke-width="3"
+            fill="none" stroke-linecap="round" opacity=".95"/>
+      <path d="M70 62 C73 67 72 72 70 75" stroke="#FFC060" stroke-width="1.3"
+            fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- Faceted kernel highlights and silk threads create a denser corn surface. -->
+    <g fill="#FFD96A" opacity=".9"><ellipse cx="40" cy="42" rx="2" ry="1.4"/><ellipse cx="53" cy="37" rx="2" ry="1.4"/>
+      <ellipse cx="63" cy="48" rx="2" ry="1.4"/><ellipse cx="42" cy="89" rx="1.8" ry="1.3"/>
+      <ellipse cx="61" cy="91" rx="1.8" ry="1.3"/></g>
+    <path d="M47 18 Q42 10 44 6 M53 16 Q54 8 58 5" fill="none" stroke="#E8C56E"
+          stroke-width="1.5" stroke-linecap="round"/>
+
+    <g data-expression="cute">
+      <path d="M34 58 Q41 53 48 58 M56 58 Q63 53 70 58" fill="none" stroke="#E0B33A" stroke-width="8" stroke-linecap="round"/>
+      <path d="M34 58 Q41 53 48 58 M56 58 Q63 53 70 58" fill="none" stroke="#2A2418" stroke-width="2.8" stroke-linecap="round"/>
+      <ellipse cx="34" cy="79" rx="3.1" ry="1.8" fill="#E87961" opacity=".62"/><ellipse cx="70" cy="79" rx="3.1" ry="1.8" fill="#E87961" opacity=".62"/>
+      <path d="M45 78 Q52 86 59 78 Q58 88 52 89 Q46 88 45 78 Z" fill="#3B2119" stroke="#2A2418" stroke-width="2.2"/>
+      <path d="M49 84 Q52 86 55 84" fill="none" stroke="#F18C71" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <path class="crack" d="M38 42 L48 56 L38 68 L50 82 L40 96"
+          stroke="#1A1410" stroke-width="2.8" fill="none" stroke-linejoin="round"/>
+  </g>
+
+  <g class="armF" style="transform-origin:76px 92px">
+    <path d="M65 84 A13 13 0 0 1 91 84 Q78 89 65 84 Z"
+          fill="#3A3228" stroke="#2A2418" stroke-width="3.2" stroke-linejoin="round"/>
+    <path d="M71 79 L85 79" stroke="#E06020" stroke-width="3.6" stroke-linecap="round"/>
+    <path d="M72.5 79 L83.5 79" stroke="#FFB050" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M76 90 L84 96" stroke="#2A2418" stroke-width="13" stroke-linecap="round"/>
+    <path d="M76 90 L84 96" stroke="#3A3228" stroke-width="9" stroke-linecap="round"/>
+
+    <path d="M58 102 L86 94" stroke="#2A2418" stroke-width="13.5" stroke-linecap="round"/>
+    <path d="M58 102 L86 94" stroke="#6E5436" stroke-width="9.5" stroke-linecap="round"/>
+    <path d="M63 101 L66 100 M69 99 L72 98.2" stroke="#4A3826" stroke-width="2.4"
+          stroke-linecap="round"/>
+    <path d="M86 94 L104 89" stroke="#2A2418" stroke-width="12" stroke-linecap="round"/>
+    <path d="M86 94 L104 89" stroke="#3A3228" stroke-width="8" stroke-linecap="round"/>
+    <path d="M95 88 L95 95 M95 90 L92.5 88.5 M95 90 L97.5 88.5 M95 93 L92.5 91.5 M95 93 L97.5 91.5"
+          stroke="#D9A83A" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+
+    <path d="M100 82 L115 66 L117 106 L100 97 Z"
+          fill="#3A3228" stroke="#2A2418" stroke-width="3.6" stroke-linejoin="round"/>
+    <path d="M103 82 L113 71" stroke="#5A5044" stroke-width="2.6" stroke-linecap="round"/>
+    <ellipse cx="116" cy="86" rx="4.5" ry="20" fill="#1A1410" stroke="#2A2418" stroke-width="2.6"/>
+    <ellipse cx="116" cy="86" rx="3" ry="15.5" fill="#E06020"/>
+    <ellipse cx="116" cy="86" rx="1.6" ry="9.5" fill="#FFC060"/>
+
+    <circle cx="72" cy="99" r="6" fill="#2E2820" stroke="#2A2418" stroke-width="2.8"/>
+    <circle cx="90" cy="93" r="6" fill="#2E2820" stroke="#2A2418" stroke-width="2.8"/>
+  </g>
+
+  <g class="fx" style="transform-origin:117px 86px">
+    <path d="M117 86 L134 78 M117 86 L137 86 M117 86 L134 95 M117 86 L128 72 M117 86 L127 100"
+          stroke="#F0A030" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+    <ellipse cx="119" cy="86" rx="6" ry="10" fill="#FFD060" opacity=".95"/>
+    <ellipse cx="130" cy="80" rx="3" ry="2.3" fill="#E0B33A"/>
+    <ellipse cx="136" cy="88" rx="2.8" ry="2.1" fill="#EFC960"/>
+    <ellipse cx="129" cy="95" rx="2.6" ry="2" fill="#E0B33A"/>
+  </g>
+</svg>

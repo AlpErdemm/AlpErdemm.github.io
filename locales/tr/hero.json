@@ -1,0 +1,10 @@
+{
+  "hero.title": "Tur kendi kendini pişiriyor",
+  "hero.subtitle": "Gerçek bir maç, canlı tekrar oynatılıyor — aynı altıgen tahta, aynı elle çizilmiş rig'ler, bu sayfada çalışan bir motor yok.",
+  "hero.boardLabel": "Bir Kitchen Tactics maçının tekrarı, döngüde oynuyor",
+  "hero.fallback": "Tahta bu sefer yüklenemedi — ama aşağıdaki birleştirme yine de çalışıyor.",
+  "merge.title": "Üçünü birleştir, birini al",
+  "merge.subtitle": "Kaydır — aşağıdaki iki malzeme, tezgahta olduğu gibi iki yıldızlı bir birime dönüşür.",
+  "merge.cardOneStar": "1★",
+  "merge.cardTwoStar": "2★"
+}

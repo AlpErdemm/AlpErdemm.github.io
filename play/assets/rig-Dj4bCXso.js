@@ -1,0 +1,2 @@
+const l=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" class="rig" data-item="ziyafet_sunucusu"><ellipse cx="60" cy="72" rx="39" ry="25" fill="#D7DCE2" stroke="#2A2114" stroke-width="4"/><path d="M28 70Q60 35 92 70" fill="#F2B74D" stroke="#2A2114" stroke-width="4"/><circle cx="42" cy="58" r="5" fill="#E66A43"/><circle cx="76" cy="58" r="5" fill="#70A95C"/></svg>
+`;export{l as default};

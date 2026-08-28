@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "styles": [
+    {
+      "id": "defter",
+      "file": "assets/styles/style-a-defter.png",
+      "name": "Defter",
+      "note": "A hand-ruled ledger page — cream paper, pencil-thin hex lines, nothing painted.",
+      "chosen": false
+    },
+    {
+      "id": "cini",
+      "file": "assets/styles/style-b-cini.png",
+      "name": "Çini",
+      "note": "Deep indigo and white, bordered like Iznik tilework — handsome, but reads as decor before it reads as a game.",
+      "chosen": false
+    },
+    {
+      "id": "pazar",
+      "file": "assets/styles/style-c-pazar.png",
+      "name": "Pazar",
+      "note": "The striped market awning first appears here — the motif that survived even though the counter underneath did not.",
+      "chosen": false
+    },
+    {
+      "id": "buzdolabi",
+      "file": "assets/styles/style-d-buzdolabi.png",
+      "name": "Buzdolabı",
+      "note": "Steel-blue and frosted, a refrigerator door's worth of magnets — too cold for a food fight.",
+      "chosen": false
+    },
+    {
+      "id": "tezgah",
+      "file": "assets/styles/style-e-tezgah.png",
+      "name": "Tezgah",
+      "note": "Warm plank counter, worn brass — the direction that named the studio and shipped as the board itself.",
+      "chosen": true
+    },
+    {
+      "id": "ocak",
+      "name": "Ocak",
+      "file": "assets/styles/style-f-ocak.png",
+      "note": "Charcoal and ember glow, a cooktop grate for a board — striking, but every card fights the dark for attention.",
+      "chosen": false
+    },
+    {
+      "id": "neon",
+      "file": "assets/styles/style-g-neon.png",
+      "name": "Neon",
+      "note": "Synthwave arcade cabinet, glowing grid lines — a different game's clothes on this one's roster.",
+      "chosen": false
+    }
+  ]
+}

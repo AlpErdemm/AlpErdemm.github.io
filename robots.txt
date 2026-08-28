@@ -1,0 +1,8 @@
+# This page wants to be found. Nothing here is private — the design corpus
+# lives in the game repository and is never synced out.
+#
+# No sitemap line: there is no sitemap.xml, and pointing a crawler at a 404
+# is worse than saying nothing. Sprint X adds one with `press.html` and
+# `studio.html` if it wants one.
+User-agent: *
+Disallow:

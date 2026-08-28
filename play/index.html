@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Kitchen Tactics</title>
+    <!-- The tomato, drawn by the emoji font — a favicon with no asset. -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🍅%3C/text%3E%3C/svg%3E" />
+    <!--
+      The Poki HTML5 SDK: a script tag, not an npm package - there is no
+      package to install, which is why this sprint never opens package.json.
+
+      This is one of only two external origins permitted anywhere in the
+      build; everything else - fonts, art, audio, libraries - is bundled,
+      because Poki blocks external requests by default. Deliberately *not*
+      `async` or `defer`: `src/poki/sdk.ts` reads `window.PokiSDK` only after
+      `main.tsx` starts, and a race between this tag and boot would silently
+      ship a game with no ads and no gameplay events rather than a broken one
+      anybody would notice.
+    -->
+    <style>
+      /*
+        The loading screen (Task M5). Poki asks for a progress bar and
+        something worth looking at "to prevent players from thinking the
+        game is frozen" - today's alternative is a blank #root for the
+        length of the first download. Inlined here, in <head>, so it paints
+        before any script parses and never waits on ui.css.
+
+        Palette values are duplicated from ui.css's --wood/--brass/--paper
+        tokens rather than read from them - deliberately, and this is the
+        one place in the app allowed to drift from that file, because this
+        markup has to survive with zero CSS loaded at all. No studio
+        branding and no splash: Poki permits a logo here and nothing else,
+        and this build has no logo to show.
+      */
+      #boot {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #52402f;
+      }
+      #boot__track {
+        width: 33vw;
+        min-width: 120px;
+        max-width: 220px;
+        height: 10px;
+        border-radius: 5px;
+        background: #4a3722;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+      }
+      #boot__fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(180deg, #f0c368, #c9973f);
+        transition: width 0.15s ease-out;
+      }
+    </style>
+    <script type="module" crossorigin src="./assets/index-YZbFhYh2.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-0GYNCOKG.css">
+  </head>
+  <body>
+    <div id="root">
+      <!--
+        Static markup, not Preact's: this has to be on screen before the
+        module script below has even been requested. `main.tsx` removes the
+        whole node once `render(<App .../>)` has run.
+      -->
+      <div id="boot" data-loading>
+        <div id="boot__track"><div id="boot__fill"></div></div>
+      </div>
+    </div>
+  </body>
+</html>

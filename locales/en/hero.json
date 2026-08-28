@@ -1,0 +1,10 @@
+{
+  "hero.title": "The round cooks itself",
+  "hero.subtitle": "A real match, replaying live — the same hex board, the same hand-drawn rigs, no engine running on this page.",
+  "hero.boardLabel": "A replay of a Kitchen Tactics match, playing on loop",
+  "hero.fallback": "The board couldn't load this time — but the merge below still works.",
+  "merge.title": "Merge three, get one",
+  "merge.subtitle": "Scroll — the two ingredients below merge into a two-star unit exactly as they would on the counter.",
+  "merge.cardOneStar": "1★",
+  "merge.cardTwoStar": "2★"
+}

@@ -1,0 +1,237 @@
+const r=`<!-- Pide · Hamur 3-star · frontline · melee · reference-aligned vector rework\r
+     Reworked 2026-08-21 from repository art using the user-provided Pide concept.\r
+\r
+     Reference translation: compact bread knight, split crust framing the face,\r
+     filled center with sparse toppings, braided-dough armor, embroidered sash,\r
+     round dough mace, heavy boots, and tall rope-edged wheat shield.\r
+\r
+     Gameplay locks: viewBox, baseline, rig classes and pivots, data-atk="stab",\r
+     one shield-driven attack, and contact coordinate (120,84). Flat primitives\r
+     only; no filters, masks, gradients, text, or embedded raster imagery. -->\r
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"\r
+     class="rig" data-atk="stab" data-unit="pide" style="--dur-atk:1.00s">\r
+\r
+  <ellipse class="shadow" cx="54" cy="137" rx="37" ry="7.2" fill="#08090C" opacity=".5"/>\r
+  <ellipse cx="54" cy="135.5" rx="27" ry="3.2" fill="#C56B2B" opacity=".12"/>\r
+\r
+  <!-- rear arm: braided shoulder, bulky dough fist, round baked mace -->\r
+  <g class="armB" style="transform-origin:28px 88px">\r
+    <path d="M30 83 Q20 85 15 95 Q10 104 15 114" fill="none" stroke="#150E12"\r
+          stroke-width="17" stroke-linecap="round"/>\r
+    <path d="M30 83 Q20 85 15 95 Q10 104 15 114" fill="none" stroke="#8E512D"\r
+          stroke-width="11" stroke-linecap="round"/>\r
+    <ellipse cx="28" cy="82" rx="8.5" ry="7" fill="#B96B35" stroke="#211217" stroke-width="3"/>\r
+    <ellipse cx="22" cy="87" rx="7.4" ry="6.5" fill="#E1A35C" stroke="#211217" stroke-width="2.8"/>\r
+    <ellipse cx="16.5" cy="94" rx="7" ry="6.2" fill="#B96B35" stroke="#211217" stroke-width="2.8"/>\r
+    <path d="M24 79 L31 85 M18.5 84 L25.5 90 M13 91 L20 97" stroke="#7B3F27"\r
+          stroke-width="2.2" stroke-linecap="round"/>\r
+\r
+    <path d="M15 94 Q5 103 9 114 Q12 121 20 118 Q27 115 25 105 Q23 97 15 94 Z"\r
+          fill="#E6B873" stroke="#211217" stroke-width="3.2" stroke-linejoin="round"/>\r
+    <path d="M13 99 Q8 107 12 113 M18 98 Q14 106 18 115 M22 101 Q19 108 22 113"\r
+          fill="none" stroke="#C48948" stroke-width="2" stroke-linecap="round"/>\r
+\r
+    <path d="M18 112 L18 124" stroke="#211217" stroke-width="8" stroke-linecap="round"/>\r
+    <path d="M18 112 L18 124" stroke="#8D4D2A" stroke-width="4.5" stroke-linecap="round"/>\r
+    <circle cx="18" cy="121" r="13" fill="#2A1719" stroke="#130B0F" stroke-width="2.6"/>\r
+    <circle cx="18" cy="121" r="10.2" fill="#E8C486" stroke="#B56B31" stroke-width="2.7"/>\r
+    <circle cx="18" cy="121" r="12" fill="none" stroke="#D68B3D" stroke-width="3.2"/>\r
+    <path d="M9 116 Q18 110 27 116 M9 124 Q18 130 27 124" fill="none" stroke="#F2B95C"\r
+          stroke-width="1.9" stroke-linecap="round"/>\r
+    <ellipse cx="14" cy="118" rx="2.3" ry="1.7" fill="#A75C2C"/>\r
+    <ellipse cx="22" cy="124" rx="2" ry="1.6" fill="#B66B31"/>\r
+  </g>\r
+\r
+  <!-- squat armored stance from the concept, baseline unchanged -->\r
+  <g class="legB" style="transform-origin:44px 114px">\r
+    <path d="M42 108 L39 126" stroke="#150E12" stroke-width="15" stroke-linecap="round"/>\r
+    <path d="M42 108 L39 126" stroke="#5A3427" stroke-width="10" stroke-linecap="round"/>\r
+    <path d="M29 125 Q35 120 44 123 Q51 127 48 136 L29 136 Q27 131 29 125 Z"\r
+          fill="#3C2521" stroke="#150E12" stroke-width="3.2" stroke-linejoin="round"/>\r
+    <path d="M31 130 Q39 126 47 130" fill="none" stroke="#B16A35" stroke-width="2.4"\r
+          stroke-linecap="round"/>\r
+  </g>\r
+  <g class="legF" style="transform-origin:62px 114px">\r
+    <path d="M64 108 L68 126" stroke="#150E12" stroke-width="15" stroke-linecap="round"/>\r
+    <path d="M64 108 L68 126" stroke="#6F402B" stroke-width="10" stroke-linecap="round"/>\r
+    <path d="M59 124 Q67 120 76 124 Q82 128 79 136 L58 136 Q56 130 59 124 Z"\r
+          fill="#493027" stroke="#150E12" stroke-width="3.2" stroke-linejoin="round"/>\r
+    <path d="M61 130 Q69 126 78 130" fill="none" stroke="#C27B3A" stroke-width="2.4"\r
+          stroke-linecap="round"/>\r
+  </g>\r
+\r
+  <g class="body" style="transform-origin:52px 120px">\r
+    <!-- dark armored torso widens the lower read -->\r
+    <path d="M27 78 Q25 105 34 121 Q52 132 70 121 Q79 105 77 78 Z"\r
+          fill="#3A221F" stroke="#150E12" stroke-width="3.6" stroke-linejoin="round"/>\r
+    <path d="M31 88 Q52 80 73 88 L71 117 Q52 125 33 117 Z"\r
+          fill="#69402B" stroke="#2A1719" stroke-width="2.8" stroke-linejoin="round"/>\r
+\r
+    <!-- filled center, drawn first so the two crust folds frame it -->\r
+    <path d="M52 18 Q36 29 31 55 Q28 79 33 101 Q40 113 52 116 Q64 113 71 101\r
+             Q76 79 73 55 Q68 29 52 18 Z"\r
+          fill="#EBC47E" stroke="#3B211B" stroke-width="3.2" stroke-linejoin="round"/>\r
+    <path d="M38 37 Q32 58 34 88 Q35 103 44 109" fill="none" stroke="#FFE2A1"\r
+          stroke-width="5" opacity=".7" stroke-linecap="round"/>\r
+    <path d="M66 35 Q73 58 70 91 Q68 105 60 110" fill="none" stroke="#C87933"\r
+          stroke-width="3.2" opacity=".72" stroke-linecap="round"/>\r
+\r
+    <!-- reference toppings: tomato, meat, herb; controlled clusters at native scale -->\r
+    <path d="M45 35 Q50 29 57 34 Q62 39 57 44 Q50 46 44 42 Q41 38 45 35 Z"\r
+          fill="#B83A2C" stroke="#69231F" stroke-width="2" stroke-linejoin="round"/>\r
+    <path d="M50 32 Q52 28 54 32 M48 34 L44 31 M56 34 L60 31" fill="none" stroke="#587139"\r
+          stroke-width="2" stroke-linecap="round"/>\r
+    <path d="M41 51 Q46 46 51 51 L50 57 Q44 60 40 55 Z" fill="#8A4A29" stroke="#51291F" stroke-width="1.8"/>\r
+    <path d="M58 50 Q64 46 68 52 L66 58 Q60 60 57 55 Z" fill="#A8642E" stroke="#5E321F" stroke-width="1.8"/>\r
+    <path d="M39 92 Q44 87 49 92 L48 98 Q42 101 38 96 Z" fill="#A45A2B" stroke="#592A1F" stroke-width="1.8"/>\r
+    <path d="M60 93 Q65 88 69 93 L68 99 Q63 102 59 97 Z" fill="#B83A2C" stroke="#69231F" stroke-width="1.8"/>\r
+    <circle cx="53" cy="50" r="1.5" fill="#5F7737"/>\r
+    <circle cx="36" cy="65" r="1.7" fill="#B77B3D"/>\r
+    <circle cx="68" cy="70" r="1.7" fill="#A66732"/>\r
+\r
+    <!-- split crust frame: the defining form from the supplied concept -->\r
+    <path d="M52 14 Q37 22 28 50 Q21 76 25 101 Q28 108 36 104 Q32 80 38 51\r
+             Q43 28 52 14 Z"\r
+          fill="#C86E28" stroke="#211218" stroke-width="3.7" stroke-linejoin="round"/>\r
+    <path d="M52 14 Q67 22 76 50 Q83 76 79 101 Q76 108 68 104 Q72 80 66 51\r
+             Q61 28 52 14 Z"\r
+          fill="#D77D2D" stroke="#211218" stroke-width="3.7" stroke-linejoin="round"/>\r
+    <path d="M47 22 Q36 38 31 59 Q27 79 30 97" fill="none" stroke="#F2AE4F"\r
+          stroke-width="4" opacity=".78" stroke-linecap="round"/>\r
+    <path d="M58 22 Q69 39 74 60 Q78 80 75 98" fill="none" stroke="#FFB952"\r
+          stroke-width="3.6" opacity=".72" stroke-linecap="round"/>\r
+    <path d="M29 64 Q25 78 28 91 M75 62 Q80 78 76 92" fill="none" stroke="#8C431F"\r
+          stroke-width="2" opacity=".75" stroke-linecap="round"/>\r
+    <circle cx="34" cy="51" r="1.6" fill="#F8C168"/>\r
+    <circle cx="29" cy="73" r="1.4" fill="#F8C168"/>\r
+    <circle cx="70" cy="48" r="1.6" fill="#FFC76B"/>\r
+    <circle cx="76" cy="76" r="1.4" fill="#FFC76B"/>\r
+\r
+    <!-- cute, welcoming face centered inside the crust opening -->\r
+    <path d="M35 65 Q41 60 47 64" fill="none" stroke="#211218" stroke-width="3.2"\r
+          stroke-linecap="round"/>\r
+    <path d="M69 65 Q63 60 57 64" fill="none" stroke="#211218" stroke-width="3.2"\r
+          stroke-linecap="round"/>\r
+    <ellipse cx="43" cy="74" rx="6.5" ry="8" fill="#FFF7E5" stroke="#211218" stroke-width="2.6"/>\r
+    <ellipse cx="61" cy="74" rx="6.5" ry="8" fill="#FFF7E5" stroke="#211218" stroke-width="2.6"/>\r
+    <ellipse cx="44.4" cy="75" rx="3.5" ry="4.9" fill="#211218"/>\r
+    <ellipse cx="62.4" cy="75" rx="3.5" ry="4.9" fill="#211218"/>\r
+    <circle cx="42.8" cy="71.8" r="1.55" fill="#FFF"/>\r
+    <circle cx="60.8" cy="71.8" r="1.55" fill="#FFF"/>\r
+    <ellipse cx="36.5" cy="84" rx="3.1" ry="2" fill="#E47767" opacity=".68"/>\r
+    <ellipse cx="67.5" cy="84" rx="3.1" ry="2" fill="#E47767" opacity=".68"/>\r
+    <path d="M45.5 84 Q52 91.5 58.5 84 Q57 94 52 95 Q47 94 45.5 84 Z"\r
+          fill="#3A1A1D" stroke="#211218" stroke-width="2.5" stroke-linejoin="round"/>\r
+    <path d="M49 90.2 Q52 92.8 55 90.2" fill="none" stroke="#E47767" stroke-width="2.1"\r
+          stroke-linecap="round"/>\r
+\r
+    <!-- broad embroidered sash crossing the armored torso -->\r
+    <path d="M24 82 Q48 95 77 97 L73 108 Q45 106 21 92 Z"\r
+          fill="#F5E2BB" stroke="#211218" stroke-width="3.1" stroke-linejoin="round"/>\r
+    <path d="M25 86 Q48 98 74 101" fill="none" stroke="#FFF3D5" stroke-width="2.5"\r
+          opacity=".8" stroke-linecap="round"/>\r
+    <path d="M33 91 L37 96 M43 96 L47 101 M57 99 L61 104 M68 100 L72 104"\r
+          stroke="#A83930" stroke-width="2.1" stroke-linecap="round"/>\r
+\r
+    <!-- apron, red under-layer, braided belt, wheat medallion -->\r
+    <path d="M42 105 L64 105 L67 125 Q53 131 39 125 Z"\r
+          fill="#8D3828" stroke="#211218" stroke-width="2.8" stroke-linejoin="round"/>\r
+    <path d="M32 104 L47 108 L45 129 Q37 131 31 126 Z"\r
+          fill="#F4E4C3" stroke="#211218" stroke-width="2.7" stroke-linejoin="round"/>\r
+    <path d="M59 108 L72 104 L73 126 Q67 131 60 128 Z"\r
+          fill="#F4E4C3" stroke="#211218" stroke-width="2.7" stroke-linejoin="round"/>\r
+    <path d="M35 111 L43 114 M34 117 L42 120 M63 114 L70 111 M63 120 L71 117"\r
+          stroke="#A83930" stroke-width="1.8"/>\r
+    <path d="M27 104 Q52 113 77 104" stroke="#211218" stroke-width="11" fill="none"\r
+          stroke-linecap="round"/>\r
+    <path d="M27 104 Q52 113 77 104" stroke="#B96B35" stroke-width="6.7" fill="none"\r
+          stroke-linecap="round"/>\r
+    <path d="M33 108 L36 103 M42 111 L45 106 M59 111 L62 106 M68 108 L71 103"\r
+          stroke="#6E3823" stroke-width="2.2" stroke-linecap="round"/>\r
+    <circle cx="52" cy="108" r="8" fill="#4E281F" stroke="#211218" stroke-width="2.8"/>\r
+    <circle cx="52" cy="108" r="5.5" fill="#E2A13B" stroke="#FFC866" stroke-width="1.4"/>\r
+    <path d="M52 112 L52 103 M52 106 L49 104 M52 106 L55 104 M52 109 L49 107 M52 109 L55 107"\r
+          stroke="#714020" stroke-width="1.6" fill="none" stroke-linecap="round"/>\r
+\r
+    <!-- Oven blisters, flour freckles and a toasted rim add tactile bread scale. -->\r
+    <g fill="#9B5228" opacity=".8"><circle cx="42" cy="45" r="1.5"/><circle cx="62" cy="65" r="1.2"/>\r
+      <circle cx="45" cy="88" r="1.3"/><circle cx="66" cy="84" r="1"/></g>\r
+    <g fill="#FFF0C2" opacity=".75"><circle cx="37" cy="60" r="1.1"/><circle cx="57" cy="43" r="1"/>\r
+      <circle cx="54" cy="102" r="1.2"/></g>\r
+    <path d="M34 31 Q40 23 49 20" fill="none" stroke="#FFF0BD" stroke-width="2"\r
+          stroke-linecap="round" opacity=".72"/>\r
+\r
+    <path class="crack" d="M37 40 L48 55 L39 70 L51 84 L41 99"\r
+          stroke="#160D11" stroke-width="3.3" fill="none" stroke-linejoin="round"/>\r
+    <path class="crack" d="M51 84 L65 76 L71 90 M41 99 L33 108"\r
+          stroke="#160D11" stroke-width="2.6" fill="none" stroke-linejoin="round"/>\r
+  </g>\r
+\r
+  <!-- front arm and reference shield remain one animated part -->\r
+  <g class="armF" style="transform-origin:78px 88px">\r
+    <path d="M73 85 Q82 81 91 89" fill="none" stroke="#150E12" stroke-width="17"\r
+          stroke-linecap="round"/>\r
+    <path d="M73 85 Q82 81 91 89" fill="none" stroke="#9C572D" stroke-width="11"\r
+          stroke-linecap="round"/>\r
+    <ellipse cx="75" cy="85" rx="8" ry="7" fill="#D88C43" stroke="#211218" stroke-width="2.8"/>\r
+    <ellipse cx="82" cy="84" rx="7.6" ry="6.7" fill="#F0B963" stroke="#211218" stroke-width="2.8"/>\r
+    <ellipse cx="89" cy="88" rx="7" ry="6.4" fill="#C57435" stroke="#211218" stroke-width="2.8"/>\r
+    <path d="M71 82 L78 88 M78 81 L85 87 M85 85 L92 91" stroke="#7A3C24"\r
+          stroke-width="2.1" stroke-linecap="round"/>\r
+\r
+    <!-- rope carry-loop visible above the shield -->\r
+    <path d="M96 50 Q96 37 106 34 Q117 35 118 50" fill="none" stroke="#211218"\r
+          stroke-width="10" stroke-linecap="round"/>\r
+    <path d="M96 50 Q96 37 106 34 Q117 35 118 50" fill="none" stroke="#D48635"\r
+          stroke-width="6.5" stroke-linecap="round"/>\r
+    <path d="M99 43 L104 48 M105 36 L110 42 M113 39 L117 45" stroke="#F0B45D"\r
+          stroke-width="2" stroke-linecap="round"/>\r
+\r
+    <!-- dark depth plate and tall walnut face -->\r
+    <path d="M91 48 Q84 48 84 58 L84 113 Q84 124 96 126 L110 126 Q121 124 121 113\r
+             L121 58 Q121 48 112 48 Z"\r
+          fill="#211218" stroke="#120B0F" stroke-width="3.4" stroke-linejoin="round"/>\r
+    <path d="M94 52 Q88 52 88 60 L88 111 Q88 120 98 121 L108 121 Q117 120 117 111\r
+             L117 60 Q117 52 110 52 Z"\r
+          fill="#7A431F" stroke="#A75D29" stroke-width="2.8" stroke-linejoin="round"/>\r
+    <path d="M94 57 L94 116 M101 54 L101 120 M108 54 L108 119 M114 57 L114 115"\r
+          stroke="#4D281D" stroke-width="2.3" opacity=".9" stroke-linecap="round"/>\r
+    <path d="M92 59 Q90 73 91 108" fill="none" stroke="#C27632" stroke-width="2.4"\r
+          opacity=".72" stroke-linecap="round"/>\r
+\r
+    <!-- thick braided border; leading strike coordinate remains (120,84) -->\r
+    <path d="M93 50 Q85 50 85 59 L85 113 Q85 123 97 124 L109 124 Q120 123 120 113\r
+             L120 59 Q120 50 111 50 Z"\r
+          fill="none" stroke="#D18434" stroke-width="6.8" stroke-linejoin="round"/>\r
+    <path d="M93 50 Q85 50 85 59 L85 113 Q85 123 97 124 L109 124 Q120 123 120 113\r
+             L120 59 Q120 50 111 50 Z"\r
+          fill="none" stroke="#F1B35A" stroke-width="2.2" stroke-linejoin="round" opacity=".88"/>\r
+    <path d="M88 58 L94 53 M88 70 L84 65 M88 83 L84 78 M88 96 L84 91 M88 109 L84 104\r
+             M92 121 L97 116 M104 124 L109 118 M116 119 L120 113\r
+             M117 105 L121 100 M117 92 L121 87 M117 79 L121 74 M117 66 L121 61\r
+             M101 51 L96 47 M113 52 L108 48"\r
+          stroke="#8A4826" stroke-width="2.1" stroke-linecap="round"/>\r
+\r
+    <!-- oversized cream wheat mark from the reference -->\r
+    <path d="M103 108 L103 66" stroke="#F8E7BD" stroke-width="3.2" stroke-linecap="round"/>\r
+    <path d="M103 75 L97 69 M103 75 L109 69 M103 84 L96 78 M103 84 L110 78\r
+             M103 93 L96 87 M103 93 L110 87 M103 102 L97 96 M103 102 L109 96"\r
+          stroke="#F8E7BD" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>\r
+    <path d="M99 111 Q103 114 107 111" fill="none" stroke="#F4C76F" stroke-width="2.2"\r
+          stroke-linecap="round"/>\r
+  </g>\r
+\r
+  <g class="fx" style="transform-origin:120px 84px">\r
+    <ellipse cx="130" cy="84" rx="11" ry="31" fill="none" stroke="#8D4E24"\r
+             stroke-width="12" opacity=".35"/>\r
+    <ellipse cx="130" cy="84" rx="10" ry="29" fill="none" stroke="#F0B83E"\r
+             stroke-width="6.5" opacity=".82"/>\r
+    <ellipse cx="130" cy="84" rx="9" ry="27" fill="none" stroke="#FFF0B2"\r
+             stroke-width="2.5" opacity=".96"/>\r
+    <path d="M141 60 L146 55 M144 84 L150 84 M141 108 L146 113" stroke="#F8CD63"\r
+          stroke-width="3.2" stroke-linecap="round"/>\r
+    <circle cx="136" cy="66" r="2.6" fill="#FFF0B2"/>\r
+    <circle cx="139" cy="101" r="2.3" fill="#F0B83E"/>\r
+  </g>\r
+</svg>\r
+`;export{r as default};

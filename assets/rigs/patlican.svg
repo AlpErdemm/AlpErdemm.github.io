@@ -1,0 +1,130 @@
+<!-- Patlıcan · Bostan 4 ✦ · Dövüşçü · yakın dövüş
+     attackSpeed 1.11 → round(20/1.11) = 18 tick = 0.90 sn
+
+     SINIF KURALI: silah yok. Sargı ASMA FİLİZİ — bostanın kendi ipi.
+
+     BOSTAN ORTAK TABANI korundu: aşağıda toprak ve sap, yukarıda tamamen
+     başka bir taç. Ayçiçeği'nin diski, Bamya'nın sivri yeşili, Kabak'ın
+     küresi — Patlıcan'ınki aşağı çekilmiş bir ÇANAK YAPRAK, kaskı gibi
+     gözlerinin üstünde duruyor.
+
+     SİLUET: bostanın tek MOR gövdesi ve en uzun damlası. 40 px'te renk tek
+     başına ayırıyor; sınıfın diğer beşi de sıcak tonlarda, bu tek soğuk. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="punch" data-unit="patlican" style="--dur-atk:0.90s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="27" ry="5.8" fill="#000" opacity=".35"/>
+
+  <g class="armB" style="transform-origin:30px 92px">
+    <path d="M30 92 L16 96" stroke="#1A1220" stroke-width="12" stroke-linecap="round"/>
+    <path d="M30 92 L16 96" stroke="#4A2A6B" stroke-width="8" stroke-linecap="round"/>
+    <path d="M25 99 Q22 94 25 90 M20 100 Q17 95 20 91" stroke="#4E7A32" stroke-width="2.6"
+          fill="none" stroke-linecap="round"/>
+    <circle cx="13" cy="98" r="10" fill="#4A2A6B" stroke="#1A1220" stroke-width="3"/>
+    <path d="M6 104 Q13 110 20 102 Q16 107 10 107 Z" fill="#33184D"/>
+  </g>
+
+  <g class="legB" style="transform-origin:44px 116px">
+    <path d="M44 106 L41 126" stroke="#1A1220" stroke-width="12" stroke-linecap="round"/>
+    <path d="M44 106 L41 126" stroke="#33184D" stroke-width="8" stroke-linecap="round"/>
+    <path d="M34 126 Q29 131 32 136 L46 136 Q47 130 43 125 Z"
+          fill="#4E7A32" stroke="#1A1220" stroke-width="2.8" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 116px">
+    <path d="M62 106 L65 126" stroke="#1A1220" stroke-width="12" stroke-linecap="round"/>
+    <path d="M62 106 L65 126" stroke="#4A2A6B" stroke-width="8" stroke-linecap="round"/>
+    <path d="M62 125 Q57 130 60 136 L75 136 Q77 131 72 126 Z"
+          fill="#5E8F3A" stroke="#1A1220" stroke-width="2.8" stroke-linejoin="round"/>
+  </g>
+
+  <g class="body" style="transform-origin:52px 120px">
+    <path d="M52 40 C74 40 84 62 84 84 C84 106 70 116 52 116 C34 116 20 106 20 84
+             C20 62 30 40 52 40 Z"
+          fill="#4A2A6B" stroke="#1A1220" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M68 52 C80 66 82 96 66 110 C78 104 84 94 84 84 C84 68 78 56 68 52 Z"
+          fill="#33184D"/>
+    <path d="M34 58 C28 70 27 84 30 96" stroke="#8A63B8" stroke-width="3.2" fill="none"
+          stroke-linecap="round" opacity=".9"/>
+    <path d="M40 52 Q46 47 54 47" stroke="#C9A6E8" stroke-width="3.4" fill="none"
+          stroke-linecap="round" opacity=".85"/>
+    <path d="M31 64 Q27 78 30 91" stroke="#E2C8F5" stroke-width="1.7" fill="none"
+          stroke-linecap="round" opacity=".7"/>
+
+    <path d="M52 30 L52 42" stroke="#1A1220" stroke-width="5" stroke-linecap="round"/>
+    <path d="M52 34 L52 24" stroke="#4E7A32" stroke-width="6" stroke-linecap="round"/>
+    <path d="M52 44 C40 44 30 50 26 58 C34 62 44 62 52 58 Z"
+          fill="#4E7A32" stroke="#1A1220" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M52 44 C64 44 74 50 78 58 C70 62 60 62 52 58 Z"
+          fill="#5E8F3A" stroke="#1A1220" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M34 54 L44 57 M70 54 L60 57" stroke="#2E4A1E" stroke-width="2.2"
+          stroke-linecap="round"/>
+    <!-- Leaf armour, vine belt and a stitched field patch are the reference's
+         secondary read; they make this a bruiser, not a bare purple mascot. -->
+    <path d="M24 52 Q30 40 43 44 L52 52 L61 44 Q74 40 80 52 Q68 56 61 64
+             Q52 58 43 64 Q36 56 24 52 Z" fill="#3E6B2C" stroke="#1A1220"
+          stroke-width="2.8" stroke-linejoin="round"/>
+    <path d="M30 51 Q38 47 45 53 M74 51 Q66 47 59 53" stroke="#78A54C"
+          stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M23 100 Q52 107 81 99" fill="none" stroke="#A57A3E" stroke-width="6"
+          stroke-linecap="round"/>
+    <path d="M27 99 Q52 104 77 98" fill="none" stroke="#E0C083" stroke-width="1.8"
+          stroke-dasharray="3 3"/>
+    <path d="M30 104 L45 106 L42 116 L28 112 Z" fill="#406C2B" stroke="#1A1220"
+          stroke-width="2.4" stroke-linejoin="round"/>
+    <path d="M74 103 L60 106 L63 116 L77 112 Z" fill="#527F34" stroke="#1A1220"
+          stroke-width="2.4" stroke-linejoin="round"/>
+    <path d="M33 91 L44 92 L43 102 L32 100 Z" fill="#C79554" stroke="#1A1220"
+          stroke-width="2" stroke-linejoin="round"/>
+    <path d="M34 94 L41 99 M41 94 L34 99" stroke="#F0D5A4" stroke-width="1.4"/>
+
+    <path d="M32 74 L44 76 M60 76 L72 74" stroke="#1A1220" stroke-width="3.4"
+          stroke-linecap="round"/>
+    <ellipse cx="39" cy="86" rx="6.6" ry="7.6" fill="#fff" stroke="#1A1220" stroke-width="2.3"/>
+    <ellipse cx="65" cy="86" rx="6.6" ry="7.6" fill="#fff" stroke="#1A1220" stroke-width="2.3"/>
+    <ellipse cx="40.4" cy="87" rx="3.6" ry="4.8" fill="#1A1220"/>
+    <ellipse cx="66.4" cy="87" rx="3.6" ry="4.8" fill="#1A1220"/>
+    <circle cx="38" cy="83.4" r="1.6" fill="#fff"/>
+    <circle cx="64" cy="83.4" r="1.6" fill="#fff"/>
+    <path d="M44 99 Q52 104 60 99" stroke="#1A1220" stroke-width="3"
+          fill="none" stroke-linecap="round"/>
+    <g fill="#B995D6" opacity=".65">
+      <ellipse cx="27" cy="77" rx="1.4" ry="2.2"/><ellipse cx="75" cy="71" rx="1.2" ry="2"/>
+      <ellipse cx="69" cy="96" rx="1.3" ry="2.1"/>
+    </g>
+
+    <g data-expression="cute">
+      <path d="M32 76 Q38 71 44 76 M60 76 Q66 71 72 76" fill="none" stroke="#4A2A6B" stroke-width="7" stroke-linecap="round"/>
+      <path d="M32 76 Q38 71 44 76 M60 76 Q66 71 72 76" fill="none" stroke="#1A1220" stroke-width="2.8" stroke-linecap="round"/>
+      <ellipse cx="31" cy="99" rx="3.2" ry="1.9" fill="#D986B8" opacity=".72"/><ellipse cx="73" cy="99" rx="3.2" ry="1.9" fill="#D986B8" opacity=".72"/>
+      <path d="M44 98 Q52 106 60 98 Q59 109 52 110 Q45 109 44 98 Z" fill="#30152F" stroke="#1A1220" stroke-width="2.3"/>
+      <path d="M49 104 Q52 106 55 104" fill="none" stroke="#E995BC" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <path class="crack" d="M36 56 L48 72 L38 86 L50 98 L40 110"
+          stroke="#0A0A06" stroke-width="2.8" fill="none" stroke-linejoin="round"/>
+  </g>
+
+  <g class="armF" style="transform-origin:74px 92px">
+    <path d="M74 92 L98 89" stroke="#1A1220" stroke-width="16" stroke-linecap="round"/>
+    <path d="M74 92 L98 89" stroke="#4A2A6B" stroke-width="12" stroke-linecap="round"/>
+    <path d="M85 91 Q90 86 95 90" stroke="#4E7A32" stroke-width="3.4" fill="none"
+          stroke-linecap="round"/>
+    <path d="M87 90 Q92 94 97 89" stroke="#5E8F3A" stroke-width="3" fill="none"
+          stroke-linecap="round"/>
+    <circle cx="108" cy="87" r="12" fill="#4A2A6B" stroke="#1A1220" stroke-width="3.4"/>
+    <path d="M97 81 Q102 87 97 93" fill="none" stroke="#1A1220" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M99 94 Q108 102 117 92 Q112 99 105 99 Z" fill="#33184D"/>
+    <path d="M100 81 Q105 77 111 78" stroke="#C9A6E8" stroke-width="2.6" fill="none"
+          stroke-linecap="round" opacity=".85"/>
+    <path d="M103 77 L103 96 M110 76 L110 97" stroke="#1A1220" stroke-width="1.8" opacity=".6"/>
+  </g>
+
+  <g class="fx" style="transform-origin:120px 87px">
+    <path d="M119 73 L134 64 M123 87 L142 87 M119 101 L134 110"
+          stroke="#8A63B8" stroke-width="5.5" stroke-linecap="round" opacity=".9"/>
+    <path d="M119 73 L129 67 M123 87 L136 87 M119 101 L129 107"
+          stroke="#E6D6F6" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M131 76 L135 73 L134 78 Z" fill="#4A2A6B" stroke="#1A1220" stroke-width="1.2"/>
+    <path d="M133 97 L138 96 L135 100 Z" fill="#4A2A6B" stroke="#1A1220" stroke-width="1.2"/>
+  </g>
+</svg>

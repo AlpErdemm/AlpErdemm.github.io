@@ -1,0 +1,57 @@
+# Publish the site to GitHub Pages.
+#
+# THIS WORKFLOW DOES NOT RUN IN THIS REPOSITORY. It is authored here so the
+# deploy path exists and is reviewable before Sprint X needs it, and it is
+# carried into the public repo — AlpErdemm/AlpErdemm.github.io — by Sprint X's
+# `scripts/site-sync.mjs`. This repository (AlpErdemm/KitchenTactics) is
+# private and holds the game's design corpus; nothing here is published.
+#
+# The `if` on the job is what makes that mechanical rather than a promise: on
+# any repository other than the public one, the job is skipped. If you are
+# reading this wondering why it never fired, that is why.
+#
+# There is no build step, and there should never be one. The site is
+# hand-authored HTML, CSS and SVG (decision 7) — `site/` is uploaded exactly
+# as committed. No node, no install, no bundler. `site/js/shell.test.ts`
+# fails this file if an `npm` or a `setup-node` appears in it.
+
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time; a queued run supersedes an older queued one but never
+# cancels a deploy already in flight.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.repository == 'AlpErdemm/AlpErdemm.github.io'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload the site as it is authored
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

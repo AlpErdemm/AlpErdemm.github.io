@@ -1,0 +1,23 @@
+{
+  "roster.title": "The Roster",
+  "roster.intro": "Every ingredient on the counter, live. Hover a card — or tab to it — and watch it swing.",
+  "roster.tier.2": "Cost 2",
+  "roster.tier.3": "Cost 3",
+  "roster.tier.4": "Cost 4",
+  "roster.tier.5": "Cost 5",
+  "howto.title": "How a Run Plays",
+  "howto.intro": "Five steps. Read only the headings and you already know the game.",
+  "howto.step1.heading": "Buy from the stall",
+  "howto.step1.body": "The shop restocks every round. Ingredients cost between 2 and 5 — spend what you can afford.",
+  "howto.step2.heading": "Place your board",
+  "howto.step2.body": "Set your ingredients on the hex grid before the round starts. Position is half the fight.",
+  "howto.step3.heading": "Merge three into one",
+  "howto.step3.body": "Three of the same ingredient merge into a stronger one. Merging is the whole economy.",
+  "howto.step4.heading": "Let the round cook itself",
+  "howto.step4.body": "No input during the fight — it plays out on its own, board against board.",
+  "howto.step5.heading": "Climb the standings",
+  "howto.step5.body": "Win rounds, keep your board standing, and outlast the table.",
+  "art.title": "The Art We Didn't Ship",
+  "art.intro": "Before the counter and the awning, six other directions were tried. Here they are — including the one that named the studio.",
+  "art.chosenLabel": "Chosen"
+}

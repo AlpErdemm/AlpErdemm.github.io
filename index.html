@@ -1,1 +1,496 @@
-Hello World
+<!doctype html>
+<!--
+  Tezgah — the studio, and Kitchen Tactics, the game on the counter.
+
+  Hand-authored. There is no build step for this page (decision 7): what is in
+  this directory is what is served. `data-site` marks the document as ours —
+  Vite's dev server answers an unknown path with the *game's* index.html and a
+  200, so without this a mistyped path in a test looks like a pass.
+
+  This file is shared by five sprints. The regions are binding:
+
+    <head>, <header>, <footer>, the section stubs   Sprint S
+    inside #hero, #merge                            Sprint U
+    inside #roster, #howto, #art                    Sprint V
+    inside #play, #studio                           Sprint X
+    the `lang` attribute and the locale toggle      Sprint W
+
+  Write inside your own section and nowhere else.
+-->
+<html lang="en" data-site="tezgah">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Kitchen Tactics — a market-stall auto-battler by Tezgah</title>
+    <meta
+      name="description"
+      content="Kitchen Tactics is a market-stall auto-battler. Buy ingredients, merge three into one, and let the round cook itself. Made by Tezgah."
+    />
+
+    <!-- The unfurl. The publisher pastes this link into Slack, and what
+         renders there happens before anyone clicks — so it is asserted in
+         `site/js/shell.test.ts`, not eyeballed. Absolute URLs on purpose: a
+         crawler does not resolve relative paths the way a browser does. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://alperdemm.github.io/" />
+    <meta property="og:title" content="Kitchen Tactics — a market-stall auto-battler" />
+    <meta
+      property="og:description"
+      content="Buy ingredients, merge three into one, and let the round cook itself. A hand-drawn auto-battler from Tezgah."
+    />
+    <meta property="og:image" content="https://alperdemm.github.io/brand/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="The Tezgah awning over the Kitchen Tactics wordmark, with Mısır standing at the counter." />
+    <meta property="og:locale" content="en" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- The awning, drawn in the URL. No request, no file. Same trick the
+         game's own `index.html:8` uses for its tomato. -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20fill='%232a2114'/%3E%3Crect%20x='0'%20y='5'%20width='8'%20height='13'%20fill='%23c8402f'/%3E%3Crect%20x='8'%20y='5'%20width='8'%20height='13'%20fill='%23fdf6e6'/%3E%3Crect%20x='16'%20y='5'%20width='8'%20height='13'%20fill='%23c8402f'/%3E%3Crect%20x='24'%20y='5'%20width='8'%20height='13'%20fill='%23fdf6e6'/%3E%3Crect%20x='2'%20y='22'%20width='28'%20height='6'%20fill='%238a6a45'/%3E%3C/svg%3E"
+    />
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+
+    <!-- The shell's own module, and the only script tag in `<head>`. Sprints
+         U, V, W and X load theirs from inside their own `<section>` — see the
+         note at the top of `js/shell.js`. -->
+    <script type="module" src="js/shell.js"></script>
+  </head>
+
+  <body>
+    <header class="masthead">
+      <!-- The wordmark. Inline SVG, so it scales, costs no request and needs
+           no font load — `var(--display)` is a system stack. The awning above
+           it is the site's signature motif and it appears here and nowhere
+           else on the page. Resist a second use. -->
+      <h1 class="masthead__mark">
+        <svg class="wordmark" viewBox="0 0 264 96" role="img" aria-labelledby="wordmark-title" focusable="false">
+          <title id="wordmark-title">Tezgah</title>
+          <g class="wordmark__awning">
+            <path class="wordmark__stripe wordmark__stripe--sign" d="M0 0h33v26a16.5 16.5 0 0 1-33 0z" />
+            <path class="wordmark__stripe wordmark__stripe--paper" d="M33 0h33v26a16.5 16.5 0 0 1-33 0z" />
+            <path class="wordmark__stripe wordmark__stripe--sign" d="M66 0h33v26a16.5 16.5 0 0 1-33 0z" />
+            <path class="wordmark__stripe wordmark__stripe--paper" d="M99 0h33v26a16.5 16.5 0 0 1-33 0z" />
+            <path class="wordmark__stripe wordmark__stripe--sign" d="M132 0h33v26a16.5 16.5 0 0 1-33 0z" />
+            <path class="wordmark__stripe wordmark__stripe--paper" d="M165 0h33v26a16.5 16.5 0 0 1-33 0z" />
+            <path class="wordmark__stripe wordmark__stripe--sign" d="M198 0h33v26a16.5 16.5 0 0 1-33 0z" />
+            <path class="wordmark__stripe wordmark__stripe--paper" d="M231 0h33v26a16.5 16.5 0 0 1-33 0z" />
+          </g>
+          <text class="wordmark__word" x="132" y="88" text-anchor="middle">Tezgah</text>
+        </svg>
+      </h1>
+
+      <nav class="masthead__nav" aria-label="Sections">
+        <a href="#roster">Roster</a>
+        <a href="#howto">How it plays</a>
+        <a href="#play">Play</a>
+        <a href="#studio">Studio</a>
+      </nav>
+
+      <!-- Sprint W places the locale toggle here, and writes nowhere else in
+           this header. Leave this anchor where it is.
+
+           Styled inline rather than from a stylesheet: this sprint owns no
+           CSS file (every `site/css/*.css` belongs to another sprint's
+           single-owner list in the orchestration doc), and the toggle is
+           squarely inside the one region of `index.html` that is this
+           sprint's own. `paintToggle()` below repaints the same two
+           declarations on every locale change, referencing the tokens from
+           `css/tokens.css` rather than a literal colour. -->
+      <div
+        class="masthead__locale"
+        data-locale-toggle
+        data-i18n-aria-label="ui.locale.toggleGroupLabel"
+        aria-label="Choose language"
+        style="display: flex; gap: .35rem; align-items: center;"
+      >
+        <button
+          type="button"
+          data-locale-option="en"
+          style="font: inherit; font-size: .85rem; line-height: 1; cursor: pointer; border-radius: 999px; padding: .35rem .7rem; border: 1px solid var(--wood-rim); background: transparent; color: var(--dim);"
+        >English</button>
+        <button
+          type="button"
+          data-locale-option="tr"
+          style="font: inherit; font-size: .85rem; line-height: 1; cursor: pointer; border-radius: 999px; padding: .35rem .7rem; border: 1px solid var(--wood-rim); background: transparent; color: var(--dim);"
+        >Türkçe</button>
+      </div>
+
+      <!-- Boots the i18n spine and wires the two buttons above. Deliberately
+           inline rather than a second `src="js/…"` file: this glue is nothing
+           but "read the two buttons, call the four exports `js/i18n.js`
+           already makes public" and it lives entirely inside the region this
+           sprint owns. `await boot()` blocks this module's completion — and
+           therefore `DOMContentLoaded` — until the locale is resolved and
+           every `[data-i18n]` element has been rewritten, which is what keeps
+           a Turkish visitor from ever seeing an English frame first. -->
+      <script type="module">
+        import { applyTo, boot, locale, setLocale, t } from './js/i18n.js';
+
+        const group = document.querySelector('[data-locale-toggle]');
+
+        function paintToggle() {
+          for (const btn of group.querySelectorAll('[data-locale-option]')) {
+            const active = btn.dataset.localeOption === locale();
+            if (active) {
+              btn.setAttribute('aria-current', 'true');
+              btn.style.background = 'var(--brass)';
+              btn.style.borderColor = 'var(--brass)';
+              btn.style.color = 'var(--paper-ink)';
+            } else {
+              btn.removeAttribute('aria-current');
+              btn.style.background = 'transparent';
+              btn.style.borderColor = 'var(--wood-rim)';
+              btn.style.color = 'var(--dim)';
+            }
+          }
+        }
+
+        group.addEventListener('click', (event) => {
+          const btn = event.target.closest('[data-locale-option]');
+          if (!btn || btn.dataset.localeOption === locale()) return;
+          setLocale(btn.dataset.localeOption);
+          document.documentElement.lang = locale();
+          document.title = t('ui.meta.title');
+          applyTo(document);
+          paintToggle();
+        });
+
+        await boot();
+        paintToggle();
+      </script>
+    </header>
+
+    <main>
+      <section id="hero" aria-labelledby="hero-title">
+        <!-- Sprint U owns everything inside this section. -->
+
+        <!-- `<head>` is Sprint S's region (see the note at the top of this
+             file and `site/js/shell.js`), so U's stylesheet loads from here
+             instead — a `rel="stylesheet"` `<link>` is valid anywhere in the
+             body, and this keeps every region editing only its own file. -->
+        <link rel="stylesheet" href="css/hero.css" />
+
+        <!-- `assets/rigs/anim.css` is Sprint T's asset-pipeline copy of
+             `src/render/units/anim.css`, unmodified — it drives every rig's
+             limbs (`.st-idle`/`.st-walk`/`.st-attack`/`.st-hit`/`.st-death`)
+             from CSS custom properties. Loaded as a plain `<link>` rather
+             than a `hero.css` `@import`: a `<link>` to a file that does not
+             exist yet 404s quietly in the browser (and, before T merges, in
+             this dev server too), where an `@import` inside a stylesheet
+             is resolved eagerly enough to take the whole dev server down
+             with it — measured, not assumed, while this file did not exist. -->
+        <link rel="stylesheet" href="assets/rigs/anim.css" />
+
+        <!-- The awning: the site's signature motif, used once in the
+             masthead wordmark (Sprint S's region) and once here. The shape
+             is the wordmark's own rounded-bottom stripe, tiled as a band —
+             sampled from the scallop the game draws above the standings
+             (shots/playtest/01-round1.png), not invented.
+
+             Deliberately no `viewBox`/`preserveAspectRatio`: this element's
+             own width varies with the column (it is 100% wide), and a
+             `viewBox` stretched non-uniformly to fill it would scale the
+             tile's rounded bottom into a flat, stretched arc — measured,
+             not assumed. With no `viewBox`, one SVG user unit is one CSS
+             pixel, so the 66x43 tile below repeats at its authored size
+             regardless of how wide the element renders.
+
+             The tile is 43 tall, not 26: the arc `a16.5 16.5 0 0 1 -33 0`
+             is a full semicircle on a 33-wide chord at y=26, so it bulges
+             down to y=42.5 — a `<pattern>` clips to its own declared box,
+             so a 26-tall tile silently cropped the scallop off entirely,
+             leaving flat stripes (measured, not assumed). `.hero__awning`'s
+             own CSS height (`hero.css`) is sized to match, or this element's
+             own box would then do the same cropping the pattern box no
+             longer does. -->
+        <svg class="hero__awning" aria-hidden="true" focusable="false">
+          <defs>
+            <pattern id="hero-awning-tile" width="66" height="43" patternUnits="userSpaceOnUse">
+              <path class="hero__awning-sign" d="M0 0h33v26a16.5 16.5 0 0 1-33 0z" />
+              <path class="hero__awning-paper" d="M33 0h33v26a16.5 16.5 0 0 1-33 0z" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hero-awning-tile)" />
+        </svg>
+
+        <h2 id="hero-title" data-i18n="hero.title">The round cooks itself</h2>
+        <p data-i18n="hero.subtitle">A real match, replaying live — the same hex board, the same hand-drawn rigs, no engine running on this page.</p>
+
+        <!-- `hero.js` fills this in: fetches `data/rigs.json` and
+             `data/replay.json`, inlines each unit's rig SVG (the same file
+             `src/render/units/*/rig.svg` authors — not reimplemented), and
+             drives it with `assets/rigs/anim.css`, imported unmodified from
+             `hero.css`. No Pixi, no engine, no simulation here — this page
+             only ever renders a frame someone else recorded. -->
+        <div class="hero__board" id="hero-board" role="img" aria-labelledby="hero-board-label">
+          <span class="hero__sr-only" id="hero-board-label" data-i18n="hero.boardLabel">A replay of a Kitchen Tactics match, playing on loop</span>
+          <svg class="hero__grid" aria-hidden="true" focusable="false"></svg>
+          <p class="hero__fallback" data-i18n="hero.fallback" hidden>The board couldn't load this time — but the merge below still works.</p>
+        </div>
+
+        <script type="module" src="js/hero.js"></script>
+      </section>
+
+      <section id="merge" aria-labelledby="merge-title">
+        <!-- Sprint U owns everything inside this section. -->
+
+        <h2 id="merge-title" data-i18n="merge.title">Merge three, get one</h2>
+        <p data-i18n="merge.subtitle">Scroll — the two ingredients below merge into a two-star unit exactly as they would on the counter.</p>
+
+        <!-- `.merge__stage` is tall on purpose: `merge.js` reads its own
+             `getBoundingClientRect()` once per scroll tick and turns that
+             into a 0..1 progress value, driving `.merge__viewport`'s cards
+             by `transform`/`opacity` only. `.merge__viewport` is
+             `position: sticky`, which is what holds the cards still while
+             the stage scrolls past underneath — the visitor performs the
+             merge by scrolling, rather than watching an autoplay that would
+             already be finished by the time they arrive. -->
+        <div class="merge__stage">
+          <div class="merge__viewport">
+            <div class="merge__card merge__card--a" aria-hidden="true">
+              <div class="merge__card-face">
+                <div class="merge__card-tier"></div>
+                <div class="merge__card-art"></div>
+                <div class="merge__card-stars" data-i18n="merge.cardOneStar">1★</div>
+              </div>
+            </div>
+            <div class="merge__card merge__card--b" aria-hidden="true">
+              <div class="merge__card-face">
+                <div class="merge__card-tier"></div>
+                <div class="merge__card-art"></div>
+                <div class="merge__card-stars" data-i18n="merge.cardOneStar">1★</div>
+              </div>
+            </div>
+            <div class="merge__resolved" aria-hidden="true">
+              <div class="merge__card-face merge__card-face--resolved">
+                <div class="merge__card-tier"></div>
+                <div class="merge__card-art"></div>
+                <div class="merge__card-stars" data-i18n="merge.cardTwoStar">2★</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script type="module" src="js/merge.js"></script>
+      </section>
+
+      <section id="roster" aria-labelledby="roster-title">
+        <!-- Sprint V owns everything inside this section. -->
+        <link rel="stylesheet" href="css/roster.css" />
+        <!-- The rigs' own animation vocabulary — idle, walk, attack, hit,
+             death — byte-for-byte from `src/render/units/anim.css`. No
+             `@keyframes` are authored anywhere in Sprint V's own CSS; this is
+             the only stylesheet that drives a rig. -->
+        <link rel="stylesheet" href="assets/rigs/anim.css" />
+
+        <h2 id="roster-title" data-i18n="roster.title">The Roster</h2>
+        <p class="roster__intro" data-i18n="roster.intro">
+          Every ingredient on the counter, live. Hover a card — or tab to it — and watch it swing.
+        </p>
+
+        <!-- Populated by js/roster.js from data/rigs.json. One card per
+             unit, lazy-mounted below the fold. -->
+        <ul class="roster__grid" aria-label="Every unit in Kitchen Tactics"></ul>
+
+        <script type="module" src="js/roster.js"></script>
+      </section>
+
+      <section id="howto" aria-labelledby="howto-title">
+        <!-- Sprint V owns everything inside this section. -->
+        <h2 id="howto-title" data-i18n="howto.title">How a Run Plays</h2>
+        <p class="howto__intro" data-i18n="howto.intro">
+          Five steps. Read only the headings and you already know the game.
+        </p>
+
+        <ol class="howto__steps">
+          <li class="howto__step">
+            <img
+              class="howto__step-image"
+              src="assets/shots/placement.png"
+              width="480"
+              height="300"
+              alt="The in-game shop, showing ingredients available to buy this round"
+            />
+            <h3 class="howto__step-heading" data-i18n="howto.step1.heading">Buy from the stall</h3>
+            <p class="howto__step-body" data-i18n="howto.step1.body">
+              The shop restocks every round. Ingredients cost between 2 and 5 — spend what you can afford.
+            </p>
+          </li>
+          <li class="howto__step">
+            <img
+              class="howto__step-image"
+              src="assets/shots/placement.png"
+              width="480"
+              height="300"
+              alt="The hex board mid-placement, with units set into position before the round starts"
+            />
+            <h3 class="howto__step-heading" data-i18n="howto.step2.heading">Place your board</h3>
+            <p class="howto__step-body" data-i18n="howto.step2.body">
+              Set your ingredients on the hex grid before the round starts. Position is half the fight.
+            </p>
+          </li>
+          <li class="howto__step">
+            <img
+              class="howto__step-image"
+              src="assets/shots/merge.png"
+              width="480"
+              height="300"
+              alt="Three matching ingredients merging into one stronger unit"
+            />
+            <h3 class="howto__step-heading" data-i18n="howto.step3.heading">Merge three into one</h3>
+            <p class="howto__step-body" data-i18n="howto.step3.body">
+              Three of the same ingredient merge into a stronger one. Merging is the whole economy.
+            </p>
+          </li>
+          <li class="howto__step">
+            <img
+              class="howto__step-image"
+              src="assets/shots/fight.png"
+              width="480"
+              height="300"
+              alt="A fight mid-swing between two boards, playing out with no player input"
+            />
+            <h3 class="howto__step-heading" data-i18n="howto.step4.heading">Let the round cook itself</h3>
+            <p class="howto__step-body" data-i18n="howto.step4.body">
+              No input during the fight — it plays out on its own, board against board.
+            </p>
+          </li>
+          <li class="howto__step">
+            <img
+              class="howto__step-image"
+              src="assets/shots/run-end.png"
+              width="480"
+              height="300"
+              alt="The end-of-run standings, ranking every seat at the table"
+            />
+            <h3 class="howto__step-heading" data-i18n="howto.step5.heading">Climb the standings</h3>
+            <p class="howto__step-body" data-i18n="howto.step5.body">
+              Win rounds, keep your board standing, and outlast the table.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section id="art" aria-labelledby="art-title">
+        <!-- Sprint V owns everything inside this section. -->
+        <h2 id="art-title" data-i18n="art.title">The Art We Didn't Ship</h2>
+        <p class="art__intro" data-i18n="art.intro">
+          Before the counter and the awning, six other directions were tried. Here they are — including the one that
+          named the studio.
+        </p>
+
+        <!-- Populated by js/roster.js from data/styles.json. -->
+        <ul class="art__strip" aria-label="Seven early art directions for Kitchen Tactics"></ul>
+      </section>
+
+      <section id="play" aria-labelledby="play-title">
+        <!-- Sprint X owns everything inside this section.
+
+             `embed.css` and `embed.js` are loaded from here rather than
+             `<head>` — that region is Sprint S's (see the note at the top of
+             this file and `site/js/shell.js`'s own header) — so this
+             section carries the only `<link rel="stylesheet">` and the only
+             other `<script type="module">` this sprint adds. Module scripts
+             are deferred regardless of where the tag sits, so this changes
+             nothing about load order.
+
+             The phone is CSS and inline SVG (decision 3), not a captured
+             screenshot: Sprint T's asset pipeline had not merged into this
+             worktree at the time this section was written, so there was no
+             committed capture at the phone's screen size to link. Swapping
+             this poster `<svg>` for one of T's real captures once
+             `site/assets/**` exists is a small, contained follow-up — see
+             the work-done report. -->
+        <link rel="stylesheet" href="css/embed.css" />
+        <script type="module" src="js/embed.js"></script>
+
+        <div class="play">
+          <p class="play__eyebrow" data-i18n="embed.play.eyebrow">Try it now</p>
+          <h2 id="play-title" data-i18n="embed.play.title">Play</h2>
+          <p class="play__lede" data-i18n="embed.play.lede">
+            The full first phase, right here — no download, no account. Press Play and the phone boots the real build.
+          </p>
+
+          <div class="play__stage" data-embed-stage>
+            <div class="play__bezel" aria-hidden="true">
+              <span class="play__notch"></span>
+            </div>
+            <div class="play__screen" data-embed-screen>
+              <div class="play__poster" data-embed-poster aria-hidden="true">
+                <svg viewBox="0 0 430 946" xmlns="http://www.w3.org/2000/svg" role="presentation" focusable="false">
+                  <defs>
+                    <radialGradient id="play-poster-glow" cx="50%" cy="38%" r="65%">
+                      <stop offset="0%" stop-color="var(--wood-lit)" />
+                      <stop offset="100%" stop-color="var(--wood-dark)" />
+                    </radialGradient>
+                  </defs>
+                  <rect width="430" height="946" fill="url(#play-poster-glow)" />
+                  <g fill="none" stroke="var(--wood-rim)" stroke-width="2" opacity="0.6">
+                    <polygon points="215,300 255,323 255,369 215,392 175,369 175,323" />
+                    <polygon points="139,346 179,369 179,415 139,438 99,415 99,369" />
+                    <polygon points="291,346 331,369 331,415 291,438 251,415 251,369" />
+                    <polygon points="215,392 255,415 255,461 215,484 175,461 175,415" />
+                  </g>
+                  <circle cx="215" cy="346" r="16" fill="var(--sign)" />
+                  <circle cx="155" cy="392" r="13" fill="var(--brass)" />
+                  <circle cx="275" cy="392" r="13" fill="var(--star-3)" />
+                  <text x="215" y="620" text-anchor="middle" font-family="var(--display)" font-size="26" fill="var(--ink)">Kitchen Tactics</text>
+                  <text x="215" y="652" text-anchor="middle" font-family="var(--sans)" font-size="15" fill="var(--dim)">the board, paused</text>
+                </svg>
+              </div>
+            </div>
+            <button type="button" class="play__launch" data-embed-launch>
+              <span data-i18n="embed.play.button">Press Play</span>
+            </button>
+          </div>
+
+          <div class="play__controls">
+            <button type="button" class="play__sound" data-embed-sound aria-pressed="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3.2a1.4 1.4 0 0 1 1.4 1.4v.5a6.2 6.2 0 0 1 4.4 5.9v3.4l1.4 2.3H4.8l1.4-2.3V11a6.2 6.2 0 0 1 4.4-5.9v-.5A1.4 1.4 0 0 1 12 3.2Z" fill="currentColor" />
+                <path data-embed-sound-glyph d="M5 19.4 19 4.6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+              </svg>
+              <span data-embed-sound-label data-i18n="embed.play.soundOff">Sound: off</span>
+            </button>
+            <p class="play__hint" data-i18n="embed.play.soundHint">
+              Off until you turn it on — nothing here plays audio by itself.
+            </p>
+          </div>
+
+          <span class="visually-hidden" data-embed-frame-title data-i18n="embed.play.frameTitle">Kitchen Tactics — playable build</span>
+        </div>
+      </section>
+
+      <section id="studio" aria-labelledby="studio-title">
+        <!-- Sprint X owns everything inside this section. -->
+        <div class="studio">
+          <p class="studio__eyebrow" data-i18n="embed.studio.eyebrow">The studio</p>
+          <h2 id="studio-title" data-i18n="embed.studio.title">Tezgah</h2>
+          <p class="studio__body" data-i18n="embed.studio.body1">
+            Tezgah means both the market stall and the workbench — the counter a vendor sells from, and the bench a
+            craftsman builds at. Kitchen Tactics is built at both at once: every rig on the roster is hand-drawn, and
+            the board they fight on is the same stall counter this page stands on.
+          </p>
+          <p class="studio__body" data-i18n="embed.studio.body2">
+            This is a one-person studio's first release — one of seven fully worked art directions before this one
+            was chosen. What is next is more of that same care, not more of everything at once.
+          </p>
+          <div class="studio__actions">
+            <a href="mailto:alperdemdev@gmail.com"><span data-i18n="embed.studio.contactLabel">Say hello</span> — alperdemdev@gmail.com</a>
+            <a href="press.html"><span data-i18n="embed.studio.pressLink">Press kit</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="colophon">
+      <p class="colophon__studio">Tezgah — a one-person studio.</p>
+      <p class="colophon__contact"><a href="mailto:alperdemdev@gmail.com">alperdemdev@gmail.com</a></p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,2 @@
+const t=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" class="rig" data-item="kusburnu_balistasi"><path d="M24 84L92 50L98 62L30 96Z" fill="#A66A3D" stroke="#2A2114" stroke-width="4"/><path d="M35 78L76 57" stroke="#F0C452" stroke-width="4"/><path d="M87 30L105 48" stroke="#C33D32" stroke-width="6"/><path d="M87 30L95 52" stroke="#C33D32" stroke-width="6"/></svg>
+`;export{t as default};
