@@ -5,6 +5,8 @@
       "id": "aycicegi",
       "svg": "assets/rigs/aycicegi.svg",
       "tier": 5,
+      "origin": "bostan",
+      "role": "nisanci",
       "traits": [
         "bostan",
         "nisanci"
@@ -15,6 +17,8 @@
       "id": "balkavanozu",
       "svg": "assets/rigs/balkavanozu.svg",
       "tier": 3,
+      "origin": null,
+      "role": null,
       "traits": [],
       "attackDur": 0
     },
@@ -22,6 +26,8 @@
       "id": "bamya",
       "svg": "assets/rigs/bamya.svg",
       "tier": 3,
+      "origin": "bostan",
+      "role": "suikastci",
       "traits": [
         "bostan",
         "suikastci"
@@ -32,6 +38,8 @@
       "id": "borek",
       "svg": "assets/rigs/borek.svg",
       "tier": 5,
+      "origin": "hamur",
+      "role": "dovuscu",
       "traits": [
         "hamur",
         "dovuscu"
@@ -42,6 +50,8 @@
       "id": "cay",
       "svg": "assets/rigs/cay.svg",
       "tier": 4,
+      "origin": "ikram",
+      "role": "nisanci",
       "traits": [
         "ikram",
         "nisanci"
@@ -52,6 +62,8 @@
       "id": "dondurma",
       "svg": "assets/rigs/dondurma.svg",
       "tier": 5,
+      "origin": "ikram",
+      "role": "dovuscu",
       "traits": [
         "ikram",
         "dovuscu"
@@ -62,6 +74,8 @@
       "id": "kabak",
       "svg": "assets/rigs/kabak.svg",
       "tier": 2,
+      "origin": "bostan",
+      "role": "oncu",
       "traits": [
         "bostan",
         "oncu"
@@ -72,6 +86,8 @@
       "id": "kahve",
       "svg": "assets/rigs/kahve.svg",
       "tier": 3,
+      "origin": "ikram",
+      "role": "suikastci",
       "traits": [
         "ikram",
         "suikastci"
@@ -82,6 +98,8 @@
       "id": "karpuz",
       "svg": "assets/rigs/karpuz.svg",
       "tier": 4,
+      "origin": "pazar",
+      "role": "oncu",
       "traits": [
         "pazar",
         "oncu"
@@ -92,6 +110,8 @@
       "id": "kestane",
       "svg": "assets/rigs/kestane.svg",
       "tier": 2,
+      "origin": "ocak",
+      "role": "suikastci",
       "traits": [
         "ocak",
         "suikastci"
@@ -102,6 +122,8 @@
       "id": "kofte",
       "svg": "assets/rigs/kofte.svg",
       "tier": 4,
+      "origin": "ocak",
+      "role": "dovuscu",
       "traits": [
         "ocak",
         "dovuscu"
@@ -112,6 +134,8 @@
       "id": "korkuluk",
       "svg": "assets/rigs/korkuluk.svg",
       "tier": 5,
+      "origin": null,
+      "role": null,
       "traits": [],
       "attackDur": 1.15
     },
@@ -119,6 +143,8 @@
       "id": "kuflupeynir",
       "svg": "assets/rigs/kuflupeynir.svg",
       "tier": 4,
+      "origin": "kuf",
+      "role": "oncu",
       "traits": [
         "kuf",
         "oncu"
@@ -129,6 +155,8 @@
       "id": "lokum",
       "svg": "assets/rigs/lokum.svg",
       "tier": 2,
+      "origin": "ikram",
+      "role": "oncu",
       "traits": [
         "ikram",
         "oncu"
@@ -139,6 +167,8 @@
       "id": "manti",
       "svg": "assets/rigs/manti.svg",
       "tier": 4,
+      "origin": "hamur",
+      "role": "suikastci",
       "traits": [
         "hamur",
         "suikastci"
@@ -149,6 +179,8 @@
       "id": "misir",
       "svg": "assets/rigs/misir.svg",
       "tier": 3,
+      "origin": "ocak",
+      "role": "nisanci",
       "traits": [
         "ocak",
         "nisanci"
@@ -159,6 +191,8 @@
       "id": "nar",
       "svg": "assets/rigs/nar.svg",
       "tier": 5,
+      "origin": "pazar",
+      "role": "nisanci",
       "traits": [
         "pazar",
         "nisanci"
@@ -169,6 +203,8 @@
       "id": "pastirma",
       "svg": "assets/rigs/pastirma.svg",
       "tier": 3,
+      "origin": "pazar",
+      "role": "dovuscu",
       "traits": [
         "pazar",
         "dovuscu"
@@ -179,6 +215,8 @@
       "id": "patlican",
       "svg": "assets/rigs/patlican.svg",
       "tier": 4,
+      "origin": "bostan",
+      "role": "dovuscu",
       "traits": [
         "bostan",
         "dovuscu"
@@ -189,6 +227,8 @@
       "id": "pide",
       "svg": "assets/rigs/pide.svg",
       "tier": 3,
+      "origin": "hamur",
+      "role": "oncu",
       "traits": [
         "hamur",
         "oncu"
@@ -199,6 +239,8 @@
       "id": "simit",
       "svg": "assets/rigs/simit.svg",
       "tier": 2,
+      "origin": "hamur",
+      "role": "nisanci",
       "traits": [
         "hamur",
         "nisanci"
@@ -209,6 +251,8 @@
       "id": "sirke",
       "svg": "assets/rigs/sirke.svg",
       "tier": 3,
+      "origin": "kuf",
+      "role": "nisanci",
       "traits": [
         "kuf",
         "nisanci"
@@ -219,6 +263,8 @@
       "id": "sis",
       "svg": "assets/rigs/sis.svg",
       "tier": 5,
+      "origin": "ocak",
+      "role": "oncu",
       "traits": [
         "ocak",
         "oncu"
@@ -229,6 +275,8 @@
       "id": "tarhana",
       "svg": "assets/rigs/tarhana.svg",
       "tier": 2,
+      "origin": "kuf",
+      "role": "dovuscu",
       "traits": [
         "kuf",
         "dovuscu"
@@ -239,6 +287,8 @@
       "id": "tursu",
       "svg": "assets/rigs/tursu.svg",
       "tier": 5,
+      "origin": "kuf",
+      "role": "suikastci",
       "traits": [
         "kuf",
         "suikastci"
@@ -249,6 +299,8 @@
       "id": "zeytin",
       "svg": "assets/rigs/zeytin.svg",
       "tier": 2,
+      "origin": "pazar",
+      "role": "suikastci",
       "traits": [
         "pazar",
         "suikastci"

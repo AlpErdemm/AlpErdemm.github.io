@@ -1,5 +1,11 @@
 {
   "ui.meta.title": "Mutfak Taktikleri — Tezgah",
   "ui.locale.toggleGroupLabel": "Dil seçin",
-  "ui.locale.current": "Geçerli dil: Türkçe"
+  "ui.locale.current": "Geçerli dil: Türkçe",
+  "ui.nav.home": "Kitchen Tactics sayfasının başına dön",
+  "ui.nav.label": "Bölümler",
+  "ui.nav.roster": "Kadro",
+  "ui.nav.howto": "Nasıl oynanır",
+  "ui.nav.play": "Oyna",
+  "ui.nav.studio": "Stüdyo"
 }

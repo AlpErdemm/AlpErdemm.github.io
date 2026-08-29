@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { MERGE_THRESHOLD, mergeProgress } from './merge.js';
+import { MERGE_THRESHOLD, mergePhases, mergeProgress } from './merge.js';
 
 /**
  * `merge.js`'s progress function, pure and headless. Sprint U task U3.
@@ -35,17 +35,12 @@ describe('mergeProgress', () => {
     expect(values[values.length - 1]).toBe(1);
   });
 
-  it('resolves the star at the contracted threshold', () => {
-    // MERGE_THRESHOLD is 0.5, and progress 0.5 falls at `top = -199`/`-200`
-    // for this viewport and section height — worked from the same formula
-    // `mergeProgress` itself uses, not a value nudged until a screenshot
-    // looked right.
-    const justBelow = mergeProgress({ top: -199, height: HEIGHT, viewportHeight: VIEWPORT });
-    const atThreshold = mergeProgress({ top: -200, height: HEIGHT, viewportHeight: VIEWPORT });
-    // Fixing the threshold as a constant, and reading progress off known
-    // `top` values, is what stops it drifting into a number that only
-    // happens to look right on one screen height.
-    expect(justBelow).toBeLessThan(MERGE_THRESHOLD);
-    expect(atThreshold).toBeGreaterThanOrEqual(MERGE_THRESHOLD);
+  it('uses reversible approach, resolve, and hold phases for exactly two cards', () => {
+    expect(MERGE_THRESHOLD).toBe(0.72);
+    expect(mergePhases(0)).toEqual({ approach: 0, resolve: 0, hold: 0 });
+    expect(mergePhases(.55).approach).toBe(1);
+    expect(mergePhases(.55).resolve).toBe(0);
+    expect(mergePhases(.72).resolve).toBe(1);
+    expect(mergePhases(1)).toEqual({ approach: 1, resolve: 1, hold: 1 });
   });
 });

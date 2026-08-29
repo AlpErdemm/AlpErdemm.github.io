@@ -1,10 +1,16 @@
 {
-  "hero.title": "Tur kendi kendini pişiriyor",
-  "hero.subtitle": "Gerçek bir maç, canlı tekrar oynatılıyor — aynı altıgen tahta, aynı elle çizilmiş rig'ler, bu sayfada çalışan bir motor yok.",
+  "hero.eyebrow": "Pazar tezgâhında geçen bir otomatik dövüş oyunu",
+  "hero.title": "Kitchen Tactics",
+  "hero.pitch": "Canlı malzemelerden takımını kur, eş iki birimi birleştir ve turun kendi kendine pişmesini izle.",
+  "hero.play": "Şimdi oyna",
+  "hero.roster": "Kadroyu gör",
+  "hero.trust": "İndirme yok. Hesap yok. İngilizce ve Türkçe.",
+  "hero.replayLabel": "Canlı maç tekrarı",
   "hero.boardLabel": "Bir Kitchen Tactics maçının tekrarı, döngüde oynuyor",
   "hero.fallback": "Tahta bu sefer yüklenemedi — ama aşağıdaki birleştirme yine de çalışıyor.",
-  "merge.title": "Üçünü birleştir, birini al",
-  "merge.subtitle": "Kaydır — aşağıdaki iki malzeme, tezgahta olduğu gibi iki yıldızlı bir birime dönüşür.",
+  "merge.eyebrow": "Temel döngü",
+  "merge.title": "İkisini birleştir, yıldızını yükselt.",
+  "merge.subtitle": "Aynı iki birim birleşip tek bir 2★ birime dönüşür.",
   "merge.cardOneStar": "1★",
   "merge.cardTwoStar": "2★"
 }

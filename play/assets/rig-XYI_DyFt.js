@@ -1,0 +1,144 @@
+const r=`<!-- Lokum · İkram 2 ✦ · Öncü · yakın dövüş
+     attackSpeed 1.11 → round(20/1.11) = 18 tick = 0.90 sn
+
+     Karakter sayfasına göre yeniden çizildi. Eski rig'in silahı "gümüş maşa"
+     idi ve gövde izometrik bir küptü; sayfa bir Öncü istiyor: mermer damarlı
+     pudra şekeri küpü, gümüş zırh şeridi, işlemeli ikram örtüsü, elde ŞEKER
+     SÜSÜ topuzu, ve asıl imza — kalkan olarak taşınan GÜMÜŞ SERVİS TEPSİSİ.
+
+     ARKETİP \`swing\` DEĞİL \`stab\`, Pide'yle aynı gerekçe: sayfanın saldırı
+     şeridinin üçüncü karesi "ÇARPIŞMA" ve orada öne giden şey tepsi. Ucunda
+     bir disk olan kol 98 derece dönmez, iter. \`stab\` 16px ileri, 6° dönüş.
+
+     Tepsi armF'te, topuz armB'de: \`ATTACK_COMMON\` armB'yi ters yöne
+     çevirdiği için tepsi öne çıkarken topuz geriye kuruluyor.
+
+     SİLUET: KÖŞELİ gövde + yanında büyük yuvarlak disk. İkram'ın diğer ikisi
+     (çay, kahve) yuvarlak ve küçük; 40 px'te bunu ayıran şey o iki karşıt
+     biçim, kare ile daire. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="stab" data-unit="lokum" style="--dur-atk:0.90s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="28" ry="6" fill="#000" opacity=".34"/>
+
+  <g class="armB" style="transform-origin:26px 90px">
+    <path d="M26 92 L20 102" stroke="#2A2114" stroke-width="13" stroke-linecap="round"/>
+    <path d="M26 92 L20 102" stroke="#D46A6A" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="19" cy="104" r="5.6" fill="#C9C0C0" stroke="#2A2114" stroke-width="2.6"/>
+    <path d="M21 100 L16 72" stroke="#2A2114" stroke-width="7" stroke-linecap="round"/>
+    <path d="M21 100 L16 72" stroke="#C6A56A" stroke-width="4.4" stroke-linecap="round"/>
+    <circle cx="15" cy="64" r="7" fill="#B33E3E" stroke="#2A2114" stroke-width="2.8"/>
+    <circle cx="12.2" cy="61.2" r="1.6" fill="#C6A56A"/>
+    <circle cx="17.8" cy="61.2" r="1.6" fill="#C6A56A"/>
+    <circle cx="15" cy="67.5" r="1.6" fill="#C6A56A"/>
+    <circle cx="15" cy="56" r="2.4" fill="#C6A56A" stroke="#2A2114" stroke-width="1.6"/>
+  </g>
+
+  <g class="legB" style="transform-origin:44px 116px">
+    <path d="M44 106 L41 126" stroke="#2A2114" stroke-width="13" stroke-linecap="round"/>
+    <path d="M44 106 L41 126" stroke="#C2708A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M34 126 Q29 131 32 136 L47 136 Q49 130 44 125 Z"
+          fill="#C9C0C0" stroke="#2A2114" stroke-width="2.8" stroke-linejoin="round"/>
+    <path d="M35 131 L45 130" stroke="#9A9292" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 116px">
+    <path d="M62 106 L65 126" stroke="#2A2114" stroke-width="13" stroke-linecap="round"/>
+    <path d="M62 106 L65 126" stroke="#D46A6A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M63 125 Q58 130 61 136 L76 136 Q79 131 74 126 Z"
+          fill="#E4E7EC" stroke="#2A2114" stroke-width="2.8" stroke-linejoin="round"/>
+    <path d="M63 131 L74 130" stroke="#9A9292" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <g class="body" style="transform-origin:52px 124px">
+    <path d="M27 30 Q21 30 21 37 L21 102 Q21 110 29 110 L75 110 Q83 110 83 102
+             L83 37 Q83 30 77 30 Z"
+          fill="#D46A6A" stroke="#2A2114" stroke-width="4.4" stroke-linejoin="round"/>
+    <path d="M27 40 C36 48 30 60 38 70 M64 36 C56 50 68 60 60 78 M25 86 C35 90 43 84 51 92"
+          stroke="#F4D7D7" stroke-width="4.6" fill="none" stroke-linecap="round" opacity=".55"/>
+    <path d="M74 44 C79 58 76 78 78 98" stroke="#B33E3E" stroke-width="4.4" fill="none"
+          stroke-linecap="round" opacity=".5"/>
+    <ellipse cx="30" cy="82" rx="3.8" ry="3.1" fill="#C6A56A" stroke="#8A6A3A" stroke-width="1.5"/>
+    <ellipse cx="74" cy="62" rx="3.6" ry="2.9" fill="#C6A56A" stroke="#8A6A3A" stroke-width="1.5"/>
+    <ellipse cx="57" cy="98" rx="3.4" ry="2.7" fill="#C6A56A" stroke="#8A6A3A" stroke-width="1.5"/>
+    <ellipse cx="68" cy="90" rx="3" ry="2.5" fill="#C6A56A" stroke="#8A6A3A" stroke-width="1.4"/>
+    <ellipse cx="29" cy="46" rx="2.8" ry="2.3" fill="#F2E7D6" opacity=".8"/>
+    <ellipse cx="76" cy="80" rx="2.6" ry="2.1" fill="#F2E7D6" opacity=".7"/>
+
+    <path d="M21 99 L83 99 L83 102 Q83 110 75 110 L29 110 Q21 110 21 102 Z"
+          fill="#C9C0C0" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M27 104 L77 104" stroke="#9A9292" stroke-width="1.8"/>
+
+    <path d="M19 40 Q52 27 85 40 L84 52 Q52 39 20 52 Z"
+          fill="#F2E7D6" stroke="#2A2114" stroke-width="3.2" stroke-linejoin="round"/>
+    <path d="M21 49 L33 46 L35 80 Q27 86 20 81 Z"
+          fill="#F2E7D6" stroke="#2A2114" stroke-width="2.8" stroke-linejoin="round"/>
+    <circle cx="34" cy="42" r="2.8" fill="none" stroke="#2E8BBE" stroke-width="1.9"/>
+    <circle cx="52" cy="38" r="3" fill="none" stroke="#2E8BBE" stroke-width="1.9"/>
+    <circle cx="70" cy="42" r="2.8" fill="none" stroke="#2E8BBE" stroke-width="1.9"/>
+    <path d="M27 56 Q32 61 27 66 M31 69 Q26 73 29 77" stroke="#2E8BBE" stroke-width="1.9"
+          fill="none" stroke-linecap="round"/>
+    <path d="M24 83 L24 87 M31 82 L31 86" stroke="#C6A56A" stroke-width="2.1"
+          stroke-linecap="round"/>
+
+    <path d="M37 56 L52 63 L50 69 L36 62 Z" fill="#2A2114"/>
+    <path d="M72 56 L57 63 L59 69 L73 62 Z" fill="#2A2114"/>
+    <ellipse cx="46" cy="73" rx="7.4" ry="8.4" fill="#fff" stroke="#2A2114" stroke-width="2.5"/>
+    <ellipse cx="65" cy="73" rx="7.4" ry="8.4" fill="#fff" stroke="#2A2114" stroke-width="2.5"/>
+    <ellipse cx="47.4" cy="74" rx="4.1" ry="5.3" fill="#2A2114"/>
+    <ellipse cx="66.4" cy="74" rx="4.1" ry="5.3" fill="#2A2114"/>
+    <circle cx="45.4" cy="70.2" r="1.8" fill="#fff"/>
+    <circle cx="64.4" cy="70.2" r="1.8" fill="#fff"/>
+    <path d="M49 88 Q56 83 63 88" stroke="#2A2114" stroke-width="3" fill="none"
+          stroke-linecap="round"/>
+
+    <!-- Powdered sugar granules and translucent edge glints make the lokum read soft, not plastic. -->
+    <path d="M27 35 C24 51 24 75 27 94" fill="none" stroke="#FFF4F1" stroke-width="2.2"
+          stroke-linecap="round" opacity=".72"/>
+    <g fill="#FFECEC" opacity=".8"><circle cx="35" cy="38" r="1.2"/><circle cx="51" cy="47" r="1"/>
+      <circle cx="70" cy="52" r="1.3"/><circle cx="43" cy="95" r="1.1"/><circle cx="72" cy="101" r="1"/></g>
+    <path d="M22 98 Q52 104 82 98" fill="none" stroke="#FFFFFF" stroke-width="1.6" opacity=".55"/>
+
+    <g data-expression="cute">
+      <path d="M36 62 Q43 57 50 62 M57 62 Q64 57 72 62" fill="none" stroke="#D46A6A" stroke-width="8" stroke-linecap="round"/>
+      <path d="M36 62 Q43 57 50 62 M57 62 Q64 57 72 62" fill="none" stroke="#2A2114" stroke-width="2.9" stroke-linecap="round"/>
+      <ellipse cx="36" cy="87" rx="3.2" ry="1.9" fill="#FFB0AD" opacity=".72"/><ellipse cx="76" cy="87" rx="3.2" ry="1.9" fill="#FFB0AD" opacity=".72"/>
+      <path d="M48 86 Q56 94 64 86 Q63 97 56 98 Q49 97 48 86 Z" fill="#4A2023" stroke="#2A2114" stroke-width="2.3"/>
+      <path d="M53 93 Q56 95 59 93" fill="none" stroke="#F28C86" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <path class="crack" d="M30 40 L44 54 L32 68 L46 82 L34 96"
+          stroke="#1A1410" stroke-width="3.2" fill="none" stroke-linejoin="round"/>
+  </g>
+
+  <g class="armF" style="transform-origin:78px 88px">
+    <path d="M78 88 L90 86" stroke="#2A2114" stroke-width="13" stroke-linecap="round"/>
+    <path d="M78 88 L90 86" stroke="#D46A6A" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="92" cy="86" r="5.8" fill="#C9C0C0" stroke="#2A2114" stroke-width="2.6"/>
+
+    <ellipse cx="101" cy="78" rx="20" ry="31" fill="#C9C0C0" stroke="#2A2114" stroke-width="4"/>
+    <ellipse cx="101" cy="78" rx="15" ry="25" fill="#E4E7EC" stroke="#9A9292" stroke-width="1.8"/>
+    <ellipse cx="101" cy="78" rx="10.5" ry="18" fill="none" stroke="#A8A0A0" stroke-width="1.8"/>
+    <path d="M96 71 C99.5 66 105.5 68.5 104.5 74.5 C109 73.5 110.5 79.5 105.5 82
+             C108 86.5 103 90 99.5 85.5 C96 90 91.5 86.5 94 82 C89.5 79.5 90.5 73.5 95 74.5 Z"
+          fill="#2E8BBE" opacity=".85"/>
+    <circle cx="100.5" cy="78" r="2.7" fill="#F2E7D6"/>
+    <path d="M101 51 C106 56 106 63 101 66" stroke="#F7FAFC" stroke-width="2.6"
+          fill="none" stroke-linecap="round" opacity=".8"/>
+    <circle cx="101" cy="50" r="2.2" fill="#C6A56A"/>
+    <circle cx="101" cy="106" r="2.2" fill="#C6A56A"/>
+    <circle cx="83" cy="78" r="2" fill="#C6A56A"/>
+    <circle cx="119" cy="78" r="2" fill="#C6A56A"/>
+  </g>
+
+  <g class="fx" style="transform-origin:121px 78px">
+    <ellipse cx="128" cy="78" rx="10" ry="30" fill="none" stroke="#2E8BBE"
+             stroke-width="7" opacity=".45"/>
+    <ellipse cx="128" cy="78" rx="10" ry="30" fill="none" stroke="#9FE3F5"
+             stroke-width="2.6" opacity=".9"/>
+    <path d="M138 60 L145 54 M141 78 L149 78 M138 96 L145 102" stroke="#CFF2FB"
+          stroke-width="3" stroke-linecap="round" opacity=".85"/>
+    <path d="M143 66 L140 63 L145 62 Z" fill="#E8F8FD"/>
+    <path d="M142 92 L146 90 L144 95 Z" fill="#E8F8FD"/>
+  </g>
+</svg>
+`;export{r as default};

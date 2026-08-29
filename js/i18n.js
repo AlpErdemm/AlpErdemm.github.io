@@ -211,7 +211,11 @@ function rewrite(root, attr, apply) {
   const targets = root.matches?.(selector) ? [root, ...root.querySelectorAll(selector)] : root.querySelectorAll(selector);
   for (const el of targets) {
     const key = el.getAttribute(attr);
-    if (key) apply(el, t(key));
+    // Dynamic content may carry an authored, readable fallback while a
+    // locale is being completed. Never replace that fallback with the raw
+    // lookup key: a missing translation should be graceful, not user-facing.
+    const value = key ? t(key) : null;
+    if (key && value !== key) apply(el, value);
   }
 }
 
@@ -228,8 +232,11 @@ function rewrite(root, attr, apply) {
  * vitest's node environment, which is exactly why `loadBundleFrom` exists as
  * its own seam above.
  */
-export async function boot(base = 'locales/') {
-  await Promise.all(
+let readiness = null;
+
+export function boot(base = 'locales/') {
+  if (readiness) return readiness;
+  readiness = Promise.all(
     LOCALES.map(async (loc) => {
       const dataByNamespace = {};
       await Promise.all(
@@ -240,11 +247,13 @@ export async function boot(base = 'locales/') {
       );
       loadBundleFrom(loc, dataByNamespace);
     }),
-  );
-  refreshLocale();
-  applyDocumentLocale();
-  applyTo(document);
-  return current;
+  ).then(() => {
+    refreshLocale();
+    applyDocumentLocale();
+    if (typeof document !== 'undefined') applyTo(document);
+    return current;
+  });
+  return readiness;
 }
 
 /** `<html lang>` and `<title>` follow the active locale. */

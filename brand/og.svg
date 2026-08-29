@@ -229,7 +229,7 @@
 
   <text x="80" y="290" font-family="Georgia, &quot;Iowan Old Style&quot;, &quot;Times New Roman&quot;, serif" font-size="88" font-weight="600" fill="#fdf6e6">Kitchen Tactics</text>
   <text x="80" y="352" font-family="Georgia, &quot;Iowan Old Style&quot;, &quot;Times New Roman&quot;, serif" font-size="36" fill="#e0cba4">A market-stall auto-battler.</text>
-  <text x="80" y="404" font-family="Georgia, &quot;Iowan Old Style&quot;, &quot;Times New Roman&quot;, serif" font-size="36" fill="#e0cba4">Buy, merge three into one, let the round cook.</text>
+  <text x="80" y="404" font-family="Georgia, &quot;Iowan Old Style&quot;, &quot;Times New Roman&quot;, serif" font-size="36" fill="#e0cba4">Buy, merge matching pairs, let the round cook.</text>
 
   <rect x="80" y="470" width="196" height="8" fill="#c9973f"/>
   <text x="80" y="540" font-family="Georgia, &quot;Iowan Old Style&quot;, &quot;Times New Roman&quot;, serif" font-size="44" font-weight="600" fill="#c9973f" letter-spacing="6">TEZGAH</text>

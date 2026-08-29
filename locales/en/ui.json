@@ -1,5 +1,11 @@
 {
   "ui.meta.title": "Kitchen Tactics — Tezgah",
   "ui.locale.toggleGroupLabel": "Choose language",
-  "ui.locale.current": "Current language: English"
+  "ui.locale.current": "Current language: English",
+  "ui.nav.home": "Back to the top of Kitchen Tactics",
+  "ui.nav.label": "Sections",
+  "ui.nav.roster": "Roster",
+  "ui.nav.howto": "How it plays",
+  "ui.nav.play": "Play",
+  "ui.nav.studio": "Studio"
 }

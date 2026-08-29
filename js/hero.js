@@ -23,6 +23,7 @@ const BOARD_HEIGHT = 8;
 
 /** Used only when `replay.json` cannot be fetched at all (U4). */
 const FALLBACK_HEX_SIZE = 26;
+const FALLBACK_IDS = ['kabak', 'misir', 'manti', 'kofte', 'borek', 'nar', 'pide', 'simit'];
 
 /** `src/render/units/anim.css`'s five states, and the class each wears. */
 const ANIM_CLASS = { idle: 'st-idle', walk: 'st-walk', atk: 'st-attack', hit: 'st-hit', die: 'st-death' };
@@ -54,10 +55,11 @@ function hexPoints(radius) {
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
-function drawGrid(gridSvg, hexSize) {
+function drawGrid(gridSvg, hexSize, crop = null) {
   gridSvg.innerHTML = '';
   const extent = boardExtent(hexSize);
-  gridSvg.setAttribute('viewBox', `0 0 ${extent.width} ${extent.height}`);
+  const view = crop ?? { x: 0, y: 0, ...extent };
+  gridSvg.setAttribute('viewBox', `${view.x} ${view.y} ${view.width} ${view.height}`);
   const points = hexPoints(hexSize * 0.94);
   for (let row = 0; row < BOARD_HEIGHT; row++) {
     for (let col = 0; col < BOARD_WIDTH; col++) {
@@ -75,7 +77,7 @@ function drawGrid(gridSvg, hexSize) {
  * of `src/render/layout.ts`'s `ART_H` (which also weighs headroom and
  * same-row daylight; this page draws its own board, not the phone canvas
  * those extra constraints size for). */
-const RIG_HEIGHT_HEXES = 1.85;
+const RIG_HEIGHT_HEXES = 2.15;
 
 class HeroBoard {
   constructor(root) {
@@ -85,9 +87,10 @@ class HeroBoard {
     this.hexSize = FALLBACK_HEX_SIZE;
     this.rigMarkup = new Map(); // unit id -> raw SVG text
     this.attackDur = new Map(); // unit id -> seconds
-    this.elements = new Map(); // unit id -> mounted <svg class="rig">
-    this.stateOf = new Map(); // unit id -> current st-* class, to avoid restarting a running animation
+    this.elements = new Map(); // per-frame id -> mounted <svg class="rig">
+    this.stateOf = new Map(); // per-frame id -> current st-* class, to avoid restarting a running animation
     this.replay = null;
+    this.crop = null;
     this.startedAt = 0;
     this.raf = null;
     this.visible = true;
@@ -114,16 +117,19 @@ class HeroBoard {
   async loadRigs(rigsPath) {
     const res = await fetch(rigsPath);
     if (!res.ok) throw new Error(`rigs.json: HTTP ${res.status}`);
-    const data = await res.json();
-    await Promise.all(
-      data.units.map(async (unit) => {
-        this.attackDur.set(unit.id, unit.attackDur);
-        const svgRes = await fetch(unit.svg);
-        if (!svgRes.ok) return;
-        this.rigMarkup.set(unit.id, await svgRes.text());
-      }),
-    );
-    return data;
+    return res.json();
+  }
+
+  async loadFrameRigs(manifest, frame, ids = null) {
+    const wanted = ids ?? [...new Set(frame.units.map((unit) => unit.id))];
+    const byId = new Map(manifest.units.map((unit) => [unit.id, unit]));
+    await Promise.all(wanted.map(async (id) => {
+      const unit = byId.get(id);
+      if (!unit || this.rigMarkup.has(id)) return;
+      this.attackDur.set(id, unit.attackDur);
+      const svgRes = await fetch(unit.svg);
+      if (svgRes.ok) this.rigMarkup.set(id, await svgRes.text());
+    }));
   }
 
   async loadReplay(replayPath) {
@@ -152,7 +158,7 @@ class HeroBoard {
     return { t: 0, units };
   }
 
-  mount(unit) {
+  mount(unit, key) {
     const markup = this.rigMarkup.get(unit.id);
     if (!markup) return null;
     const holder = document.createElement('div');
@@ -164,7 +170,7 @@ class HeroBoard {
     if (dur !== undefined) svg.style.setProperty('--dur-atk', `${dur}s`);
     svg.style.height = `${(RIG_HEIGHT_HEXES / (boardExtent(this.hexSize).height / this.hexSize)) * 100}%`;
     this.root.appendChild(svg);
-    this.elements.set(unit.id, svg);
+    this.elements.set(key, svg);
     return svg;
   }
 
@@ -182,34 +188,35 @@ class HeroBoard {
    */
   paint(frame, { static: isStatic = false } = {}) {
     const seen = new Set();
-    for (const unit of frame.units) {
-      seen.add(unit.id);
-      let el = this.elements.get(unit.id);
-      if (!el) el = this.mount(unit);
+    for (const [index, unit] of frame.units.entries()) {
+      const key = `${unit.id}:${index}`;
+      seen.add(key);
+      let el = this.elements.get(key);
+      if (!el) el = this.mount(unit, key);
       if (!el) continue;
 
       const { x, y } = hexToPixel({ q: unit.q, r: unit.r }, this.hexSize);
-      const extent = boardExtent(this.hexSize);
+      const extent = this.crop ?? boardExtent(this.hexSize);
       const mirror = unit.side !== 'mine';
-      el.style.left = `${(x / extent.width) * 100}%`;
-      el.style.top = `${(y / extent.height) * 100}%`;
+      el.style.left = `${((x - (this.crop?.x ?? 0)) / extent.width) * 100}%`;
+      el.style.top = `${((y - (this.crop?.y ?? 0)) / extent.height) * 100}%`;
       el.style.transform = `translate(-50%, -78%)${mirror ? ' scaleX(-1)' : ''}`;
 
       const cls = isStatic ? null : (ANIM_CLASS[unit.anim] ?? 'st-idle');
-      if (this.stateOf.get(unit.id) !== cls) {
+      if (this.stateOf.get(key) !== cls) {
         for (const other of Object.values(ANIM_CLASS)) el.classList.remove(other);
         if (cls) el.classList.add(cls);
-        this.stateOf.set(unit.id, cls);
+        this.stateOf.set(key, cls);
       }
     }
     // A unit gone from this frame (left the recording entirely) is removed —
     // nothing in this hero's cast currently does, but a shorter fixture or a
     // future recording might.
-    for (const [id, el] of this.elements) {
-      if (!seen.has(id)) {
+    for (const [key, el] of this.elements) {
+      if (!seen.has(key)) {
         el.remove();
-        this.elements.delete(id);
-        this.stateOf.delete(id);
+        this.elements.delete(key);
+        this.stateOf.delete(key);
       }
     }
   }
@@ -218,13 +225,27 @@ class HeroBoard {
    * resolve at all — `.hero__board` has no height of its own otherwise, only
    * absolutely-positioned children, which would collapse it to 0. */
   sizeBoard() {
-    const extent = boardExtent(this.hexSize);
+    const extent = this.crop ?? boardExtent(this.hexSize);
     this.root.style.aspectRatio = `${extent.width} / ${extent.height}`;
+  }
+
+  cropTo(frame) {
+    const cells = frame.units.map((unit) => fromOffset(unit.q + ((unit.r - (unit.r & 1)) >> 1), unit.r));
+    if (!cells.length) return;
+    const cols = cells.map((cell) => cell.q + ((cell.r - (cell.r & 1)) >> 1));
+    const rows = cells.map((cell) => cell.r);
+    const colStart = Math.max(0, Math.min(...cols) - 1);
+    const colEnd = Math.min(BOARD_WIDTH - 1, Math.max(...cols) + 1);
+    const rowStart = Math.max(0, Math.min(...rows) - 1);
+    const rowEnd = Math.min(BOARD_HEIGHT - 1, Math.max(...rows) + 1);
+    const w = Math.sqrt(3) * this.hexSize;
+    const step = 1.5 * this.hexSize;
+    this.crop = { x: colStart * w, y: rowStart * step, width: (colEnd - colStart + 1.5) * w, height: (rowEnd - rowStart) * step + 2 * this.hexSize };
   }
 
   renderStill(frame) {
     this.sizeBoard();
-    drawGrid(this.grid, this.hexSize);
+    drawGrid(this.grid, this.hexSize, this.crop);
     this.paint(frame, { static: true });
   }
 
@@ -239,7 +260,7 @@ class HeroBoard {
       t = Number(pinned);
     } else {
       if (!this.startedAt) this.startedAt = now;
-      const elapsed = (now - this.startedAt) / 1000;
+      const elapsed = (now - this.startedAt) / 1000 + this.replay.posterTime;
       t = this.replay.duration > 0 ? elapsed % this.replay.duration : 0;
     }
     this.paint(at(this.replay, t));
@@ -249,15 +270,16 @@ class HeroBoard {
   start(replay) {
     this.replay = replay;
     this.hexSize = replay.hexSize;
+    this.cropTo(at(replay, replay.posterTime));
     this.sizeBoard();
-    drawGrid(this.grid, this.hexSize);
+    drawGrid(this.grid, this.hexSize, this.crop);
     if (this.reduceMotion.matches) {
       // The *same* composed still a missing `replay.json` falls back to
       // (U4): "the hero shows the same still" either way, which a still
       // sampled from the live recording could not promise — this recording
       // ends, a fetch failure has no recording at all, and the two would
       // drift the moment either one changed.
-      this.renderStill(this.composedFallbackFrame());
+      this.renderStill(at(replay, replay.posterTime));
       return;
     }
     this.raf = requestAnimationFrame((n) => this.tick(n));
@@ -300,7 +322,7 @@ class HeroBoard {
       this.root.classList.toggle('paused', this.reduceMotion.matches);
       if (this.reduceMotion.matches) {
         this.pause();
-        this.renderStill(this.composedFallbackFrame());
+        this.renderStill(at(this.replay, this.replay.posterTime));
       } else {
         this.resume();
       }
@@ -313,11 +335,10 @@ async function init() {
   if (!root) return;
   const board = new HeroBoard(root);
 
+  let manifest;
   try {
-    await board.loadRigs('data/rigs.json');
+    manifest = await board.loadRigs('data/rigs.json');
   } catch {
-    // No rigs at all: nothing to draw a tableau from. The grid alone still
-    // satisfies "never a blank rectangle" — it is a real board, just empty.
     board.sizeBoard();
     drawGrid(board.grid, board.hexSize);
     if (board.fallback) board.fallback.hidden = false;
@@ -326,10 +347,15 @@ async function init() {
 
   try {
     const replay = await board.loadReplay('data/replay.json');
+    const poster = at(replay, replay.posterTime);
+    await board.loadFrameRigs(manifest, poster);
     board.observe();
     board.start(replay);
   } catch {
-    board.showFallback();
+    try {
+      await board.loadFrameRigs(manifest, { units: [] }, FALLBACK_IDS);
+      board.showFallback();
+    } catch { board.showFallback(); }
   }
 }
 

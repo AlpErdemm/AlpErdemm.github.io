@@ -1,202 +1,56 @@
-/**
- * Sprint U: the hero board and the merge scroll.
- *
- * Not one colour is authored here — every paint is `var(--token)` out of
- * `tokens.css`, exactly as `site/js/shell.test.ts` requires of every
- * stylesheet under `site/css/` besides `tokens.css` itself.
- *
- * `src/render/units/anim.css` (loaded unmodified, from a plain `<link>` in
- * `index.html` rather than an `@import` here — see the note beside that tag)
- * is what actually drives a rig's limbs — the `.st-idle`/`.st-walk`/
- * `.st-attack`/`.st-hit`/`.st-death` state classes and the per-part keyframes
- * all live there. This file positions things; it never reimplements a
- * keyframe `anim.css` already owns.
- */
+/* Hero, replay panel, and the two-to-one merge story. */
 
-/* ------------------------------------------------------------- the awning
-   The site's signature motif, used exactly once elsewhere (the masthead
-   wordmark, `site/index.html`'s own region) and once here — `tests/site/
-   hero.spec.ts` counts `.hero__awning` across the whole document and fails
-   above 1. The shape is the wordmark's own stripe-with-a-rounded-bottom
-   (`M0 0h33v26a16.5 16.5 0 0 1-33 0z`), tiled as a band rather than laid out
-   as eight fixed stripes: the scalloped awning the game itself draws above
-   the standings (`shots/playtest/01-round1.png`), sampled rather than
-   invented. */
+#hero { display: grid; grid-template-columns: minmax(0, .92fr) minmax(20rem, 1.08fr); align-items: center; gap: clamp(1.75rem, 3vw, 4.5rem); min-height: min(43rem, calc(100vh - 5rem)); }
+.eyebrow, .hero__replay-label { margin: 0 0 .55rem; font: 600 .76rem/1.2 var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--brass-lit); }
+.hero__copy h1 { margin: 0 0 .75rem; font-size: clamp(2.7rem, 1.8rem + 4vw, 5.2rem); line-height: 1.15; }
+.hero__pitch, .hero__trust, .merge__intro > p:last-child { max-width: 39ch; color: var(--dim); }
+.hero__trust { margin: 1rem 0 0; font-size: .88rem; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1.4rem; }
+.button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: .55rem 1.1rem; border: 2px solid var(--wood-rim); border-radius: 999px; font-family: var(--display); font-weight: 600; text-decoration: none; }
+.button--primary { color: var(--paper); background: var(--sign); }
+.button--primary:hover { color: var(--paper); background: var(--sign-dark); }
+.button--quiet { color: var(--ink); background: var(--wood-dark); }
 
-.hero__awning {
-  display: block;
-  width: 100%;
-  /* Matches the tile's own 43px height (`index.html`'s note beside the
-     pattern): the SVG has no `viewBox`, so 1 unit is 1 CSS pixel, and a
-     shorter box here would crop the scallop's downward bulge exactly the
-     way an undersized `<pattern>` box already did once. */
-  height: 43px;
-}
-
+.hero__replay { overflow: hidden; padding: 0 1rem 1rem; background: var(--wood-dark); border: 3px solid var(--wood-rim); border-radius: 1rem; box-shadow: 0 1.2rem 2.5rem color-mix(in srgb, var(--wood-dark) 70%, transparent); }
+.hero__awning { display: block; width: calc(100% + 2rem); height: 43px; margin-inline: -1rem; }
 .hero__awning-sign { fill: var(--sign); }
 .hero__awning-paper { fill: var(--paper); }
+.hero__replay-label { margin: .9rem 0 .6rem; }
+.hero__board { position: relative; width: 100%; margin: 0; overflow: hidden; border: 2px solid var(--wood-rim); border-radius: .6rem; background: var(--wood); }
+.hero__grid { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.hero__hex { fill: var(--wood); stroke: var(--wood-rim); stroke-width: 1.5; }
+svg.rig.hero__unit { position: absolute; width: auto; overflow: visible; transform-origin: center bottom; will-change: left, top; }
+.hero__fallback:not([hidden]) { position: absolute; inset: 0; display: grid; place-items: center; padding: 1rem; text-align: center; color: var(--dim); background: var(--wood-dark); }
+.hero__sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
 
-/* -------------------------------------------------------------- the copy */
+#merge { padding-block-end: 0; }
+.merge__intro { max-width: 38rem; margin-inline: auto; text-align: center; }
+.merge__intro > p:last-child { margin-inline: auto; }
+.merge__stage { position: relative; height: 160vh; margin-top: 1rem; }
+.merge__viewport { position: sticky; top: 0; display: grid; place-items: center; height: 100vh; overflow: hidden; }
+.merge__card, .merge__resolved { position: absolute; top: 50%; left: 50%; width: clamp(8.5rem, 12vw, 12rem); aspect-ratio: 3 / 4; transform: translate(-50%, -50%); will-change: transform, opacity; }
+.merge__resolved { width: clamp(10rem, 14vw, 13.5rem); opacity: 0; }
+.merge__card-face { display: flex; height: 100%; flex-direction: column; overflow: hidden; color: var(--paper-ink); background: var(--paper); border: 3px solid var(--wood-rim); border-radius: .75rem; box-shadow: 0 .8rem 1.5rem color-mix(in srgb, var(--wood-dark) 60%, transparent); }
+.merge__card-tier { margin: .55rem .55rem 0; padding: .15rem .4rem; align-self: flex-start; border-radius: .25rem; font: .67rem var(--mono); color: var(--paper-ink); background: var(--brass-lit); }
+.merge__card-art { display: grid; flex: 1; place-items: center; min-height: 0; }
+.merge__card-art img { width: 86%; height: 86%; object-fit: contain; }
+.merge__card-name { text-align: center; font-family: var(--display); font-size: 1.05rem; }
+.merge__card-stars { margin: .55rem; padding: .2rem .4rem; border-radius: 999px; text-align: center; font-family: var(--display); color: var(--paper-ink); background: var(--star-2); }
+.merge__card-face--resolved .merge__card-stars { background: var(--star-3); }
+.merge__viewport::after { content: "✦"; position: absolute; top: 50%; left: 50%; z-index: -1; font-size: clamp(5rem, 14vw, 10rem); color: var(--star-3); transform: translate(-50%, -50%) scale(.3); opacity: 0; }
+.merge__viewport.is-resolving::after { z-index: 0; opacity: .7; transform: translate(-50%, -50%) scale(1); }
 
-#hero h2,
-#merge h2 {
-  margin-top: 1.25rem;
+@media (max-width: 48rem) {
+  #hero { grid-template-columns: 1fr; min-height: auto; padding-block-start: 2rem; }
+  .hero__copy { text-align: center; }
+  .hero__pitch, .hero__trust { margin-inline: auto; }
+  .hero__actions { justify-content: center; }
+  .hero__replay { max-width: 34rem; width: 100%; margin-inline: auto; }
+  .merge__stage { height: 145vh; }
 }
 
-#hero > p,
-#merge > p {
-  max-width: 62ch;
-  color: var(--dim);
-}
-
-.hero__sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* ---------------------------------------------------------------- board
-   Sized in JS from `replay.json`'s `hexSize` (the board's own pixel extent
-   depends on the data contract's field, not a literal here), then held to
-   that aspect ratio however wide the column is. A percentage height on an
-   absolutely-positioned unit resolves against this element's own computed
-   height, which is why the ratio has to be real rather than assumed. */
-
-.hero__board {
-  position: relative;
-  width: 100%;
-  max-width: 32rem;
-  margin: 1.75rem auto 0;
-}
-
-.hero__grid {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.hero__hex {
-  fill: var(--wood);
-  stroke: var(--wood-rim);
-  stroke-width: 1.5;
-}
-
-/* One inlined rig per board unit — an `<svg class="rig hero__unit">`, the
-   same `rig.svg` element every unit directory under `src/render/units/`
-   authors, just fetched and dropped in rather than reimplemented
-   (`hero.js`). Anchored by its own bottom-centre so a unit's feet, not its
-   bounding box, sit on the hex. */
-svg.rig.hero__unit {
-  position: absolute;
-  width: auto;
-  overflow: visible;
-  transform-origin: center bottom;
-  will-change: left, top;
-}
-
-/* `:not([hidden])` matters: a class selector and the UA stylesheet's
-   `[hidden] { display: none }` tie on specificity, and author styles beat
-   the UA origin regardless of source order, so an unconditional `display`
-   here would show this text even while `hidden` — measured, not assumed. */
-.hero__fallback:not([hidden]) {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 1rem;
-  color: var(--dim);
-  background: var(--wood-dark);
-}
-
-/* --------------------------------------------------------------- merge
-   The stage is tall — several viewport heights — so scrolling through it has
-   somewhere to happen; the viewport inside it is what visually holds still
-   (`position: sticky`) while the stage scrolls underneath, the same
-   scrollytelling shape most "scroll to animate" sections use. `merge.js`
-   only ever writes `transform`/`opacity` on the cards inside, once per
-   frame, off one `getBoundingClientRect()` read of `.merge__stage` itself. */
-
-.merge__stage {
-  position: relative;
-  height: 220vh;
-}
-
-.merge__viewport {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.merge__card,
-.merge__resolved {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: clamp(7rem, 8vw + 4rem, 10rem);
-  aspect-ratio: 3 / 4;
-  /* The static centring; `merge.js` composes its own `translateX`/`scale`
-     onto this same string every frame (it writes the whole property, so the
-     centring has to be part of what it writes, not a separate rule). */
-  transform: translate(-50%, -50%);
-}
-
-.merge__card-face {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background: var(--paper);
-  color: var(--paper-ink);
-  border: 3px solid var(--wood-rim);
-  border-radius: 0.5rem;
-  overflow: hidden;
-}
-
-.merge__card-tier {
-  height: 0.5rem;
-  background: var(--wood);
-}
-
-.merge__card-face--resolved .merge__card-tier {
-  background: var(--star-2);
-}
-
-.merge__card-art {
-  flex: 1;
-  background: var(--paper);
-}
-
-.merge__card-stars {
-  padding: 0.35rem 0;
-  text-align: center;
-  font-family: var(--display);
-  font-weight: 600;
-  color: var(--brass);
-  background: var(--paper);
-}
-
-/* The star row itself in the tier metal — a badge, not coloured text: the
-   game's own star badges are metal shapes with dark ink on them, and
-   `--star-2` (near-white) as a *text* colour on `--paper` (cream) reads as
-   barely-there, not "silver". Swapping which side carries the colour is
-   what keeps this both faithful and legible. */
-.merge__card-face--resolved .merge__card-stars {
-  background: var(--star-2);
-  color: var(--paper-ink);
-}
-
-.merge__resolved {
-  opacity: 0;
+@media (prefers-reduced-motion: reduce) {
+  .merge__card { display: none; }
+  .merge__resolved { opacity: 1 !important; transform: translate(-50%, -50%) scale(1) !important; }
+  .merge__viewport::after { opacity: .7; transform: translate(-50%, -50%) scale(1); }
 }

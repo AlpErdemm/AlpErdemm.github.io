@@ -60,6 +60,7 @@ export function load(data) {
   const frames = [...data.frames].sort((a, b) => a.t - b.t);
   return {
     hexSize: data.hexSize,
+    posterTime: Number.isFinite(data.posterTime) ? Math.min(Math.max(data.posterTime, 0), frames.length ? frames[frames.length - 1].t : 0) : 0,
     frames,
     duration: frames.length > 0 ? frames[frames.length - 1].t : 0,
   };
