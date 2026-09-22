@@ -2,11 +2,30 @@
   "version": 1,
   "units": [
     {
+      "id": "akar",
+      "svg": "assets/rigs/akar.svg",
+      "tier": 2,
+      "traits": [],
+      "attackDur": 0.9
+    },
+    {
+      "id": "akinti",
+      "svg": "assets/rigs/akinti.svg",
+      "tier": 4,
+      "traits": [],
+      "attackDur": 1.1
+    },
+    {
+      "id": "ambarbiti",
+      "svg": "assets/rigs/ambarbiti.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1
+    },
+    {
       "id": "aycicegi",
       "svg": "assets/rigs/aycicegi.svg",
       "tier": 5,
-      "origin": "bostan",
-      "role": "nisanci",
       "traits": [
         "bostan",
         "nisanci"
@@ -17,8 +36,6 @@
       "id": "balkavanozu",
       "svg": "assets/rigs/balkavanozu.svg",
       "tier": 3,
-      "origin": null,
-      "role": null,
       "traits": [],
       "attackDur": 0
     },
@@ -26,8 +43,6 @@
       "id": "bamya",
       "svg": "assets/rigs/bamya.svg",
       "tier": 3,
-      "origin": "bostan",
-      "role": "suikastci",
       "traits": [
         "bostan",
         "suikastci"
@@ -35,11 +50,16 @@
       "attackDur": 1.2
     },
     {
+      "id": "bit",
+      "svg": "assets/rigs/bit.svg",
+      "tier": 2,
+      "traits": [],
+      "attackDur": 0.85
+    },
+    {
       "id": "borek",
       "svg": "assets/rigs/borek.svg",
       "tier": 5,
-      "origin": "hamur",
-      "role": "dovuscu",
       "traits": [
         "hamur",
         "dovuscu"
@@ -47,11 +67,37 @@
       "attackDur": 0.95
     },
     {
+      "id": "buhar",
+      "svg": "assets/rigs/buhar.svg",
+      "tier": 4,
+      "traits": [],
+      "attackDur": 1.1
+    },
+    {
+      "id": "bulasik",
+      "svg": "assets/rigs/bulasik.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1.25
+    },
+    {
+      "id": "camasirsuyu",
+      "svg": "assets/rigs/camasirsuyu.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1.3
+    },
+    {
+      "id": "capak",
+      "svg": "assets/rigs/capak.svg",
+      "tier": 2,
+      "traits": [],
+      "attackDur": 0.95
+    },
+    {
       "id": "cay",
       "svg": "assets/rigs/cay.svg",
       "tier": 4,
-      "origin": "ikram",
-      "role": "nisanci",
       "traits": [
         "ikram",
         "nisanci"
@@ -59,11 +105,51 @@
       "attackDur": 1.05
     },
     {
+      "id": "cira",
+      "svg": "assets/rigs/cira.svg",
+      "tier": 3,
+      "traits": [],
+      "attackDur": 0.95
+    },
+    {
+      "id": "civi",
+      "svg": "assets/rigs/civi.svg",
+      "tier": 3,
+      "traits": [],
+      "attackDur": 0.9
+    },
+    {
+      "id": "curuf",
+      "svg": "assets/rigs/curuf.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1.25
+    },
+    {
+      "id": "curuk",
+      "svg": "assets/rigs/curuk.svg",
+      "tier": 4,
+      "traits": [],
+      "attackDur": 1.15
+    },
+    {
+      "id": "curukpatates",
+      "svg": "assets/rigs/curukpatates.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1.3
+    },
+    {
+      "id": "damla",
+      "svg": "assets/rigs/damla.svg",
+      "tier": 2,
+      "traits": [],
+      "attackDur": 0.95
+    },
+    {
       "id": "dondurma",
       "svg": "assets/rigs/dondurma.svg",
       "tier": 5,
-      "origin": "ikram",
-      "role": "dovuscu",
       "traits": [
         "ikram",
         "dovuscu"
@@ -71,11 +157,44 @@
       "attackDur": 0.95
     },
     {
+      "id": "duman",
+      "svg": "assets/rigs/duman.svg",
+      "tier": 3,
+      "traits": [],
+      "attackDur": 0.9
+    },
+    {
+      "id": "eksitursu",
+      "svg": "assets/rigs/eksitursu.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1.3
+    },
+    {
+      "id": "guve",
+      "svg": "assets/rigs/guve.svg",
+      "tier": 3,
+      "traits": [],
+      "attackDur": 0.95
+    },
+    {
+      "id": "hamambocegi",
+      "svg": "assets/rigs/hamambocegi.svg",
+      "tier": 4,
+      "traits": [],
+      "attackDur": 1.2
+    },
+    {
+      "id": "islaklik",
+      "svg": "assets/rigs/islaklik.svg",
+      "tier": 3,
+      "traits": [],
+      "attackDur": 0.9
+    },
+    {
       "id": "kabak",
       "svg": "assets/rigs/kabak.svg",
       "tier": 2,
-      "origin": "bostan",
-      "role": "oncu",
       "traits": [
         "bostan",
         "oncu"
@@ -86,8 +205,6 @@
       "id": "kahve",
       "svg": "assets/rigs/kahve.svg",
       "tier": 3,
-      "origin": "ikram",
-      "role": "suikastci",
       "traits": [
         "ikram",
         "suikastci"
@@ -95,11 +212,23 @@
       "attackDur": 1.2
     },
     {
+      "id": "kapak",
+      "svg": "assets/rigs/kapak.svg",
+      "tier": 4,
+      "traits": [],
+      "attackDur": 1.2
+    },
+    {
+      "id": "karinca",
+      "svg": "assets/rigs/karinca.svg",
+      "tier": 3,
+      "traits": [],
+      "attackDur": 0.9
+    },
+    {
       "id": "karpuz",
       "svg": "assets/rigs/karpuz.svg",
       "tier": 4,
-      "origin": "pazar",
-      "role": "oncu",
       "traits": [
         "pazar",
         "oncu"
@@ -107,11 +236,16 @@
       "attackDur": 1.2
     },
     {
+      "id": "kavruk",
+      "svg": "assets/rigs/kavruk.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1.15
+    },
+    {
       "id": "kestane",
       "svg": "assets/rigs/kestane.svg",
       "tier": 2,
-      "origin": "ocak",
-      "role": "suikastci",
       "traits": [
         "ocak",
         "suikastci"
@@ -119,11 +253,30 @@
       "attackDur": 1.15
     },
     {
+      "id": "kir",
+      "svg": "assets/rigs/kir.svg",
+      "tier": 2,
+      "traits": [],
+      "attackDur": 0.85
+    },
+    {
+      "id": "kirec",
+      "svg": "assets/rigs/kirec.svg",
+      "tier": 3,
+      "traits": [],
+      "attackDur": 0.95
+    },
+    {
+      "id": "kireclimusluk",
+      "svg": "assets/rigs/kireclimusluk.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1.15
+    },
+    {
       "id": "kofte",
       "svg": "assets/rigs/kofte.svg",
       "tier": 4,
-      "origin": "ocak",
-      "role": "dovuscu",
       "traits": [
         "ocak",
         "dovuscu"
@@ -131,11 +284,37 @@
       "attackDur": 0.9
     },
     {
+      "id": "kokusmusfici",
+      "svg": "assets/rigs/kokusmusfici.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1.3
+    },
+    {
+      "id": "komur",
+      "svg": "assets/rigs/komur.svg",
+      "tier": 4,
+      "traits": [],
+      "attackDur": 1.2
+    },
+    {
+      "id": "kopuk",
+      "svg": "assets/rigs/kopuk.svg",
+      "tier": 2,
+      "traits": [],
+      "attackDur": 0.85
+    },
+    {
+      "id": "kor",
+      "svg": "assets/rigs/kor.svg",
+      "tier": 2,
+      "traits": [],
+      "attackDur": 1.05
+    },
+    {
       "id": "korkuluk",
       "svg": "assets/rigs/korkuluk.svg",
       "tier": 5,
-      "origin": null,
-      "role": null,
       "traits": [],
       "attackDur": 1.15
     },
@@ -143,8 +322,6 @@
       "id": "kuflupeynir",
       "svg": "assets/rigs/kuflupeynir.svg",
       "tier": 4,
-      "origin": "kuf",
-      "role": "oncu",
       "traits": [
         "kuf",
         "oncu"
@@ -152,11 +329,58 @@
       "attackDur": 1.2
     },
     {
+      "id": "kul",
+      "svg": "assets/rigs/kul.svg",
+      "tier": 2,
+      "traits": [],
+      "attackDur": 0.85
+    },
+    {
+      "id": "kurtcuk",
+      "svg": "assets/rigs/kurtcuk.svg",
+      "tier": 2,
+      "traits": [],
+      "attackDur": 0.95
+    },
+    {
+      "id": "kurtlulahana",
+      "svg": "assets/rigs/kurtlulahana.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1.15
+    },
+    {
+      "id": "kurum",
+      "svg": "assets/rigs/kurum.svg",
+      "tier": 2,
+      "traits": [],
+      "attackDur": 0.9
+    },
+    {
+      "id": "lehim",
+      "svg": "assets/rigs/lehim.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1
+    },
+    {
+      "id": "leke",
+      "svg": "assets/rigs/leke.svg",
+      "tier": 4,
+      "traits": [],
+      "attackDur": 1.2
+    },
+    {
+      "id": "lif",
+      "svg": "assets/rigs/lif.svg",
+      "tier": 3,
+      "traits": [],
+      "attackDur": 0.9
+    },
+    {
       "id": "lokum",
       "svg": "assets/rigs/lokum.svg",
       "tier": 2,
-      "origin": "ikram",
-      "role": "oncu",
       "traits": [
         "ikram",
         "oncu"
@@ -164,11 +388,16 @@
       "attackDur": 0.9
     },
     {
+      "id": "mantar",
+      "svg": "assets/rigs/mantar.svg",
+      "tier": 3,
+      "traits": [],
+      "attackDur": 0.95
+    },
+    {
       "id": "manti",
       "svg": "assets/rigs/manti.svg",
       "tier": 4,
-      "origin": "hamur",
-      "role": "suikastci",
       "traits": [
         "hamur",
         "suikastci"
@@ -176,11 +405,30 @@
       "attackDur": 1.45
     },
     {
+      "id": "masa",
+      "svg": "assets/rigs/masa.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1
+    },
+    {
+      "id": "mentese",
+      "svg": "assets/rigs/mentese.svg",
+      "tier": 4,
+      "traits": [],
+      "attackDur": 1.2
+    },
+    {
+      "id": "mildiyo",
+      "svg": "assets/rigs/mildiyo.svg",
+      "tier": 4,
+      "traits": [],
+      "attackDur": 1.2
+    },
+    {
       "id": "misir",
       "svg": "assets/rigs/misir.svg",
       "tier": 3,
-      "origin": "ocak",
-      "role": "nisanci",
       "traits": [
         "ocak",
         "nisanci"
@@ -191,8 +439,6 @@
       "id": "nar",
       "svg": "assets/rigs/nar.svg",
       "tier": 5,
-      "origin": "pazar",
-      "role": "nisanci",
       "traits": [
         "pazar",
         "nisanci"
@@ -200,11 +446,37 @@
       "attackDur": 1.2
     },
     {
+      "id": "nem",
+      "svg": "assets/rigs/nem.svg",
+      "tier": 2,
+      "traits": [],
+      "attackDur": 0.85
+    },
+    {
+      "id": "nemlicuval",
+      "svg": "assets/rigs/nemlicuval.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1.2
+    },
+    {
+      "id": "orumcek",
+      "svg": "assets/rigs/orumcek.svg",
+      "tier": 4,
+      "traits": [],
+      "attackDur": 1.1
+    },
+    {
+      "id": "pas",
+      "svg": "assets/rigs/pas.svg",
+      "tier": 2,
+      "traits": [],
+      "attackDur": 0.85
+    },
+    {
       "id": "pastirma",
       "svg": "assets/rigs/pastirma.svg",
       "tier": 3,
-      "origin": "pazar",
-      "role": "dovuscu",
       "traits": [
         "pazar",
         "dovuscu"
@@ -215,8 +487,6 @@
       "id": "patlican",
       "svg": "assets/rigs/patlican.svg",
       "tier": 4,
-      "origin": "bostan",
-      "role": "dovuscu",
       "traits": [
         "bostan",
         "dovuscu"
@@ -227,8 +497,6 @@
       "id": "pide",
       "svg": "assets/rigs/pide.svg",
       "tier": 3,
-      "origin": "hamur",
-      "role": "oncu",
       "traits": [
         "hamur",
         "oncu"
@@ -236,11 +504,44 @@
       "attackDur": 1
     },
     {
+      "id": "rutubet",
+      "svg": "assets/rigs/rutubet.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1.25
+    },
+    {
+      "id": "sabun",
+      "svg": "assets/rigs/sabun.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1
+    },
+    {
+      "id": "sac",
+      "svg": "assets/rigs/sac.svg",
+      "tier": 4,
+      "traits": [],
+      "attackDur": 1.2
+    },
+    {
+      "id": "salamura",
+      "svg": "assets/rigs/salamura.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1
+    },
+    {
+      "id": "salyangoz",
+      "svg": "assets/rigs/salyangoz.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1.25
+    },
+    {
       "id": "simit",
       "svg": "assets/rigs/simit.svg",
       "tier": 2,
-      "origin": "hamur",
-      "role": "nisanci",
       "traits": [
         "hamur",
         "nisanci"
@@ -251,8 +552,6 @@
       "id": "sirke",
       "svg": "assets/rigs/sirke.svg",
       "tier": 3,
-      "origin": "kuf",
-      "role": "nisanci",
       "traits": [
         "kuf",
         "nisanci"
@@ -263,8 +562,6 @@
       "id": "sis",
       "svg": "assets/rigs/sis.svg",
       "tier": 5,
-      "origin": "ocak",
-      "role": "oncu",
       "traits": [
         "ocak",
         "oncu"
@@ -272,11 +569,30 @@
       "attackDur": 1.25
     },
     {
+      "id": "sismiskonserve",
+      "svg": "assets/rigs/sismiskonserve.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1.15
+    },
+    {
+      "id": "sizinti",
+      "svg": "assets/rigs/sizinti.svg",
+      "tier": 2,
+      "traits": [],
+      "attackDur": 0.95
+    },
+    {
+      "id": "sunger",
+      "svg": "assets/rigs/sunger.svg",
+      "tier": 4,
+      "traits": [],
+      "attackDur": 1.2
+    },
+    {
       "id": "tarhana",
       "svg": "assets/rigs/tarhana.svg",
       "tier": 2,
-      "origin": "kuf",
-      "role": "dovuscu",
       "traits": [
         "kuf",
         "dovuscu"
@@ -284,11 +600,37 @@
       "attackDur": 0.8
     },
     {
+      "id": "tel",
+      "svg": "assets/rigs/tel.svg",
+      "tier": 3,
+      "traits": [],
+      "attackDur": 0.95
+    },
+    {
+      "id": "teneke",
+      "svg": "assets/rigs/teneke.svg",
+      "tier": 2,
+      "traits": [],
+      "attackDur": 0.9
+    },
+    {
+      "id": "tirtil",
+      "svg": "assets/rigs/tirtil.svg",
+      "tier": 4,
+      "traits": [],
+      "attackDur": 1.2
+    },
+    {
+      "id": "tortu",
+      "svg": "assets/rigs/tortu.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1.25
+    },
+    {
       "id": "tursu",
       "svg": "assets/rigs/tursu.svg",
       "tier": 5,
-      "origin": "kuf",
-      "role": "suikastci",
       "traits": [
         "kuf",
         "suikastci"
@@ -296,16 +638,42 @@
       "attackDur": 1.5
     },
     {
+      "id": "vida",
+      "svg": "assets/rigs/vida.svg",
+      "tier": 4,
+      "traits": [],
+      "attackDur": 1.1
+    },
+    {
+      "id": "yaniksomun",
+      "svg": "assets/rigs/yaniksomun.svg",
+      "tier": 5,
+      "traits": [],
+      "attackDur": 1.3
+    },
+    {
+      "id": "yosun",
+      "svg": "assets/rigs/yosun.svg",
+      "tier": 2,
+      "traits": [],
+      "attackDur": 0.85
+    },
+    {
       "id": "zeytin",
       "svg": "assets/rigs/zeytin.svg",
       "tier": 2,
-      "origin": "pazar",
-      "role": "suikastci",
       "traits": [
         "pazar",
         "suikastci"
       ],
       "attackDur": 1.15
+    },
+    {
+      "id": "zifir",
+      "svg": "assets/rigs/zifir.svg",
+      "tier": 4,
+      "traits": [],
+      "attackDur": 1.1
     }
   ]
 }

@@ -1,0 +1,1954 @@
+<!-- Composed by scripts/build-journey-grounds.mjs from art-package/region3/.
+     The environment only: every interface part the scene was delivered with is
+     dropped, because the game draws its own. Edit the parts, then re-run
+     `npm run journey-grounds`. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1672 941"
+     width="1672" height="941" id="region-3">
+<!-- Shared kit for region 3, the Rusted Cupboard — Paslı Dolap, a tinned
+     kitchen press and the room it stands in. LIGHT DIRECTION: the lit doorway
+     through to the next room at the back right, scene coords ~ (1400, 110).
+     Every highlight faces up-right; every contact shadow falls down-left. -->
+<style>
+  #region-3 {
+    --sun:       #FFE3A8;  --sun-dk:   #E8B463;
+    --sky:       #C9D8E4;  --sky-warm: #E8D6B4;
+    --stone:     #C2A882;  --stone-lt: #DCC7A0;  --stone-dk: #8E7550;
+    --grout:     #6E5A3C;
+    --wood:      #A8703C;  --wood-dk:  #6E4423;  --wood-lt:  #C98F55;
+    --wood-deep: #4A2C15;
+    --crate:     #B98B52;  --crate-dk: #79522A;  --crate-lt: #DDB479;
+    --copper:    #C9773F;  --copper-lt:#F0B47A;  --copper-dk:#8A4E28;
+    --cream:     #F6EFDC;  --cream-dk: #DCCFAE;
+    --ink:       #1C3039;  --ink-soft: #2E4A55;
+    --teal:      #1D4A4A;  --teal-lt:  #2E6560;
+    --red:       #E2453A;  --red-dk:   #B22F28;  --red-lt: #F0705F;
+    --gold:      #F2C14B;  --gold-lt:  #FFE08A;  --gold-dk: #C2932B;
+    --basil:     #4E8C3A;  --basil-dk: #2C5A22;  --basil-lt: #7DBA5E;
+    --tomato:    #D8382C;  --tomato-dk:#9E241C;  --tomato-lt: #F0685A;
+    --lemon:     #E8C63C;  --lemon-dk: #B8962A;
+    --cheese:    #EFD68C;  --cheese-dk:#C7A84E;
+    --slate:     #2A2622;  --slate-lt: #423C36;
+    --canvas-w:  #F2EADA;  --canvas-g: #3F7460;
+    --ginger:    #D98B4A;  --ginger-dk:#A85F2A;
+    --dove:      #8C8A90;  --dove-dk:  #5C5A62;
+    /* The family's own material. Tin is what the cupboard is faced with,
+       zinc what its liners are, and rust is the three stages it goes through
+       on the way out: bloom, run, pit. */
+    --tin:       #B0A283;  --tin-lt:   #E8DCBE;  --tin-dk:  #6E6450;
+    --zinc:      #B6B2A4;  --zinc-lt:  #E4E0D0;  --zinc-dk: #7E7C70;
+    --rust:      #A85A24;  --rust-lt:  #D8823C;  --rust-dk: #6E3410;
+  }
+
+  /* --- motion --------------------------------------------------------- */
+  .sway     { animation: sway 4.2s ease-in-out infinite alternate }
+  .sway-b   { animation: sway 5.6s ease-in-out infinite alternate 0.8s }
+  .pulse    { animation: pulse 2.0s ease-in-out infinite }
+  .shine    { animation: shine 3.2s ease-in-out infinite }
+  .spin-slow{ animation: spin 14s linear infinite }
+  .breathe  { animation: breathe 3.8s ease-in-out infinite alternate }
+  .dust     { animation: dust 7s linear infinite }
+
+  @keyframes sway   { from { transform: rotate(-2.2deg) } to { transform: rotate(2.2deg) } }
+  @keyframes pulse  { 0%,100% { transform: scale(1); opacity:.55 } 50% { transform: scale(1.13); opacity:.95 } }
+  @keyframes shine  { 0%,100% { opacity:.15 } 50% { opacity:.55 } }
+  @keyframes spin   { to { transform: rotate(360deg) } }
+  @keyframes breathe{ from { transform: scaleY(1) } to { transform: scaleY(1.04) } }
+  @keyframes dust   { 0% { transform: translate(0,0); opacity:0 } 20% { opacity:.5 }
+                      100% { transform: translate(-40px,-90px); opacity:0 } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sway,.sway-b,.pulse,.shine,.spin-slow,.breathe,.dust { animation: none }
+  }
+
+  /* --- stop states ----------------------------------------------------- */
+  .stop { --face: var(--teal); --ring: var(--cream) }
+  .stop[data-state="cleared"] { --face: var(--red) }
+  .stop[data-state="locked"]  { --face: var(--ink-soft); opacity:.82 }
+  .stop .num { fill: var(--cream); font: 700 44px/1 "Trebuchet MS", system-ui, sans-serif;
+               text-anchor: middle; dominant-baseline: central }
+  /* Chalk and painted sign lettering share one face. */
+  .chalk { fill: var(--cream); font-family: "Trebuchet MS", system-ui, sans-serif;
+           font-weight: 700; opacity: .88 }
+  .carved{ fill: #3E5B33; font-family: "Trebuchet MS", system-ui, sans-serif; font-weight: 700 }
+</style>
+<defs>
+  <clipPath id="frame"><rect width="1672" height="941"/></clipPath>
+
+  <filter id="soft"    x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="9"/></filter>
+  <filter id="soft-sm" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.5"/></filter>
+  <filter id="far"     x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="7"/></filter>
+
+  <filter id="grain" x="0%" y="0%" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+    <feColorMatrix in="n" type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope=".22"/></feComponentTransfer>
+  </filter>
+
+  <linearGradient id="g-wood" x1="0" y1="0" x2="1" y2="0.25">
+    <stop offset="0"   stop-color="#5E3A1C"/>
+    <stop offset=".45" stop-color="#A8703C"/>
+    <stop offset=".85" stop-color="#D49E63"/>
+    <stop offset="1"   stop-color="#7A5028"/>
+  </linearGradient>
+  <linearGradient id="g-crate" x1="0" y1="0" x2="0.35" y2="1">
+    <stop offset="0"   stop-color="#DDB479"/>
+    <stop offset=".35" stop-color="#B98B52"/>
+    <stop offset=".75" stop-color="#8F6334"/>
+    <stop offset="1"   stop-color="#5E3A1C"/>
+  </linearGradient>
+  <linearGradient id="g-stone" x1="0" y1="0" x2="0.6" y2="1">
+    <stop offset="0"   stop-color="#E0CBA4"/>
+    <stop offset=".5"  stop-color="#C2A882"/>
+    <stop offset="1"   stop-color="#8E7550"/>
+  </linearGradient>
+  <linearGradient id="g-slate" x1="0" y1="0" x2="0.4" y2="1">
+    <stop offset="0"   stop-color="#4A433C"/>
+    <stop offset=".5"  stop-color="#2E2A26"/>
+    <stop offset="1"   stop-color="#1B1815"/>
+  </linearGradient>
+  <linearGradient id="g-copper" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0"   stop-color="#F0B47A"/>
+    <stop offset=".45" stop-color="#C9773F"/>
+    <stop offset="1"   stop-color="#8A4E28"/>
+  </linearGradient>
+  <radialGradient id="g-sunwash" cx="82%" cy="12%" r="70%">
+    <stop offset="0"   stop-color="#FFE0A8" stop-opacity=".55"/>
+    <stop offset="1"   stop-color="#FFE0A8" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="g-tomato" cx="36%" cy="30%" r="72%">
+    <stop offset="0"   stop-color="#F58C7E"/>
+    <stop offset=".45" stop-color="#D8382C"/>
+    <stop offset="1"   stop-color="#8E1E16"/>
+  </radialGradient>
+  <radialGradient id="g-lemon" cx="36%" cy="30%" r="72%">
+    <stop offset="0"   stop-color="#FAE88A"/>
+    <stop offset=".5"  stop-color="#E8C63C"/>
+    <stop offset="1"   stop-color="#A8861E"/>
+  </radialGradient>
+  <linearGradient id="g-wicker" x1="0" y1="0" x2="0.4" y2="1">
+    <stop offset="0"   stop-color="#D9AE6E"/>
+    <stop offset=".5"  stop-color="#B4863F"/>
+    <stop offset="1"   stop-color="#7A5726"/>
+  </linearGradient>
+
+  <!-- A single tomato, placed a hundred times across the crates and floor. -->
+  <g id="tomato"><circle r="15" fill="url(#g-tomato)"/>
+    <path d="M-5 -13 l5 -5 l5 5" fill="none" stroke="var(--basil-dk)" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="-5" cy="-5" rx="4.5" ry="3" fill="#FFFFFF" opacity=".4" transform="rotate(-30 -5 -5)"/></g>
+  <g id="lemon"><ellipse rx="16" ry="12" fill="url(#g-lemon)"/>
+    <ellipse cx="-5" cy="-4" rx="5" ry="3" fill="#FFFFFF" opacity=".35"/></g>
+  <g id="leaf">
+    <path d="M0 0 C 12 -11, 29 -9, 32 2 C 25 12, 8 12, 0 0 Z"
+          fill="var(--basil)" stroke="var(--basil-dk)" stroke-width="2"/>
+    <path d="M2 1 L28 2" stroke="var(--basil-dk)" stroke-width="2" opacity=".7"/></g>
+
+  <!-- A slat, so a crate is six of one shape and not six hand-drawn boxes. -->
+  <g id="slat"><rect width="96" height="15" rx="3" fill="url(#g-crate)"/>
+    <rect y="1" width="96" height="3" fill="#FFFFFF" opacity=".18"/></g>
+
+  <g id="medallion">
+    <circle r="52" fill="var(--ring)"/>
+    <circle r="43" fill="var(--face)"/>
+    <circle r="43" fill="none" stroke="#0F2129" stroke-width="3" opacity=".35"/>
+    <path d="M-30 -26 A 40 40 0 0 1 4 -41" fill="none" stroke="#FFFFFF"
+          stroke-width="6" stroke-linecap="round" opacity=".22"/>
+  </g>
+  <g id="crown-badge">
+    <circle r="17" fill="var(--cream)"/>
+    <circle r="17" fill="none" stroke="var(--wood-dk)" stroke-width="2.5"/>
+    <path d="M-9 4 L-9 -5 L-4.5 -1 L0 -7 L4.5 -1 L9 -5 L9 4 Z" fill="var(--gold)"
+          stroke="var(--gold-dk)" stroke-width="1.5" stroke-linejoin="round"/>
+  </g>
+</defs>
+
+  <g id="bg-wall">
+<!-- The back of the kitchen, behind the cupboard: a tiled wall, and the one lit
+     doorway through to the next room at the back right. Everything here is
+     blurred, because it is the only thing behind the carcass. The light still
+     comes from that doorway, which is what every highlight in the scene faces. -->
+<defs>
+  <radialGradient id="wall-g-glow" cx="55%" cy="55%" r="65%">
+    <stop offset="0"   stop-color="#FFE7B0"/>
+    <stop offset=".55" stop-color="#F2B978"/>
+    <stop offset="1"   stop-color="#C97F4E"/>
+  </radialGradient>
+  <linearGradient id="wall-g-plaster" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#F0D9B0"/>
+    <stop offset="1" stop-color="#C79C6E"/>
+  </linearGradient>
+  <linearGradient id="wall-g-tile" x1="0" y1="0" x2="0.4" y2="1">
+    <stop offset="0"   stop-color="#E8EFE8"/>
+    <stop offset=".55" stop-color="#C2CFC8"/>
+    <stop offset="1"   stop-color="#8FA098"/>
+  </linearGradient>
+</defs>
+<rect id="bg-room" width="1672" height="941" fill="#6E4E30"/>
+<g id="bg-far" filter="url(#far)">
+  <rect x="1180" width="340" height="420" fill="#D8A66E"/>
+  <rect x="1180" width="340" height="230" fill="url(#wall-g-glow)"/>
+  <!-- The next room: a glazed tile wall to shoulder height, plaster above,
+       and a plate rack and a kettle on the shelf that runs along it. -->
+  <g id="bg-nextroom">
+    <rect x="1180" y="0"   width="340" height="150" fill="url(#wall-g-plaster)"/>
+    <rect x="1180" y="150" width="340" height="270" fill="url(#wall-g-tile)"/>
+    <g stroke="#8FA098" stroke-width="2" opacity=".55">
+      <path d="M1180 196 H1520 M1180 242 H1520 M1180 288 H1520 M1180 334 H1520 M1180 380 H1520"/>
+      <path d="M1226 150 V420 M1272 150 V420 M1318 150 V420 M1364 150 V420 M1410 150 V420 M1456 150 V420"/>
+    </g>
+    <!-- the shelf and what stands on it -->
+    <rect x="1190" y="136" width="320" height="14" rx="4" fill="#A8703C"/>
+    <rect x="1190" y="136" width="320" height="4"  rx="2" fill="#E8C68E" opacity=".6"/>
+    <g fill="#B9BCC0" stroke="#7E8288" stroke-width="3">
+      <rect x="1214" y="86" width="52" height="50" rx="6"/>
+      <rect x="1288" y="72" width="44" height="64" rx="6"/>
+      <rect x="1358" y="94" width="58" height="42" rx="6"/>
+    </g>
+    <!-- a kettle, spout to the right -->
+    <g>
+      <ellipse cx="1464" cy="112" rx="30" ry="24" fill="#CFA97A"/>
+      <path d="M1492 106 l22 -8 l-4 14 Z" fill="#CFA97A"/>
+      <path d="M1444 92 q20 -22 40 0" fill="none" stroke="#6E5A3C" stroke-width="5"/>
+    </g>
+    <!-- the doorway's own jamb light -->
+    <rect x="1180" y="416" width="340" height="10" fill="#7A5A38" opacity=".7"/>
+  </g>
+  <!-- The tiled floor of the next room, running away from us. -->
+  <path d="M1250 420 L1460 420 L1520 640 L1190 640 Z" fill="#A89478"/>
+  <path d="M1266 452 L1444 452 M1258 486 L1454 486 M1246 526 L1468 526
+           M1230 572 L1486 572 M1210 624 L1506 624" stroke="#7A6A50" stroke-width="4" opacity=".5"/>
+  <path d="M1300 420 L1286 640 M1350 420 L1348 640 M1400 420 L1410 640"
+        stroke="#7A6A50" stroke-width="4" opacity=".4"/>
+</g>
+<!-- The doorway itself: two plastered reveals and a flat head, sun on its
+     right cheek. Where the market's arch stood; a kitchen door does not arch. -->
+<g id="bg-doorway">
+  <path d="M1176 470 V210 H1480 V470 H1436 V254 H1220 V470 Z" fill="url(#g-stone)"/>
+  <path d="M1436 470 V254 H1480 V470 Z" fill="#E4C08A" opacity=".85"/>
+  <path d="M1176 470 V210 H1220 V470 Z" fill="#5E4630" opacity=".65"/>
+  <rect x="1176" y="196" width="304" height="26" rx="4" fill="#8E7550"/>
+  <rect x="1176" y="196" width="304" height="7"  rx="3" fill="#E8C68E" opacity=".55"/>
+  <!-- the reveals are plastered in courses, so they read as built, not painted -->
+  <g stroke="#6E5638" stroke-width="2" opacity=".45">
+    <path d="M1176 470 H1220 M1176 438 H1220 M1176 406 H1220 M1176 374 H1220
+             M1176 342 H1220 M1176 310 H1220 M1176 278 H1220 M1176 246 H1220"/>
+    <path d="M1436 470 H1480 M1436 438 H1480 M1436 406 H1480 M1436 374 H1480
+             M1436 342 H1480 M1436 310 H1480 M1436 278 H1480 M1436 246 H1480"/>
+  </g>
+</g>
+<!-- A wire plate rack bolted across the opening. Galvanised, and going the
+     same way as everything else in this room. -->
+<g id="bg-plate-rack" stroke="#241708" stroke-width="8" opacity=".92">
+  <path d="M1206 470 V300 M1244 470 V296 M1282 470 V292 M1320 470 V290
+           M1358 470 V292 M1396 470 V296 M1434 470 V300"/>
+  <path d="M1196 316 H1446" stroke-width="10"/>
+  <path d="M1196 460 H1446" stroke-width="10"/>
+  <g fill="#7E6A4A" opacity=".8">
+    <circle cx="1206" cy="296" r="4"/><circle cx="1244" cy="292" r="4"/>
+    <circle cx="1282" cy="288" r="4"/><circle cx="1320" cy="286" r="4"/>
+    <circle cx="1358" cy="288" r="4"/><circle cx="1396" cy="292" r="4"/>
+    <circle cx="1434" cy="296" r="4"/>
+  </g>
+</g>
+<rect id="bg-lampwash" width="1672" height="941" fill="url(#g-sunwash)" opacity=".45"/>
+  </g>
+  <g id="floor-tiles">
+<!-- The kitchen's quarry-tile floor, laid in perspective. Two tile tones in a
+     chequer, the courses shorter and paler at the back and longer, darker and
+     wider-jointed at the front, with the grout showing through as the bed. -->
+<defs>
+  <linearGradient id="floor-g-tile-a" x1="0" y1="0" x2="0.5" y2="1">
+    <stop offset="0" stop-color="#D8BE9A"/><stop offset=".55" stop-color="#B69672"/>
+    <stop offset="1" stop-color="#7E6446"/>
+  </linearGradient>
+  <linearGradient id="floor-g-tile-b" x1="0" y1="0" x2="0.5" y2="1">
+    <stop offset="0" stop-color="#AE9270"/><stop offset=".55" stop-color="#8C7250"/>
+    <stop offset="1" stop-color="#5E4A30"/>
+  </linearGradient>
+</defs>
+<path id="floor-bed" d="M0 941 H1672 V520 L1140 470 L640 500 L0 600 Z" fill="var(--grout)"/>
+<g id="floor-courses">
+  <!-- Back courses: small, pale, tight joints. -->
+  <g opacity=".95">
+    <path fill="url(#floor-g-tile-a)" d="
+      M660 502 h52 l-2 26 h-52 Z M768 500 h52 l-2 26 h-52 Z M876 499 h52 l-2 26 h-52 Z
+      M984 500 h52 l-2 26 h-52 Z M1092 501 h52 l-2 26 h-52 Z"/>
+    <path fill="url(#floor-g-tile-b)" d="
+      M714 501 h52 l-2 26 h-52 Z M822 500 h52 l-2 26 h-52 Z M930 499 h52 l-2 26 h-52 Z
+      M1038 500 h52 l-2 26 h-52 Z M1146 502 h48 l-2 26 h-48 Z"/>
+    <path fill="url(#floor-g-tile-b)" d="
+      M640 530 h58 l-2 30 h-58 Z M756 530 h58 l-2 30 h-58 Z M872 529 h58 l-2 30 h-58 Z
+      M988 530 h58 l-2 30 h-58 Z M1104 531 h58 l-2 30 h-58 Z"/>
+    <path fill="url(#floor-g-tile-a)" d="
+      M698 530 h58 l-2 30 h-58 Z M814 530 h58 l-2 30 h-58 Z M930 529 h58 l-2 30 h-58 Z
+      M1046 530 h58 l-2 30 h-58 Z M1162 531 h58 l-2 30 h-58 Z"/>
+  </g>
+  <!-- Middle courses. -->
+  <g opacity=".97">
+    <path fill="url(#floor-g-tile-a)" d="
+      M500 564 h70 l-4 38 h-70 Z M640 563 h70 l-4 38 h-70 Z M780 562 h70 l-4 38 h-70 Z
+      M920 563 h70 l-4 38 h-70 Z M1060 564 h70 l-4 38 h-70 Z M1200 565 h70 l-4 38 h-70 Z
+      M1340 566 h70 l-4 38 h-70 Z"/>
+    <path fill="url(#floor-g-tile-b)" d="
+      M570 564 h70 l-4 38 h-70 Z M710 563 h70 l-4 38 h-70 Z M850 562 h70 l-4 38 h-70 Z
+      M990 563 h70 l-4 38 h-70 Z M1130 564 h70 l-4 38 h-70 Z M1270 565 h70 l-4 38 h-70 Z
+      M1410 566 h70 l-4 38 h-70 Z M430 565 h70 l-4 38 h-70 Z"/>
+    <path fill="url(#floor-g-tile-b)" d="
+      M330 606 h86 l-6 48 h-86 Z M502 605 h86 l-6 48 h-86 Z M674 604 h86 l-6 48 h-86 Z
+      M846 604 h86 l-6 48 h-86 Z M1018 605 h86 l-6 48 h-86 Z M1190 606 h86 l-6 48 h-86 Z
+      M1362 607 h86 l-6 48 h-86 Z"/>
+    <path fill="url(#floor-g-tile-a)" d="
+      M416 606 h86 l-6 48 h-86 Z M588 605 h86 l-6 48 h-86 Z M760 604 h86 l-6 48 h-86 Z
+      M932 604 h86 l-6 48 h-86 Z M1104 605 h86 l-6 48 h-86 Z M1276 606 h86 l-6 48 h-86 Z
+      M1448 607 h86 l-6 48 h-86 Z M244 607 h86 l-6 48 h-86 Z"/>
+  </g>
+  <!-- Front courses: large, darker, and the joints open up. -->
+  <g opacity="1">
+    <path fill="url(#floor-g-tile-a)" d="
+      M60 660 h108 l-8 62 h-108 Z M276 659 h108 l-8 62 h-108 Z M492 658 h108 l-8 62 h-108 Z
+      M708 658 h108 l-8 62 h-108 Z M924 659 h108 l-8 62 h-108 Z M1140 660 h108 l-8 62 h-108 Z
+      M1356 661 h108 l-8 62 h-108 Z"/>
+    <path fill="url(#floor-g-tile-b)" d="
+      M168 660 h108 l-8 62 h-108 Z M384 659 h108 l-8 62 h-108 Z M600 658 h108 l-8 62 h-108 Z
+      M816 658 h108 l-8 62 h-108 Z M1032 659 h108 l-8 62 h-108 Z M1248 660 h108 l-8 62 h-108 Z
+      M1464 661 h108 l-8 62 h-108 Z M-48 661 h108 l-8 62 h-108 Z"/>
+    <path fill="url(#floor-g-tile-b)" d="
+      M-40 730 h132 l-10 82 h-132 Z M224 729 h132 l-10 82 h-132 Z M488 728 h132 l-10 82 h-132 Z
+      M752 728 h132 l-10 82 h-132 Z M1016 729 h132 l-10 82 h-132 Z M1280 730 h132 l-10 82 h-132 Z
+      M1544 731 h132 l-10 82 h-132 Z"/>
+    <path fill="url(#floor-g-tile-a)" d="
+      M92 730 h132 l-10 82 h-132 Z M356 729 h132 l-10 82 h-132 Z M620 728 h132 l-10 82 h-132 Z
+      M884 728 h132 l-10 82 h-132 Z M1148 729 h132 l-10 82 h-132 Z M1412 730 h132 l-10 82 h-132 Z"/>
+    <path fill="url(#floor-g-tile-a)" d="
+      M-60 820 h162 l-12 121 h-162 Z M264 819 h162 l-12 122 h-162 Z M588 818 h162 l-12 123 h-162 Z
+      M912 818 h162 l-12 123 h-162 Z M1236 819 h162 l-12 122 h-162 Z M1560 820 h162 l-12 121 h-162 Z"/>
+    <path fill="url(#floor-g-tile-b)" d="
+      M102 820 h162 l-12 121 h-162 Z M426 819 h162 l-12 122 h-162 Z M750 818 h162 l-12 123 h-162 Z
+      M1074 818 h162 l-12 123 h-162 Z M1398 819 h162 l-12 122 h-162 Z"/>
+  </g>
+</g>
+<!-- Rust and grit worked into the joints: cheap detail density, not another
+     gradient. The orange specks are where the cupboard has dripped. -->
+<g fill="#3E3220" opacity=".5">
+  <circle cx="210" cy="640" r="2.4"/><circle cx="380" cy="700" r="2"/><circle cx="560" cy="760" r="2.6"/>
+  <circle cx="720" cy="820" r="2.2"/><circle cx="900" cy="880" r="2.8"/><circle cx="1080" cy="740" r="2.1"/>
+  <circle cx="1250" cy="800" r="2.4"/><circle cx="1420" cy="860" r="2.6"/><circle cx="150" cy="560" r="1.8"/>
+  <circle cx="640" cy="600" r="1.7"/><circle cx="1000" cy="600" r="1.8"/><circle cx="1350" cy="640" r="1.9"/>
+  <circle cx="300" cy="900" r="2.6"/><circle cx="1550" cy="700" r="2.2"/><circle cx="60" cy="800" r="2.4"/>
+</g>
+<g id="floor-rust-drips" fill="#A85A24" opacity=".28">
+  <ellipse cx="452" cy="672" rx="26" ry="9"/><ellipse cx="1148" cy="706" rx="34" ry="11"/>
+  <ellipse cx="806" cy="762" rx="22" ry="8"/><ellipse cx="1392" cy="648" rx="18" ry="7"/>
+  <ellipse cx="236" cy="748" rx="20" ry="8"/>
+</g>
+<!-- Fine grain over the whole bed, low opacity: fired-clay tooth, not noise. -->
+<rect x="0" y="470" width="1672" height="471" fill="#000" filter="url(#grain)" opacity=".35"/>
+<!-- The cupboard throws its own shade; the doorway keeps the light. -->
+<path id="floor-shade-l" d="M0 600 L640 500 L620 941 H0 Z" fill="#4A3319" opacity=".42"/>
+<path id="floor-shade-r" d="M1672 520 V941 H1320 L1380 520 Z" fill="#4A3319" opacity=".3"/>
+  </g>
+  <g id="cupboard-carcass">
+<!-- The cupboard itself: the thing the Region is named after, and the thing
+     everything else in the picture hangs off. A tinned kitchen press across
+     the whole back wall — sheet panels, riveted seams, tin-clad uprights and
+     rails, two bays standing open, and rust coming through every joint.
+     Drawn dark, because its own shelves keep the light off it. Light comes
+     from the doorway at the upper right, so every upright gets a lit right
+     edge and a shaded left edge; the open bays read as near-black. -->
+<defs>
+  <linearGradient id="cup-panel" x1="0" y1="0" x2="0.55" y2="1">
+    <stop offset="0"    stop-color="#5C4A32"/>
+    <stop offset=".4"   stop-color="#4A3A24"/>
+    <stop offset=".75"  stop-color="#3A2C18"/>
+    <stop offset="1"    stop-color="#2C2010"/>
+  </linearGradient>
+  <linearGradient id="cup-tin-lit" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0"   stop-color="#3E3528"/>
+    <stop offset=".35" stop-color="#7A6A50"/>
+    <stop offset=".7"  stop-color="#B2A184"/>
+    <stop offset="1"   stop-color="#E8DCC0"/>
+  </linearGradient>
+  <linearGradient id="cup-bay" x1="0.5" y1="0" x2="0.5" y2="1">
+    <stop offset="0"   stop-color="#3A2510"/>
+    <stop offset=".3"  stop-color="#1C1004"/>
+    <stop offset="1"   stop-color="#0A0602"/>
+  </linearGradient>
+  <linearGradient id="cup-rust" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0"   stop-color="#C2662A" stop-opacity=".85"/>
+    <stop offset=".6"  stop-color="#8E4418" stop-opacity=".55"/>
+    <stop offset="1"   stop-color="#5E2C10" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+
+<path id="cup-back" d="M0 0 H1180 V520 L640 498 L0 598 Z" fill="url(#cup-panel)"/>
+
+<!-- Two bays with their doors off: the cupboard goes back further than any one
+     shelf, and those bays read almost black. -->
+<g id="cup-open-bays" fill="#160D04">
+  <path d="M596 0 H676 L666 480 L606 486 Z" opacity=".75"/>
+  <path d="M948 0 H1010 L1000 380 L956 384 Z" opacity=".65"/>
+</g>
+
+<!-- Sheet panels, with the riveted seam down each lap joint. -->
+<g id="cup-panel-seams" opacity=".6">
+  <path d="M40 0 V560 M132 0 V556 M224 0 V550 M316 0 V544 M408 0 V536 M500 0 V528
+           M592 0 V520 M684 0 V500 M776 0 V502 M868 0 V504 M960 0 V506 M1052 0 V510 M1144 0 V514"
+        stroke="#2A2008" stroke-width="7"/>
+  <path d="M86 0 V558 M178 0 V553 M270 0 V547 M362 0 V540 M454 0 V532 M546 0 V524
+           M638 0 V510 M730 0 V501 M822 0 V503 M914 0 V505 M1006 0 V508 M1098 0 V512"
+        stroke="#6E6044" stroke-width="2" opacity=".5"/>
+  <path d="M0 190 H320 M360 176 H590 M700 240 H960 M1010 196 H1180
+           M0 388 H260 M300 404 H560 M760 372 H1180"
+        stroke="#241708" stroke-width="4" opacity=".55"/>
+</g>
+<!-- The rivets themselves, one row per seam. Three rows is enough to say
+     "sheet metal" at the size the map draws this. -->
+<g id="cup-rivets" fill="#8E7E5E" opacity=".55">
+  <circle cx="40" cy="96" r="4"/><circle cx="40" cy="300" r="4"/><circle cx="40" cy="486" r="4"/>
+  <circle cx="224" cy="88" r="4"/><circle cx="224" cy="292" r="4"/><circle cx="224" cy="478" r="4"/>
+  <circle cx="408" cy="80" r="4"/><circle cx="408" cy="284" r="4"/><circle cx="408" cy="470" r="4"/>
+  <circle cx="592" cy="72" r="4"/><circle cx="592" cy="276" r="4"/><circle cx="592" cy="462" r="4"/>
+  <circle cx="776" cy="80" r="4"/><circle cx="776" cy="284" r="4"/><circle cx="776" cy="452" r="4"/>
+  <circle cx="960" cy="88" r="4"/><circle cx="960" cy="292" r="4"/><circle cx="960" cy="456" r="4"/>
+  <circle cx="1144" cy="96" r="4"/><circle cx="1144" cy="300" r="4"/><circle cx="1144" cy="464" r="4"/>
+</g>
+
+<g id="cup-uprights" fill="url(#cup-tin-lit)" stroke="#2C2010" stroke-width="4">
+  <rect x="352" y="0"  width="34" height="470" rx="4"/>
+  <rect x="540" y="96" width="30" height="420" rx="4"/>
+  <rect x="716" y="0"  width="36" height="440" rx="4"/>
+  <rect x="900" y="60" width="28" height="360" rx="4"/>
+  <rect x="1096" y="0" width="32" height="400" rx="4"/>
+  <rect x="1160" y="96" width="24" height="330" rx="4"/>
+</g>
+<!-- rim light on the door-facing edge of each upright -->
+<g id="cup-uprights-rim" stroke="#F0E4BE" stroke-width="2" stroke-linecap="round" opacity=".7">
+  <path d="M384 6 V462"/>
+  <path d="M568 100 V510"/>
+  <path d="M750 6 V432"/>
+  <path d="M926 64 V414"/>
+  <path d="M1126 6 V394"/>
+  <path d="M1182 100 V420"/>
+</g>
+
+<g id="cup-rails" fill="url(#cup-tin-lit)" stroke="#2C2010" stroke-width="4">
+  <rect x="330" y="112" width="440" height="26" rx="5"/>
+  <rect x="700" y="150" width="480" height="24" rx="5"/>
+  <rect x="330" y="230" width="250" height="20" rx="5"/>
+  <rect x="880" y="252" width="300" height="18" rx="5"/>
+</g>
+<g id="cup-rails-rim" stroke="#F0E4BE" stroke-width="1.5" stroke-linecap="round" opacity=".6">
+  <path d="M336 114 H766"/>
+  <path d="M706 152 H1176"/>
+  <path d="M336 232 H576"/>
+  <path d="M886 254 H1176"/>
+</g>
+
+<!-- The opening: a tin-faced head and two stiles framing the shelves, so the
+     back reads as one press standing open rather than as loose shelving. It is
+     set at this height on purpose — the map crops about 120 scene pixels off
+     the top and the bottom, and a cornice drawn at y=0 is a cornice nobody
+     sees. -->
+<g id="cup-opening">
+  <!-- the head, heavy and light-faced: at map size this band is the only part
+       of the carcass the crates do not cover, so it carries the whole reading -->
+  <rect x="236" y="92" width="1010" height="58" rx="6" fill="#C0B292" stroke="#241708" stroke-width="6"/>
+  <rect x="244" y="100" width="994" height="10" rx="4" fill="#F4EACA" opacity=".75"/>
+  <rect x="236" y="140" width="1010" height="10" fill="#4A4030" opacity=".6"/>
+  <!-- the stiles either side of the opening -->
+  <rect x="236" y="150" width="46" height="330" rx="5" fill="#A8997A" stroke="#241708" stroke-width="6"/>
+  <rect x="1200" y="150" width="46" height="330" rx="5" fill="#C0B292" stroke="#241708" stroke-width="6"/>
+  <g stroke="#F4EACA" stroke-width="3" stroke-linecap="round" opacity=".7">
+    <path d="M276 156 V474"/><path d="M1240 156 V474"/>
+  </g>
+  <!-- the rust starts at the head and runs down both stiles -->
+  <g fill="#A85A24">
+    <path d="M362 150 h30 l-8 128 h-18 Z" opacity=".55"/>
+    <path d="M868 150 h26 l-8 104 h-16 Z" opacity=".5"/>
+    <path d="M1096 150 h22 l-6 86 h-14 Z" opacity=".45"/>
+    <ellipse cx="258" cy="306" rx="19" ry="52" opacity=".45"/>
+    <ellipse cx="1222" cy="266" rx="18" ry="46" opacity=".45"/>
+    <ellipse cx="520" cy="122" rx="52" ry="18" opacity=".35"/>
+    <ellipse cx="1004" cy="126" rx="44" ry="16" opacity=".3"/>
+  </g>
+  <g id="cup-opening-rivets" fill="#6E6044" opacity=".7">
+    <circle cx="262" cy="120" r="6"/><circle cx="500" cy="120" r="6"/>
+    <circle cx="740" cy="120" r="6"/><circle cx="980" cy="120" r="6"/>
+    <circle cx="1222" cy="120" r="6"/>
+  </g>
+</g>
+<!-- The one door still on its hinges, hanging open off the left stile. Its
+     glass is gone; what is left is the frame, the catch and the rust coming
+     out of both hinges. -->
+<g id="cup-door" transform="translate(1252 156) rotate(6)">
+  <rect x="0" y="0" width="140" height="330" rx="6" fill="#6A5836" stroke="#241708" stroke-width="6"/>
+  <rect x="16" y="18" width="108" height="136" rx="4" fill="#1A1206" opacity=".85"/>
+  <rect x="16" y="172" width="108" height="140" rx="4" fill="#8A7248"/>
+  <rect x="16" y="172" width="108" height="10" rx="4" fill="#C6AE74" opacity=".7"/>
+  <path d="M16 18 H124 M70 18 V154" stroke="#C6AE74" stroke-width="4" opacity=".6"/>
+  <circle cx="26" cy="184" r="10" fill="#C9A24A" stroke="#7E5E1E" stroke-width="3"/>
+  <g fill="#8E4418">
+    <rect x="-8" y="36"  width="20" height="36" rx="3"/>
+    <rect x="-8" y="252" width="20" height="36" rx="3"/>
+  </g>
+  <path d="M2 72 q8 46 -2 96" stroke="#A85A24" stroke-width="8" fill="none" opacity=".55"/>
+</g>
+
+<!-- Rust, which is the family and so is the wall. It runs out of every seam
+     and pools where the panels lap. -->
+<g id="cup-rust-runs" opacity=".8">
+  <path d="M132 0 h26 l-6 240 h-16 Z" fill="url(#cup-rust)"/>
+  <path d="M500 0 h22 l-6 200 h-14 Z" fill="url(#cup-rust)"/>
+  <path d="M868 88 h24 l-6 210 h-16 Z" fill="url(#cup-rust)"/>
+  <path d="M1052 0 h20 l-4 170 h-14 Z" fill="url(#cup-rust)"/>
+  <path d="M316 232 h30 l-8 190 h-20 Z" fill="url(#cup-rust)" opacity=".7"/>
+</g>
+<g id="cup-rust-blooms" fill="#A85A24">
+  <ellipse cx="238" cy="430" rx="58" ry="26" opacity=".38"/>
+  <ellipse cx="672" cy="330" rx="40" ry="20" opacity=".3"/>
+  <ellipse cx="1004" cy="446" rx="66" ry="24" opacity=".34"/>
+  <ellipse cx="452" cy="128" rx="34" ry="16" opacity=".28"/>
+  <ellipse cx="1128" cy="286" rx="30" ry="18" opacity=".3"/>
+</g>
+<g id="cup-rust-pits" fill="#6E3410" opacity=".45">
+  <circle cx="220" cy="424" r="5"/><circle cx="256" cy="438" r="4"/><circle cx="244" cy="412" r="3"/>
+  <circle cx="996" cy="440" r="5"/><circle cx="1026" cy="452" r="4"/><circle cx="982" cy="456" r="3"/>
+  <circle cx="664" cy="326" r="4"/><circle cx="686" cy="336" r="3"/>
+</g>
+
+<!-- The deepest shelf, behind the jars, with soft falloff instead of a flat fill. -->
+<rect id="cup-deep-shelf" x="770" y="170" width="150" height="250" rx="6" fill="url(#cup-bay)" opacity=".95"/>
+<rect x="770" y="170" width="150" height="18" rx="6" fill="#000" opacity=".35"/>
+  </g>
+  <g id="shelf-tins-a" transform="translate(300 150)">
+<!-- The high shelf left of centre: a rank of tins, one shape reused, with
+     painted bands so the row still carries colour now the canvas is gone.
+     Every lid catches the doorway light on its right; every tin sheds rust
+     down its left seam. -->
+<defs>
+  <linearGradient id="tin-a-body" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0"   stop-color="#5E5848"/>
+    <stop offset=".35" stop-color="#A89A80"/>
+    <stop offset=".78" stop-color="#D8CCAE"/>
+    <stop offset="1"   stop-color="#8E8168"/>
+  </linearGradient>
+  <g id="tin-a">
+    <rect x="-27" y="-104" width="54" height="104" rx="4" fill="url(#tin-a-body)"/>
+    <ellipse cx="0" cy="-104" rx="27" ry="8" fill="#E4D8BA"/>
+    <ellipse cx="0" cy="-104" rx="27" ry="8" fill="none" stroke="#6E6450" stroke-width="3"/>
+    <rect x="-27" y="-72" width="54" height="34" fill="var(--tin-band)"/>
+    <rect x="-27" y="-72" width="54" height="5" fill="#FFFFFF" opacity=".25"/>
+    <rect x="-24" y="-98" width="7" height="92" rx="3" fill="#3E3828" opacity=".4"/>
+    <path d="M-22 -34 q4 18 -2 34" stroke="#A85A24" stroke-width="6" fill="none" opacity=".55"/>
+  </g>
+</defs>
+<path id="shelf-a-shadow" d="M-28 118 H432 L436 152 H-32 Z" fill="#3A2408" opacity=".4" filter="url(#soft)"/>
+<g id="shelf-a-tins">
+  <g style="--tin-band:#C8362C"><use href="#tin-a" x="24"  y="122"/></g>
+  <g style="--tin-band:#C2932B"><use href="#tin-a" x="86"  y="122"/></g>
+  <g style="--tin-band:#2E6560"><use href="#tin-a" x="148" y="122"/></g>
+  <g style="--tin-band:#C8362C"><use href="#tin-a" x="210" y="122"/></g>
+  <g style="--tin-band:#8A4E28"><use href="#tin-a" x="272" y="122"/></g>
+  <g style="--tin-band:#C2932B"><use href="#tin-a" x="334" y="122"/></g>
+  <!-- one tin off the shelf, on its side, its lid sprung -->
+  <g transform="translate(392 104) rotate(74)"><g style="--tin-band:#2E6560"><use href="#tin-a"/></g></g>
+</g>
+<rect id="shelf-a-board" x="-28" y="122" width="464" height="18" rx="4" fill="#7E6A4A"/>
+<rect id="shelf-a-board-lit" x="-28" y="122" width="464" height="5" rx="2" fill="#E8DCB4" opacity=".55"/>
+<path id="shelf-a-board-rust" d="M118 140 h30 l-6 26 h-20 Z M306 140 h24 l-4 20 h-16 Z"
+      fill="#A85A24" opacity=".5"/>
+<g id="shelf-a-brackets" fill="#4A4032" stroke="#241708" stroke-width="3">
+  <path d="M36 140 h16 l-4 34 l-18 -16 Z"/>
+  <path d="M352 140 h16 l-4 34 l-18 -16 Z"/>
+</g>
+  </g>
+  <g id="shelf-tins-b" transform="translate(798 162)">
+<!-- The second rank, right of centre and one shelf lower: shorter, fatter tins
+     with their lids off, so the row reads as a different object than the left
+     shelf rather than the same drawing twice. -->
+<defs>
+  <linearGradient id="tin-b-body" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0"   stop-color="#544E3E"/>
+    <stop offset=".35" stop-color="#9C8F76"/>
+    <stop offset=".78" stop-color="#CEC2A4"/>
+    <stop offset="1"   stop-color="#82765E"/>
+  </linearGradient>
+  <g id="tin-b">
+    <rect x="-34" y="-72" width="68" height="72" rx="5" fill="url(#tin-b-body)"/>
+    <ellipse cx="0" cy="-72" rx="34" ry="10" fill="#241A0C"/>
+    <ellipse cx="0" cy="-72" rx="34" ry="10" fill="none" stroke="#D8CCAE" stroke-width="4"/>
+    <rect x="-34" y="-50" width="68" height="22" fill="var(--tin-band)"/>
+    <rect x="-34" y="-50" width="68" height="4" fill="#FFFFFF" opacity=".22"/>
+    <path d="M-28 -28 q6 14 0 26" stroke="#A85A24" stroke-width="7" fill="none" opacity=".5"/>
+  </g>
+</defs>
+<path id="shelf-b-shadow" d="M-24 100 H400 L404 132 H-28 Z" fill="#3A2408" opacity=".4" filter="url(#soft)"/>
+<g id="shelf-b-tins">
+  <g style="--tin-band:#C2932B"><use href="#tin-b" x="34"  y="104"/></g>
+  <g style="--tin-band:#C8362C"><use href="#tin-b" x="112" y="104"/></g>
+  <g style="--tin-band:#8A4E28"><use href="#tin-b" x="190" y="104"/></g>
+  <g style="--tin-band:#2E6560"><use href="#tin-b" x="268" y="104"/></g>
+  <g style="--tin-band:#C2932B"><use href="#tin-b" x="346" y="104"/></g>
+</g>
+<rect id="shelf-b-board" x="-24" y="104" width="452" height="16" rx="4" fill="#7E6A4A"/>
+<rect id="shelf-b-board-lit" x="-24" y="104" width="452" height="5" rx="2" fill="#E8DCB4" opacity=".55"/>
+<path id="shelf-b-board-rust" d="M206 120 h28 l-6 30 h-18 Z" fill="#A85A24" opacity=".5"/>
+<g id="shelf-b-brackets" fill="#4A4032" stroke="#241708" stroke-width="3">
+  <path d="M44 120 h16 l-4 32 l-18 -14 Z"/>
+  <path d="M348 120 h16 l-4 32 l-18 -14 Z"/>
+</g>
+  </g>
+  <g id="pan-rail" transform="translate(1452 86)">
+<!-- The far right, where the doorway light lands first: a rail of tinned pans
+     hung by their handles. Copper under the tinning, coming through where the
+     tinning has worn off. -->
+<defs>
+  <linearGradient id="pan-face" x1="0" y1="0" x2="0.4" y2="1">
+    <stop offset="0"   stop-color="#E8DCBE"/>
+    <stop offset=".5"  stop-color="#B0A283"/>
+    <stop offset="1"   stop-color="#6E6450"/>
+  </linearGradient>
+</defs>
+<path id="pan-rail-bar" d="M-16 18 H244" stroke="#4A4032" stroke-width="10" stroke-linecap="round"/>
+<path id="pan-rail-bar-lit" d="M-14 14 H242" stroke="#E8DCB4" stroke-width="3" opacity=".5"/>
+<g id="pan-rail-hooks" stroke="#4A4032" stroke-width="6" fill="none" stroke-linecap="round">
+  <path d="M34 18 q0 16 12 18"/><path d="M110 18 q0 16 12 18"/><path d="M188 18 q0 14 -12 16"/>
+</g>
+<g id="pan-rail-pans">
+  <g transform="translate(46 36)">
+    <circle r="44" fill="url(#pan-face)" stroke="#5A5040" stroke-width="5"/>
+    <circle r="30" fill="none" stroke="#8E8168" stroke-width="3" opacity=".7"/>
+    <path d="M-20 -24 a 30 30 0 0 1 24 -8" stroke="#FFFFFF" stroke-width="6"
+          stroke-linecap="round" fill="none" opacity=".35"/>
+    <path d="M18 24 q22 16 18 40" stroke="#A85A24" stroke-width="8" fill="none" opacity=".55"/>
+  </g>
+  <g transform="translate(122 36)">
+    <circle r="34" fill="url(#pan-face)" stroke="#5A5040" stroke-width="5"/>
+    <circle r="22" fill="none" stroke="#8E8168" stroke-width="3" opacity=".7"/>
+    <path d="M-8 22 q14 14 10 34" stroke="#A85A24" stroke-width="7" fill="none" opacity=".5"/>
+  </g>
+  <g transform="translate(176 52)">
+    <ellipse rx="38" ry="26" fill="#C9773F" stroke="#7E4420" stroke-width="5"/>
+    <ellipse rx="24" ry="15" fill="none" stroke="#F0B47A" stroke-width="3" opacity=".6"/>
+    <path d="M30 -14 l26 -10 l4 12 Z" fill="#8A4E28"/>
+  </g>
+</g>
+<g id="pan-rail-rust" fill="#A85A24" opacity=".4">
+  <ellipse cx="60" cy="64" rx="18" ry="9"/><ellipse cx="170" cy="70" rx="14" ry="7"/>
+</g>
+  </g>
+  <g id="rust-runs-left" transform="translate(8 0)">
+<!-- Rust down the left upright, where the ivy used to climb. One blistered
+     scale per sprig, so the run reads as spreading rather than painted: the
+     Region's own family, drawn on the room it lives in. -->
+<defs>
+  <g id="scale-l">
+    <path d="M0 0 C 9 -9, 24 -8, 27 1 C 24 10, 8 11, 0 0 Z"
+          fill="#A85A24" stroke="#6E3410" stroke-width="2"/>
+    <path d="M6 1 q7 -4 14 0" stroke="#6E3410" stroke-width="2" fill="none" opacity=".8"/>
+    <circle cx="17" cy="2" r="2.5" fill="#6E3410" opacity=".8"/>
+  </g>
+</defs>
+<path id="rust-l-run" d="M40 0 C 20 90, 60 170, 30 260 C 10 330, 44 400, 26 470"
+      fill="none" stroke="#7E3A14" stroke-width="9" opacity=".75"/>
+<path id="rust-l-wash" d="M40 0 C 20 90, 60 170, 30 260 C 10 330, 44 400, 26 470"
+      fill="none" stroke="#C2662A" stroke-width="3" opacity=".6"/>
+<g id="rust-l-scales" class="sway" style="transform-origin:40px 0px">
+  <use href="#scale-l" transform="translate(34 24) rotate(38) scale(.9)"/>
+  <use href="#scale-l" transform="translate(28 74) rotate(150) scale(.8)"/>
+  <use href="#scale-l" transform="translate(48 118) rotate(20) scale(1)"/>
+  <use href="#scale-l" transform="translate(26 166) rotate(168) scale(.85)"/>
+  <use href="#scale-l" transform="translate(52 214) rotate(46) scale(.95)"/>
+  <use href="#scale-l" transform="translate(20 262) rotate(160) scale(.8)"/>
+  <use href="#scale-l" transform="translate(46 306) rotate(28) scale(.9)"/>
+  <use href="#scale-l" transform="translate(18 352) rotate(172) scale(.85)"/>
+  <use href="#scale-l" transform="translate(44 398) rotate(40) scale(.9)"/>
+  <use href="#scale-l" transform="translate(16 446) rotate(158) scale(.8)"/>
+</g>
+  </g>
+  <g id="rust-runs-right" transform="translate(1250 10)">
+<!-- The same rust down the right-hand upright, closer to the doorway and so
+     brighter: two runs that meet, and a bloom where they pool on the rail. -->
+<defs>
+  <g id="scale-r">
+    <path d="M0 0 C 9 -9, 24 -8, 27 1 C 24 10, 8 11, 0 0 Z"
+          fill="#C2662A" stroke="#7E3A14" stroke-width="2"/>
+    <path d="M6 1 q7 -4 14 0" stroke="#7E3A14" stroke-width="2" fill="none" opacity=".8"/>
+    <circle cx="17" cy="2" r="2.5" fill="#7E3A14" opacity=".8"/>
+  </g>
+</defs>
+<g id="rust-r-runs" fill="none" opacity=".8">
+  <path d="M52 0 C 34 80, 74 150, 46 232 C 26 296, 62 360, 40 430"
+        stroke="#7E3A14" stroke-width="9"/>
+  <path d="M132 12 C 116 84, 150 146, 124 224 C 106 280, 138 336, 118 398"
+        stroke="#7E3A14" stroke-width="7"/>
+  <path d="M52 0 C 34 80, 74 150, 46 232 C 26 296, 62 360, 40 430"
+        stroke="#D8823C" stroke-width="3" opacity=".7"/>
+</g>
+<g id="rust-r-scales" class="sway-b" style="transform-origin:52px 0px">
+  <use href="#scale-r" transform="translate(46 30) rotate(34) scale(.9)"/>
+  <use href="#scale-r" transform="translate(126 58) rotate(146) scale(.8)"/>
+  <use href="#scale-r" transform="translate(62 104) rotate(16) scale(1)"/>
+  <use href="#scale-r" transform="translate(118 150) rotate(170) scale(.85)"/>
+  <use href="#scale-r" transform="translate(50 196) rotate(44) scale(.95)"/>
+  <use href="#scale-r" transform="translate(132 238) rotate(158) scale(.8)"/>
+  <use href="#scale-r" transform="translate(44 288) rotate(26) scale(.9)"/>
+  <use href="#scale-r" transform="translate(120 330) rotate(174) scale(.85)"/>
+  <use href="#scale-r" transform="translate(40 382) rotate(40) scale(.9)"/>
+</g>
+<ellipse id="rust-r-pool" cx="84" cy="436" rx="66" ry="20" fill="#A85A24" opacity=".35"/>
+  </g>
+  <g id="jars-shelf" transform="translate(860 150)">
+<!-- The preserve shelf in the dark of the stall. Glass catches the one bit of
+     light that reaches back here, which is what makes the doorway read deep. -->
+<rect id="jar-shelf-board" x="-10" y="86" width="220" height="14" rx="4" fill="url(#g-wood)"/>
+<rect id="jar-shelf-board2" x="-10" y="176" width="220" height="14" rx="4" fill="url(#g-wood)"/>
+<defs>
+  <g id="jar">
+    <rect x="-17" y="-52" width="34" height="52" rx="7" fill="#C9A85E" opacity=".92"/>
+    <rect x="-19" y="-60" width="38" height="12" rx="4" fill="#8E7038"/>
+    <rect x="-13" y="-48" width="7" height="40" rx="3" fill="#FFFFFF" opacity=".35"/>
+  </g>
+</defs>
+<g id="jars-top">
+  <use href="#jar" x="14"  y="86"/><use href="#jar" x="58" y="86"/>
+  <use href="#jar" x="102" y="86"/><use href="#jar" x="146" y="86"/>
+  <use href="#jar" x="190" y="86"/>
+</g>
+<g id="jars-bottom">
+  <use href="#jar" x="14"  y="176"/><use href="#jar" x="58" y="176"/>
+  <use href="#jar" x="102" y="176"/><use href="#jar" x="146" y="176"/>
+</g>
+  </g>
+  <g id="barrels" transform="translate(1080 320)">
+<!-- Two oak barrels behind the right-hand crates. -->
+<g id="barrel-a">
+  <path d="M0 0 C -14 30, -14 76, 0 106 C 22 116, 62 116, 84 106
+           C 98 76, 98 30, 84 0 C 62 -10, 22 -10, 0 0 Z" fill="url(#g-wood)"/>
+  <g stroke="#3F2A12" stroke-width="3" fill="none" opacity=".55">
+    <path d="M18 -6 C 12 34, 12 74, 18 112"/>
+    <path d="M42 -9 C 42 34, 42 74, 42 115"/>
+    <path d="M66 -6 C 72 34, 72 74, 66 112"/>
+  </g>
+  <g fill="#6B6B6B" stroke="#3A3A3A" stroke-width="2">
+    <path d="M-10 18 C 24 8, 60 8, 94 18 L94 30 C 60 20, 24 20, -10 30 Z"/>
+    <path d="M-12 74 C 24 84, 60 84, 96 74 L96 86 C 60 96, 24 96, -12 86 Z"/>
+  </g>
+  <ellipse cx="42" cy="0" rx="42" ry="11" fill="#C99A5E"/>
+  <ellipse cx="42" cy="0" rx="42" ry="11" fill="none" stroke="#6B6B6B" stroke-width="4"/>
+</g>
+<g id="barrel-b" transform="translate(96 40) scale(.82)">
+  <path d="M0 0 C -14 30, -14 76, 0 106 C 22 116, 62 116, 84 106
+           C 98 76, 98 30, 84 0 C 62 -10, 22 -10, 0 0 Z" fill="#8E5E2E"/>
+  <g fill="#5A5A5A" stroke="#3A3A3A" stroke-width="2">
+    <path d="M-10 18 C 24 8, 60 8, 94 18 L94 30 C 60 20, 24 20, -10 30 Z"/>
+    <path d="M-12 74 C 24 84, 60 84, 96 74 L96 86 C 60 96, 24 96, -12 86 Z"/>
+  </g>
+  <ellipse cx="42" cy="0" rx="42" ry="11" fill="#A87C48"/>
+</g>
+  </g>
+  <g id="crates-left">
+<!-- The stack of produce crates filling the left third. Each crate is the
+     same six slats; only the tilt and the fruit in it differ. -->
+<defs>
+  <filter id="cl-grain" x="-10%" y="-10%" width="120%" height="120%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.02 0.9" numOctaves="2" seed="11" result="n"/>
+    <feColorMatrix in="n" type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope=".16"/></feComponentTransfer>
+  </filter>
+  <linearGradient id="cl-g-slat" x1="0" y1="0" x2="0.15" y2="1">
+    <stop offset="0" stop-color="#E4C088"/>
+    <stop offset=".5" stop-color="#B98B52"/>
+    <stop offset="1" stop-color="#6E4E29"/>
+  </linearGradient>
+  <g id="cl-slat-worn">
+    <rect width="96" height="15" rx="3" fill="url(#cl-g-slat)"/>
+    <rect y="1" width="96" height="3" fill="#FFFFFF" opacity=".2"/>
+    <rect y="12" width="96" height="2.5" fill="#3E2A14" opacity=".38"/>
+    <rect y="13.5" width="96" height="1.5" fill="#150D06" opacity=".55"/>
+    <path d="M6 4 Q30 7 54 4 T90 5" fill="none" stroke="#5A3B1E" stroke-width="1" opacity=".45"/>
+    <path d="M4 10 Q40 12 82 10" fill="none" stroke="#3E2A14" stroke-width="1" opacity=".3"/>
+    <path d="M14 2 Q18 8 13 13" fill="none" stroke="#4A3217" stroke-width=".8" opacity=".4"/>
+    <path d="M46 2 Q50 7 45 13" fill="none" stroke="#4A3217" stroke-width=".8" opacity=".35"/>
+    <path d="M74 2 Q79 8 73 13" fill="none" stroke="#4A3217" stroke-width=".8" opacity=".4"/>
+    <ellipse cx="30" cy="7" rx="2.6" ry="1.8" fill="#3A2611" opacity=".5"/>
+    <ellipse cx="63" cy="9" rx="1.8" ry="1.3" fill="#3A2611" opacity=".4"/>
+    <circle cx="7"  cy="7.5" r="1.6" fill="#2E2010" opacity=".65"/>
+    <circle cx="89" cy="7.5" r="1.6" fill="#2E2010" opacity=".65"/>
+    <rect width="96" height="15" rx="3" fill="#000" opacity="0" filter="url(#cl-grain)"/>
+  </g>
+  <g id="crate-box">
+    <!-- outer dark rim: reads as the gap between this crate and its neighbours -->
+    <path d="M-6 -6 h222 v130 h-222 Z" fill="#150D06"/>
+    <path d="M0 0 h210 v118 h-210 Z" fill="var(--crate-dk)"/>
+    <use href="#cl-slat-worn" transform="translate(15 15) scale(1.86 1)"/>
+    <use href="#cl-slat-worn" transform="translate(15 47) scale(1.86 1)"/>
+    <use href="#cl-slat-worn" transform="translate(15 79) scale(1.86 1)"/>
+    <use href="#cl-slat-worn" transform="translate(15 101) scale(1.86 1)"/>
+    <!-- shade wedge, away from the up-right light -->
+    <path d="M0 0 h34 v118 h-34 Z" fill="#000" opacity=".22" filter="url(#soft-sm)"/>
+    <!-- top and bottom rim close the box off from loose slat stacks -->
+    <rect x="0" y="0" width="210" height="16" fill="#4A2F17"/>
+    <rect x="0" y="0" width="210" height="6" fill="#20140A"/>
+    <rect x="0" y="102" width="210" height="16" fill="#3A2412"/>
+    <rect x="0" y="112" width="210" height="6" fill="#150D06"/>
+    <!-- corner posts, wide enough to read as a box frame rather than a border line -->
+    <rect x="0" y="0" width="22" height="118" fill="#5E3E20"/>
+    <rect x="0" y="0" width="7" height="118" fill="#20140A"/>
+    <rect x="15" y="0" width="7" height="118" fill="#20140A" opacity=".5"/>
+    <circle cx="11" cy="20" r="2.4" fill="#150D06" opacity=".8"/>
+    <circle cx="11" cy="59" r="2.4" fill="#150D06" opacity=".8"/>
+    <circle cx="11" cy="98" r="2.4" fill="#150D06" opacity=".8"/>
+    <rect x="188" y="0" width="22" height="118" fill="#A87A44"/>
+    <rect x="203" y="0" width="7" height="118" fill="#F0CE96" opacity=".7"/>
+    <rect x="188" y="0" width="7" height="118" fill="#20140A" opacity=".4"/>
+    <circle cx="199" cy="20" r="2.4" fill="#6E4A26" opacity=".8"/>
+    <circle cx="199" cy="59" r="2.4" fill="#6E4A26" opacity=".8"/>
+    <circle cx="199" cy="98" r="2.4" fill="#6E4A26" opacity=".8"/>
+    <!-- crisp outline so the box edge reads distinct from its own slats -->
+    <path d="M1 1 h208 v116 h-208 Z" fill="none" stroke="#150D06" stroke-width="3" opacity=".7"/>
+    <rect width="210" height="118" fill="#000" opacity="0" filter="url(#cl-grain)"/>
+  </g>
+</defs>
+<!-- contact shadow, cast down-left from the crate mass -->
+<ellipse cx="150" cy="770" rx="220" ry="34" fill="#1C1208" opacity=".38" filter="url(#soft)"/>
+<g id="crates-l-stack">
+  <use href="#crate-box" transform="translate(-10 470)"/>
+  <use href="#crate-box" transform="translate(30 356) scale(.92)"/>
+  <use href="#crate-box" transform="translate(196 400) rotate(3)"/>
+  <use href="#crate-box" transform="translate(120 590) scale(1.08)"/>
+  <use href="#crate-box" transform="translate(228 560) rotate(-2) scale(.9)"/>
+  <use href="#crate-box" transform="translate(-30 660) scale(1.1)"/>
+  <use href="#crate-box" transform="translate(300 300) scale(.8) rotate(-2)"/>
+</g>
+<!-- Tomatoes heaped over the near crates, with basil leaves tucked among them. -->
+<g id="crates-l-tomatoes">
+  <use href="#leaf" transform="translate(14 486) rotate(160) scale(.6)"/>
+  <use href="#leaf" transform="translate(150 480) rotate(-20) scale(.55)"/>
+  <use href="#leaf" transform="translate(280 596) rotate(40) scale(.6)"/>
+  <use href="#leaf" transform="translate(40 668) rotate(-100) scale(.55)"/>
+  <use href="#leaf" transform="translate(100 350) rotate(140) scale(.5)"/>
+  <use href="#tomato" x="24"  y="474"/><use href="#tomato" x="58" y="466"/>
+  <use href="#tomato" x="92"  y="476"/><use href="#tomato" x="126" y="464"/>
+  <use href="#tomato" x="160" y="474"/><use href="#tomato" x="42" y="498"/>
+  <use href="#tomato" x="110" y="496"/><use href="#tomato" x="176" y="500"/>
+  <use href="#tomato" x="150" y="600"/><use href="#tomato" x="186" y="592"/>
+  <use href="#tomato" x="222" y="602"/><use href="#tomato" x="258" y="590"/>
+  <use href="#tomato" x="168" y="626"/><use href="#tomato" x="240" y="626"/>
+  <use href="#tomato" x="300" y="600"/><use href="#tomato" x="336" y="610"/>
+  <use href="#tomato" x="0"   y="672"/><use href="#tomato" x="36" y="664"/>
+  <use href="#tomato" x="72"  y="676"/>
+  <use href="#tomato" x="52"  y="362"/><use href="#tomato" x="88" y="354"/>
+  <use href="#tomato" x="124" y="364"/><use href="#tomato" x="160" y="356"/>
+  <use href="#tomato" x="14"  y="484" transform="scale(.7)"/>
+  <use href="#tomato" x="200" y="608" transform="scale(.75)"/>
+</g>
+  </g>
+  <g id="crates-center">
+<!-- The crates behind the middle of the route, tipped and half emptied. -->
+<defs>
+  <linearGradient id="crates-c-shade" x1="1" y1="0" x2="0" y2="0">
+    <stop offset="0" stop-color="#000000" stop-opacity="0"/>
+    <stop offset="1" stop-color="#000000" stop-opacity=".38"/>
+  </linearGradient>
+  <linearGradient id="crates-c-g-slat-a" x1="0" y1="0" x2="0.15" y2="1">
+    <stop offset="0" stop-color="#E4C088"/>
+    <stop offset=".5" stop-color="#B98B52"/>
+    <stop offset="1" stop-color="#6E4E29"/>
+  </linearGradient>
+  <linearGradient id="crates-c-g-slat-b" x1="0" y1="0" x2="0.15" y2="1">
+    <stop offset="0" stop-color="#D8B27A"/>
+    <stop offset=".5" stop-color="#9C6F3E"/>
+    <stop offset="1" stop-color="#5A3D20"/>
+  </linearGradient>
+  <linearGradient id="crates-c-g-slat-c" x1="0" y1="0" x2="0.15" y2="1">
+    <stop offset="0" stop-color="#EAD0A0"/>
+    <stop offset=".5" stop-color="#C79A5E"/>
+    <stop offset="1" stop-color="#7A5630"/>
+  </linearGradient>
+  <g id="crates-c-slat-a">
+    <rect width="86" height="13" rx="2.6" fill="url(#crates-c-g-slat-a)"/>
+    <rect y="1" width="86" height="2.5" fill="#FFFFFF" opacity=".2"/>
+    <rect y="10.5" width="86" height="2" fill="#3E2A14" opacity=".36"/>
+    <rect y="11.5" width="86" height="1.5" fill="#150D06" opacity=".5"/>
+    <path d="M5 3.5 Q27 6 49 3.5 T80 4.5" fill="none" stroke="#5A3B1E" stroke-width=".9" opacity=".42"/>
+    <ellipse cx="27" cy="6" rx="2.2" ry="1.5" fill="#3A2611" opacity=".45"/>
+    <circle cx="6"  cy="6.5" r="1.4" fill="#2E2010" opacity=".6"/>
+    <circle cx="80" cy="6.5" r="1.4" fill="#2E2010" opacity=".6"/>
+  </g>
+  <g id="crates-c-slat-b">
+    <rect width="86" height="13" rx="2.6" fill="url(#crates-c-g-slat-b)"/>
+    <rect y="1" width="86" height="2.5" fill="#FFFFFF" opacity=".18"/>
+    <rect y="10.5" width="86" height="2" fill="#2E1F10" opacity=".4"/>
+    <rect y="11.5" width="86" height="1.5" fill="#120B05" opacity=".55"/>
+    <path d="M4 9 Q36 11 74 9" fill="none" stroke="#2E1F10" stroke-width=".9" opacity=".32"/>
+    <path d="M40 2 Q44 7 39 12" fill="none" stroke="#3E2814" stroke-width=".7" opacity=".38"/>
+    <circle cx="6"  cy="6.5" r="1.4" fill="#241708" opacity=".65"/>
+    <circle cx="80" cy="6.5" r="1.4" fill="#241708" opacity=".65"/>
+  </g>
+  <g id="crates-c-slat-c">
+    <rect width="86" height="13" rx="2.6" fill="url(#crates-c-g-slat-c)"/>
+    <rect y="1" width="86" height="2.5" fill="#FFFFFF" opacity=".24"/>
+    <rect y="10.5" width="86" height="2" fill="#4A3018" opacity=".34"/>
+    <rect y="11.5" width="86" height="1.5" fill="#1C1108" opacity=".5"/>
+    <path d="M10 2 Q14 7 9 12" fill="none" stroke="#5A3B1E" stroke-width=".7" opacity=".4"/>
+    <path d="M60 2 Q64 7 59 12" fill="none" stroke="#5A3B1E" stroke-width=".7" opacity=".36"/>
+    <ellipse cx="50" cy="8" rx="1.6" ry="1.1" fill="#3A2611" opacity=".4"/>
+    <circle cx="6"  cy="6.5" r="1.4" fill="#3A2611" opacity=".55"/>
+    <circle cx="80" cy="6.5" r="1.4" fill="#3A2611" opacity=".55"/>
+  </g>
+  <!-- a crate reads as a bounded box: dark outer rim, wide dark corner posts,
+       closed top/bottom rim bands, and a crisp stroked outline (matches
+       crates-left's fix for the same "loose slats" problem) -->
+  <g id="crates-c-box">
+    <path d="M-5 -5 h190 v114 h-190 Z" fill="#150D06"/>
+    <path d="M0 0 h180 v104 h-180 Z" fill="var(--crate-dk)"/>
+    <use href="#crates-c-slat-a" transform="translate(13 13) scale(1.86 1)"/>
+    <use href="#crates-c-slat-b" transform="translate(13 40) scale(1.86 1)"/>
+    <use href="#crates-c-slat-c" transform="translate(13 67) scale(1.86 1)"/>
+    <use href="#crates-c-slat-a" transform="translate(13 87) scale(1.86 1)"/>
+    <rect width="180" height="104" fill="url(#crates-c-shade)"/>
+    <!-- top and bottom rim bands close the box off -->
+    <rect x="0" y="0" width="180" height="14" fill="#4A2F17"/>
+    <rect x="0" y="0" width="180" height="5" fill="#20140A"/>
+    <rect x="0" y="90" width="180" height="14" fill="#3A2412"/>
+    <rect x="0" y="99" width="180" height="5" fill="#150D06"/>
+    <!-- corner posts, wide and dark enough to read as a frame -->
+    <rect x="0" y="0" width="19" height="104" fill="#5E3E20"/>
+    <rect x="0" y="0" width="6" height="104" fill="#20140A"/>
+    <rect x="13" y="0" width="6" height="104" fill="#20140A" opacity=".5"/>
+    <!-- worn corner iron, left post -->
+    <path d="M0 4 h13 v9 h-6 v-4 h-7 Z" fill="#8A8F94" opacity=".55"/>
+    <path d="M0 4 h13 v3 h-13 Z" fill="#C7CCD1" opacity=".5"/>
+    <circle cx="9" cy="18" r="2.1" fill="#150D06" opacity=".8"/>
+    <circle cx="9" cy="52" r="2.1" fill="#150D06" opacity=".8"/>
+    <circle cx="9" cy="86" r="2.1" fill="#150D06" opacity=".8"/>
+    <rect x="161" y="0" width="19" height="104" fill="#A87A44"/>
+    <rect x="174" y="0" width="6" height="104" fill="#F0CE96" opacity=".7"/>
+    <rect x="161" y="0" width="6" height="104" fill="#20140A" opacity=".4"/>
+    <!-- worn corner iron, right post -->
+    <path d="M180 88 h-13 v-9 h6 v4 h7 Z" fill="#9A9FA4" opacity=".5"/>
+    <path d="M167 88 h13 v3 h-13 Z" fill="#D7DCE1" opacity=".45"/>
+    <circle cx="171" cy="18" r="2.1" fill="#6E4A26" opacity=".8"/>
+    <circle cx="171" cy="52" r="2.1" fill="#6E4A26" opacity=".8"/>
+    <circle cx="171" cy="86" r="2.1" fill="#6E4A26" opacity=".8"/>
+    <!-- rope tie -->
+    <path d="M62 14 v76 M118 14 v76" stroke="#5A4022" stroke-width="3.4" opacity=".5"/>
+    <path d="M50 40 q12 10 24 0 M50 60 q12 10 24 0" fill="none" stroke="#3E2A14" stroke-width="1.8" opacity=".45"/>
+    <!-- crisp outline so the box edge reads distinct from its own slats -->
+    <path d="M1 1 h178 v102 h-178 Z" fill="none" stroke="#150D06" stroke-width="2.6" opacity=".7"/>
+  </g>
+  <g id="crates-c-berry">
+    <circle r="6" fill="url(#g-tomato)"/>
+  </g>
+  <g id="crates-c-currant">
+    <circle r="3.6" fill="url(#g-tomato)"/>
+  </g>
+</defs>
+
+<ellipse cx="520" cy="470" rx="230" ry="34" fill="#000000" opacity=".22" filter="url(#soft)"/>
+<ellipse cx="820" cy="480" rx="190" ry="30" fill="#000000" opacity=".2" filter="url(#soft)"/>
+
+<g id="crates-c-stack">
+  <use href="#crates-c-box" transform="translate(430 250) scale(.9)"/>
+  <use href="#crates-c-box" transform="translate(470 356) rotate(2)"/>
+  <use href="#crates-c-box" transform="translate(620 300) scale(.86) rotate(-3)"/>
+  <use href="#crates-c-box" transform="translate(556 452) scale(1.02) rotate(-2)"/>
+  <use href="#crates-c-box" transform="translate(690 420) rotate(4) scale(.94)"/>
+  <use href="#crates-c-box" transform="translate(830 400) scale(.92) rotate(2)"/>
+  <use href="#crates-c-box" transform="translate(940 430) rotate(-3)"/>
+  <use href="#crates-c-box" transform="translate(600 560) scale(1.04) rotate(6)"/>
+  <!-- rim light along the top-right edge of each box, facing the light -->
+  <path d="M430 250 h162" stroke="#FFE7BC" stroke-width="3" opacity=".5" stroke-linecap="round" transform="translate(0 0) scale(.9) translate(0 0)"/>
+  <path d="M620 300 h155" stroke="#FFE7BC" stroke-width="3" opacity=".45" stroke-linecap="round" transform="scale(.86)" />
+  <path d="M830 400 h165" stroke="#FFE7BC" stroke-width="3" opacity=".45" stroke-linecap="round" transform="scale(.92)"/>
+</g>
+
+<g id="crates-c-fruit">
+  <use href="#tomato" x="460" y="256"/><use href="#tomato" x="496" y="248"/>
+  <use href="#tomato" x="532" y="258"/><use href="#tomato" x="568" y="250"/>
+  <use href="#tomato" x="500" y="362"/><use href="#tomato" x="536" y="356"/>
+  <use href="#tomato" x="572" y="364"/><use href="#tomato" x="608" y="354"/>
+  <use href="#tomato" x="716" y="426"/><use href="#tomato" x="752" y="418"/>
+  <use href="#tomato" x="788" y="428"/>
+  <use href="#lemon"  x="632" y="572"/><use href="#lemon" x="672" y="564"/>
+  <use href="#lemon"  x="712" y="576"/><use href="#lemon" x="664" y="596"/>
+  <use href="#tomato" x="602" y="574"/>
+  <use href="#tomato" x="972" y="440"/><use href="#tomato" x="1008" y="432"/>
+</g>
+
+<!-- spilled berries and currants scattered across the ground between and below the crates -->
+<g id="crates-c-scatter">
+  <use href="#crates-c-berry" x="452" y="410"/><use href="#crates-c-berry" x="470" y="424"/>
+  <use href="#crates-c-berry" x="486" y="406"/><use href="#crates-c-berry" x="504" y="430"/>
+  <use href="#crates-c-berry" x="522" y="412"/><use href="#crates-c-berry" x="540" y="428"/>
+  <use href="#crates-c-berry" x="558" y="408"/><use href="#crates-c-berry" x="580" y="420"/>
+  <use href="#crates-c-berry" x="600" y="404"/><use href="#crates-c-berry" x="622" y="418"/>
+  <use href="#crates-c-berry" x="640" y="500"/><use href="#crates-c-berry" x="660" y="512"/>
+  <use href="#crates-c-berry" x="680" y="496"/><use href="#crates-c-berry" x="700" y="510"/>
+  <use href="#crates-c-berry" x="720" y="494"/><use href="#crates-c-berry" x="740" y="508"/>
+  <use href="#crates-c-berry" x="760" y="492"/><use href="#crates-c-berry" x="780" y="504"/>
+  <use href="#crates-c-berry" x="800" y="490"/><use href="#crates-c-berry" x="820" y="502"/>
+  <use href="#crates-c-berry" x="840" y="488"/><use href="#crates-c-berry" x="860" y="500"/>
+  <use href="#crates-c-berry" x="880" y="486"/><use href="#crates-c-berry" x="900" y="498"/>
+  <use href="#crates-c-currant" x="466" y="418"/><use href="#crates-c-currant" x="480" y="432"/>
+  <use href="#crates-c-currant" x="514" y="422"/><use href="#crates-c-currant" x="548" y="418"/>
+  <use href="#crates-c-currant" x="588" y="414"/><use href="#crates-c-currant" x="610" y="428"/>
+  <use href="#crates-c-currant" x="650" y="506"/><use href="#crates-c-currant" x="670" y="502"/>
+  <use href="#crates-c-currant" x="690" y="514"/><use href="#crates-c-currant" x="712" y="504"/>
+  <use href="#crates-c-currant" x="750" y="498"/><use href="#crates-c-currant" x="770" y="510"/>
+  <use href="#crates-c-currant" x="810" y="496"/><use href="#crates-c-currant" x="850" y="494"/>
+  <use href="#crates-c-currant" x="892" y="492"/><use href="#crates-c-currant" x="920" y="486"/>
+  <use href="#lemon" x="948" y="480" transform="scale(.6)" />
+</g>
+
+<rect x="410" y="230" width="695" height="380" fill="#3E2A14" opacity=".05" filter="url(#grain)"/>
+  </g>
+  <g id="crates-right">
+<!-- The right-hand stall: crates of olives and apples, and the cheese board. -->
+<defs>
+  <radialGradient id="cr-olive" cx="34%" cy="28%" r="75%">
+    <stop offset="0"   stop-color="#5A4A3A"/>
+    <stop offset=".5"  stop-color="#2E2420"/>
+    <stop offset="1"   stop-color="#120D0C"/>
+  </radialGradient>
+  <radialGradient id="cr-apple" cx="34%" cy="28%" r="75%">
+    <stop offset="0"   stop-color="#C8DE7A"/>
+    <stop offset=".5"  stop-color="#8FA83C"/>
+    <stop offset="1"   stop-color="#526420"/>
+  </radialGradient>
+  <linearGradient id="cr-cheese-a" x1="0" y1="0" x2=".6" y2="1">
+    <stop offset="0"  stop-color="#FBEBB0"/>
+    <stop offset=".6" stop-color="var(--cheese)"/>
+    <stop offset="1"  stop-color="#C7A24A"/>
+  </linearGradient>
+  <linearGradient id="cr-cheese-b" x1="0" y1="0" x2=".6" y2="1">
+    <stop offset="0"  stop-color="#F2DE9C"/>
+    <stop offset=".6" stop-color="#E8D08A"/>
+    <stop offset="1"  stop-color="#B99646"/>
+  </linearGradient>
+  <linearGradient id="cr-g-slat" x1="0" y1="0" x2="0.15" y2="1">
+    <stop offset="0" stop-color="#E4C088"/>
+    <stop offset=".5" stop-color="#B98B52"/>
+    <stop offset="1" stop-color="#6E4E29"/>
+  </linearGradient>
+  <g id="cr-slat-worn">
+    <rect width="86" height="13" rx="2.6" fill="url(#cr-g-slat)"/>
+    <rect y="1" width="86" height="2.5" fill="#FFFFFF" opacity=".2"/>
+    <rect y="10.5" width="86" height="2" fill="#3E2A14" opacity=".36"/>
+    <rect y="11.5" width="86" height="1.5" fill="#150D06" opacity=".5"/>
+    <path d="M5 3.5 Q27 6 49 3.5 T80 4.5" fill="none" stroke="#5A3B1E" stroke-width=".9" opacity=".42"/>
+    <path d="M20 2 Q24 7 19 12" fill="none" stroke="#4A3217" stroke-width=".7" opacity=".38"/>
+    <ellipse cx="27" cy="6" rx="2.2" ry="1.5" fill="#3A2611" opacity=".45"/>
+    <circle cx="6"  cy="6.5" r="1.4" fill="#2E2010" opacity=".6"/>
+    <circle cx="80" cy="6.5" r="1.4" fill="#2E2010" opacity=".6"/>
+  </g>
+  <g id="cr-slat-cracked">
+    <rect width="86" height="13" rx="2.6" fill="url(#cr-g-slat)"/>
+    <rect y="1" width="86" height="2.5" fill="#FFFFFF" opacity=".18"/>
+    <rect y="10.5" width="86" height="2" fill="#3E2A14" opacity=".36"/>
+    <rect y="11.5" width="86" height="1.5" fill="#150D06" opacity=".5"/>
+    <path d="M4 8 Q40 10 78 8" fill="none" stroke="#2E1F10" stroke-width=".8" opacity=".3"/>
+    <!-- a chipped/split slat, seen on the near boxes in the reference -->
+    <path d="M46 1 L42 6 L48 6.5 L40 12" fill="none" stroke="#1C1108" stroke-width="1" opacity=".55"/>
+    <path d="M56 2 L60 13" fill="none" stroke="#1C1108" stroke-width=".8" opacity=".4"/>
+    <circle cx="6"  cy="6.5" r="1.4" fill="#2E2010" opacity=".6"/>
+    <circle cx="80" cy="6.5" r="1.4" fill="#2E2010" opacity=".6"/>
+  </g>
+  <!-- bounded box: dark outer rim, wide dark corner posts, closed top/bottom
+       rim bands, crisp stroked outline, worn corner iron (matches
+       crates-left / crates-center's fix for the same "loose slats" problem) -->
+  <g id="crate-box-r">
+    <ellipse cx="95" cy="118" rx="98" ry="16" fill="#000" opacity=".28" filter="url(#soft)" transform="translate(-8 4)"/>
+    <path d="M-5 -5 h200 v120 h-200 Z" fill="#150D06"/>
+    <path d="M0 0 h190 v110 h-190 Z" fill="var(--crate-dk)"/>
+    <use href="#cr-slat-worn" transform="translate(13 13) scale(1.98 1)"/>
+    <use href="#cr-slat-cracked" transform="translate(13 39) scale(1.98 1)"/>
+    <use href="#cr-slat-worn" transform="translate(13 65) scale(1.98 1)"/>
+    <use href="#cr-slat-worn" transform="translate(13 88) scale(1.98 1)"/>
+    <!-- shade wedge, away from the up-right light -->
+    <path d="M0 0 h30 v110 h-30 Z" fill="#000" opacity=".2" filter="url(#soft-sm)"/>
+    <!-- top and bottom rim bands close the box off -->
+    <rect x="0" y="0" width="190" height="15" fill="#4A2F17"/>
+    <rect x="0" y="0" width="190" height="5.5" fill="#20140A"/>
+    <rect x="0" y="95" width="190" height="15" fill="#3A2412"/>
+    <rect x="0" y="104.5" width="190" height="5.5" fill="#150D06"/>
+    <!-- corner posts, wide enough to read as a box frame -->
+    <rect x="0" y="0" width="20" height="110" fill="#5E3E20"/>
+    <rect x="0" y="0" width="6.5" height="110" fill="#20140A"/>
+    <rect x="13" y="0" width="6.5" height="110" fill="#20140A" opacity=".5"/>
+    <!-- worn corner iron, left post -->
+    <path d="M0 4 h13 v9 h-6 v-4 h-7 Z" fill="#8A8F94" opacity=".55"/>
+    <path d="M0 4 h13 v3 h-13 Z" fill="#C7CCD1" opacity=".5"/>
+    <circle cx="10" cy="20" r="2.3" fill="#150D06" opacity=".8"/>
+    <circle cx="10" cy="55" r="2.3" fill="#150D06" opacity=".8"/>
+    <circle cx="10" cy="90" r="2.3" fill="#150D06" opacity=".8"/>
+    <rect x="170" y="0" width="20" height="110" fill="#A87A44"/>
+    <rect x="184" y="0" width="6.5" height="110" fill="#F0CE96" opacity=".7"/>
+    <rect x="170" y="0" width="6.5" height="110" fill="#20140A" opacity=".4"/>
+    <!-- worn corner iron, right post -->
+    <path d="M190 92 h-13 v-9 h6 v4 h7 Z" fill="#9A9FA4" opacity=".5"/>
+    <path d="M177 92 h13 v3 h-13 Z" fill="#D7DCE1" opacity=".45"/>
+    <circle cx="180" cy="20" r="2.3" fill="#6E4A26" opacity=".8"/>
+    <circle cx="180" cy="55" r="2.3" fill="#6E4A26" opacity=".8"/>
+    <circle cx="180" cy="90" r="2.3" fill="#6E4A26" opacity=".8"/>
+    <!-- rope tie across the slats, echoing the bundled boxes in the reference -->
+    <path d="M95 15 v80" stroke="#5A4022" stroke-width="3" opacity=".45"/>
+    <path d="M83 42 q12 9 24 0 M83 62 q12 9 24 0" fill="none" stroke="#3E2A14" stroke-width="1.6" opacity=".4"/>
+    <!-- crisp outline so the box edge reads distinct from its own slats -->
+    <path d="M1 1 h188 v108 h-188 Z" fill="none" stroke="#150D06" stroke-width="2.8" opacity=".7"/>
+    <rect width="190" height="110" fill="#000" opacity=".22" filter="url(#grain)"/>
+  </g>
+  <g id="crate-tray-r">
+    <path d="M-4 -4 h158 v60 h-158 Z" fill="#150D06"/>
+    <path d="M0 0 h150 v52 h-150 Z" fill="var(--crate-dk)"/>
+    <rect width="150" height="52" fill="#000" opacity=".3" filter="url(#grain)"/>
+    <rect x="0" y="0" width="150" height="8" fill="#4A2F17"/>
+    <rect x="0" y="44" width="150" height="8" fill="#3A2412"/>
+    <rect width="9" height="52" fill="#5E3A1C"/>
+    <rect x="141" width="9" height="52" fill="#C99A5E"/>
+    <path d="M0 0 h150" stroke="#FFE7BC" stroke-width="3" opacity=".4"/>
+    <path d="M1 1 h148 v50 h-148 Z" fill="none" stroke="#150D06" stroke-width="2" opacity=".65"/>
+  </g>
+</defs>
+<g id="crates-r-stack">
+  <use href="#crate-box-r" transform="translate(1152 372) scale(.84)"/>
+  <use href="#crate-box-r" transform="translate(1182 452) rotate(2) scale(.86)"/>
+  <use href="#crate-box-r" transform="translate(1176 560)"/>
+  <use href="#crate-box-r" transform="translate(1380 560) rotate(-2)"/>
+  <use href="#crate-box-r" transform="translate(1420 680) scale(1.14)"/>
+  <use href="#crate-box-r" transform="translate(1262 486) scale(.8)"/>
+  <use href="#crate-box-r" transform="translate(1510 452) scale(.88) rotate(3)"/>
+</g>
+<use href="#crate-tray-r" transform="translate(1192 556)"/>
+<g id="crates-r-olives" fill="url(#cr-olive)">
+  <circle cx="1210" cy="572" r="9"/><circle cx="1232" cy="566" r="9"/>
+  <circle cx="1254" cy="574" r="9"/><circle cx="1222" cy="588" r="9"/>
+  <circle cx="1246" cy="590" r="9"/><circle cx="1268" cy="580" r="9"/>
+  <circle cx="1552" cy="700" r="9"/><circle cx="1574" cy="694" r="9"/>
+  <circle cx="1596" cy="702" r="9"/><circle cx="1564" cy="716" r="9"/>
+</g>
+<g fill="#FFF" opacity=".35">
+  <ellipse cx="1207" cy="569" rx="2.4" ry="1.6" transform="rotate(-25 1207 569)"/>
+  <ellipse cx="1229" cy="563" rx="2.4" ry="1.6" transform="rotate(-25 1229 563)"/>
+  <ellipse cx="1251" cy="571" rx="2.4" ry="1.6" transform="rotate(-25 1251 571)"/>
+  <ellipse cx="1219" cy="585" rx="2.4" ry="1.6" transform="rotate(-25 1219 585)"/>
+  <ellipse cx="1243" cy="587" rx="2.4" ry="1.6" transform="rotate(-25 1243 587)"/>
+  <ellipse cx="1265" cy="577" rx="2.4" ry="1.6" transform="rotate(-25 1265 577)"/>
+  <ellipse cx="1549" cy="697" rx="2.4" ry="1.6" transform="rotate(-25 1549 697)"/>
+  <ellipse cx="1571" cy="691" rx="2.4" ry="1.6" transform="rotate(-25 1571 691)"/>
+  <ellipse cx="1593" cy="699" rx="2.4" ry="1.6" transform="rotate(-25 1593 699)"/>
+  <ellipse cx="1561" cy="713" rx="2.4" ry="1.6" transform="rotate(-25 1561 713)"/>
+</g>
+<use href="#crate-tray-r" transform="translate(1430 656) scale(.9)"/>
+<g id="crates-r-apples" fill="url(#cr-apple)">
+  <circle cx="1440" cy="700" r="15"/><circle cx="1476" cy="692" r="15"/>
+  <circle cx="1512" cy="702" r="15"/><circle cx="1458" cy="722" r="15"/>
+</g>
+<g fill="#FFF" opacity=".4">
+  <ellipse cx="1435" cy="694" rx="4" ry="2.6" transform="rotate(-25 1435 694)"/>
+  <ellipse cx="1471" cy="686" rx="4" ry="2.6" transform="rotate(-25 1471 686)"/>
+  <ellipse cx="1507" cy="696" rx="4" ry="2.6" transform="rotate(-25 1507 696)"/>
+  <ellipse cx="1453" cy="716" rx="4" ry="2.6" transform="rotate(-25 1453 716)"/>
+</g>
+<g id="crates-r-cheese">
+  <ellipse cx="1330" cy="608" rx="70" ry="14" fill="#000" opacity=".22" filter="url(#soft-sm)"/>
+  <path d="M1268 552 l84 -14 l10 66 l-84 14 Z" fill="url(#cr-cheese-a)" stroke="var(--cheese-dk)" stroke-width="3"/>
+  <path d="M1268 552 l84 -14 l8 12 l-84 14 Z" fill="#F8E7AE"/>
+  <path d="M1272 556 l76 -12" stroke="#FFF7DE" stroke-width="2" opacity=".5"/>
+  <circle cx="1298" cy="576" r="5" fill="var(--cheese-dk)" opacity=".7"/>
+  <circle cx="1324" cy="588" r="4" fill="var(--cheese-dk)" opacity=".7"/>
+  <circle cx="1308" cy="596" r="3" fill="var(--cheese-dk)" opacity=".5"/>
+  <path d="M1356 542 l70 10 l-12 62 l-64 -10 Z" fill="url(#cr-cheese-b)" stroke="var(--cheese-dk)" stroke-width="3"/>
+  <path d="M1358 546 l62 8" stroke="#FFF7DE" stroke-width="2" opacity=".45"/>
+  <circle cx="1382" cy="576" r="5" fill="var(--cheese-dk)" opacity=".6"/>
+  <circle cx="1400" cy="588" r="3.5" fill="var(--cheese-dk)" opacity=".5"/>
+</g>
+  </g>
+  <g id="cloths">
+<!-- The red gingham cloths thrown over the crates. Checks are one clipped
+     grid, not a hundred squares, so a fold can be drawn over the top.
+     Corners hang into soft points; the drape falls into shadow below the
+     fold, per kit.svg's light from the upper-right. -->
+<defs>
+  <pattern id="gingham" width="26" height="26" patternUnits="userSpaceOnUse">
+    <rect width="26" height="26" fill="#F2E7D4"/>
+    <rect width="13" height="26" fill="#D8463A" opacity=".55"/>
+    <rect width="26" height="13" fill="#D8463A" opacity=".55"/>
+    <rect width="13" height="13" fill="#B02C22" opacity=".8"/>
+  </pattern>
+</defs>
+<g id="cloth-a" transform="translate(556 292) rotate(-4)">
+  <path d="M14 78 C 4 84 -2 92 2 100 C 8 108 20 106 33 98
+           C 42 104 52 106 56 100 C 62 92 58 82 47 79
+           C 56 88 62 96 62 100 C 62 106 54 108 47 100
+           L20 100 C 12 100 8 92 14 78 Z"
+        fill="#7E241C"/>
+  <path d="M0 0 L166 -10 L182 62 L14 78 Z" fill="url(#gingham)"/>
+  <path d="M14 78 L182 62 L176 84 L20 100 Z" fill="#8E2A22" opacity=".5"/>
+  <path d="M14 78 L182 62 L176 76 L20 92 Z" fill="#5C1A15" opacity=".35"/>
+  <path d="M0 0 L166 -10 L182 62 L14 78 Z" fill="none"/>
+  <path d="M108 -4 L172 0" stroke="#FFFBEF" stroke-opacity=".4" stroke-width="1.6" stroke-linecap="round"/>
+  <g fill="#B02C22">
+    <circle cx="14" cy="78" r="3.2"/><circle cx="30.8" cy="76.4" r="3.2"/>
+    <circle cx="47.6" cy="74.8" r="3.2"/><circle cx="64.4" cy="73.2" r="3.2"/>
+    <circle cx="81.2" cy="71.6" r="3.2"/><circle cx="98" cy="70" r="3.2"/>
+    <circle cx="114.8" cy="68.4" r="3.2"/><circle cx="131.6" cy="66.8" r="3.2"/>
+    <circle cx="148.4" cy="65.2" r="3.2"/><circle cx="165.2" cy="63.6" r="3.2"/>
+    <circle cx="182" cy="62" r="3.2"/>
+  </g>
+  <g fill="#F2E7D4" opacity=".7">
+    <circle cx="22.4" cy="77.2" r="1.1"/><circle cx="39.2" cy="75.6" r="1.1"/>
+    <circle cx="56" cy="74" r="1.1"/><circle cx="72.8" cy="72.4" r="1.1"/>
+    <circle cx="89.6" cy="70.8" r="1.1"/><circle cx="106.4" cy="69.2" r="1.1"/>
+    <circle cx="123.2" cy="67.6" r="1.1"/><circle cx="140" cy="66" r="1.1"/>
+    <circle cx="156.8" cy="64.4" r="1.1"/>
+  </g>
+</g>
+<g id="cloth-b" transform="translate(830 290) rotate(3)">
+  <path d="M10 70 C 2 75 -3 82 1 89 C 6 96 16 94 27 88
+           C 34 93 42 95 46 90 C 51 84 48 76 39 73
+           C 46 80 51 87 50 90 C 50 95 44 97 38 90
+           L16 90 C 10 90 6 82 10 70 Z"
+        fill="#7E241C"/>
+  <path d="M0 0 L150 -8 L162 56 L10 70 Z" fill="url(#gingham)"/>
+  <path d="M10 70 L162 56 L158 76 L16 90 Z" fill="#8E2A22" opacity=".5"/>
+  <path d="M10 70 L162 56 L158 68 L16 82 Z" fill="#5C1A15" opacity=".35"/>
+  <path d="M96 -3 L156 2" stroke="#FFFBEF" stroke-opacity=".4" stroke-width="1.6" stroke-linecap="round"/>
+  <g fill="#B02C22">
+    <circle cx="10" cy="70" r="3"/><circle cx="26.9" cy="68.4" r="3"/>
+    <circle cx="43.8" cy="66.9" r="3"/><circle cx="60.7" cy="65.3" r="3"/>
+    <circle cx="77.6" cy="63.8" r="3"/><circle cx="94.4" cy="62.2" r="3"/>
+    <circle cx="111.3" cy="60.7" r="3"/><circle cx="128.2" cy="59.1" r="3"/>
+    <circle cx="145.1" cy="57.6" r="3"/><circle cx="162" cy="56" r="3"/>
+  </g>
+  <g fill="#F2E7D4" opacity=".7">
+    <circle cx="18.5" cy="69.2" r="1"/><circle cx="35.4" cy="67.6" r="1"/>
+    <circle cx="52.3" cy="66.1" r="1"/><circle cx="69.1" cy="64.6" r="1"/>
+    <circle cx="86" cy="63" r="1"/><circle cx="102.9" cy="61.4" r="1"/>
+    <circle cx="119.7" cy="59.9" r="1"/><circle cx="136.6" cy="58.3" r="1"/>
+    <circle cx="153.5" cy="56.8" r="1"/>
+  </g>
+</g>
+<g id="cloth-c" transform="translate(1238 540) rotate(-3)">
+  <path d="M18 92 C 6 99 -1 108 4 117 C 10 126 24 123 39 114
+           C 50 121 61 123 66 116 C 73 107 68 96 55 92
+           C 66 102 73 111 73 116 C 73 123 64 126 56 116
+           L24 116 C 15 116 10 107 18 92 Z"
+        fill="#7E241C"/>
+  <path d="M0 0 L180 -12 L196 74 L18 92 Z" fill="url(#gingham)"/>
+  <path d="M18 92 L196 74 L190 98 L24 116 Z" fill="#8E2A22" opacity=".5"/>
+  <path d="M18 92 L196 74 L190 90 L24 108 Z" fill="#5C1A15" opacity=".35"/>
+  <path d="M118 -6 L188 0" stroke="#FFFBEF" stroke-opacity=".4" stroke-width="1.6" stroke-linecap="round"/>
+  <g fill="#B02C22">
+    <circle cx="18" cy="92" r="3.3"/><circle cx="35.8" cy="90.2" r="3.3"/>
+    <circle cx="53.6" cy="88.4" r="3.3"/><circle cx="71.4" cy="86.6" r="3.3"/>
+    <circle cx="89.2" cy="84.8" r="3.3"/><circle cx="107" cy="83" r="3.3"/>
+    <circle cx="124.8" cy="81.2" r="3.3"/><circle cx="142.6" cy="79.4" r="3.3"/>
+    <circle cx="160.4" cy="77.6" r="3.3"/><circle cx="178.2" cy="75.8" r="3.3"/>
+    <circle cx="196" cy="74" r="3.3"/>
+  </g>
+  <g fill="#F2E7D4" opacity=".7">
+    <circle cx="26.9" cy="91.1" r="1.15"/><circle cx="44.7" cy="89.3" r="1.15"/>
+    <circle cx="62.5" cy="87.5" r="1.15"/><circle cx="80.3" cy="85.7" r="1.15"/>
+    <circle cx="98.1" cy="83.9" r="1.15"/><circle cx="115.9" cy="82.1" r="1.15"/>
+    <circle cx="133.7" cy="80.3" r="1.15"/><circle cx="151.5" cy="78.5" r="1.15"/>
+    <circle cx="169.3" cy="76.7" r="1.15"/>
+  </g>
+</g>
+<g id="cloth-d" transform="translate(568 452) rotate(2)">
+  <path d="M0 0 L120 -6 L128 46 L8 56 Z" fill="url(#gingham)"/>
+  <path d="M78 -4 L124 -1" stroke="#FFFBEF" stroke-opacity=".4" stroke-width="1.4" stroke-linecap="round"/>
+  <g fill="#B02C22">
+    <circle cx="8" cy="56" r="2.6"/><circle cx="28" cy="54.3" r="2.6"/>
+    <circle cx="48" cy="52.7" r="2.6"/><circle cx="68" cy="51" r="2.6"/>
+    <circle cx="88" cy="49.3" r="2.6"/><circle cx="108" cy="47.7" r="2.6"/>
+    <circle cx="128" cy="46" r="2.6"/>
+  </g>
+</g>
+  </g>
+  <g id="basket-c" transform="translate(876 352)">
+<!-- The second tipped basket, further back and mostly empty. -->
+<ellipse id="bk-c-shadow" cx="10" cy="62" rx="84" ry="20" fill="#3A2408" opacity=".4" filter="url(#soft)"/>
+<g id="bk-c-body" transform="rotate(18)">
+  <path d="M-74 -34 C -80 18, -54 56, 4 60 C 62 56, 88 18, 82 -34 Z" fill="url(#g-wicker)"/>
+  <g stroke="#6E4A1E" stroke-width="3" fill="none" opacity=".7">
+    <path d="M-76 -14 C -30 0, 38 0, 84 -14"/>
+    <path d="M-72 8  C -28 22, 36 22, 80 8"/>
+    <path d="M-66 30 C -26 44, 34 44, 74 30"/>
+    <path d="M-52 -34 V 48 M-24 -34 V 56 M4 -34 V 60 M32 -34 V 56 M60 -34 V 48"/>
+  </g>
+</g>
+<ellipse id="bk-c-mouth" cx="46" cy="-28" rx="72" ry="34" fill="#3A2610" transform="rotate(18 46 -28)"/>
+<ellipse id="bk-c-rim" cx="46" cy="-28" rx="72" ry="34" fill="none"
+         stroke="#A87A38" stroke-width="10" transform="rotate(18 46 -28)"/>
+  </g>
+  <g id="milkcan" transform="translate(1170 556)">
+<!-- The tinned milk churn: the one cool metal object in a scene of wood and
+     fruit, which is what makes it the place the eye checks the lighting.
+     Light from the archway at back right, so the hard specular sits on the
+     RIGHT of the body and the reflected bounce is a cooler band on the left.
+
+     NOTE: a warm bronze version of this scored better on `colour` and was
+     rejected anyway. The scored patch includes the dark crates behind the
+     churn, so darkening the object moves the patch average closer while
+     making the object itself wrong. The reference churn is bright steel. -->
+<defs>
+  <linearGradient id="mc-steel" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0"    stop-color="#7C8790"/>
+    <stop offset=".18"  stop-color="#A9B4BC"/>
+    <stop offset=".34"  stop-color="#6E7A84"/>
+    <stop offset=".56"  stop-color="#CBD5DB"/>
+    <stop offset=".74"  stop-color="#F2F7FA"/>
+    <stop offset=".88"  stop-color="#9AA5AE"/>
+    <stop offset="1"    stop-color="#5E6870"/>
+  </linearGradient>
+  <linearGradient id="mc-neck-g" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0"    stop-color="#6E7A84"/>
+    <stop offset=".45"  stop-color="#C2CCD3"/>
+    <stop offset=".72"  stop-color="#EEF4F7"/>
+    <stop offset="1"    stop-color="#6A747C"/>
+  </linearGradient>
+  <clipPath id="mc-clip">
+    <path d="M-52 4 C -58 60, -54 118, -44 144 L46 144 C 56 118, 60 60, 54 4 Z"/>
+  </clipPath>
+</defs>
+
+<ellipse id="mc-shadow" cx="6" cy="148" rx="60" ry="16" fill="#3A2408" opacity=".45" filter="url(#soft)"/>
+
+<path id="mc-body" d="M-52 4 C -58 60, -54 118, -44 144 L46 144 C 56 118, 60 60, 54 4 Z"
+      fill="url(#mc-steel)"/>
+<g clip-path="url(#mc-clip)">
+  <!-- Hard specular: metal is the one material that earns a crisp edge. -->
+  <path id="mc-spec" class="shine" d="M24 0 C 32 50, 32 104, 26 150 L40 150 C 46 104, 46 50, 38 0 Z"
+        fill="#FFFFFF" opacity=".55"/>
+  <!-- Reflected bounce off the crates, cooler and much softer. -->
+  <path id="mc-bounce" d="M-44 6 C -50 58, -46 110, -38 150 L-28 150 C -36 110, -40 58, -34 6 Z"
+        fill="#C8D8E4" opacity=".28"/>
+  <path id="mc-core" d="M-14 2 C -18 58, -16 110, -10 148 L2 148 C -4 110, -6 58, -2 2 Z"
+        fill="#3E4850" opacity=".3"/>
+  <!-- Dents and tarnish, kept few: this churn is used, not ruined. -->
+  <g fill="#5E6870" opacity=".3">
+    <ellipse cx="-24" cy="72" rx="7" ry="11"/>
+    <ellipse cx="10" cy="112" rx="5" ry="8"/>
+  </g>
+</g>
+
+<!-- The flared shoulder and short neck. In the reference the mouth is WIDE —
+     wider than the neck — which is most of what makes it read as a churn. -->
+<path id="mc-neck" d="M-30 -50 C -38 -28, -46 -12, -52 4 L54 4 C 48 -12, 40 -28, 32 -50 Z"
+      fill="url(#mc-neck-g)"/>
+<path id="mc-neck-spec" d="M20 -48 C 26 -28, 32 -14, 38 2 L46 2 C 40 -14, 34 -30, 28 -48 Z"
+      fill="#FFFFFF" opacity=".4"/>
+
+<ellipse id="mc-collar" cx="1" cy="-50" rx="36" ry="12" fill="#AEB9C1" stroke="#5E6870" stroke-width="3"/>
+<ellipse id="mc-mouth"  cx="1" cy="-58" rx="33" ry="11" fill="#8E99A1" stroke="#5E6870" stroke-width="3"/>
+<ellipse id="mc-lid"    cx="1" cy="-64" rx="27" ry="9"  fill="#DCE6EC" stroke="#5E6870" stroke-width="3"/>
+<ellipse id="mc-lid-hi" cx="8"  cy="-66" rx="13" ry="4" fill="#FFFFFF" opacity=".6"/>
+
+<g id="mc-bands" fill="none" stroke="#5E6870" stroke-width="5" opacity=".75">
+  <path d="M-55 34 C -10 42, 12 42, 57 34"/>
+  <path d="M-55 96 C -10 104, 12 104, 57 96"/>
+</g>
+<g id="mc-band-hi" fill="none" stroke="#FFFFFF" stroke-width="2" opacity=".4">
+  <path d="M-55 31 C -10 39, 12 39, 57 31"/>
+  <path d="M-55 93 C -10 101, 12 101, 57 93"/>
+</g>
+
+<path id="mc-handle" d="M-48 -22 C -72 -16, -70 14, -50 18" fill="none"
+      stroke="#8C959C" stroke-width="8" stroke-linecap="round"/>
+<path id="mc-handle-hi" d="M-50 -20 C -68 -14, -67 10, -52 14" fill="none"
+      stroke="#E2EAF0" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
+  </g>
+  <g id="zinc-sheet-l" transform="translate(-20 392)">
+<!-- A corrugated zinc sheet leaned over the crates at the bottom left, the way
+     a cupboard's loose shelf liner gets leaned anywhere there is room. The ribs
+     do the work the canvas stripes used to do: they read at map size and they
+     are the same material as everything else in the room. -->
+<path id="zinc-l-body" d="M0 0 L262 26 L250 96 Q 120 130 -14 90 Z" fill="#B6B2A4"/>
+<g id="zinc-l-ribs" fill="#7E7C70" opacity=".9">
+  <path d="M28 3 L58 6 L48 106 L20 98 Z"/>
+  <path d="M96 10 L126 13 L116 118 L88 112 Z"/>
+  <path d="M164 17 L194 20 L184 118 L156 120 Z"/>
+  <path d="M232 24 L258 26 L248 104 L222 112 Z"/>
+</g>
+<g id="zinc-l-rib-lights" fill="#E4E0D0" opacity=".55">
+  <path d="M58 6 L70 7 L60 108 L48 106 Z"/>
+  <path d="M126 13 L138 14 L128 118 L116 118 Z"/>
+  <path d="M194 20 L206 21 L196 118 L184 118 Z"/>
+</g>
+<path id="zinc-l-fold" d="M-14 90 Q 120 130 250 96 L246 118 Q 118 152 -18 112 Z"
+      fill="#6E6A5E" opacity=".6"/>
+<g id="zinc-l-rust" fill="#A85A24" opacity=".45">
+  <ellipse cx="72" cy="74" rx="22" ry="30"/>
+  <ellipse cx="196" cy="60" rx="16" ry="22"/>
+  <path d="M112 96 q8 30 -4 52" stroke="#8E4418" stroke-width="8" fill="none" opacity=".7"/>
+</g>
+  </g>
+  <g id="cat-sleeping" transform="translate(1552 392)">
+<!-- The ginger cat asleep on the crate. It breathes; nothing else here moves. -->
+<ellipse id="cat-shadow" cx="0" cy="34" rx="64" ry="14" fill="#3A2408" opacity=".4" filter="url(#soft-sm)"/>
+<g id="cat-body" class="breathe" style="transform-origin:0px 30px">
+  <path d="M-64 30 C -70 -4, -40 -24, 0 -24 C 44 -24, 74 -6, 68 30 Z" fill="var(--ginger)"/>
+  <path d="M-64 30 C -70 -4, -40 -24, 0 -24 C 10 -24, 18 -22, 24 -18 C -8 -12, -30 8, -34 30 Z"
+        fill="#EBA463" opacity=".8"/>
+  <g fill="var(--ginger-dk)" opacity=".7">
+    <path d="M-20 -18 q 8 12 4 26 l-8 0 q 4 -14 -4 -24 Z"/>
+    <path d="M4 -22 q 8 14 4 30 l-8 0 q 4 -16 -4 -28 Z"/>
+    <path d="M28 -18 q 8 12 4 26 l-8 0 q 4 -14 -4 -24 Z"/>
+  </g>
+</g>
+<g id="cat-head" transform="translate(56 6)">
+  <circle r="26" fill="var(--ginger)"/>
+  <path d="M-22 -14 l-4 -22 l20 10 Z" fill="var(--ginger)"/>
+  <path d="M22 -14 l4 -22 l-20 10 Z" fill="var(--ginger)"/>
+  <path d="M-20 -14 l-2 -14 l12 6 Z" fill="#E8A183"/>
+  <path d="M20 -14 l2 -14 l-12 6 Z" fill="#E8A183"/>
+  <path d="M-14 2 q 6 4 12 0" fill="none" stroke="#7A4118" stroke-width="3" stroke-linecap="round"/>
+  <path d="M2 2 q 6 4 12 0"  fill="none" stroke="#7A4118" stroke-width="3" stroke-linecap="round"/>
+  <path d="M-4 10 l4 4 l4 -4 Z" fill="#D07A6A"/>
+  <path d="M0 14 q -6 6 -12 4 M0 14 q 6 6 12 4" fill="none" stroke="#7A4118" stroke-width="2.5"/>
+</g>
+<path id="cat-tail" d="M-62 26 C -96 22, -104 -2, -86 -10" fill="none"
+      stroke="var(--ginger)" stroke-width="15" stroke-linecap="round"/>
+  </g>
+  <g id="produce-scatter">
+<!-- What has fallen on the floor. This is the whole story of the region:
+     the market has spoiled, and nobody picked any of it up. -->
+<defs>
+  <radialGradient id="ps-g-green" cx="35%" cy="30%" r="75%">
+    <stop offset="0%" stop-color="#9CC96E"/>
+    <stop offset="55%" stop-color="var(--basil)"/>
+    <stop offset="100%" stop-color="var(--basil-dk)"/>
+  </radialGradient>
+  <radialGradient id="ps-g-berry" cx="35%" cy="30%" r="75%">
+    <stop offset="0%" stop-color="#5A4A66"/>
+    <stop offset="60%" stop-color="#3A2A46"/>
+    <stop offset="100%" stop-color="#22182C"/>
+  </radialGradient>
+  <g id="ps-tomato-green"><circle r="12" fill="url(#ps-g-green)"/>
+    <path d="M-4 -10 l4 -4 l4 4" fill="none" stroke="var(--basil-dk)" stroke-width="2.5" stroke-linecap="round"/>
+    <ellipse cx="-4" cy="-4" rx="3.5" ry="2.4" fill="#FFFFFF" opacity=".35" transform="rotate(-30 -4 -4)"/></g>
+  <g id="ps-berry"><circle r="6" fill="url(#ps-g-berry)"/>
+    <ellipse cx="-1.6" cy="-1.6" rx="1.6" ry="1" fill="#FFFFFF" opacity=".3"/></g>
+</defs>
+<g id="scatter-contact-shadows" fill="#2A1C12">
+  <ellipse cx="380" cy="748" rx="120" ry="26" opacity=".22"/>
+  <ellipse cx="560" cy="706" rx="90" ry="20" opacity=".18"/>
+  <ellipse cx="860" cy="640" rx="150" ry="30" opacity=".22"/>
+  <ellipse cx="1040" cy="576" rx="110" ry="24" opacity=".2"/>
+  <ellipse cx="670" cy="756" rx="60" ry="16" opacity=".2"/>
+  <ellipse cx="1460" cy="700" rx="90" ry="22" opacity=".2"/>
+</g>
+<g id="scatter-tomatoes">
+  <use href="#tomato" x="330" y="700"/><use href="#tomato" x="398" y="716" transform="rotate(12 398 716)"/>
+  <use href="#tomato" x="452" y="694"/><use href="#tomato" x="516" y="724"/>
+  <use href="#tomato" x="570" y="702"/><use href="#tomato" x="614" y="730"/>
+  <use href="#tomato" x="704" y="640"/><use href="#tomato" x="760" y="622"/>
+  <use href="#tomato" x="836" y="596"/><use href="#tomato" x="902" y="566"/>
+  <use href="#tomato" x="980" y="552"/><use href="#tomato" x="1044" y="574"/>
+  <use href="#tomato" x="286" y="742"/><use href="#tomato" x="360" y="756"/>
+  <use href="#tomato" x="1112" y="530"/>
+  <use href="#tomato" x="917.5" y="728.6" transform="rotate(-9.9 917.5 728.6)"/>
+  <use href="#tomato" x="470" y="679.2" transform="rotate(14.3 470 679.2)"/>
+  <use href="#tomato" x="801.6" y="732.2" transform="rotate(-3.9 801.6 732.2)"/>
+  <use href="#tomato" x="836.7" y="686.2" transform="rotate(17.2 836.7 686.2)"/>
+  <use href="#tomato" x="945.6" y="707.2" transform="rotate(13 945.6 707.2)"/>
+  <use href="#tomato" x="762.6" y="744.8" transform="rotate(9.6 762.6 744.8)"/>
+  <use href="#tomato" x="1458.9" y="702.6" transform="rotate(19.3 1458.9 702.6)"/>
+  <use href="#tomato" x="866.8" y="606.3" transform="rotate(15 866.8 606.3)"/>
+  <use href="#tomato" x="1495.7" y="608.4" transform="rotate(-0.2 1495.7 608.4)"/>
+  <use href="#tomato" x="407.1" y="570.5" transform="rotate(13.2 407.1 570.5)"/>
+  <use href="#tomato" x="656" y="744" transform="translate(656 744) scale(.62) translate(-656 -744) rotate(24 656 744)"/>
+  <use href="#tomato" x="884" y="668" transform="translate(884 668) scale(.55) translate(-884 -668) rotate(-16 884 668)"/>
+  <use href="#tomato" x="1176" y="588" transform="translate(1176 588) scale(.6) translate(-1176 -588) rotate(8 1176 588)"/>
+  <use href="#tomato" x="1512" y="726" transform="translate(1512 726) scale(.5) translate(-1512 -726) rotate(-22 1512 726)"/>
+</g>
+<g id="scatter-tomatoes-green">
+  <use href="#ps-tomato-green" x="418" y="738" transform="rotate(8 418 738)"/>
+  <use href="#ps-tomato-green" x="592" y="720" transform="rotate(-16 592 720)"/>
+  <use href="#ps-tomato-green" x="778" y="668" transform="rotate(22 778 668)"/>
+  <use href="#ps-tomato-green" x="1002" y="592" transform="rotate(-10 1002 592)"/>
+  <use href="#ps-tomato-green" x="1128" y="562" transform="rotate(6 1128 562)"/>
+  <use href="#ps-tomato-green" x="1382" y="654" transform="rotate(-20 1382 654)"/>
+</g>
+<g id="scatter-lemons">
+  <use href="#lemon" x="560" y="640"/><use href="#lemon" x="612" y="656"/>
+  <use href="#lemon" x="664" y="638"/><use href="#lemon" x="700" y="668"/>
+  <use href="#lemon" x="1020" y="530"/><use href="#lemon" x="1064" y="546"/>
+  <use href="#lemon" x="860" y="676"/><use href="#lemon" x="1548" y="740"/>
+  <use href="#lemon" x="1424" y="618"/><use href="#lemon" x="1470" y="646"/>
+  <use href="#lemon" x="330" y="654"/>
+</g>
+<g id="scatter-berries">
+  <use href="#ps-berry" x="1360" y="700"/><use href="#ps-berry" x="1374" y="712"/>
+  <use href="#ps-berry" x="1390" y="698"/><use href="#ps-berry" x="1352" y="716"/>
+  <use href="#ps-berry" x="1406" y="708"/><use href="#ps-berry" x="1368" y="686"/>
+  <use href="#ps-berry" x="676" y="748"/><use href="#ps-berry" x="690" y="758"/>
+  <use href="#ps-berry" x="662" y="760"/>
+</g>
+<g id="scatter-leaves">
+  <use href="#leaf" transform="translate(470 640) rotate(24)"/>
+  <use href="#leaf" transform="translate(538 690) rotate(-38)"/>
+  <use href="#leaf" transform="translate(644 600) rotate(150)"/>
+  <use href="#leaf" transform="translate(726 690) rotate(-14)"/>
+  <use href="#leaf" transform="translate(806 620) rotate(196)"/>
+  <use href="#leaf" transform="translate(880 640) rotate(40)"/>
+  <use href="#leaf" transform="translate(960 600) rotate(168)"/>
+  <use href="#leaf" transform="translate(1046 616) rotate(-26)"/>
+  <use href="#leaf" transform="translate(1136 566) rotate(140)"/>
+  <use href="#leaf" transform="translate(240 760) rotate(10)"/>
+  <use href="#leaf" transform="translate(1260 640) rotate(-50)"/>
+  <use href="#leaf" transform="translate(1330 604) rotate(170)"/>
+  <use href="#leaf" transform="translate(342 730) rotate(66)"/>
+  <use href="#leaf" transform="translate(600 748) rotate(-92)"/>
+  <use href="#leaf" transform="translate(788 604) rotate(210)"/>
+  <use href="#leaf" transform="translate(936 736) rotate(-60)"/>
+  <use href="#leaf" transform="translate(1082 700) rotate(120)"/>
+  <use href="#leaf" transform="translate(1200 572) rotate(-140)"/>
+  <use href="#leaf" transform="translate(1420 668) rotate(30)"/>
+  <use href="#leaf" transform="translate(1490 700) rotate(-70)"/>
+</g>
+<!-- The bruised ones: the same fruit, desaturated and flattened, with a
+     darker rot core and a rim of dried juice. -->
+<g id="scatter-spoiled">
+  <g opacity=".85"><ellipse cx="620" cy="770" rx="20" ry="9" fill="#7A3A2A"/><ellipse cx="623" cy="768" rx="10" ry="4.5" fill="#4A2216"/></g>
+  <g opacity=".85"><ellipse cx="748" cy="720" rx="17" ry="8" fill="#6E4A22"/><ellipse cx="751" cy="719" rx="8" ry="3.6" fill="#402C12"/></g>
+  <g opacity=".85"><ellipse cx="906" cy="640" rx="19" ry="8" fill="#7A3A2A"/><ellipse cx="909" cy="639" rx="9" ry="4" fill="#4A2216"/></g>
+  <g opacity=".85"><ellipse cx="1054" cy="642" rx="16" ry="7" fill="#6E4A22"/><ellipse cx="1057" cy="641" rx="7.5" ry="3.2" fill="#402C12"/></g>
+  <g opacity=".85"><ellipse cx="424" cy="700" rx="15" ry="7" fill="#6E4A22"/><ellipse cx="427" cy="699" rx="7" ry="3" fill="#402C12"/></g>
+  <g opacity=".85"><ellipse cx="1240" cy="606" rx="18" ry="8" fill="#7A3A2A"/><ellipse cx="1243" cy="605" rx="8.5" ry="3.8" fill="#4A2216"/></g>
+  <g opacity=".85"><ellipse cx="1330" cy="720" rx="14" ry="6" fill="#6E4A22"/><ellipse cx="1332" cy="719" rx="6.5" ry="2.8" fill="#402C12"/></g>
+  <g opacity=".85"><ellipse cx="1512" cy="672" rx="16" ry="7" fill="#7A3A2A"/><ellipse cx="1515" cy="671" rx="7.5" ry="3.2" fill="#4A2216"/></g>
+  <!-- juice spatter: the mess a burst tomato leaves on the boards around it -->
+  <g fill="#8A2E20" opacity=".55">
+    <circle cx="600" cy="756" r="3.4"/><circle cx="642" cy="782" r="2.6"/><circle cx="586" cy="784" r="2.2"/>
+    <circle cx="890" cy="656" r="3"/><circle cx="928" cy="624" r="2.4"/><circle cx="870" cy="618" r="2"/>
+    <circle cx="1500" cy="688" r="2.8"/><circle cx="1528" cy="660" r="2.2"/>
+    <circle cx="404" cy="714" r="2.6"/><circle cx="440" cy="686" r="2"/>
+    <circle cx="1222" cy="620" r="2.6"/><circle cx="1256" cy="592" r="2"/>
+  </g>
+  <!-- pips shaken loose from the rot -->
+  <g fill="#E8D48A" opacity=".7">
+    <ellipse cx="617" cy="766" rx="1.6" ry="1" transform="rotate(20 617 766)"/>
+    <ellipse cx="628" cy="774" rx="1.6" ry="1" transform="rotate(-30 628 774)"/>
+    <ellipse cx="903" cy="642" rx="1.6" ry="1" transform="rotate(50 903 642)"/>
+    <ellipse cx="1508" cy="675" rx="1.4" ry=".9" transform="rotate(10 1508 675)"/>
+  </g>
+</g>
+  </g>
+  <g id="basket-l" transform="translate(262 660)">
+<!-- Tipped wicker basket, foreground left, spilling tomatoes toward us. -->
+<ellipse id="bk-l-shadow" cx="20" cy="86" rx="112" ry="26" fill="#3A2408" opacity=".4" filter="url(#soft)"/>
+<defs>
+  <clipPath id="bk-l-body-clip">
+    <path d="M-96 -46 C -104 22, -70 74, 6 78 C 82 74, 116 22, 108 -46 Z" transform="rotate(-24)"/>
+  </clipPath>
+</defs>
+<g id="bk-l-body">
+  <path d="M-96 -46 C -104 22, -70 74, 6 78 C 82 74, 116 22, 108 -46 Z"
+        fill="url(#g-wicker)" transform="rotate(-24)"/>
+  <!-- Over-under weave: vertical stakes with alternating horizontal weavers,
+       clipped to the body so it stays inside the silhouette. -->
+  <g transform="rotate(-24)" clip-path="url(#bk-l-body-clip)">
+    <rect x="-98" y="-48" width="4" height="128" fill="#7A5726" opacity="0.55"/>
+  <rect x="-80" y="-48" width="4" height="128" fill="#7A5726" opacity="0.55"/>
+  <rect x="-62" y="-48" width="4" height="128" fill="#7A5726" opacity="0.55"/>
+  <rect x="-44" y="-48" width="4" height="128" fill="#7A5726" opacity="0.55"/>
+  <rect x="-26" y="-48" width="4" height="128" fill="#7A5726" opacity="0.55"/>
+  <rect x="-8" y="-48" width="4" height="128" fill="#7A5726" opacity="0.55"/>
+  <rect x="10" y="-48" width="4" height="128" fill="#7A5726" opacity="0.55"/>
+  <rect x="28" y="-48" width="4" height="128" fill="#7A5726" opacity="0.55"/>
+  <rect x="46" y="-48" width="4" height="128" fill="#7A5726" opacity="0.55"/>
+  <rect x="64" y="-48" width="4" height="128" fill="#7A5726" opacity="0.55"/>
+  <rect x="82" y="-48" width="4" height="128" fill="#7A5726" opacity="0.55"/>
+  <rect x="100" y="-48" width="4" height="128" fill="#7A5726" opacity="0.55"/>
+  <rect x="-105" y="-43.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-87" y="-43.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-75" y="-43.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-69" y="-43.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-51" y="-43.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-39" y="-43.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-33" y="-43.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-15" y="-43.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-3" y="-43.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="3" y="-43.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="21" y="-43.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="33" y="-43.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="39" y="-43.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="57" y="-43.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="69" y="-43.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="75" y="-43.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="93" y="-43.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="105" y="-43.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-105" y="-32.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-93" y="-32.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-87" y="-32.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="-69" y="-32.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-57" y="-32.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-51" y="-32.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="-33" y="-32.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-21" y="-32.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-15" y="-32.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="3" y="-32.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="15" y="-32.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="21" y="-32.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="39" y="-32.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="51" y="-32.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="57" y="-32.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="75" y="-32.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="87" y="-32.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="93" y="-32.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="-105" y="-21.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-87" y="-21.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-75" y="-21.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-69" y="-21.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-51" y="-21.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-39" y="-21.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-33" y="-21.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-15" y="-21.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-3" y="-21.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="3" y="-21.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="21" y="-21.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="33" y="-21.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="39" y="-21.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="57" y="-21.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="69" y="-21.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="75" y="-21.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="93" y="-21.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="105" y="-21.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-105" y="-10.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-93" y="-10.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-87" y="-10.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="-69" y="-10.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-57" y="-10.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-51" y="-10.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="-33" y="-10.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-21" y="-10.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-15" y="-10.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="3" y="-10.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="15" y="-10.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="21" y="-10.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="39" y="-10.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="51" y="-10.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="57" y="-10.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="75" y="-10.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="87" y="-10.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="93" y="-10.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="-105" y="0.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-87" y="0.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-75" y="0.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-69" y="0.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-51" y="0.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-39" y="0.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-33" y="0.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-15" y="0.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-3" y="0.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="3" y="0.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="21" y="0.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="33" y="0.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="39" y="0.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="57" y="0.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="69" y="0.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="75" y="0.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="93" y="0.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="105" y="0.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-105" y="11.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-93" y="11.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-87" y="11.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="-69" y="11.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-57" y="11.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-51" y="11.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="-33" y="11.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-21" y="11.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-15" y="11.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="3" y="11.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="15" y="11.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="21" y="11.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="39" y="11.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="51" y="11.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="57" y="11.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="75" y="11.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="87" y="11.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="93" y="11.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="-105" y="22.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-87" y="22.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-75" y="22.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-69" y="22.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-51" y="22.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-39" y="22.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-33" y="22.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-15" y="22.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-3" y="22.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="3" y="22.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="21" y="22.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="33" y="22.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="39" y="22.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="57" y="22.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="69" y="22.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="75" y="22.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="93" y="22.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="105" y="22.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-105" y="33.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-93" y="33.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-87" y="33.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="-69" y="33.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-57" y="33.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-51" y="33.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="-33" y="33.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-21" y="33.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-15" y="33.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="3" y="33.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="15" y="33.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="21" y="33.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="39" y="33.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="51" y="33.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="57" y="33.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="75" y="33.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="87" y="33.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="93" y="33.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="-105" y="44.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-87" y="44.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-75" y="44.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-69" y="44.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-51" y="44.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-39" y="44.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-33" y="44.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-15" y="44.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-3" y="44.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="3" y="44.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="21" y="44.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="33" y="44.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="39" y="44.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="57" y="44.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="69" y="44.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="75" y="44.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="93" y="44.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="105" y="44.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-105" y="55.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-93" y="55.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-87" y="55.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="-69" y="55.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-57" y="55.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-51" y="55.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="-33" y="55.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-21" y="55.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-15" y="55.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="3" y="55.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="15" y="55.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="21" y="55.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="39" y="55.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="51" y="55.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="57" y="55.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="75" y="55.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="87" y="55.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="93" y="55.5" width="18" height="7" rx="2" fill="#B4863F" opacity="0.92"/>
+  <rect x="-105" y="66.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-87" y="66.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-75" y="66.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-69" y="66.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-51" y="66.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-39" y="66.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-33" y="66.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="-15" y="66.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="-3" y="66.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="3" y="66.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="21" y="66.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="33" y="66.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="39" y="66.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="57" y="66.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="69" y="66.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="75" y="66.5" width="18" height="7" rx="2" fill="#D9AE6E" opacity="0.92"/>
+  <rect x="93" y="66.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+  <rect x="105" y="66.5" width="6" height="7" rx="1.5" fill="#B4863F" opacity="0.85"/>
+
+  </g>
+  <!-- A soft dark wedge away from the light (up-right), for volume. -->
+  <path d="M-96 -46 C -104 22, -70 74, 6 78 L 6 40 C -50 34, -80 0, -80 -46 Z"
+        fill="#3A2408" opacity=".28" filter="url(#soft)" transform="rotate(-24)"/>
+  <!-- Rim light along the edge nearest the light. -->
+  <path d="M92 -40 C 100 10, 78 54, 20 70" fill="none" stroke="#F0CE8E"
+        stroke-width="3" stroke-linecap="round" opacity=".6" transform="rotate(-24)"/>
+</g>
+<!-- The dark mouth, and the thick rolled rim in front of it. -->
+<ellipse id="bk-l-mouth" cx="-52" cy="-32" rx="98" ry="44" fill="#2E1D0C" transform="rotate(-24 -52 -32)"/>
+<ellipse id="bk-l-mouth-inner" cx="-52" cy="-32" rx="80" ry="34" fill="#1E1308" opacity=".7"
+         transform="rotate(-24 -52 -32)"/>
+<ellipse id="bk-l-rim" cx="-52" cy="-32" rx="98" ry="44" fill="none"
+         stroke="#8C6530" stroke-width="18" transform="rotate(-24 -52 -32)"/>
+<ellipse id="bk-l-rim-hi" cx="-52" cy="-32" rx="98" ry="44" fill="none"
+         stroke="#D8AC66" stroke-width="4" opacity=".55" transform="rotate(-24 -52 -32)"
+         stroke-dasharray="70 46" stroke-dashoffset="10"/>
+<g id="bk-l-spill">
+  <use href="#tomato" x="-96" y="-12"/><use href="#tomato" x="-60" y="10"/>
+  <use href="#tomato" x="-24" y="30"/><use href="#tomato" x="-110" y="26"/>
+  <use href="#tomato" x="-70" y="52"/>
+</g>
+  </g>
+  <g id="tin-lids" transform="translate(968 596)">
+<!-- Two tin lids dropped on the tiles, one on its face and one on its edge.
+     They stand where the birds used to: the only loose metal on the floor, and
+     the thing that says the cupboard has been opened and left. -->
+<defs>
+  <radialGradient id="lid-face" cx="38%" cy="32%" r="70%">
+    <stop offset="0"   stop-color="#E8DCBE"/>
+    <stop offset=".55" stop-color="#AA9C82"/>
+    <stop offset="1"   stop-color="#6A6050"/>
+  </radialGradient>
+</defs>
+<g id="lid-flat">
+  <ellipse cx="4" cy="26" rx="52" ry="15" fill="#3A2408" opacity=".4" filter="url(#soft-sm)"/>
+  <ellipse cx="0" cy="16" rx="50" ry="18" fill="url(#lid-face)" stroke="#5A5040" stroke-width="4"/>
+  <ellipse cx="0" cy="14" rx="34" ry="11" fill="none" stroke="#8E8168" stroke-width="3" opacity=".7"/>
+  <path d="M-26 8 a 30 18 0 0 1 24 -6" stroke="#FFFFFF" stroke-width="5"
+        stroke-linecap="round" fill="none" opacity=".3"/>
+  <g fill="#A85A24" opacity=".5">
+    <ellipse cx="18" cy="20" rx="16" ry="6"/><circle cx="-14" cy="22" r="4"/>
+  </g>
+</g>
+<g id="lid-edge" transform="translate(-86 70) rotate(-14)">
+  <ellipse cx="2" cy="42" rx="40" ry="10" fill="#3A2408" opacity=".35" filter="url(#soft-sm)"/>
+  <path d="M-38 36 A 40 40 0 0 1 38 36 Z" fill="url(#lid-face)" stroke="#5A5040" stroke-width="4"/>
+  <path d="M-24 34 A 26 26 0 0 1 24 34" fill="none" stroke="#8E8168" stroke-width="3" opacity=".7"/>
+  <path d="M-30 22 q10 12 4 22" stroke="#A85A24" stroke-width="7" fill="none" opacity=".55"/>
+</g>
+  </g>
+  <g id="zinc-sheet-b" transform="translate(842 676)">
+<!-- The big galvanised sheet heaped across the foreground. It is the thing that
+     closes the bottom of the picture, and it is the cupboard's own lining,
+     pulled out and dropped. Ribbed, buckled, and rusting from the fold. -->
+<path id="zinc-b-body" d="M0 0 L470 74 L620 240 L-160 240 Z" fill="#B6B2A4"/>
+<g id="zinc-b-ribs" fill="#7E7C70">
+  <path d="M42 6 L98 15 L46 240 L-46 240 Z"/>
+  <path d="M154 24 L210 33 L206 240 L114 240 Z"/>
+  <path d="M266 41 L322 50 L366 240 L274 240 Z"/>
+  <path d="M378 58 L434 67 L526 240 L434 240 Z"/>
+</g>
+<g id="zinc-b-rib-lights" fill="#E4E0D0" opacity=".5">
+  <path d="M98 15 L118 18 L70 240 L46 240 Z"/>
+  <path d="M210 33 L230 36 L228 240 L206 240 Z"/>
+  <path d="M322 50 L342 53 L390 240 L366 240 Z"/>
+  <path d="M434 67 L454 70 L550 240 L526 240 Z"/>
+</g>
+<path id="zinc-b-crease" d="M0 0 L-160 240 M470 74 L620 240" stroke="#5E5A50"
+      stroke-width="5" fill="none" opacity=".6"/>
+<g id="zinc-b-rust" fill="#A85A24">
+  <ellipse cx="86" cy="110" rx="44" ry="26" opacity=".4"/>
+  <ellipse cx="330" cy="150" rx="58" ry="30" opacity=".35"/>
+  <ellipse cx="502" cy="196" rx="36" ry="22" opacity=".38"/>
+  <path d="M172 62 q16 70 -6 130" stroke="#8E4418" stroke-width="10" fill="none" opacity=".45"/>
+  <path d="M398 92 q18 60 0 116" stroke="#8E4418" stroke-width="8" fill="none" opacity=".4"/>
+</g>
+<path id="zinc-b-shade" d="M-160 240 L620 240 L540 152 L-90 170 Z" fill="#2E2A20" opacity=".28"/>
+  </g>
+  <g id="sign-bozulmus" transform="translate(218 182)">
+<!-- No lettering. The board is a blank surface on purpose: copy is set at runtime, so it can be localised without touching the art. -->
+<!-- The market's name board, hung on chains from the top-left corner.
+     The big carved letters are the first thing a player reads. -->
+<g id="sbz-chains" stroke="#4A3A28" stroke-width="5">
+  <path d="M-96 -170 L-84 -82" /><path d="M96 -180 L84 -84"/>
+</g>
+<path id="sbz-shadow" d="M-134 -70 H140 L150 82 H-128 Z" fill="#2E1C08" opacity=".4"
+      filter="url(#soft)" transform="translate(8 10)"/>
+<path id="sbz-board" d="M-132 -80 H138 L146 76 H-126 Z" fill="#C9B489"/>
+<path id="sbz-board-lit" d="M60 -78 H138 L146 76 H70 Z" fill="#DCC79C" opacity=".8"/>
+<path id="sbz-board-shade" d="M-132 -80 H-56 L-62 76 H-126 Z" fill="#A89468" opacity=".7"/>
+<g id="sbz-grain" stroke="#9E8A60" stroke-width="2" opacity=".5">
+  <path d="M-126 -50 H142 M-126 -18 H144 M-124 16 H144 M-124 48 H146"/>
+</g>
+<path id="sbz-edge" d="M-132 -80 H138 L146 76 H-126 Z" fill="none" stroke="#7E6A42" stroke-width="5"/>
+<use href="#leaf" transform="translate(-118 20) rotate(-20) scale(.7)"/>
+<use href="#leaf" transform="translate(104 16) rotate(20) scale(.7)"/>
+  </g>
+  <g id="sign-zamanlar" transform="translate(198 320)">
+<!-- No lettering. The board is a blank surface on purpose: copy is set at runtime, so it can be localised without touching the art. -->
+<!-- The small plank under it: "it was lively once". -->
+<path id="szm-shadow" d="M-108 -38 H112 L116 46 H-104 Z" fill="#2E1C08" opacity=".35"
+      filter="url(#soft-sm)" transform="translate(6 8)"/>
+<path id="szm-board" d="M-106 -44 H110 L114 42 H-102 Z" fill="#C9B489"/>
+<path id="szm-board-lit" d="M40 -44 H110 L114 42 H46 Z" fill="#DCC79C" opacity=".75"/>
+<path id="szm-edge" d="M-106 -44 H110 L114 42 H-102 Z" fill="none" stroke="#7E6A42" stroke-width="4"/>
+<use href="#leaf" transform="translate(76 -10) rotate(24) scale(.6)"/>
+  </g>
+  <g id="sign-kapali" transform="translate(962 196)">
+<!-- No lettering. The board is a blank surface on purpose: copy is set at runtime, so it can be localised without touching the art. -->
+<!-- "CLOSED", hung on two ropes over the middle of the stall. -->
+<g id="skp-ropes" stroke="#6E5A38" stroke-width="4">
+  <path d="M-52 -84 L-46 -34"/><path d="M52 -84 L46 -34"/>
+</g>
+<path id="skp-board" d="M-62 -34 H64 L58 34 H-56 Z" fill="#CFBA8E" stroke="#7E6A42" stroke-width="4"/>
+<path id="skp-board-lit" d="M20 -34 H64 L58 34 H16 Z" fill="#E0CCA0" opacity=".7"/>
+  </g>
+  <g id="sign-tazeydi" transform="translate(1214 172)">
+<!-- No lettering. The board is a blank surface on purpose: copy is set at runtime, so it can be localised without touching the art. -->
+<!-- "IT WAS FRESH", past tense. Hung from a bracket on the post. -->
+<g id="stz-ropes" stroke="#6E5A38" stroke-width="4">
+  <path d="M-38 -70 L-34 -38"/><path d="M38 -70 L34 -38"/>
+</g>
+<path id="stz-board" d="M-52 -38 H54 L50 40 H-48 Z" fill="#CFBA8E" stroke="#7E6A42" stroke-width="4"/>
+<path id="stz-board-lit" d="M16 -38 H54 L50 40 H12 Z" fill="#E0CCA0" opacity=".7"/>
+<use href="#leaf" transform="translate(16 12) rotate(16) scale(.55)"/>
+  </g>
+  <g id="sign-yarin" transform="translate(1606 296)">
+<!-- No lettering. The board is a blank surface on purpose: copy is set at runtime, so it can be localised without touching the art. -->
+<!-- "MAYBE TOMORROW", on the right-hand post. -->
+<path id="syr-board" d="M-62 -52 H66 L62 56 H-58 Z" fill="#CFBA8E" stroke="#7E6A42" stroke-width="4"/>
+<path id="syr-board-lit" d="M24 -52 H66 L62 56 H20 Z" fill="#E0CCA0" opacity=".7"/>
+<use href="#leaf" transform="translate(16 34) rotate(18) scale(.5)"/>
+  </g>
+  <g id="chalk-fiyatlar" transform="translate(462 538)">
+<!-- No lettering. The board is a blank surface on purpose: copy is set at runtime, so it can be localised without touching the art. -->
+<!-- "THE PRICES HAVE GONE TO SLEEP". A framed slate propped on a crate. -->
+<path id="cfy-shadow" d="M-76 -84 H80 L86 86 H-70 Z" fill="#2E1C08" opacity=".4"
+      filter="url(#soft)" transform="translate(8 12)"/>
+<path id="cfy-frame" d="M-76 -84 H80 L86 86 H-70 Z" fill="url(#g-wood)" stroke="#4A2C15" stroke-width="4"/>
+<path id="cfy-slate" d="M-64 -72 H68 L74 74 H-58 Z" fill="url(#g-slate)"/>
+<path id="cfy-slate-wipe" d="M-58 -46 C -10 -36, 30 -44, 70 -30 L 70 6 C 26 -4, -14 4, -60 -8 Z"
+      fill="#FFFFFF" opacity=".05"/>
+<use href="#leaf" transform="translate(-14 34) rotate(150) scale(.7)" opacity=".5"/>
+  </g>
+  <g id="chalk-iyi" transform="translate(1566 572)">
+<!-- No lettering. The board is a blank surface on purpose: copy is set at runtime, so it can be localised without touching the art. -->
+<!-- "GOOD FOOD ALWAYS COMES BACK". The one hopeful line in the region. -->
+<path id="ciy-shadow" d="M-88 -96 H92 L98 98 H-82 Z" fill="#2E1C08" opacity=".4"
+      filter="url(#soft)" transform="translate(8 12)"/>
+<path id="ciy-frame" d="M-88 -96 H92 L98 98 H-82 Z" fill="url(#g-wood)" stroke="#4A2C15" stroke-width="4"/>
+<path id="ciy-slate" d="M-76 -84 H80 L86 86 H-70 Z" fill="url(#g-slate)"/>
+  </g>
+  <g id="chalk-scale" transform="translate(68 700)">
+<!-- The pair of scales chalked on a board at the bottom-left corner. -->
+<path id="csc-frame" d="M-110 -70 H104 L112 74 H-102 Z" fill="url(#g-wood)"
+      stroke="#4A2C15" stroke-width="4"/>
+<path id="csc-slate" d="M-98 -58 H92 L100 62 H-90 Z" fill="url(#g-slate)"/>
+<g id="csc-drawing" stroke="var(--cream)" stroke-width="4" fill="none" opacity=".85"
+   stroke-linecap="round">
+  <path d="M0 -36 V 26"/>
+  <path d="M-46 -30 H46"/>
+  <path d="M-46 -30 L-64 2 H-28 Z"/>
+  <path d="M46 -30 L28 2 H64 Z"/>
+  <path d="M-22 26 H22"/>
+</g>
+  </g>
+  <g id="light">
+<!-- The one layer that ties the palette together: sun from the back right,
+     dust in the beam, and a vignette that keeps the eye on the route. -->
+<g pointer-events="none">
+  <radialGradient id="lt-warm" cx="83%" cy="12%" r="66%">
+    <stop offset="0" stop-color="#FFD9A0" stop-opacity=".34"/>
+    <stop offset="1" stop-color="#FFD9A0" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="lt-vig" cx="50%" cy="48%" r="72%">
+    <stop offset=".52" stop-color="#1A0E00" stop-opacity="0"/>
+    <stop offset="1"   stop-color="#1A0E00" stop-opacity=".5"/>
+  </radialGradient>
+  <rect id="light-warm" width="1672" height="941" fill="url(#lt-warm)"/>
+  <g id="light-dust" fill="#FFE9BE">
+    <circle class="dust" cx="1180" cy="420" r="4" opacity=".5" style="animation-delay:0s"/>
+    <circle class="dust" cx="1260" cy="500" r="3" opacity=".5" style="animation-delay:1.4s"/>
+    <circle class="dust" cx="1340" cy="440" r="4" opacity=".5" style="animation-delay:2.8s"/>
+    <circle class="dust" cx="1100" cy="360" r="3" opacity=".5" style="animation-delay:4.2s"/>
+    <circle class="dust" cx="1420" cy="520" r="4" opacity=".5" style="animation-delay:5.6s"/>
+  </g>
+  <rect id="light-vig" width="1672" height="941" fill="url(#lt-vig)"/>
+</g>
+  </g>
+</svg>

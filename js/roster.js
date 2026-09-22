@@ -24,8 +24,6 @@
  * (`IntersectionObserver`), not on page load.
  */
 
-import { applyTo, boot, t } from './i18n.js';
-
 // -------------------------------------------------------------- pure layer
 
 /** Stable order: cheapest first, alphabetical within a cost. Never reshuffles. */
@@ -54,10 +52,9 @@ export function buildCards(manifest) {
     nameFallback: titleCase(unit.id),
     tierKey: `roster.tier.${unit.tier}`,
     tierFallback: `Cost ${unit.tier}`,
-    traits: (unit.traits ?? [unit.origin, unit.role].filter(Boolean)).map((trait) => ({
+    traits: unit.traits.map((trait) => ({
       id: trait,
-      kind: trait === unit.origin ? 'origin' : trait === unit.role ? 'role' : 'trait',
-      key: trait === unit.origin ? `content.origin.${trait}.name` : trait === unit.role ? `content.role.${trait}.name` : `content.trait.${trait}`,
+      key: `content.trait.${trait}`,
       fallback: titleCase(trait),
     })),
   }));
@@ -144,8 +141,9 @@ function svgLoader(fetchText) {
 function chip(trait) {
   const el = document.createElement('span');
   el.className = 'card__chip';
+  // `site/css/roster.css` keys a chip's border colour off this attribute, one
+  // token per origin. Without it every chip falls back to the neutral border.
   el.dataset.trait = trait.id;
-  el.dataset.kind = trait.kind;
   el.dataset.i18n = trait.key;
   el.textContent = trait.fallback;
   return el;
@@ -255,12 +253,6 @@ export async function mountRoster(section, deps = {}) {
   const loadSvg = svgLoader(fetchText);
   const elements = cards.map((card) => buildCardElement(card, loadSvg));
   for (const el of elements) grid.appendChild(el);
-  await boot();
-  applyTo(grid);
-  for (const card of elements) {
-    const name = card.querySelector('.card__name')?.textContent;
-    card.setAttribute('aria-label', t('roster.cardLabel', { name: name ?? card.dataset.unit }));
-  }
   lazyMount(elements, IntersectionObserverCtor);
   return elements;
 }
@@ -274,7 +266,6 @@ function buildStyleTile(entry) {
   img.className = 'style-tile__image';
   img.src = entry.file;
   img.alt = `${entry.name} — an early art direction for Kitchen Tactics`;
-  img.dataset.i18nAlt = `art.style.${entry.id}.alt`;
   img.width = 320;
   img.height = 200;
   img.loading = 'lazy';
@@ -282,7 +273,6 @@ function buildStyleTile(entry) {
 
   const name = document.createElement('span');
   name.className = 'style-tile__name';
-  name.dataset.i18n = `art.style.${entry.id}.name`;
   name.textContent = entry.name;
   li.appendChild(name);
 
@@ -296,7 +286,6 @@ function buildStyleTile(entry) {
 
   const note = document.createElement('p');
   note.className = 'style-tile__note';
-  note.dataset.i18n = `art.style.${entry.id}.note`;
   note.textContent = entry.note;
   li.appendChild(note);
 
@@ -311,12 +300,9 @@ export async function mountArt(section, deps = {}) {
   if (!strip) return;
 
   const manifest = await fetchJSON('data/styles.json');
-  const tiles = buildStyleTiles(manifest);
-  for (const entry of tiles) {
+  for (const entry of buildStyleTiles(manifest)) {
     strip.appendChild(buildStyleTile(entry));
   }
-  await boot();
-  applyTo(strip);
 }
 
 // ------------------------------------------------------------------- boot

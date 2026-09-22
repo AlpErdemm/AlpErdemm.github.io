@@ -1,0 +1,176 @@
+<!doctype html>
+<!--
+  Kitchen Tactics — privacy policy. Sprint CrazyGames-MP, Task T9.
+
+  **Why this page exists at all.** Ledger §3's last constraint: storing a
+  CrazyGames username server-side requires a published privacy policy. T8's
+  room authority stores one against a Room, so the box on the submission form
+  that says "the game is an online multiplayer game" cannot be ticked until
+  this page is live. It is not boilerplate and it must not become boilerplate:
+  every paragraph below describes something a named file in this repository
+  actually does, and `tests/site/privacy.spec.ts` holds the load-bearing ones
+  to the source that owns them — the hostname to `src/net/netDriver.ts`, the
+  page's reachability to a link a browser actually follows.
+
+  **A directory, not `privacy.html`.** The URL a submission form is given
+  should read `…/privacy/`, and it is one a custom domain could keep. `site/`
+  is uploaded exactly as committed (decision 7) and both GitHub Pages and the
+  dev server serve a directory's `index.html`, so the pretty URL costs nothing.
+
+  Relative paths, one level up: this is the only page on the site that is not
+  at the root, so it is the only one whose stylesheet links carry `../`.
+
+  Deliberately plain English rather than `data-i18n` text, matching the
+  colophon it is linked from. The keys the site translates are marketing copy;
+  this is a legal statement, and a machine-swapped translation of one is worse
+  than an untranslated one.
+-->
+<html lang="en" data-site="tezgah">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Privacy Policy — Kitchen Tactics, by Tezgah</title>
+    <meta
+      name="description"
+      content="What Kitchen Tactics stores, where it stores it, and how to have it deleted. No analytics, no advertising identifiers, no third-party trackers."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20fill='%232a2114'/%3E%3Crect%20x='0'%20y='5'%20width='8'%20height='13'%20fill='%23c8402f'/%3E%3Crect%20x='8'%20y='5'%20width='8'%20height='13'%20fill='%23fdf6e6'/%3E%3Crect%20x='16'%20y='5'%20width='8'%20height='13'%20fill='%23c8402f'/%3E%3Crect%20x='24'%20y='5'%20width='8'%20height='13'%20fill='%23fdf6e6'/%3E%3Crect%20x='2'%20y='22'%20width='28'%20height='6'%20fill='%238a6a45'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="../css/tokens.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <script type="module" src="../js/shell.js"></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <h1 class="legal__title">Privacy policy</h1>
+      <nav class="masthead__nav" aria-label="Sections">
+        <a href="../index.html">Back to the site</a>
+      </nav>
+    </header>
+
+    <main class="legal-page">
+      <p class="legal__lede">
+        Kitchen Tactics is made by <strong>Tezgah</strong>, a one-person studio. This page says exactly what the
+        game stores, where it is stored, and how to have it removed. It is short because the game collects very
+        little, and specific because a policy that is not specific is not worth reading.
+      </p>
+      <p class="legal__updated">Last updated 9 September 2026.</p>
+
+      <h2>The short version</h2>
+      <ul>
+        <li>This website stores nothing about you and loads nothing from anyone else — no analytics, no cookies, no embedded trackers.</li>
+        <li>Playing on your own stores your progress on your own device, and on your CrazyGames account if you have one and are signed in.</li>
+        <li>Playing with friends sends your CrazyGames <strong>username</strong> and account id to our room server, so the other three chairs can see who is at the table.</li>
+        <li>There is no chat, no advertising identifier, no email address, no password and no payment. The game is free and has nothing to sell.</li>
+      </ul>
+
+      <h2>This website</h2>
+      <p>
+        These pages are hand-written HTML, CSS and SVG served as files. They set no cookie, run no analytics and
+        request nothing from any other host — the site's own test suite fails if a single request leaves this
+        origin. The playable build embedded on the Play section runs from this same origin.
+      </p>
+
+      <h2>Playing on your own</h2>
+      <p>
+        Five things are saved so the game remembers you between visits: your lifetime stats, your run counter,
+        your sound setting, your effects setting and your chosen language. They are stored in your browser on
+        your own device.
+      </p>
+      <p>
+        When the game runs on CrazyGames, those same five values are also written to the CrazyGames Data module,
+        which stores them against your CrazyGames account so they follow you to another device. That is a
+        CrazyGames facility and their privacy policy governs it; we send it nothing except the five values above.
+        None of it reaches a server of ours. If you are not signed in, it stays on your device alone.
+      </p>
+
+      <h2>Playing with friends</h2>
+      <p>
+        A multiplayer match runs on our own server, because CrazyGames provides no networking. This is the only
+        part of the game that sends anything about you anywhere.
+      </p>
+      <p>
+        When you open or join a Room, the game asks CrazyGames for a short-lived signed token identifying you and
+        passes it to that server. The server checks the signature against CrazyGames' own public key and then
+        <strong>discards the token</strong> — it is removed from the request before the Room itself ever sees it,
+        and it is never written down.
+      </p>
+      <p>What the Room keeps, for as long as the match lasts, is:</p>
+      <ul>
+        <li>your <strong>CrazyGames username</strong>, shown on your seat so the other players know whose chair is whose;</li>
+        <li>your <strong>CrazyGames account id</strong>, used to recognise you if your connection drops and you come back to the same chair;</li>
+        <li>the state of the match itself — your board, your gold, your health. Game data, not personal data.</li>
+      </ul>
+      <p>
+        The Room writes that record to its own storage a couple of times a round, so a match survives the server
+        moving it between machines mid-game. Your username is inside that record, because it is the name printed
+        on your seat. Nothing else about you is.
+      </p>
+      <p>
+        <strong>If you are not signed in to CrazyGames, none of this happens.</strong> No token is sent, no
+        username and no account id exist to store, and the server names your chair with a plain numbered label.
+        You can play every part of the game this way. The game never asks you to sign in, and never pops up a
+        sign-in prompt on its own.
+      </p>
+
+      <h2>Where it is stored, and by whom</h2>
+      <p>
+        The room server runs on Cloudflare Workers, one isolated object per room, at
+        <code>kitchen-tactics-rooms.kitchen-tactics-rooms.workers.dev</code>. Cloudflare hosts it; they are our only processor for this
+        data, and they hold it on our behalf under their own terms. If the game later moves to a domain of its
+        own, this hostname changes and this page changes with it.
+      </p>
+      <p>
+        CrazyGames is the other party involved, and only where this page says so: they issue the token that
+        proves who you are, and they hold the five saved values described above. Their handling of your
+        CrazyGames account is theirs to describe — see
+        <a href="https://www.crazygames.com/privacy" rel="noopener noreferrer">crazygames.com/privacy</a>.
+      </p>
+
+      <h2>What is never collected</h2>
+      <p>
+        No email address, no password, no real name, no profile picture, no location, no device fingerprint, no
+        advertising identifier and no payment details. There is no chat in the game, so nothing you type is sent
+        anywhere — there is nowhere to type. No third-party analytics or tracking service is used anywhere in the
+        game or on this site.
+      </p>
+
+      <h2>How long it is kept</h2>
+      <p>
+        The five saved values stay until you clear your browser storage, or — on a CrazyGames account — until you
+        remove them through CrazyGames.
+      </p>
+      <p>
+        A Room's record stays in that room's own storage on Cloudflare. There is no scheduled deletion of it
+        today; that is stated plainly rather than dressed up as a retention policy, and it is the honest
+        description of what the code does. Ask us and it is deleted.
+      </p>
+
+      <h2>Asking about it, or having it removed</h2>
+      <p>
+        Write to <a href="mailto:alperdemdev@gmail.com">alperdemdev@gmail.com</a> and say which CrazyGames
+        username you are asking about. You can ask what is held, ask for it to be deleted, or object to it being
+        held at all — in which case play the game signed out, and nothing is held in the first place.
+      </p>
+
+      <h2>Children</h2>
+      <p>
+        The game is suitable for all ages and collects nothing beyond what is described above from anyone. It has
+        no accounts of its own, no purchases and no messaging.
+      </p>
+
+      <h2>Changes</h2>
+      <p>
+        If what the game stores changes, this page changes in the same commit as the code that changed it, and
+        the date at the top moves. Previous versions are in the game's source history.
+      </p>
+    </main>
+
+    <footer class="colophon">
+      <p class="colophon__studio">Tezgah — a one-person studio.</p>
+      <p class="colophon__contact"><a href="mailto:alperdemdev@gmail.com">alperdemdev@gmail.com</a></p>
+    </footer>
+  </body>
+</html>

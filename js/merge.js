@@ -42,20 +42,10 @@ export function mergeProgress({ top, height, viewportHeight }) {
  * visitor a moment to read it before `#merge` scrolls away, instead of the
  * animation finishing exactly as the section leaves the viewport.
  */
-export const MERGE_THRESHOLD = 0.72;
+export const MERGE_THRESHOLD = 0.5;
 
 /** How far each starting card travels toward the centre, at full merge. */
-const CONVERGE_PX = 118;
-
-/** The reversible three-part merge timeline, expressed as scroll progress. */
-export function mergePhases(progress) {
-  const p = Math.min(Math.max(progress, 0), 1);
-  return {
-    approach: p >= 0.55 ? 1 : p / 0.55,
-    resolve: p >= 0.72 ? 1 : Math.max((p - 0.55) / 0.17, 0),
-    hold: p >= 1 ? 1 : Math.max((p - 0.72) / 0.28, 0),
-  };
-}
+const CONVERGE_PX = 84;
 
 function initMerge(root) {
   const cardA = root.querySelector('.merge__card--a');
@@ -66,17 +56,18 @@ function initMerge(root) {
 
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
-  function paint(progress) {
-    const { approach, resolve } = mergePhases(progress);
-    const distance = CONVERGE_PX * (1 - approach);
-    cardA.style.transform = `translate(-50%, -50%) translateX(${-distance}px) rotate(${-7 + 7 * approach}deg)`;
-    cardB.style.transform = `translate(-50%, -50%) translateX(${distance}px) rotate(${7 - 7 * approach}deg)`;
-    const cardOpacity = 1 - resolve;
+  function paint(p) {
+    // `p` is 0..1 across the whole *merge*, already normalised by threshold.
+    // `translate(-50%, -50%)` is the cards' static centring (`hero.css`);
+    // this writes the whole `transform` property each frame, so the centring
+    // has to ride along with whatever this frame's own offset is.
+    cardA.style.transform = `translate(-50%, -50%) translateX(${p * CONVERGE_PX}px)`;
+    cardB.style.transform = `translate(-50%, -50%) translateX(${p * -CONVERGE_PX}px)`;
+    const cardOpacity = 1 - p;
     cardA.style.opacity = String(cardOpacity);
     cardB.style.opacity = String(cardOpacity);
-    resolved.style.opacity = String(resolve);
-    resolved.style.transform = `translate(-50%, -50%) scale(${0.9 + 0.1 * resolve})`;
-    root.querySelector('.merge__viewport')?.classList.toggle('is-resolving', resolve > 0 && resolve < 1);
+    resolved.style.opacity = String(p);
+    resolved.style.transform = `translate(-50%, -50%) scale(${0.85 + 0.15 * p})`;
   }
 
   function still() {
@@ -92,9 +83,8 @@ function initMerge(root) {
       return;
     }
     const rect = stage.getBoundingClientRect(); // the one layout read per tick
-    const stickySpan = Math.max(rect.height - innerHeight, 1);
-    const progress = Math.min(Math.max(-rect.top / stickySpan, 0), 1);
-    paint(progress);
+    const progress = mergeProgress({ top: rect.top, height: rect.height, viewportHeight: innerHeight });
+    paint(Math.min(progress / MERGE_THRESHOLD, 1));
   }
 
   let ticking = false;

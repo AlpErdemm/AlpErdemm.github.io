@@ -1,0 +1,109 @@
+<!-- Salyangoz (Snail) - Crawling Crate - Spoil - melee, foot shove
+     attackSpeed 0.80 -> round(20/0.80) = 25 ticks = 1.25 s
+
+     A coiled shell over a broad low foot, with two eye stalks instead of a
+     face on the body. It is the only spiral in the family and the only body
+     whose eyes are off the mass, which together make it unmistakable at any
+     size - and it is the heavy the board generator leads its formations
+     with, so unmistakable is what it has to be.
+
+     Archetype `punch`: the foot shoves, alternating, and the whole animal
+     comes with it. `punch` is the two-limbed archetype and the second limb
+     landing at 58% is what sells weight on a body with no arms at all.
+
+     `WEAPON salyangoz [115, 80]` is the foot's leading edge, where it
+     shoves.
+
+     Cold enters the family here as the shell's own band, drawn in the pale
+     D9C89A over chitin: the Burnt Oven gave exactly one body a colour of
+     its own for the same reason, so that a wall of one family still has a
+     shape a player can call for.
+
+     Mass = shell plus foot, x 16..88 (72 wide), y 50..124 (74 tall), ratio
+     1.03. The stalk eyes sit at y 54 = 5% of the mass, which is as far from
+     the roster's 40..55% as anything gets and is the point. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="punch" data-unit="salyangoz" style="--dur-atk:1.25s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="31" ry="6" fill="#241A10" opacity=".32"/>
+
+  <g class="armB" style="transform-origin:26px 100px">
+    <path d="M26 100 L17 105" stroke="#241A10" stroke-width="12" stroke-linecap="round"/>
+    <path d="M26 100 L17 105" stroke="#B8A377" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="15" cy="106" r="6" fill="#D9C89A" stroke="#241A10" stroke-width="3"/>
+  </g>
+
+  <!-- No legs as such. The foot's two lobes take the leg slots, so the walk
+       cycle rolls the body along rather than stepping it. -->
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 114 L40 124" stroke="#241A10" stroke-width="15" stroke-linecap="round"/>
+    <path d="M44 114 L40 124" stroke="#B8A377" stroke-width="11" stroke-linecap="round"/>
+    <path d="M30 126 Q26 130 30 134 L44 134 Q46 129 43 125 Z"
+          fill="#D9C89A" stroke="#241A10" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 114 L66 124" stroke="#241A10" stroke-width="15" stroke-linecap="round"/>
+    <path d="M62 114 L66 124" stroke="#B8A377" stroke-width="11" stroke-linecap="round"/>
+    <path d="M62 125 Q58 130 62 134 L76 134 Q78 129 75 125 Z"
+          fill="#D9C89A" stroke="#241A10" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+
+  <g class="body">
+    <!-- The two eye stalks, drawn before the shell so their roots sit under
+         it. Different lengths and splayed, because a matched pair reads as
+         a snail toy rather than as a snail. -->
+    <path d="M64 88 Q62 70 58 56" fill="none" stroke="#241A10" stroke-width="6" stroke-linecap="round"/>
+    <path d="M64 88 Q62 70 58 57" fill="none" stroke="#B8A377" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M72 88 Q76 74 82 64" fill="none" stroke="#241A10" stroke-width="5.4" stroke-linecap="round"/>
+    <path d="M72 88 Q76 74 81 65" fill="none" stroke="#B8A377" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="57" cy="54" rx="6.4" ry="6.8" fill="#A8C43A" stroke="#241A10" stroke-width="2.6"/>
+    <ellipse cx="83" cy="62" rx="5.6" ry="6" fill="#A8C43A" stroke="#241A10" stroke-width="2.6"/>
+    <ellipse cx="58" cy="55" rx="3" ry="3.6" fill="#241A10"/>
+    <ellipse cx="84" cy="63" rx="2.7" ry="3.2" fill="#241A10"/>
+    <circle cx="55.4" cy="51.6" r="1.5" fill="#FFFFFF"/>
+    <circle cx="81.4" cy="59.6" r="1.4" fill="#FFFFFF"/>
+
+    <!-- The foot: the low broad mass everything sits on. -->
+    <path d="M22 106 Q40 98 62 100 Q84 102 88 112 Q86 124 62 124 Q38 124 24 118 Q16 113 22 106 Z"
+          fill="#D9C89A"/>
+    <path d="M88 112 Q86 124 62 124 Q48 124 40 122 L40 117 Q64 118 76 114 Q84 112 84 108 Z"
+          fill="#B8A377"/>
+    <path d="M22 106 Q40 98 62 100 Q84 102 88 112 Q86 124 62 124 Q38 124 24 118 Q16 113 22 106 Z"
+          fill="none" stroke="#241A10" stroke-width="4" stroke-linejoin="round"/>
+
+    <!-- The shell: a true spiral, wound inward, in three ink arcs over a
+         flat fill. No gradient anywhere - `Graphics.svg()` will not draw
+         one, and this is the body most tempted by a sheen. -->
+    <ellipse cx="46" cy="82" rx="30" ry="28" fill="#8F6A3E"/>
+    <path d="M76 82 Q76 102 58 108 Q50 110 45 109 L45 103 Q62 102 69 93 Q74 88 73 81 Z"
+          fill="#6B4A2A"/>
+    <path d="M30 64 Q22 74 22 84" fill="none" stroke="#B8A377" stroke-width="5" stroke-linecap="round"/>
+    <ellipse cx="46" cy="82" rx="30" ry="28" fill="none" stroke="#241A10" stroke-width="4"/>
+    <path d="M62 82 Q62 98 46 98 Q31 98 31 82 Q31 69 44 69 Q55 69 55 80 Q55 88 47 88"
+          fill="none" stroke="#241A10" stroke-width="3.4" stroke-linecap="round"/>
+    <!-- One pale band following the outer whorl: the shell's own colour, and
+         the only cool note the family carries. -->
+    <path d="M22 72 Q40 62 62 70" fill="none" stroke="#D9C89A" stroke-width="3.6" stroke-linecap="round"/>
+
+    <path class="crack" d="M30 66 L46 80 L32 92 L48 104 L36 116"
+          stroke="#241A10" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+
+  <!-- The leading edge of the foot, which is what this body hits with. Bare
+       by the roster's rule for bodies that fight with their own material,
+       with a mucus bead at the tip so the shove has a point of contact. -->
+  <g class="armF" style="transform-origin:82px 100px">
+    <path d="M82 100 L98 96" stroke="#241A10" stroke-width="13" stroke-linecap="round"/>
+    <path d="M82 100 L98 96" stroke="#B8A377" stroke-width="9" stroke-linecap="round"/>
+    <path d="M95 91 L99 102" stroke="#8F6A3E" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M98 90 Q112 88 115 96 Q112 104 100 102 Q94 96 98 90 Z"
+          fill="#D9C89A" stroke="#241A10" stroke-width="3.4" stroke-linejoin="round"/>
+    <circle cx="108" cy="94" r="2.6" fill="#EFE3C0"/>
+  </g>
+
+  <g class="fx" style="transform-origin:115px 92px">
+    <path d="M115 82 L131 76 M116 93 L134 93 M115 102 L131 108"
+          stroke="#B8A377" stroke-width="4.8" stroke-linecap="round" opacity=".9"/>
+    <circle cx="128" cy="85" r="2.6" fill="#EFE3C0"/>
+  </g>
+</svg>

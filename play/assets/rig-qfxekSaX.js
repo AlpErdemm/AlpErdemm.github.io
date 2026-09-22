@@ -1,0 +1,105 @@
+const t=`<!-- Maşa (Tongs) · Burnt Oven · Spoil · melee, the tongs themselves
+     attackSpeed 1.00 -> round(20/1.00) = 20 ticks = 1.00 s
+
+     Archetype \`stab\`, the roster's most worn track and the right one here:
+     tongs do not swing, they go out straight and close. \`WEAPON masa
+     [119, 66]\` is the tip of the closed jaw rather than the hinge that
+     carries it, which makes it the longest reach the family owns and the only
+     Burnt Oven body that aims with something held out in front of it rather
+     than with a fist or a slab.
+
+     Silhouette: the column. A narrow riveted iron post with a hinge boss on
+     its crown, and the tongs held out level. It is the tallest, thinnest mass
+     in the family against the Ash heap's flare and the Griddle's disc, and
+     the long horizontal of the tongs is a line nothing else on the family
+     draws: the whole roster aims upward between 51 and 78 degrees, so a tool
+     held flat is a silhouette on its own.
+
+     No Origin, no Role, no team colour, no tier mark, and no
+     \`data-expression="cute"\` group. Mass = the post, x 22..82 (60 wide),
+     y 42..118 (76 tall), ratio 1.27. Hinge boss to y 32. Eye y 84 = 55% of
+     the mass. Materials 2 / fills 5: iron 6E6A64 9A968F 474341 * ember D9541F
+     F2A02A. One crescent (474341, lower right), one gleam (9A968F, upper
+     left). Tint lines, two: the seams down the post. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="stab" data-unit="masa" style="--dur-atk:1.00s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="26" ry="6" fill="#2A2114" opacity=".32"/>
+
+  <g class="armB" style="transform-origin:30px 90px">
+    <path d="M30 90 L22 96" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>
+    <path d="M30 90 L22 96" stroke="#474341" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="19" cy="99" r="6.5" fill="#6E6A64" stroke="#2A2114" stroke-width="3"/>
+  </g>
+
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 108 L41 124" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M44 108 L41 124" stroke="#474341" stroke-width="10" stroke-linecap="round"/>
+    <path d="M31 124 Q26 129 29 134 L44 134 Q46 128 42 123 Z"
+          fill="#6E6A64" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 108 L65 124" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M62 108 L65 124" stroke="#474341" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 123 Q60 128 62 134 L77 134 Q79 129 74 124 Z"
+          fill="#6E6A64" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+
+  <g class="body">
+    <!-- The hinge boss first, so the post covers its shank. It is off centre
+         to the near side, because a boss sitting on x 52 reads as a hat. -->
+    <path d="M44 44 L44 36" stroke="#2A2114" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="44" cy="34" r="8" fill="#9A968F" stroke="#2A2114" stroke-width="3"/>
+    <circle cx="44" cy="34" r="3" fill="#474341"/>
+
+    <!-- The post: fill, crescent, seams, gleam, then the ink over the lot. -->
+    <path d="M52 42 L74 50 L80 72 L82 100 Q82 118 66 118 L38 118 Q22 118 22 100 L24 72 L30 50 Z"
+          fill="#6E6A64"/>
+    <path d="M82 100 Q82 118 66 118 L52 118 L52 112 L64 112 Q76 112 76 100 L75 74 L80 72 Z"
+          fill="#474341"/>
+    <path d="M30 104 L74 104 M31 112 L74 112" fill="none" stroke="#474341"
+          stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M30 58 Q26 72 26 86" fill="none" stroke="#9A968F" stroke-width="5" stroke-linecap="round"/>
+    <path d="M52 42 L74 50 L80 72 L82 100 Q82 118 66 118 L38 118 Q22 118 22 100 L24 72 L30 50 Z"
+          fill="none" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>
+
+    <path d="M32 72 L44 74 M60 74 L72 72" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="39" cy="84" rx="6.6" ry="7.6" fill="#D9541F" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="65" cy="84" rx="6.6" ry="7.6" fill="#D9541F" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="40.4" cy="85" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <ellipse cx="66.4" cy="85" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <circle cx="38" cy="81.4" r="1.6" fill="#F2A02A"/>
+    <circle cx="64" cy="81.4" r="1.6" fill="#F2A02A"/>
+    <path d="M44 97 Q52 102 60 97" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <path class="crack" d="M36 52 L48 66 L38 80 L50 94 L40 110"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+
+  <!-- The arm and the tongs, one group: \`stab\` drives both out together. The
+       two jaws part at the tip so the tool reads as tongs rather than as a
+       bar, and the near jaw is the longer of the two. -->
+  <g class="armF" style="transform-origin:76px 90px">
+    <path d="M76 90 L90 86" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M76 90 L90 86" stroke="#474341" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="92" cy="85" r="6.5" fill="#6E6A64" stroke="#2A2114" stroke-width="3"/>
+    <path d="M92 85 L112 73" stroke="#2A2114" stroke-width="9" stroke-linecap="round"/>
+    <path d="M92 85 L112 73" stroke="#9A968F" stroke-width="5" stroke-linecap="round"/>
+    <path d="M108 74 L119 66" stroke="#2A2114" stroke-width="8" stroke-linecap="round"/>
+    <path d="M108 74 L119 66" stroke="#6E6A64" stroke-width="4" stroke-linecap="round"/>
+    <path d="M108 78 L118 76" stroke="#2A2114" stroke-width="8" stroke-linecap="round"/>
+    <path d="M108 78 L118 76" stroke="#474341" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="104" cy="77" r="4" fill="#9A968F" stroke="#2A2114" stroke-width="2.4"/>
+    <path d="M112 70 L116 68" stroke="#D9541F" stroke-width="2.4" stroke-linecap="round"/>
+  </g>
+
+  <g class="fx" style="transform-origin:119px 70px">
+    <path d="M124 60 L140 54 M126 72 L146 72 M124 84 L140 90"
+          stroke="#D9541F" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+    <path d="M124 60 L134 56 M126 72 L140 72 M124 84 L134 88"
+          stroke="#F2A02A" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="140" cy="63" r="2.6" fill="#9A968F"/>
+    <circle cx="142" cy="82" r="2.4" fill="#D9541F"/>
+  </g>
+</svg>
+`;export{t as default};

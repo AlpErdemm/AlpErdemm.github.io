@@ -1,0 +1,79 @@
+const e=`<!-- Islaklik (Wetness) . Damp Cellar . Spoil . melee, a broad wet face
+     attackSpeed 1.09 > round(20/1.09) = 18 ticks = 0.90 s
+
+     Archetype \`punch\`: nothing is held, and a wet slap is what it does.
+
+     \`WEAPON islaklik [115, 92]\` is the front knuckle.
+
+     Silhouette: the spreading pool. **Forty pixels tall against the Damp's
+     fifty-two** and the widest floor in the family, so at 53 px it reads as a
+     puddle where the Damp reads as a block - the two were drawn a second time
+     precisely because the first pair could be taken for each other. The right
+     skirt runs out twice as far as the left, which makes it the only
+     asymmetric outline in the Cellar. The Damp stands square; this has
+     slumped.
+
+     Mass x 10..98, y 76..118. Materials 2 / fills 4: wet 546B74 92AEB6
+     DCEAEE * brass eye F2C46A. Two ripples, one gleam (upper left), one
+     crescent (lower right). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="punch" data-unit="islaklik" style="--dur-atk:0.90s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="40" ry="6" fill="#2A2114" opacity=".32"/>
+
+  <g class="armB" style="transform-origin:30px 96px">
+    <path d="M30 96 L22 102" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>
+    <path d="M30 96 L22 102" stroke="#546B74" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="19" cy="105" r="6.5" fill="#92AEB6" stroke="#2A2114" stroke-width="3"/>
+  </g>
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 108 L41 124" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M44 108 L41 124" stroke="#546B74" stroke-width="10" stroke-linecap="round"/>
+    <path d="M31 124 Q26 129 29 134 L44 134 Q46 128 42 123 Z"
+          fill="#92AEB6" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 108 L65 124" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M62 108 L65 124" stroke="#546B74" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 123 Q60 128 62 134 L77 134 Q79 129 74 124 Z"
+          fill="#92AEB6" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="body">
+    <!-- The pool: fill, crescent, the ripples, a gleam, then the ink. Low
+         and long, and the right skirt runs twice as far as the left. -->
+    <path d="M18 92 Q18 78 36 76 L62 76 Q76 78 78 90 Q92 94 96 104 Q98 114 84 116 Q66 118 52 117 Q36 118 24 116 Q10 114 12 104 Q12 96 18 92 Z" fill="#92AEB6"/>
+    <path d="M78 90 Q92 94 96 104 Q98 114 84 116 Q66 118 52 117 L52 111 Q66 112 82 110 Q90 108 88 102 Q84 96 74 92 Z" fill="#546B74"/>
+    <path d="M20 106 Q52 114 92 106" fill="none" stroke="#546B74" stroke-width="3" stroke-linecap="round"/>
+    <path d="M26 86 Q23 94 26 102" fill="none" stroke="#DCEAEE" stroke-width="5" stroke-linecap="round"/>
+    <path d="M18 92 Q18 78 36 76 L62 76 Q76 78 78 90 Q92 94 96 104 Q98 114 84 116 Q66 118 52 117 Q36 118 24 116 Q10 114 12 104 Q12 96 18 92 Z" fill="none" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>
+
+    <path d="M34 86 L46 88 M58 88 L70 86" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="41" cy="98" rx="6.2" ry="7.13" fill="#F2C46A" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="63" cy="98" rx="6.2" ry="7.13" fill="#F2C46A" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="42.4" cy="99" rx="3.38" ry="4.51" fill="#2A2114"/>
+    <ellipse cx="64.4" cy="99" rx="3.38" ry="4.51" fill="#2A2114"/>
+    <circle cx="40" cy="95.4" r="1.6" fill="#FFFFFF"/>
+    <circle cx="62" cy="95.4" r="1.6" fill="#FFFFFF"/>
+    <path d="M46 111 Q52 115 58 111" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path class="crack" d="M38 70 L50 84 L40 98 L52 112 L42 128"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+  <g class="armF" style="transform-origin:79px 96px">
+    <path d="M79 96 L97 94" stroke="#2A2114" stroke-width="16" stroke-linecap="round"/>
+    <path d="M79 96 L97 94" stroke="#92AEB6" stroke-width="12" stroke-linecap="round"/>
+    <!-- The forward fist, wet to the wrist. -->
+    <circle cx="105" cy="92" r="10" fill="#92AEB6" stroke="#2A2114" stroke-width="3"/>
+    <path d="M101 84 Q105 92 101 100" fill="none" stroke="#2A2114" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="107" cy="88" r="2.2" fill="#546B74"/>
+  </g>
+
+  <g class="fx" style="transform-origin:118px 92px">
+    <path d="M118 80 L136 70 M122 92 L140 92 M118 104 L136 114"
+          stroke="#92AEB6" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+    <path d="M118 80 L130 75 M122 92 L134 92 M118 104 L130 109"
+          stroke="#DCEAEE" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="134" cy="74" r="2.6" fill="#92AEB6"/>
+    <circle cx="136" cy="108" r="2.4" fill="#DCEAEE"/>
+  </g>
+</svg>
+`;export{e as default};

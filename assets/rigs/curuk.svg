@@ -1,0 +1,76 @@
+<!-- Curuk (Rot) . Damp Cellar . Spoil . melee, a soft shoulder leaned in
+     attackSpeed 0.86 > round(20/0.86) = 23 ticks = 1.15 s
+
+     Archetype `punch`: nothing is held, and what it does is lean its own
+     weight into what is in front of it.
+
+     `WEAPON curuk [114, 89]` is the front knuckle.
+
+     Silhouette: the bite. A round mass with one large concave bite out of its
+     upper right . the only outline in the Cellar that turns inward, and the
+     reason it cannot be read as the Moss or the Mildew at board size.
+
+     Mass x 14..92, y 32..118. Materials 2 / fills 4: rot 4E3A2C 8A6A4C
+     C3A47C * brass eye F2C46A. Two soft patches, one gleam (upper left), one
+     crescent (lower right). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="punch" data-unit="curuk" style="--dur-atk:1.15s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="32" ry="6" fill="#2A2114" opacity=".32"/>
+
+  <g class="armB" style="transform-origin:30px 91px">
+    <path d="M30 91 L22 97" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>
+    <path d="M30 91 L22 97" stroke="#4E3A2C" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="19" cy="100" r="6.5" fill="#8A6A4C" stroke="#2A2114" stroke-width="3"/>
+  </g>
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 108 L41 124" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M44 108 L41 124" stroke="#4E3A2C" stroke-width="10" stroke-linecap="round"/>
+    <path d="M31 124 Q26 129 29 134 L44 134 Q46 128 42 123 Z"
+          fill="#8A6A4C" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 108 L65 124" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M62 108 L65 124" stroke="#4E3A2C" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 123 Q60 128 62 134 L77 134 Q79 129 74 124 Z"
+          fill="#8A6A4C" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="body">
+    <!-- The mass: fill, crescent, the soft patches, a gleam, then the ink.
+         The bite is cut out of the upper right and taken back in to the
+         centre, so the crown is missing on one side only. -->
+    <path d="M16 76 Q14 46 42 36 Q58 30 66 44 Q52 54 62 62 Q78 60 90 48 Q92 74 88 96 Q90 118 62 118 L40 118 Q16 118 16 96 Z" fill="#8A6A4C"/>
+    <path d="M88 96 Q90 118 62 118 L52 118 L52 112 L62 112 Q82 112 82 96 L84 58 Q90 52 90 48 Q92 74 88 96 Z" fill="#4E3A2C"/>
+    <path d="M30 88 Q38 96 30 104 M68 92 Q76 100 68 108" fill="none" stroke="#4E3A2C" stroke-width="3" stroke-linecap="round"/>
+    <path d="M28 56 Q24 68 28 80" fill="none" stroke="#C3A47C" stroke-width="5" stroke-linecap="round"/>
+    <path d="M16 76 Q14 46 42 36 Q58 30 66 44 Q52 54 62 62 Q78 60 90 48 Q92 74 88 96 Q90 118 62 118 L40 118 Q16 118 16 96 Z" fill="none" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>
+
+    <path d="M34 74 L46 76 M58 76 L70 74" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="41" cy="86" rx="6.2" ry="7.13" fill="#F2C46A" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="63" cy="86" rx="6.2" ry="7.13" fill="#F2C46A" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="42.4" cy="87" rx="3.38" ry="4.51" fill="#2A2114"/>
+    <ellipse cx="64.4" cy="87" rx="3.38" ry="4.51" fill="#2A2114"/>
+    <circle cx="40" cy="83.4" r="1.6" fill="#FFFFFF"/>
+    <circle cx="62" cy="83.4" r="1.6" fill="#FFFFFF"/>
+    <path d="M46 99 Q52 103 58 99" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path class="crack" d="M38 58 L50 72 L40 86 L52 100 L42 116"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+  <g class="armF" style="transform-origin:78px 91px">
+    <path d="M78 91 L96 89" stroke="#2A2114" stroke-width="16" stroke-linecap="round"/>
+    <path d="M78 91 L96 89" stroke="#8A6A4C" stroke-width="12" stroke-linecap="round"/>
+    <!-- The forward fist, going soft at the knuckle. -->
+    <circle cx="104" cy="89" r="10" fill="#8A6A4C" stroke="#2A2114" stroke-width="3"/>
+    <path d="M100 81 Q104 89 100 97" fill="none" stroke="#2A2114" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="106" cy="85" r="2.2" fill="#4E3A2C"/>
+  </g>
+
+  <g class="fx" style="transform-origin:117px 89px">
+    <path d="M117 77 L135 67 M121 89 L139 89 M117 101 L135 111"
+          stroke="#8A6A4C" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+    <path d="M117 77 L129 72 M121 89 L133 89 M117 101 L129 106"
+          stroke="#C3A47C" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="133" cy="71" r="2.6" fill="#8A6A4C"/>
+    <circle cx="135" cy="105" r="2.4" fill="#C3A47C"/>
+  </g>
+</svg>

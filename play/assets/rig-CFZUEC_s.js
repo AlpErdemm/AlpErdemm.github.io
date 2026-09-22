@@ -1,0 +1,113 @@
+const r=`<!-- Pastırma (Pastrami) · Market 3 · Brawler · melee, bare fists\r
+     attackSpeed 1.18 → round(20/1.18) = 17 ticks = 0.85 s\r
+\r
+     Class rule (V3, README "Silahsız gövdeler"): a Brawler carries no weapon,\r
+     the hands are the weapon. Arms, fists, legs and boots are the Strudel's\r
+     and the Meatball's construction (style bible §6, §11.1) so the three\r
+     Brawlers throw the same punch; the wrist wrap here is butcher's twine in\r
+     the leather light, twice around. Archetype \`punch\`; the front fist's\r
+     leading edge rests at x 120 (\`WEAPON\` pastirma [119, 87]).\r
+\r
+     Redrawn for ticket 18 against docs/style-bible.md. Mass = one slice of\r
+     cured beef, a rounded rectangle x 20..84 (64 wide), y 44..116 (72 tall),\r
+     ratio 1.13: the roster's one rectangle beside the Strudel, and what tells\r
+     them apart is still the colour (bordeaux cut face inside an ochre fenugreek\r
+     crust) and that the crust runs round the slice where the Strudel's layers\r
+     run across it. The body grew from 60 to 64 so the fenugreek's left band\r
+     could stay 8 wide and still leave the brows 4 clear of its ink, the\r
+     Flatcake's plate margin (§11.5). Eye y 84 = 56% of the mass. Materials\r
+     3 / fills 8: beef 8E1F2A 5E1219 B8474A · fenugreek C08A2E 8A6224 · leather\r
+     6E4A2A 4A3826 C9A66B (the cast's shared values: legs, boots, twine, coin).\r
+     The coin on the hem band in leather light is the Market's coin, worn by\r
+     all four Market rigs. The shade is the right face of the slice and the\r
+     right end of both crust bands (the Strudel's construction); one gleam\r
+     (B8474A, upper left). Tint lines, none: the old marbling, crust islands\r
+     and fat flecks were a texture at 40 px, not a drawing. The brass star coin\r
+     went with them. -->\r
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"\r
+     class="rig" data-atk="punch" data-unit="pastirma" style="--dur-atk:0.85s">\r
+\r
+  <ellipse class="shadow" cx="52" cy="137" rx="27" ry="6" fill="#2A2114" opacity=".32"/>\r
+\r
+  <!-- Rear fist rests at x 18 so its ink stays inside the safe area (x ≥ 6). -->\r
+  <g class="armB" style="transform-origin:30px 92px">\r
+    <path d="M30 92 L20 95" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>\r
+    <path d="M30 92 L20 95" stroke="#8E1F2A" stroke-width="8" stroke-linecap="round"/>\r
+    <path d="M23 99 L25 90 M26.5 99.5 L28.5 90.5" stroke="#C9A66B" stroke-width="3" stroke-linecap="round"/>\r
+    <circle cx="18" cy="97" r="10" fill="#8E1F2A" stroke="#2A2114" stroke-width="3"/>\r
+  </g>\r
+\r
+  <!-- Legs and boots are the cast's shared construction (style bible §6):\r
+       from y 104 to 126 off pivots x 44 / 62, soles flat on 136, boots 16 × 11. -->\r
+  <g class="legB" style="transform-origin:44px 114px">\r
+    <path d="M44 104 L41 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>\r
+    <path d="M44 104 L41 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>\r
+    <path d="M31 126 Q26 131 29 136 L44 136 Q46 130 42 125 Z"\r
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>\r
+  </g>\r
+  <g class="legF" style="transform-origin:62px 114px">\r
+    <path d="M62 104 L65 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>\r
+    <path d="M62 104 L65 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>\r
+    <path d="M63 125 Q60 130 62 136 L77 136 Q79 131 74 126 Z"\r
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>\r
+  </g>\r
+\r
+  <g class="body">\r
+    <!-- The slice, its shaded right face and gleam, then the fenugreek crust:\r
+         top band, hem band, left band, each shaded at its right end. -->\r
+    <path d="M26 44 L78 44 Q84 44 84 50 L84 110 Q84 116 78 116 L26 116 Q20 116 20 110 L20 50 Q20 44 26 44 Z"\r
+          fill="#8E1F2A" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>\r
+    <path d="M76 58 L82 58 L82 104 L76 104 Z" fill="#5E1219"/>\r
+    <path d="M34 62 Q33 66 34 69" fill="none" stroke="#B8474A" stroke-width="5" stroke-linecap="round"/>\r
+    <path d="M26 44 L78 44 Q84 44 84 50 L84 58 L20 58 L20 50 Q20 44 26 44 Z"\r
+          fill="#C08A2E" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>\r
+    <path d="M20 104 L84 104 L84 110 Q84 116 78 116 L26 116 Q20 116 20 110 Z"\r
+          fill="#C08A2E" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>\r
+    <path d="M20 58 L28 58 L28 104 L20 104 Z"\r
+          fill="#C08A2E" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>\r
+    <path d="M76 45.5 L82.5 45.5 L82.5 56.5 L76 56.5 Z M76 105.5 L82.5 105.5 L82.5 114.5 L76 114.5 Z"\r
+          fill="#8A6224"/>\r
+\r
+    <!-- The cast face (style bible §5), eye y 84. -->\r
+    <path d="M32 72 L44 74 M60 74 L72 72" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>\r
+    <ellipse cx="39" cy="84" rx="6.6" ry="7.6" fill="#FFFFFF" stroke="#2A2114" stroke-width="2.3"/>\r
+    <ellipse cx="65" cy="84" rx="6.6" ry="7.6" fill="#FFFFFF" stroke="#2A2114" stroke-width="2.3"/>\r
+    <ellipse cx="40.4" cy="85" rx="3.6" ry="4.8" fill="#2A2114"/>\r
+    <ellipse cx="66.4" cy="85" rx="3.6" ry="4.8" fill="#2A2114"/>\r
+    <circle cx="38" cy="81.4" r="1.6" fill="#FFFFFF"/>\r
+    <circle cx="64" cy="81.4" r="1.6" fill="#FFFFFF"/>\r
+    <path d="M44 97 Q52 102 60 97" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>\r
+\r
+    <!-- The Market's coin on the hem band. -->\r
+    <circle cx="52" cy="110" r="4" fill="#C9A66B" stroke="#2A2114" stroke-width="2.3"/>\r
+\r
+    <g data-expression="cute">\r
+      <path d="M32 74 Q38 69 44 74 M60 74 Q66 69 72 74" fill="none" stroke="#8E1F2A" stroke-width="7" stroke-linecap="round"/>\r
+      <path d="M32 74 Q38 69 44 74 M60 74 Q66 69 72 74" fill="none" stroke="#2A2114" stroke-width="2.8" stroke-linecap="round"/>\r
+      <ellipse cx="31" cy="97" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/><ellipse cx="73" cy="97" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/>\r
+      <path d="M44 96 Q52 104 60 96 Q59 107 52 108 Q45 107 44 96 Z" fill="#3B211C" stroke="#2A2114" stroke-width="2.3"/>\r
+      <path d="M49 102 Q52 104 55 102" fill="none" stroke="#ED8A74" stroke-width="1.8" stroke-linecap="round"/>\r
+    </g>\r
+\r
+    <path class="crack" d="M34 54 L46 70 L36 86 L48 100 L38 110"\r
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>\r
+  </g>\r
+\r
+  <g class="armF" style="transform-origin:74px 92px">\r
+    <path d="M74 92 L98 89" stroke="#2A2114" stroke-width="16" stroke-linecap="round"/>\r
+    <path d="M74 92 L98 89" stroke="#8E1F2A" stroke-width="12" stroke-linecap="round"/>\r
+    <path d="M86 95 L90 85 M91 95.5 L95 85.5" stroke="#C9A66B" stroke-width="3" stroke-linecap="round"/>\r
+    <circle cx="108" cy="87" r="12" fill="#8E1F2A" stroke="#2A2114" stroke-width="3"/>\r
+    <path d="M97 81 Q102 87 97 93" fill="none" stroke="#2A2114" stroke-width="2.2" stroke-linecap="round"/>\r
+  </g>\r
+\r
+  <g class="fx" style="transform-origin:120px 87px">\r
+    <path d="M120 74 L136 66 M124 87 L142 87 M120 100 L136 108"\r
+          stroke="#C08A2E" stroke-width="5" stroke-linecap="round" opacity=".9"/>\r
+    <path d="M120 74 L131 69 M124 87 L137 87 M120 100 L131 105"\r
+          stroke="#F0DCA6" stroke-width="2.2" stroke-linecap="round"/>\r
+    <circle cx="132" cy="78" r="2.6" fill="#C08A2E"/>\r
+    <circle cx="134" cy="98" r="2.2" fill="#F0DCA6"/>\r
+  </g>\r
+</svg>\r
+`;export{r as default};

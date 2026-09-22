@@ -1,177 +1,122 @@
-<!-- Sirke · Küf 3 ✦ · Nişancı · menzil 3
-     attackSpeed 1.11 → round(20/1.11) = 18 tick = 0.90 sn
+<!-- Sirke (Vinegar) · Mold 3 · Marksman · ranged (range 3)
+     attackSpeed 1.11 → round(20/1.11) = 18 ticks = 0.90 s
 
-     Karakter sayfasına göre yeniden çizildi. Eski rig "silah: kendi ağzı —
-     ekşiyi püskürtüyor" diyordu; sayfa BASINÇLI PÜSKÜRTÜCÜ istiyor — cam
-     hazneli metal namlu, arkaya dolanan yeşil hortum — ve şişeyi zırhlıyor:
-     omuzlarda küf kolonileri, gövdede küf çiçekli tabard.
+     Archetype `spray`, kept: the sprayer's kick is armF's -9°/+11° and the
+     body squeeze is what a pressurised bottle does. It is also the one
+     archetype with an ammo track, so the `.ammo` squirt stays and `MUZZLE`
+     reads it at (118, 87) with `part: 'ammo'`.
 
-     ARKETİP `spray` OLARAK KALDI, ve bu sefer kalması doğru olan. Bu turdaki
-     dört menzilli birimi (Simit, Mısır, Ayçiçeği, Çay) `stab`e taşıdım çünkü
-     `throw` omuzlanmış bir namluyu savuruyordu. Burada öyle bir sorun yok:
-     `spray` armF'i topu topu -9°/+11° kıpırdatıyor — bir püskürtücünün geri
-     tepmesi kadar — ve `body`yi sıkıştırıp bırakıyor, ki basınçlı bir şişede
-     tam olarak istenen şey o. Üstelik ammo pisti OLAN tek arketip: fıs 0.36'da
-     ağızdan çıkıyor, 0.40'ta yok oluyor.
-
-     Bu yüzden `.ammo` grubu DURUYOR ve `MUZZLE` onu `part: 'ammo'` ile
-     okuyor — Domates'in ketçap damlasıyla aynı kurgu. Diğer dördünde grubu
-     silmek zorunda kalmıştım, çünkü `stab`in ammo pisti yok.
-
-     Menzilli boşluğun BEŞİNCİ tekrarı yine de vardı: `range: 3`, ama ne
-     `MUZZLE` ne `SHOTS` satırı — atış göğsün ortasından çıkan krem bir
-     noktaydı. `SHOTS` artık `spray` formunu kullanıyor; tabloda tanımlıydı ve
-     Soğan'la Acı Sos çıkarıldığından beri hiçbir birim onu çağırmıyordu.
-
-     KÜF ORTAK TABAN: cam + tüylü küf. KAP: UZUN İNCE ŞİŞE, turşunun şişkin
-     kavanozundan ve peynirin tekerinden en-boy ile ayrılıyor. -->
+     Redrawn for ticket 20 against docs/style-bible.md. Mass = the bottle,
+     x 22..82 (60 wide), y 38..116 (78 tall), ratio 1.30 — the thinnest §6
+     allows, which is what keeps a bottle a bottle beside the Pickle's
+     capsule and the Stilton's wheel. The old bottle was 44 wide, under the
+     floor. Neck and cork are the crown (cork top y 12). The glass is drawn
+     in the cast's steel light C8CCD6 with a white gleam: glass and the
+     sprayer's steel share one material, which is what leaves room for the
+     Mold's teal and the cast's leather inside the four-material cap. The
+     vinegar sits at y 66 so the whole face plate is on the liquid; eye y 84
+     = 59% of the mass. Materials 4 / fills 9: steel/glass 8A8F98 C8CCD6 ·
+     vinegar C8B45A 9A8838 · mold 3E8C7A 9ED4C4 · leather 6E4A2A 4A3826
+     C9A66B. One crescent (9A8838, lower right, in the liquid), one gleam
+     (white, upper left, on the glass). Tint lines, one: the nozzle glint.
+     The Mold's tell is three colonies on the lit shoulder. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
      class="rig" data-atk="spray" data-unit="sirke" style="--dur-atk:0.90s">
 
-  <ellipse class="shadow" cx="52" cy="137" rx="23" ry="5.2" fill="#000" opacity=".33"/>
+  <ellipse class="shadow" cx="52" cy="137" rx="25" ry="6" fill="#2A2114" opacity=".32"/>
 
-  <g class="armB" style="transform-origin:30px 98px">
-    <path d="M30 98 L22 108" stroke="#1A2420" stroke-width="12" stroke-linecap="round"/>
-    <path d="M30 98 L22 108" stroke="#2E5F5C" stroke-width="8.5" stroke-linecap="round"/>
-    <path d="M24 100 L31 103" stroke="#6A7A9A" stroke-width="2.4" stroke-linecap="round"/>
-    <circle cx="20" cy="111" r="5.4" fill="#1E4A4A" stroke="#1A2420" stroke-width="2.6"/>
-    <path d="M18 88 A12 12 0 0 1 42 88 Q30 93 18 88 Z"
-          fill="#2E5F5C" stroke="#1A2420" stroke-width="3.2" stroke-linejoin="round"/>
-    <circle cx="30" cy="83" r="3" fill="#3E8C7A" stroke="#1A2420" stroke-width="1.8"/>
+  <g class="armB" style="transform-origin:30px 96px">
+    <path d="M30 96 L22 106" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>
+    <path d="M30 96 L22 106" stroke="#6E4A2A" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="20" cy="108" r="6" fill="#6E4A2A" stroke="#2A2114" stroke-width="3"/>
   </g>
 
-  <g class="legB" style="transform-origin:44px 120px">
-    <path d="M44 114 L41 128" stroke="#1A2420" stroke-width="12" stroke-linecap="round"/>
-    <path d="M44 114 L41 128" stroke="#1E4A4A" stroke-width="8.5" stroke-linecap="round"/>
-    <path d="M35 128 Q30 132 33 136 L46 136 Q47 131 43 127 Z"
-          fill="#182F30" stroke="#1A2420" stroke-width="2.8" stroke-linejoin="round"/>
+  <!-- Legs and boots are the cast's shared construction (style bible §6):
+       from y 104 to 126 off pivots x 44 / 62, soles flat on 136, boots 16 × 11. -->
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 104 L41 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M44 104 L41 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>
+    <path d="M31 126 Q26 131 29 136 L44 136 Q46 130 42 125 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
   </g>
-  <g class="legF" style="transform-origin:62px 120px">
-    <path d="M62 114 L65 128" stroke="#1A2420" stroke-width="12" stroke-linecap="round"/>
-    <path d="M62 114 L65 128" stroke="#2E5F5C" stroke-width="8.5" stroke-linecap="round"/>
-    <path d="M63 127 Q58 131 61 136 L75 136 Q77 132 72 128 Z"
-          fill="#1E4A4A" stroke="#1A2420" stroke-width="2.8" stroke-linejoin="round"/>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 104 L65 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M62 104 L65 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 125 Q60 130 62 136 L77 136 Q79 131 74 126 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
   </g>
 
-  <g class="body" style="transform-origin:52px 122px">
-    <path d="M42 17 L62 17 L60 33 L44 33 Z"
-          fill="#A88A5A" stroke="#1A2420" stroke-width="3" stroke-linejoin="round"/>
-    <circle cx="48" cy="22" r="1.6" fill="#7A6038"/>
-    <circle cx="56" cy="26" r="1.4" fill="#7A6038"/>
-    <circle cx="52" cy="20" r="1.2" fill="#7A6038"/>
+  <g class="body">
+    <!-- Neck and cork first, so the shoulder covers the neck's base. -->
+    <path d="M42 42 L42 20 L62 20 L62 42 Z" fill="#C8CCD6" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="39" y="12" width="26" height="12" rx="3" fill="#C9A66B" stroke="#2A2114" stroke-width="3"/>
 
-    <path d="M44 32 L60 32 L60 46 C70 54 74 68 74 84 L74 110
-             C74 117 66 120 52 120 C38 120 30 117 30 110 L30 84
-             C30 68 34 54 44 46 Z"
-          fill="#D8E2DE" stroke="#1A2420" stroke-width="4" stroke-linejoin="round" opacity=".96"/>
-    <path d="M34 62 L70 62 L70 110 C70 115 63 117 52 117 C41 117 34 115 34 110 Z"
-          fill="#EDE7D8"/>
-    <path d="M34 100 Q52 96 70 100 L70 110 C70 115 63 117 52 117 C41 117 34 115 34 110 Z"
-          fill="#DCD3BC"/>
-    <path d="M38 52 C34 62 33 76 33 92" stroke="#F4F8F6" stroke-width="4"
-          fill="none" opacity=".65" stroke-linecap="round"/>
+    <!-- The bottle: glass, vinegar with its meniscus, crescent, gleam, then
+         the ink outline over the lot so the shade never eats it. -->
+    <path d="M30 38 L74 38 Q82 44 82 60 L82 106 Q82 116 72 116 L32 116 Q22 116 22 106 L22 60 Q22 44 30 38 Z"
+          fill="#C8CCD6"/>
+    <path d="M22 68 Q37 63 52 67 Q67 71 82 66 L82 106 Q82 116 72 116 L32 116 Q22 116 22 106 Z" fill="#C8B45A"/>
+    <path d="M82 78 L82 106 Q82 116 72 116 L52 116 L52 111 L70 111 Q77 111 77 104 L77 78 Z" fill="#9A8838"/>
+    <path d="M28 50 Q26 56 26 64" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+    <path d="M30 38 L74 38 Q82 44 82 60 L82 106 Q82 116 72 116 L32 116 Q22 116 22 106 L22 60 Q22 44 30 38 Z"
+          fill="none" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>
 
-    <g fill="#3E8C7A" stroke="#1A2420" stroke-width="1.8">
-      <circle cx="37" cy="47" r="4"/><circle cx="43" cy="41" r="3.2"/>
-      <circle cx="33" cy="55" r="3.4"/><circle cx="66" cy="47" r="4"/>
-      <circle cx="61" cy="40" r="3"/><circle cx="71" cy="56" r="3.4"/>
-      <circle cx="29" cy="66" r="3"/><circle cx="74" cy="66" r="2.8"/>
-    </g>
-    <g fill="#6FBFA8">
-      <circle cx="38" cy="45" r="1.6"/><circle cx="65" cy="45" r="1.6"/>
-      <circle cx="33" cy="53" r="1.4"/>
-    </g>
+    <!-- Mold colonies on the lit shoulder: the Origin's tell. -->
+    <circle cx="31" cy="50" r="5" fill="#3E8C7A" stroke="#2A2114" stroke-width="2.3"/>
+    <circle cx="38" cy="44" r="3.6" fill="#3E8C7A" stroke="#2A2114" stroke-width="2.3"/>
+    <circle cx="29" cy="59" r="3" fill="#3E8C7A" stroke="#2A2114" stroke-width="2.3"/>
+    <circle cx="29.5" cy="48.5" r="1.8" fill="#9ED4C4"/>
 
-    <path d="M34 68 L47 75 L45 80 L33 74 Z" fill="#1A2420"/>
-    <path d="M70 68 L57 75 L59 80 L71 74 Z" fill="#1A2420"/>
-    <ellipse cx="43" cy="84" rx="6.5" ry="7.5" fill="#fff" stroke="#1A2420" stroke-width="2.3"/>
-    <ellipse cx="61" cy="84" rx="6.5" ry="7.5" fill="#fff" stroke="#1A2420" stroke-width="2.3"/>
-    <ellipse cx="44.3" cy="85" rx="3.6" ry="4.8" fill="#1A2420"/>
-    <ellipse cx="62.3" cy="85" rx="3.6" ry="4.8" fill="#1A2420"/>
-    <circle cx="42.6" cy="81.6" r="1.6" fill="#fff"/>
-    <circle cx="60.6" cy="81.6" r="1.6" fill="#fff"/>
-    <path d="M46 96 Q52 92 58 96" stroke="#1A2420" stroke-width="2.8" fill="none"
-          stroke-linecap="round"/>
-
-    <path d="M38 104 L66 104 L64 128 Q52 134 40 128 Z"
-          fill="#1E4A4A" stroke="#1A2420" stroke-width="3.2" stroke-linejoin="round"/>
-    <path d="M41 107 L63 107" stroke="#5A4A8A" stroke-width="3.4"/>
-    <circle cx="52" cy="117" r="6.4" fill="#2E5F5C" stroke="#1A2420" stroke-width="2.4"/>
-    <circle cx="52" cy="113.4" r="2.4" fill="#8AA85A"/>
-    <circle cx="48.6" cy="118" r="2.4" fill="#8AA85A"/>
-    <circle cx="55.4" cy="118" r="2.4" fill="#8AA85A"/>
-    <circle cx="52" cy="119.6" r="1.8" fill="#B8D46A"/>
-
-    <!-- Bottle caustic, suspended vinegar bubbles and glass rim light. -->
-    <path d="M39 42 C34 60 35 91 39 107" fill="none" stroke="#FFFFFF" stroke-width="2.2"
-          stroke-linecap="round" opacity=".7"/>
-    <path d="M63 51 C69 65 69 93 66 108" fill="none" stroke="#83B8AD" stroke-width="1.6"
-          stroke-linecap="round" opacity=".5"/>
-    <g fill="none" stroke="#F7F1DE" stroke-width="1.3" opacity=".9">
-      <circle cx="45" cy="88" r="2"/><circle cx="60" cy="101" r="1.5"/><circle cx="54" cy="72" r="1.2"/>
-    </g>
+    <!-- The cast face (style bible §5), eye y 84. -->
+    <path d="M32 72 L44 74 M60 74 L72 72" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="39" cy="84" rx="6.6" ry="7.6" fill="#FFFFFF" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="65" cy="84" rx="6.6" ry="7.6" fill="#FFFFFF" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="40.4" cy="85" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <ellipse cx="66.4" cy="85" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <circle cx="38" cy="81.4" r="1.6" fill="#FFFFFF"/>
+    <circle cx="64" cy="81.4" r="1.6" fill="#FFFFFF"/>
+    <path d="M44 97 Q52 102 60 97" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
 
     <g data-expression="cute">
-      <path d="M34 74 Q41 69 47 74 M57 74 Q63 69 70 74" fill="none" stroke="#EDE7D8" stroke-width="8" stroke-linecap="round"/>
-      <path d="M34 74 Q41 69 47 74 M57 74 Q63 69 70 74" fill="none" stroke="#1A2420" stroke-width="2.8" stroke-linecap="round"/>
-      <ellipse cx="34" cy="96" rx="3" ry="1.8" fill="#DB7D71" opacity=".58"/><ellipse cx="70" cy="96" rx="3" ry="1.8" fill="#DB7D71" opacity=".58"/>
-      <path d="M45 95 Q52 103 59 95 Q58 105 52 106 Q46 105 45 95 Z" fill="#26322E" stroke="#1A2420" stroke-width="2.2"/>
-      <path d="M49 101 Q52 103 55 101" fill="none" stroke="#E58D7D" stroke-width="1.7" stroke-linecap="round"/>
+      <path d="M32 74 Q38 69 44 74 M60 74 Q66 69 72 74" fill="none" stroke="#C8B45A" stroke-width="7" stroke-linecap="round"/>
+      <path d="M32 74 Q38 69 44 74 M60 74 Q66 69 72 74" fill="none" stroke="#2A2114" stroke-width="2.8" stroke-linecap="round"/>
+      <ellipse cx="31" cy="97" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/><ellipse cx="73" cy="97" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/>
+      <path d="M44 96 Q52 104 60 96 Q59 107 52 108 Q45 107 44 96 Z" fill="#3B211C" stroke="#2A2114" stroke-width="2.3"/>
+      <path d="M49 102 Q52 104 55 102" fill="none" stroke="#ED8A74" stroke-width="1.8" stroke-linecap="round"/>
     </g>
 
-    <path class="crack" d="M36 44 L48 58 L38 72 L50 86 L40 100"
-          stroke="#0E1614" stroke-width="2.8" fill="none" stroke-linejoin="round"/>
+    <path class="crack" d="M34 48 L46 62 L36 76 L48 90 L38 104"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
   </g>
 
+  <!-- Front arm and the pressure sprayer as one part; the squirt leaves the
+       nozzle at (118, 87). -->
   <g class="armF" style="transform-origin:70px 96px">
-    <path d="M76 102 C66 119 44 127 28 117 C18 109 20 97 29 94"
-          fill="none" stroke="#1A2420" stroke-width="9" stroke-linecap="round"/>
-    <path d="M76 102 C66 119 44 127 28 117 C18 109 20 97 29 94"
-          fill="none" stroke="#3E8C7A" stroke-width="5.5" stroke-linecap="round"/>
-    <path d="M76 102 C66 119 44 127 28 117" fill="none" stroke="#6FBFA8"
-          stroke-width="1.8" stroke-linecap="round" opacity=".7"/>
-
-    <path d="M70 96 L82 99" stroke="#1A2420" stroke-width="12" stroke-linecap="round"/>
-    <path d="M70 96 L82 99" stroke="#2E5F5C" stroke-width="8.5" stroke-linecap="round"/>
-    <path d="M60 88 A13 13 0 0 1 86 88 Q73 93 60 88 Z"
-          fill="#2E5F5C" stroke="#1A2420" stroke-width="3.2" stroke-linejoin="round"/>
-    <circle cx="73" cy="83" r="3.2" fill="#3E8C7A" stroke="#1A2420" stroke-width="1.8"/>
-
-    <path d="M74 94 L114 87" stroke="#1A2420" stroke-width="17" stroke-linecap="round"/>
-    <path d="M74 94 L114 87" stroke="#6A7A9A" stroke-width="12.5" stroke-linecap="round"/>
-    <path d="M78 90 L110 84" stroke="#8F9EBA" stroke-width="3" stroke-linecap="round"
-          opacity=".7"/>
-    <path d="M88 82 L106 79 L108 91 L90 94 Z"
-          fill="#B8D46A" stroke="#1A2420" stroke-width="2.8" stroke-linejoin="round"/>
-    <circle cx="93" cy="87" r="2.2" fill="#3E8C7A"/>
-    <circle cx="99" cy="85" r="1.8" fill="#3E8C7A"/>
-    <circle cx="104" cy="87" r="1.6" fill="#2A6355"/>
-    <path d="M82 96 L85 84" stroke="#1A2420" stroke-width="6.5" stroke-linecap="round"/>
-    <path d="M82 96 L85 84" stroke="#8F9EBA" stroke-width="3.6" stroke-linecap="round"/>
-    <path d="M110 80 L118 84 L118 92 L110 95 Z"
-          fill="#6A7A9A" stroke="#1A2420" stroke-width="2.8" stroke-linejoin="round"/>
-    <path d="M76 98 Q80 104 86 103" fill="none" stroke="#1A2420" stroke-width="6"
-          stroke-linecap="round"/>
-    <path d="M76 98 Q80 104 86 103" fill="none" stroke="#4A5A78" stroke-width="3.4"
-          stroke-linecap="round"/>
-    <circle cx="84" cy="97" r="5.4" fill="#1E4A4A" stroke="#1A2420" stroke-width="2.6"/>
+    <path d="M70 96 L84 100" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>
+    <path d="M70 96 L84 100" stroke="#6E4A2A" stroke-width="8" stroke-linecap="round"/>
+    <path d="M86 97 L114 89" stroke="#2A2114" stroke-width="10" stroke-linecap="round"/>
+    <path d="M86 97 L114 89" stroke="#8A8F98" stroke-width="6" stroke-linecap="round"/>
+    <path d="M91 94 L108 89.5" stroke="#C8CCD6" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M90 96 L94 84" stroke="#2A2114" stroke-width="7" stroke-linecap="round"/>
+    <path d="M90 96 L94 84" stroke="#C8CCD6" stroke-width="4" stroke-linecap="round"/>
+    <path d="M112 84 L118 86 L118 92 L112 94 Z" fill="#8A8F98" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M84 102 Q88 108 94 106" fill="none" stroke="#2A2114" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="86" cy="100" r="6" fill="#6E4A2A" stroke="#2A2114" stroke-width="3"/>
 
     <g class="ammo">
-      <ellipse cx="118" cy="87" rx="4.6" ry="3.6" fill="#B8D46A" stroke="#1A2420"
-               stroke-width="2.2"/>
-      <circle cx="117" cy="86" r="1.4" fill="#EDF7C8"/>
+      <ellipse cx="118" cy="87" rx="4" ry="3.2" fill="#C8B45A" stroke="#2A2114" stroke-width="2.2"/>
     </g>
   </g>
 
   <g class="fx" style="transform-origin:118px 87px">
-    <path d="M118 87 C130 78 144 74 156 74" fill="none" stroke="#8AA85A"
+    <path d="M118 87 C130 78 144 74 156 74" fill="none" stroke="#9A8838"
           stroke-width="7" stroke-linecap="round" opacity=".45"/>
-    <path d="M118 87 C132 87 146 89 158 92" fill="none" stroke="#B8D46A"
-          stroke-width="6" stroke-linecap="round" opacity=".6"/>
+    <path d="M118 87 C132 87 146 89 158 92" fill="none" stroke="#C8B45A"
+          stroke-width="6" stroke-linecap="round" opacity=".7"/>
     <path d="M118 87 C130 95 142 102 152 108" fill="none" stroke="#3E8C7A"
           stroke-width="5.5" stroke-linecap="round" opacity=".5"/>
-    <circle cx="140" cy="80" r="3" fill="#B8D46A" opacity=".8"/>
-    <circle cx="146" cy="95" r="2.6" fill="#8AA85A" opacity=".7"/>
-    <circle cx="136" cy="100" r="2.4" fill="#6FBFA8" opacity=".7"/>
+    <circle cx="140" cy="80" r="3" fill="#C8B45A" opacity=".8"/>
+    <circle cx="146" cy="95" r="2.6" fill="#9A8838" opacity=".7"/>
+    <circle cx="136" cy="100" r="2.4" fill="#9ED4C4" opacity=".7"/>
   </g>
 </svg>

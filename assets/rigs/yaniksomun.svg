@@ -1,0 +1,113 @@
+<!-- Yanık Somun (Burnt Loaf) · Burnt Oven · Spoil · the Region boss
+     attackSpeed 0.78 -> round(20/0.78) = 26 ticks = 1.30 s
+
+     Archetype `punch`, the slowest cycle on the whole roster at 1.30 s. Both
+     arms land, one blow, one damage number. `WEAPON yaniksomun [112, 94]` is
+     the front knuckle, set lower and further in than any other Brawler's
+     because the mass is the widest thing the family owns and the arm is short
+     against it.
+
+     Silhouette: the scored loaf. A broad crust dome, lobed rather than smooth
+     along its outline, with three diagonal baker's cuts laid across the crown
+     and split open to the fire. It shares the roster's dome with Kör and is
+     told from it by exactly two things: the cuts, and the colour. Where the
+     Ember is a stone with fire standing on top of it, this is bread that was
+     scored and then left in.
+
+     **Why the two bosses do not read as one bigger and one biggest.** Kavruk
+     is angular, spread along the floor, and split down to open ember seams;
+     this is round, tall, closed everywhere except the one slash across its
+     crown, and it is the only warm-brown boss against the Scorch's char. One
+     is a rock that never went out. The other is a thing that was baked too
+     long and came out of the oven anyway.
+
+     No Origin, no Role, no team colour, no tier mark, and no
+     `data-expression="cute"` group. Mass = the loaf, x 16..88 (72 wide),
+     y 42..120 (78 tall), ratio 1.08. No crown item.
+     Eye y 88 = 59% of the mass. Materials 2 / fills 6: crust 6B4426 9A6A3C
+     3E2716 * ember F2A02A D9541F B02E1F. One crescent (3E2716, lower right),
+     one gleam (9A6A3C, upper left). Tint lines, two: the scoring on the
+     flanks. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="punch" data-unit="yaniksomun" style="--dur-atk:1.30s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="30" ry="6" fill="#2A2114" opacity=".32"/>
+
+  <g class="armB" style="transform-origin:28px 98px">
+    <path d="M28 98 L21 102" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M28 98 L21 102" stroke="#3E2716" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="19" cy="104" r="10" fill="#6B4426" stroke="#2A2114" stroke-width="3"/>
+    <path d="M14 98 L14 111 M19 97 L19 112" stroke="#3E2716" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 114 L41 126" stroke="#2A2114" stroke-width="15" stroke-linecap="round"/>
+    <path d="M44 114 L41 126" stroke="#3E2716" stroke-width="11" stroke-linecap="round"/>
+    <path d="M30 126 Q25 130 28 134 L45 134 Q47 129 43 125 Z"
+          fill="#6B4426" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 114 L65 126" stroke="#2A2114" stroke-width="15" stroke-linecap="round"/>
+    <path d="M62 114 L65 126" stroke="#3E2716" stroke-width="11" stroke-linecap="round"/>
+    <path d="M63 125 Q60 130 62 134 L79 134 Q81 130 75 126 Z"
+          fill="#6B4426" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+
+  <g class="body">
+    <!-- The loaf: fill, crescent, scoring, gleam, then the ink over the lot.
+         The outline is a run of lobes rather than one curve, and the crown is
+         notched down to y 68: it shares the roster's dome with Kör, and a
+         smooth dome drawn twice is one body drawn twice. -->
+    <path d="M52 44 Q64 42 70 50 Q80 50 84 60 Q90 68 88 80 Q90 92 84 102 Q84 114 72 118 Q62 122 52 119 Q42 122 32 118 Q20 114 20 102 Q14 92 16 80 Q14 68 20 60 Q24 50 34 50 Q40 42 52 44 Z" fill="#6B4426"/>
+    <path d="M88 80 Q90 92 84 102 Q84 114 72 118 Q62 122 52 119 L52 113
+             Q62 115 70 111 Q79 107 79 98 Q84 90 82 80 Z" fill="#3E2716"/>
+    <path d="M24 92 L34 86 M70 96 L80 90" fill="none" stroke="#3E2716"
+          stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M28 62 Q22 72 22 84" fill="none" stroke="#9A6A3C" stroke-width="5" stroke-linecap="round"/>
+    <path d="M52 44 Q64 42 70 50 Q80 50 84 60 Q90 68 88 80 Q90 92 84 102 Q84 114 72 118 Q62 122 52 119 Q42 122 32 118 Q20 114 20 102 Q14 92 16 80 Q14 68 20 60 Q24 50 34 50 Q40 42 52 44 Z"
+          fill="none" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>
+
+    <!-- The scoring, and it is the whole tell. Three diagonal cuts across the
+         crown, split open to the fire: an ink trough with the ember standing
+         in it, flat, no glow. Diagonal and uneven on purpose — drawn as one
+         band across the crown it read as a headband at 53 px, and drawn as a
+         wedge standing out of the crown it read as a candle. Neither is
+         visible in a number; both were visible in the board strip, which is
+         what the strip is for. -->
+    <path d="M28 66 L44 52 M40 72 L58 56 M56 72 L72 58" fill="none" stroke="#2A2114"
+          stroke-width="8" stroke-linecap="round"/>
+    <path d="M28 66 L44 52 M40 72 L58 56 M56 72 L72 58" fill="none" stroke="#B02E1F"
+          stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M31 64 L42 54 M42 70 L56 58 M58 70 L69 60" fill="none" stroke="#F2A02A"
+          stroke-width="1.8" stroke-linecap="round"/>
+
+    <path d="M32 76 L44 78 M60 78 L72 76" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="39" cy="88" rx="6.6" ry="7.6" fill="#D9541F" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="65" cy="88" rx="6.6" ry="7.6" fill="#D9541F" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="40.4" cy="89" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <ellipse cx="66.4" cy="89" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <circle cx="38" cy="85.4" r="1.6" fill="#F2A02A"/>
+    <circle cx="64" cy="85.4" r="1.6" fill="#F2A02A"/>
+    <path d="M42 101 Q52 108 62 101" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <path class="crack" d="M34 60 L48 74 L36 90 L50 104 L38 118"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+
+  <g class="armF" style="transform-origin:78px 98px">
+    <path d="M78 98 L92 96" stroke="#2A2114" stroke-width="17" stroke-linecap="round"/>
+    <path d="M78 98 L92 96" stroke="#6B4426" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="100" cy="95" r="12" fill="#6B4426" stroke="#2A2114" stroke-width="3"/>
+    <path d="M90 89 Q95 95 90 101" fill="none" stroke="#2A2114" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M96 85 L96 104 M103 84 L103 105" stroke="#3E2716" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <g class="fx" style="transform-origin:114px 95px">
+    <path d="M114 80 L134 70 M118 95 L142 95 M114 110 L134 120"
+          stroke="#B02E1F" stroke-width="6.5" stroke-linecap="round" opacity=".9"/>
+    <path d="M114 80 L127 74 M118 95 L136 95 M114 110 L127 116"
+          stroke="#F2A02A" stroke-width="2.8" stroke-linecap="round"/>
+    <circle cx="134" cy="82" r="3.2" fill="#D9541F"/>
+    <circle cx="136" cy="108" r="2.8" fill="#9A6A3C"/>
+  </g>
+</svg>

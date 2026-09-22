@@ -1,0 +1,113 @@
+const t=`<!-- Kavruk (Scorch) · Burnt Oven · Spoil · the Stop 10 lesser boss
+     attackSpeed 0.86 -> round(20/0.86) = 23 ticks = 1.15 s
+
+     Archetype \`swing\`, shared with Cüruf, and the arm carries a spur of the
+     same lava rock the body is cut from rather than a tool: this body owns
+     nothing, it is all one piece. \`WEAPON kavruk [119, 54]\` is the outer horn
+     of that spur.
+
+     Silhouette: the mound with a crest. The widest and squattest mass on the
+     family, ratio 1.00 against every other body's 1.03 to 1.27, and it is the
+     only one with a horned ridge across the top. Kömür is the family's other
+     angular body and the pair are told apart by exactly that: the Charcoal is
+     a block that ends at its own outline, this spreads along the floor and
+     breaks upward in three places.
+
+     **What makes it a spike and not just a big body**, and it is a colour
+     decision rather than a shape one: the ember seams here are wide open. The
+     other eleven carry one or two hairlines of D9541F; this is split down to
+     the fire in four places and the mouth is a seam rather than a line, so it
+     reads as something that is still burning inside while the family standing
+     beside it has gone out. That is the Stop 10 lesson in one body.
+
+     No Origin, no Role, no team colour, no tier mark, and no
+     \`data-expression="cute"\` group. Mass = the mound, x 15..89 (74 wide),
+     y 46..120 (74 tall), ratio 1.00. Crest horns to y 24. Eye y 86 = 54% of
+     the mass. Materials 2 / fills 6: char 3A352F 5E574E 241F1B * ember
+     F2A02A D9541F B02E1F. One crescent (241F1B, lower right), one lit facet
+     (5E574E, upper left). Tint lines, three: the open seams. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="swing" data-unit="kavruk" style="--dur-atk:1.15s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="31" ry="6" fill="#2A2114" opacity=".32"/>
+
+  <g class="armB" style="transform-origin:26px 96px">
+    <path d="M26 96 L16 102" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M26 96 L16 102" stroke="#241F1B" stroke-width="10" stroke-linecap="round"/>
+    <path d="M18 96 L8 104 L14 112 L24 106 Z"
+          fill="#3A352F" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M12 102 L18 106" stroke="#B02E1F" stroke-width="2.4" stroke-linecap="round"/>
+  </g>
+
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 112 L41 124" stroke="#2A2114" stroke-width="15" stroke-linecap="round"/>
+    <path d="M44 112 L41 124" stroke="#241F1B" stroke-width="11" stroke-linecap="round"/>
+    <path d="M30 124 Q25 129 28 134 L45 134 Q47 128 43 123 Z"
+          fill="#3A352F" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 112 L65 124" stroke="#2A2114" stroke-width="15" stroke-linecap="round"/>
+    <path d="M62 112 L65 124" stroke="#241F1B" stroke-width="11" stroke-linecap="round"/>
+    <path d="M63 123 Q60 128 62 134 L79 134 Q81 129 75 124 Z"
+          fill="#3A352F" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+
+  <g class="body">
+    <!-- The three crest horns first, so the mound covers their roots. Uneven
+         heights and none of them upright: a matched trio reads as a crown. -->
+    <path d="M28 54 L22 24 L40 44 Z"
+          fill="#3A352F" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M46 46 L56 26 L62 48 Z"
+          fill="#5E574E" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M68 52 L84 34 L80 58 Z"
+          fill="#3A352F" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- The mound: fill, lit facet, crescent, open seams, then the ink over
+         the lot. Straight cuts only, like the Charcoal, but spread along the
+         floor rather than stacked. -->
+    <path d="M52 46 L74 52 L86 68 L89 92 L82 112 L66 120 L38 120 L22 112 L15 92 L18 68 L32 52 Z"
+          fill="#3A352F"/>
+    <path d="M52 46 L32 52 L18 68 L28 78 L44 58 Z" fill="#5E574E"/>
+    <path d="M89 92 L82 112 L66 120 L52 120 L52 113 L64 113 L76 104 L83 90 Z" fill="#241F1B"/>
+    <path d="M26 66 L40 76 L30 92 M62 108 L76 98 M80 66 L70 78" fill="none" stroke="#D9541F"
+          stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M52 46 L74 52 L86 68 L89 92 L82 112 L66 120 L38 120 L22 112 L15 92 L18 68 L32 52 Z"
+          fill="none" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>
+
+    <path d="M32 72 L44 78 M60 78 L72 72" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="39" cy="86" rx="6.6" ry="7.6" fill="#F2A02A" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="65" cy="86" rx="6.6" ry="7.6" fill="#F2A02A" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="40.4" cy="87" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <ellipse cx="66.4" cy="87" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <circle cx="38" cy="83.4" r="1.6" fill="#FFFFFF"/>
+    <circle cx="64" cy="83.4" r="1.6" fill="#FFFFFF"/>
+    <!-- The mouth is an open seam rather than an ink line: the one face on the
+         family you can see the fire through. -->
+    <path d="M40 100 L52 106 L64 100" fill="none" stroke="#B02E1F"
+          stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M42 100 L52 105 L62 100" fill="none" stroke="#F2A02A"
+          stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path class="crack" d="M34 56 L48 70 L36 86 L50 100 L38 116"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+
+  <g class="armF" style="transform-origin:78px 96px">
+    <path d="M78 96 L92 90" stroke="#2A2114" stroke-width="16" stroke-linecap="round"/>
+    <path d="M78 96 L92 90" stroke="#3A352F" stroke-width="12" stroke-linecap="round"/>
+    <path d="M94 92 L104 66 L118 54 L116 76 L106 96 Z"
+          fill="#3A352F" stroke="#2A2114" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M100 82 L112 70" stroke="#D9541F" stroke-width="3" stroke-linecap="round"/>
+    <path d="M98 88 L108 80" stroke="#B02E1F" stroke-width="2.6" stroke-linecap="round"/>
+  </g>
+
+  <g class="fx" style="transform-origin:118px 62px">
+    <path d="M116 48 L136 38 M120 62 L144 62 M116 78 L136 88"
+          stroke="#B02E1F" stroke-width="6.5" stroke-linecap="round" opacity=".9"/>
+    <path d="M116 48 L129 42 M120 62 L138 62 M116 78 L129 84"
+          stroke="#F2A02A" stroke-width="2.8" stroke-linecap="round"/>
+    <circle cx="136" cy="50" r="3.2" fill="#D9541F"/>
+    <circle cx="138" cy="76" r="2.8" fill="#F2A02A"/>
+  </g>
+</svg>
+`;export{t as default};

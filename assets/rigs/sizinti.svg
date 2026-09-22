@@ -1,0 +1,75 @@
+<!-- Sizinti (Seep) . Damp Cellar . Spoil . melee, a point held out
+     attackSpeed 1.07 > round(20/1.07) = 19 ticks = 0.95 s
+
+     Archetype `stab`: the arm draws back and drives forward. A head of water
+     is the only thing this body has.
+
+     `WEAPON sizinti [116, 86]` is the held runnel's head, level.
+
+     Silhouette: the runnel. A narrow column that steps sideways twice on the
+     way down, offset left at the crown and right at the floor, so its outline
+     is a zigzag. The Cellar's other narrow bodies are straight (the Mushroom's
+     stalk) or leaning (the Trickle); nothing else here is kinked.
+
+     Mass x 22..82, y 26..118. Materials 2 / fills 4: seep 4C6B72 88AAB0
+     D3E6E8 * brass eye F2C46A. Two flow lines, one gleam (upper left), one
+     crescent (lower right). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="stab" data-unit="sizinti" style="--dur-atk:0.95s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="20" ry="6" fill="#2A2114" opacity=".32"/>
+
+  <g class="armB" style="transform-origin:30px 94px">
+    <path d="M30 94 L22 100" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>
+    <path d="M30 94 L22 100" stroke="#4C6B72" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="19" cy="103" r="6.5" fill="#88AAB0" stroke="#2A2114" stroke-width="3"/>
+  </g>
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 108 L41 124" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M44 108 L41 124" stroke="#4C6B72" stroke-width="10" stroke-linecap="round"/>
+    <path d="M31 124 Q26 129 29 134 L44 134 Q46 128 42 123 Z"
+          fill="#88AAB0" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 108 L65 124" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M62 108 L65 124" stroke="#4C6B72" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 123 Q60 128 62 134 L77 134 Q79 129 74 124 Z"
+          fill="#88AAB0" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="body">
+    <!-- The runnel: fill, crescent, the flow lines, a gleam, then the ink.
+         Two sideways steps on the way down, which is the whole silhouette. -->
+    <path d="M28 26 L52 26 L54 54 L74 56 L76 84 L82 86 L82 118 L44 118 L42 88 L24 86 L22 56 L26 54 Z" fill="#88AAB0"/>
+    <path d="M76 84 L82 86 L82 118 L52 118 L52 112 L76 112 L74 88 Z" fill="#4C6B72"/>
+    <path d="M32 36 L48 36 M58 66 L72 66 M50 98 L78 98" fill="none" stroke="#4C6B72" stroke-width="3" stroke-linecap="round"/>
+    <path d="M32 44 L30 66" fill="none" stroke="#D3E6E8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M28 26 L52 26 L54 54 L74 56 L76 84 L82 86 L82 118 L44 118 L42 88 L24 86 L22 56 L26 54 Z" fill="none" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>
+
+    <path d="M34 74 L46 76 M58 76 L70 74" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="41" cy="86" rx="5.6" ry="6.44" fill="#F2C46A" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="63" cy="86" rx="5.6" ry="6.44" fill="#F2C46A" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="42.4" cy="87" rx="3.05" ry="4.07" fill="#2A2114"/>
+    <ellipse cx="64.4" cy="87" rx="3.05" ry="4.07" fill="#2A2114"/>
+    <circle cx="40" cy="83.4" r="1.6" fill="#FFFFFF"/>
+    <circle cx="62" cy="83.4" r="1.6" fill="#FFFFFF"/>
+    <path d="M46 99 Q52 103 58 99" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path class="crack" d="M38 58 L50 72 L40 86 L52 100 L42 116"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+  <g class="armF" style="transform-origin:76px 94px">
+    <path d="M76 94 L92 90" stroke="#2A2114" stroke-width="16" stroke-linecap="round"/>
+    <path d="M76 94 L92 90" stroke="#88AAB0" stroke-width="12" stroke-linecap="round"/>
+    <!-- A second head of water, held point first. Its tip is the aim. -->
+    <path d="M116 86 Q100 80 94 88 Q100 96 116 90 Z"
+          fill="#D3E6E8" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+
+  <g class="fx" style="transform-origin:119px 88px">
+    <path d="M119 76 L137 66 M123 88 L141 88 M119 100 L137 110"
+          stroke="#88AAB0" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+    <path d="M119 76 L131 71 M123 88 L135 88 M119 100 L131 105"
+          stroke="#D3E6E8" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="135" cy="70" r="2.6" fill="#88AAB0"/>
+    <circle cx="137" cy="104" r="2.4" fill="#D3E6E8"/>
+  </g>
+</svg>

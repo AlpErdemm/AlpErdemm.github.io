@@ -1,0 +1,86 @@
+const e=`<!-- Nem (Damp) . Damp Cellar . Spoil . melee, bare fists
+     attackSpeed 1.19 > round(20/1.19) = 17 ticks = 0.85 s
+
+     Archetype \`punch\`, the family's cheapest body and it carries nothing, so
+     the two fists are the whole of what it has. Fastest cycle in the Cellar,
+     and the body that carries Nemlenme.
+
+     \`WEAPON nem [114, 90]\` is the front knuckle, the Brawler convention.
+
+     Silhouette: the patch and its drips. A hard-cornered rectangle of wall
+     damp - the squarest outline in the Cellar, and wider than it is tall -
+     with three pendant drips of three lengths hanging clear below its bottom
+     edge. The Foam in Region 4 breaks upward off its crown; this breaks
+     downward off its floor, and it is the only body in the family that does.
+
+     No Origin, no Role, no team colour, no tier mark, and no
+     \`data-expression="cute"\` group. Mass x 14..90, y 46..124. Materials 2 /
+     fills 4: damp 5C6B5C 93A58F D3DECB * brass eye F2C46A. Two seep lines,
+     one gleam (upper left), one crescent (lower right). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="punch" data-unit="nem" style="--dur-atk:0.85s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="34" ry="6" fill="#2A2114" opacity=".32"/>
+
+  <g class="armB" style="transform-origin:30px 92px">
+    <path d="M30 92 L22 98" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>
+    <path d="M30 92 L22 98" stroke="#5C6B5C" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="19" cy="101" r="6.5" fill="#93A58F" stroke="#2A2114" stroke-width="3"/>
+  </g>
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 108 L41 124" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M44 108 L41 124" stroke="#5C6B5C" stroke-width="10" stroke-linecap="round"/>
+    <path d="M31 124 Q26 129 29 134 L44 134 Q46 128 42 123 Z"
+          fill="#93A58F" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 108 L65 124" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M62 108 L65 124" stroke="#5C6B5C" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 123 Q60 128 62 134 L77 134 Q79 129 74 124 Z"
+          fill="#93A58F" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="body">
+    <!-- The three drips first, so the patch covers where they part from it.
+         Three lengths on purpose: a matched row would read as a fringe. -->
+    <path d="M26 92 Q18 110 28 114 Q38 112 34 92 Z" fill="#D3DECB" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M48 92 Q40 118 52 122 Q64 118 56 92 Z" fill="#D3DECB" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M70 92 Q64 106 72 110 Q80 108 78 92 Z" fill="#D3DECB" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- The patch: fill, crescent, the seep lines, a gleam, then the ink.
+         Four hard corners, which nothing else in this family has. -->
+    <path d="M16 46 L88 46 L88 98 L16 98 Z" fill="#93A58F"/>
+    <path d="M88 46 L88 98 L52 98 L52 92 L82 92 L82 46 Z" fill="#5C6B5C"/>
+    <path d="M22 60 Q52 66 82 60 M22 86 Q52 92 82 86" fill="none" stroke="#5C6B5C" stroke-width="3" stroke-linecap="round"/>
+    <path d="M24 54 Q20 66 24 78" fill="none" stroke="#D3DECB" stroke-width="5" stroke-linecap="round"/>
+    <path d="M16 46 L88 46 L88 98 L16 98 Z" fill="none" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>
+
+    <path d="M34 70 L46 72 M58 72 L70 70" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="41" cy="82" rx="6.2" ry="7.13" fill="#F2C46A" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="63" cy="82" rx="6.2" ry="7.13" fill="#F2C46A" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="42.4" cy="83" rx="3.38" ry="4.51" fill="#2A2114"/>
+    <ellipse cx="64.4" cy="83" rx="3.38" ry="4.51" fill="#2A2114"/>
+    <circle cx="40" cy="79.4" r="1.6" fill="#FFFFFF"/>
+    <circle cx="62" cy="79.4" r="1.6" fill="#FFFFFF"/>
+    <path d="M46 95 Q52 99 58 95" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path class="crack" d="M38 54 L50 68 L40 82 L52 96 L42 112"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+  <g class="armF" style="transform-origin:78px 92px">
+    <path d="M78 92 L96 90" stroke="#2A2114" stroke-width="16" stroke-linecap="round"/>
+    <path d="M78 92 L96 90" stroke="#93A58F" stroke-width="12" stroke-linecap="round"/>
+    <!-- The forward fist. Damp carries nothing, so the fist is the weapon. -->
+    <circle cx="104" cy="90" r="10" fill="#93A58F" stroke="#2A2114" stroke-width="3"/>
+    <path d="M100 82 Q104 90 100 98" fill="none" stroke="#2A2114" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="106" cy="86" r="2.2" fill="#5C6B5C"/>
+  </g>
+
+  <g class="fx" style="transform-origin:117px 90px">
+    <path d="M117 78 L135 68 M121 90 L139 90 M117 102 L135 112"
+          stroke="#93A58F" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+    <path d="M117 78 L129 73 M121 90 L133 90 M117 102 L129 107"
+          stroke="#D3DECB" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="133" cy="72" r="2.6" fill="#93A58F"/>
+    <circle cx="135" cy="106" r="2.4" fill="#D3DECB"/>
+  </g>
+</svg>
+`;export{e as default};

@@ -78,13 +78,13 @@ code, kbd, samp { font-family: var(--mono); }
 .colophon,
 main > section {
   width: 100%;
-  max-width: 72rem;
+  max-width: 68rem;
   margin-inline: auto;
   padding-inline: clamp(1rem, .5rem + 2.5vw, 2.5rem);
 }
 
 main > section:not(:empty) {
-  padding-block: clamp(2.75rem, 1.5rem + 3vw, 4.5rem);
+  padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem);
 }
 
 /* ------------------------------------------------------------- masthead
@@ -93,9 +93,9 @@ main > section:not(:empty) {
    banner: a motif used twice on one screen is a pattern, not a mark. */
 
 .masthead {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
   gap: .5rem clamp(.75rem, .4rem + 1.4vw, 2rem);
   padding-block: 1rem 1.25rem;
   border-bottom: 2px solid var(--wood-rim);
@@ -103,13 +103,14 @@ main > section:not(:empty) {
 
 .masthead__mark {
   margin: 0;
+  margin-inline-end: auto;
   font-size: 0;
   line-height: 0;
 }
 
 .wordmark {
   display: block;
-  height: clamp(2.8rem, 2rem + 2.8vw, 3.9rem);
+  height: clamp(2.5rem, 1.9rem + 2.6vw, 3.5rem);
   width: auto;
 }
 
@@ -127,7 +128,6 @@ main > section:not(:empty) {
 .masthead__nav {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
   gap: .35rem 1.1rem;
   font-family: var(--display);
   font-size: .95rem;
@@ -145,52 +145,6 @@ main > section:not(:empty) {
   color: var(--ink);
   border-bottom-color: var(--brass);
 }
-
-@media (max-width: 44rem) {
-  .masthead {
-    grid-template-columns: 1fr auto;
-    align-items: start;
-  }
-
-  .masthead__nav {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: .25rem;
-    width: 100%;
-  }
-
-  .masthead__nav a { text-align: center; }
-  .masthead__locale { grid-column: 2; grid-row: 1; }
-}
-
-/* The page alternates tactile counter sections with framed boards. This is
-   intentionally quiet: the hand-drawn rigs remain the visual event. */
-#roster,
-#art,
-#studio {
-  margin-block: clamp(1.5rem, 1rem + 2vw, 2.5rem);
-  background: var(--wood-dark);
-  border: 2px solid var(--wood-rim);
-  border-radius: 1rem;
-  box-shadow: 0 1rem 2rem color-mix(in srgb, var(--wood-dark) 65%, transparent);
-}
-
-#howto,
-#play {
-  margin-block: clamp(1.5rem, 1rem + 2vw, 2.5rem);
-  background: var(--paper);
-  color: var(--paper-ink);
-  border: 2px solid var(--wood-rim);
-  border-radius: 1rem;
-  box-shadow: 0 1rem 2rem color-mix(in srgb, var(--wood-dark) 55%, transparent);
-}
-
-#howto .howto__intro,
-#howto .howto__step-body,
-#play .play__lede,
-#play .play__hint { color: var(--wood-dark); }
 
 /* --------------------------------------------------------------- footer */
 
@@ -233,4 +187,65 @@ main > section:not(:empty) {
     transition-duration: .01ms !important;
     transition-delay: 0ms !important;
   }
+}
+
+/* ----------------------------------------------------------- legal pages
+   Task T9. The privacy policy (`privacy/index.html`) and the strip that
+   links to it. Both live here rather than in a stylesheet of their own: a
+   fourth `<link>` for two dozen declarations would cost the policy page an
+   extra request to say nothing the shell's own measure does not already say.
+
+   `.legal-page` restates the one column `main > section` gives every other
+   page, because the policy is prose straight into `<main>` — it has no
+   sections to inherit it through, and running body text the full width of a
+   desktop window is unreadable at any typeface. Narrower than 68rem on
+   purpose: this is the only page on the site somebody reads a paragraph at a
+   time. */
+
+.legal-page {
+  width: 100%;
+  max-width: 46rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, .5rem + 2.5vw, 2.5rem);
+  padding-block: clamp(2rem, 1.25rem + 3vw, 3.5rem);
+}
+
+.legal__title {
+  margin: 0;
+  margin-inline-end: auto;
+  font-family: var(--display);
+}
+
+.legal__lede { font-size: 1.05rem; }
+.legal__updated { color: var(--dim); font-size: .9rem; }
+
+.legal-page h2 {
+  margin-block: 2rem .75rem;
+  font-size: clamp(1.15rem, 1rem + .7vw, 1.5rem);
+}
+
+.legal-page ul { margin: 0 0 1rem; padding-inline-start: 1.25rem; }
+.legal-page li { margin-block-end: .4rem; }
+
+/* The strip under the colophon, on the home page.
+
+   A sibling of `footer.colophon` rather than a line inside it, and the
+   reason is recorded because it is not a design preference: the colophon
+   carries two committed baselines (`footer.png`, `footer-tr.png`) and the
+   task that added this link had no budget to look at a re-baselined picture.
+   Minting one unseen is the exact thing `.claude/gates.md` says this repo's
+   tiers exist to prevent, so the link went where it could be added without
+   claiming a picture nobody had reviewed. It is a real, visible, tabbable
+   line under the footer rule — not a hidden one — and if the colophon is
+   ever re-baselined for another reason, folding this into it is a two-line
+   change. */
+
+.legal {
+  width: 100%;
+  max-width: 68rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, .5rem + 2.5vw, 2.5rem);
+  padding-block-end: 2rem;
+  color: var(--dim);
+  font-size: .9rem;
 }

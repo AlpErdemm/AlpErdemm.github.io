@@ -113,24 +113,42 @@ describe('the English roster', () => {
     }
   });
 
-  it('keeps Turkish unchanged from the game\'s own shipped copy', () => {
-    const site = siteContent('tr');
-    const game = gameContent('tr');
-    for (const id of unitIds()) {
-      expect(site[`content.unit.${id}.name`], `content.unit.${id}.name`).toBe(game[`content.unit.${id}.name`]);
-      expect(site[`content.unit.${id}.flavor`], `content.unit.${id}.flavor`).toBe(game[`content.unit.${id}.flavor`]);
-    }
-    for (const id of ORIGIN_IDS) {
-      expect(site[`content.origin.${id}.name`], `content.origin.${id}.name`).toBe(game[`content.origin.${id}.name`]);
-      expect(site[`content.origin.${id}.description`], `content.origin.${id}.description`).toBe(
-        game[`content.origin.${id}.description`],
-      );
-    }
-    for (const id of ROLE_IDS) {
-      expect(site[`content.role.${id}.name`], `content.role.${id}.name`).toBe(game[`content.role.${id}.name`]);
-      expect(site[`content.role.${id}.description`], `content.role.${id}.description`).toBe(
-        game[`content.role.${id}.description`],
-      );
+  /**
+   * **The site's locales are a subset of the game's, and a faithful one.**
+   *
+   * `site/locales/{en,tr}/content.json` is hand-maintained — there is no
+   * script behind it — and it carries 192 of the game's 458 keys. Subset is
+   * fine and deliberate: the promo site needs the roster, not the tooltips.
+   * *Divergence* is not fine. A string the site shows and the game does not
+   * say is a second, contradicting copy of content that has exactly one
+   * canonical home, and nothing here noticed it.
+   *
+   * The direction matters. This asserts that every key the site *has* is a
+   * key the game has, with the same value — not that the site has every key,
+   * which would forbid the subset. Coverage is the roster check above's job.
+   *
+   * It subsumes the old per-id Turkish comparison, which walked the same
+   * ground for one locale and one hand-listed set of key shapes.
+   */
+  it('is a faithful subset of the game\'s own shipped copy', () => {
+    for (const loc of ['en', 'tr']) {
+      const site = siteContent(loc);
+      const game = gameContent(loc);
+      const keys = Object.keys(site);
+      expect(keys.length, `${loc}: the site mirror is empty`).toBeGreaterThan(0);
+
+      for (const key of keys) {
+        expect(
+          Object.hasOwn(game, key),
+          `${loc}: the site says "${key}" and locales/${loc}/content.json has no such key — ` +
+            'the site is showing a string the game does not',
+        ).toBe(true);
+        expect(
+          site[key],
+          `${loc}: "${key}" has drifted from the game's copy — the game is canonical, ` +
+            `so copy locales/${loc}/content.json's value into site/locales/${loc}/content.json`,
+        ).toBe(game[key]);
+      }
     }
   });
 });

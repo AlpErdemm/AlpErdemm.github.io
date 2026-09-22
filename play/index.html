@@ -7,39 +7,63 @@
     <!-- The tomato, drawn by the emoji font — a favicon with no asset. -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🍅%3C/text%3E%3C/svg%3E" />
     <!--
-      The Poki HTML5 SDK: a script tag, not an npm package - there is no
-      package to install, which is why this sprint never opens package.json.
-
-      This is one of only two external origins permitted anywhere in the
-      build; everything else - fonts, art, audio, libraries - is bundled,
-      because Poki blocks external requests by default. Deliberately *not*
-      `async` or `defer`: `src/poki/sdk.ts` reads `window.PokiSDK` only after
-      `main.tsx` starts, and a race between this tag and boot would silently
-      ship a game with no ads and no gameplay events rather than a broken one
-      anybody would notice.
+      No portal SDK tag lives here. The one the submission needs is injected
+      into `dist/index.html` at build time by `vite.config.ts`, so this
+      document - the dev server's, the visual suite's, and the marketing
+      site's embed - loads no third-party script at all. That is ADR-0008's
+      point rather than a convenience: the wrapper's no-SDK path is the one
+      every local run and every test exercises, so it cannot rot.
     -->
     <style>
       /*
-        The loading screen (Task M5). Poki asks for a progress bar and
-        something worth looking at "to prevent players from thinking the
-        game is frozen" - today's alternative is a blank #root for the
-        length of the first download. Inlined here, in <head>, so it paints
-        before any script parses and never waits on ui.css.
+        The loading screen (Task M5). A portal asks for a progress bar and
+        something worth looking at, to keep a player from thinking the game
+        is frozen - today's alternative is a blank #root for the length of
+        the first download. Inlined here, in <head>, so it paints before any
+        script parses and never waits on a stylesheet.
 
-        Palette values are duplicated from ui.css's --wood/--brass/--paper
-        tokens rather than read from them - deliberately, and this is the
-        one place in the app allowed to drift from that file, because this
-        markup has to survive with zero CSS loaded at all. No studio
-        branding and no splash: Poki permits a logo here and nothing else,
-        and this build has no logo to show.
+        Palette values are spelled out here rather than read from
+        src/ui/tokens.css, because this markup has to survive with zero CSS
+        loaded at all — but they are the design tokens' own hexes (stall,
+        panelWell, chalk, terracottaLit from src/design/tokens.ts), and
+        src/ui/uiCss.test.ts holds them to that, so the first frame and the
+        stall behind it are one colour. Since decision 3 that colour is the
+        counter itself, the same timber the canvas paints past the tray's
+        edge. No studio branding and no splash: a loading screen is allowed a
+        logo and nothing else, and this build has no logo to show.
+
+        The text is chalk rather than cream because cream on the bare counter
+        is 4.02:1 and this line is 15px — under the large threshold, so it
+        owes 4.5. The bar's fill is the lit clay for the same reason: the
+        terracotta of the sign is 1.1:1 against the counter and would be a
+        progress bar nobody could see move.
+
+        Progress is shown twice — the bar's fill and the figure under it —
+        so a player on a slow connection can see the number move even when
+        the bar's growth per rig is under a pixel.
       */
       #boot {
         position: fixed;
         inset: 0;
         display: flex;
+        flex-direction: column;
+        gap: 8px;
         align-items: center;
         justify-content: center;
-        background: #52402f;
+        background: #96633A;
+        color: #FBF6EC;
+        /*
+          The `label` step spelled out — 15/20 at 600 — for the same reason the
+          colours above are: this markup has to paint with zero CSS loaded.
+          The family is `TYPE.family.sans`, character for character, and
+          `src/ui/uiCss.test.ts` holds it to that. It was the mono stack until
+          ticket 18 retired the mono family; the progress figure keeps its
+          tabular numerals, which is the half of that face the line actually
+          needed — a percentage that re-measures itself as it counts up is the
+          one thing a progress readout must not do.
+        */
+        font: 600 15px/20px system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-variant-numeric: tabular-nums;
       }
       #boot__track {
         width: 33vw;
@@ -47,19 +71,18 @@
         max-width: 220px;
         height: 10px;
         border-radius: 5px;
-        background: #4a3722;
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        background: #2E2416;
         overflow: hidden;
       }
       #boot__fill {
         height: 100%;
         width: 0%;
-        background: linear-gradient(180deg, #f0c368, #c9973f);
+        background: #E58F6E;
         transition: width 0.15s ease-out;
       }
     </style>
-    <script type="module" crossorigin src="./assets/index-Dq9uYoGV.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CTVa7QII.css">
+    <script type="module" crossorigin src="./assets/index-DY9k35KR.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BJa7_N8m.css">
   </head>
   <body>
     <div id="root">
@@ -70,7 +93,8 @@
       -->
       <div id="boot" data-loading>
         <div id="boot__track"><div id="boot__fill"></div></div>
+        <div id="boot__pct" aria-live="polite">0%</div>
       </div>
-    </div>
+    </div>
   </body>
 </html>

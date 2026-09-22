@@ -1,0 +1,114 @@
+<!-- Kurtlu Lahana (Wormy Cabbage) - Crawling Crate - Spoil - melee, leaf
+     attackSpeed 0.86 -> round(20/0.86) = 23 ticks = 1.15 s
+     The Region's lesser boss, Stop 30.
+
+     **A vegetable, not a pest, and that is deliberate.** The Region's ten
+     ordinary bodies are what got into the crate; the two that stand at the
+     landmarks are what they got into - exactly as the Burnt Oven's ten are
+     fire and smoke while Kavruk and Yanik Somun are the food the fire
+     ruined. A reader who notices the inconsistency should find the reason
+     here rather than fix it.
+
+     So this is the first body of the family drawn green throughout, and the
+     read at board size is a big leafy ball with its outer leaves flared
+     open and holes eaten through them. The holes are the tell: without them
+     it is a cabbage, with them it is a cabbage something lives in.
+
+     Archetype `swing`: an outer leaf comes across in a wide arc. `WEAPON
+     kurtlulahana [120, 52]` is the torn edge at the top of that swing -
+     the highest weapon point in the family, because this body is the
+     tallest thing the player has met from it by Stop 30.
+
+     Kavruk is a statline and so is this: the most hit points and the
+     heaviest blow the Crawling Crate owns, and nothing the player has not
+     already seen a smaller version of. The wall is the other one.
+
+     Mass = the head, x 12..92 (80 wide), y 36..120 (84 tall), ratio 1.05 -
+     the largest mass of the twelve. Eye y 74 = 45% of the mass. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="swing" data-unit="kurtlulahana" style="--dur-atk:1.15s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="32" ry="6.5" fill="#241A10" opacity=".32"/>
+
+  <g class="armB" style="transform-origin:24px 88px">
+    <path d="M24 88 L16 95" stroke="#241A10" stroke-width="12" stroke-linecap="round"/>
+    <path d="M24 88 L16 95" stroke="#3F5222" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="14" cy="96" r="6" fill="#5E7A34" stroke="#241A10" stroke-width="3"/>
+  </g>
+
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 110 L39 123" stroke="#241A10" stroke-width="14" stroke-linecap="round"/>
+    <path d="M44 110 L39 123" stroke="#3F5222" stroke-width="10" stroke-linecap="round"/>
+    <path d="M29 125 Q25 130 29 134 L43 134 Q45 129 42 124 Z"
+          fill="#5E7A34" stroke="#241A10" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 110 L67 123" stroke="#241A10" stroke-width="14" stroke-linecap="round"/>
+    <path d="M62 110 L67 123" stroke="#3F5222" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 124 Q59 129 63 134 L77 134 Q79 130 76 125 Z"
+          fill="#5E7A34" stroke="#241A10" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+
+  <g class="body">
+    <!-- The flared outer leaves, drawn first so the head covers their bases.
+         Three, at three sizes, all leaning off-centre. -->
+    <path d="M30 70 Q16 58 14 44 Q27 45 36 58 Z"
+          fill="#3F5222" stroke="#241A10" stroke-width="3.4" stroke-linejoin="round"/>
+    <path d="M52 56 Q48 40 56 28 Q66 38 64 56 Z"
+          fill="#3F5222" stroke="#241A10" stroke-width="3.4" stroke-linejoin="round"/>
+    <path d="M74 70 Q88 60 92 46 Q78 48 68 60 Z"
+          fill="#3F5222" stroke="#241A10" stroke-width="3.4" stroke-linejoin="round"/>
+
+    <!-- The head: fill, crescent, gleam, ink. -->
+    <path d="M52 50 Q78 52 87 74 Q94 96 80 112 Q68 122 52 120 Q36 122 24 112 Q10 96 17 74 Q26 52 52 50 Z"
+          fill="#5E7A34"/>
+    <path d="M87 74 Q94 96 80 112 Q68 122 52 120 L52 113 Q70 113 79 102 Q88 90 82 74 Z"
+          fill="#3F5222"/>
+    <path d="M30 66 Q22 78 21 90" fill="none" stroke="#7FA046" stroke-width="5.5" stroke-linecap="round"/>
+    <path d="M52 50 Q78 52 87 74 Q94 96 80 112 Q68 122 52 120 Q36 122 24 112 Q10 96 17 74 Q26 52 52 50 Z"
+          fill="none" stroke="#241A10" stroke-width="4" stroke-linejoin="round"/>
+
+    <!-- Leaf veins, three, fanning from the crown and unevenly spaced. -->
+    <path d="M52 52 Q40 74 34 106" fill="none" stroke="#7FA046" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M56 52 Q58 78 56 118" fill="none" stroke="#7FA046" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M62 54 Q74 76 76 104" fill="none" stroke="#7FA046" stroke-width="3.2" stroke-linecap="round"/>
+
+    <!-- The holes. Three, all different sizes, off the centre line: this is
+         what makes the body a boss of a pest family rather than a cabbage. -->
+    <ellipse cx="34" cy="94" rx="6" ry="5" fill="#241A10" opacity=".8"/>
+    <ellipse cx="70" cy="100" rx="4.4" ry="3.8" fill="#241A10" opacity=".8"/>
+    <ellipse cx="62" cy="64" rx="3.4" ry="3" fill="#241A10" opacity=".8"/>
+
+    <path d="M34 62 L45 68 M59 68 L70 62" stroke="#241A10" stroke-width="3.6" stroke-linecap="round"/>
+    <ellipse cx="40" cy="74" rx="7" ry="8" fill="#A8C43A" stroke="#241A10" stroke-width="2.4"/>
+    <ellipse cx="64" cy="74" rx="7" ry="8" fill="#A8C43A" stroke="#241A10" stroke-width="2.4"/>
+    <ellipse cx="41.4" cy="75" rx="3.8" ry="5" fill="#241A10"/>
+    <ellipse cx="65.4" cy="75" rx="3.8" ry="5" fill="#241A10"/>
+    <circle cx="39" cy="71.2" r="1.7" fill="#FFFFFF"/>
+    <circle cx="63" cy="71.2" r="1.7" fill="#FFFFFF"/>
+    <path d="M42 90 Q52 84 62 90" stroke="#241A10" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+
+    <path class="crack" d="M32 62 L46 78 L34 92 L48 106 L36 118"
+          stroke="#241A10" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Front limb and the torn outer leaf as one part. The leaf rests at 66
+       degrees above horizontal, inside the roster's 58..78 band. -->
+  <g class="armF" style="transform-origin:80px 90px">
+    <path d="M80 90 L94 82" stroke="#241A10" stroke-width="12" stroke-linecap="round"/>
+    <path d="M80 90 L94 82" stroke="#3F5222" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="96" cy="81" r="6.5" fill="#5E7A34" stroke="#241A10" stroke-width="3"/>
+    <path d="M97 78 L106 64" stroke="#241A10" stroke-width="8" stroke-linecap="round"/>
+    <path d="M97 78 L105 65" stroke="#5E7A34" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M101 66 Q112 48 120 50 Q118 64 110 74 Q104 76 101 66 Z"
+          fill="#7FA046" stroke="#241A10" stroke-width="3.4" stroke-linejoin="round"/>
+    <path d="M106 66 Q110 60 114 56" fill="none" stroke="#3F5222" stroke-width="2.8" stroke-linecap="round"/>
+    <ellipse cx="112" cy="62" rx="3" ry="2.6" fill="#241A10" opacity=".8"/>
+  </g>
+
+  <g class="fx" style="transform-origin:120px 54px">
+    <path d="M120 42 L138 36 M120 54 L140 54 M120 66 L138 72"
+          stroke="#7FA046" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+    <path d="M126 42 L130 54 L126 66" fill="none" stroke="#A8C43A" stroke-width="2.4" stroke-linecap="round"/>
+  </g>
+</svg>

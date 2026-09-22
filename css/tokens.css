@@ -1,61 +1,84 @@
 /**
  * The palette, lifted from the game.
  *
- * Every value here is a byte-for-byte copy of a declaration in
- * `src/ui/ui.css`'s `:root` block, and `site/js/shell.test.ts` reads both
- * files and compares them so it stays that way. This is the whole reason the
+ * Every value here is a design token out of `src/ui/tokens.css`, which
+ * `src/design/tokens.ts` generates. `site/js/shell.test.ts` carries the
+ * mapping — this page's `--paper` is the game's `--kt-cream-panel` — and
+ * compares the two files, so it stays that way. This is the whole reason the
  * site and the game read as one object: the awning red on this page is not
  * "close to" the awning red in the screenshots beside it, it is the same
  * number.
+ *
+ * The names are the site's own. They are the vocabulary the game's stylesheet
+ * used to share, before ticket 01 collapsed its alias layer onto the token
+ * names; this page kept them because it is a marketing document with a cream
+ * ground and no stall to be wrong about, and renaming it buys nothing.
  *
  * Nothing else lives in this file. No layout, no type sizes, no components —
  * and the sibling test refuses any hex, `rgb()` or `hsl()` authored in any
  * other stylesheet under `site/css/`, for all six sprints.
  *
- * The game ships no web font, and neither does this page (binding rule 6).
- * The three stacks below are what the captures were taken in.
+ * **The game ships a web font now, and this page still does not** (binding
+ * rule 6, unchanged; shell polish T7). `--kt-font-display` names Baloo 2 in
+ * two self-hosted woff2 subsets with the serif stack behind it as its `swap`
+ * fallback — see style-bible §2. `--display` here is that fallback, exactly,
+ * which is what the captures were taken in and what rule 6 allows. So this is
+ * the one token the sibling test no longer copies straight across: it asserts
+ * the tail relationship instead, so a retuned serif still fails here.
+ *
+ * The cost is real and it is a divergence: the game's headings are rounded and
+ * this page's are a serif. Reversing it means either reversing rule 6 or
+ * accepting that the two surfaces are set in different faces, and that is a
+ * decision for whoever owns the site, not for a token file.
  */
 
 :root {
-  /* The stall counter — the page's ground. ui.css:30-32 */
-  --counter: #8a6a45;
-  --counter-plank: #7d5f3d;
-  --counter-seam: #63492a;
+  /* The stall counter — the page's ground. `--kt-cream` */
+  --counter: #F3E6CC;
+  --counter-plank: #F3E6CC;
+  --counter-seam: #F3E6CC;
 
-  /* The plank pitch the canvas and the page both count from. ui.css:33-34 */
+  /* The plank pitch this page's ground counts from. The game's stall is
+     painted by the canvas from `PALETTE.stall*` and keeps no pitch in CSS. */
   --plank-w: 48px;
   --plank-gap: 2px;
 
-  /* Frames and rims. ui.css:35-38 */
-  --wood: #795c3e;
-  --wood-dark: #52402f;
-  --wood-rim: #4a3722;
-  --wood-lit: #9a7748;
+  /* Frames and rims. `--kt-cream-well`, `--kt-ink`, `--kt-cream-panel` */
+  --wood: #EBD7B5;
+  --wood-dark: #EBD7B5;
+  --wood-rim: #2A2114;
+  --wood-lit: #FFF1DA;
 
-  /* The merge metals: silver, gold, and ice. ui.css:54, 55, 58 */
-  --star-2: #e9eef6;
-  --star-3: #f7d774;
-  --star-4: #7ef9ff;
+  /* The merge metals: silver, gold, and ice. `--kt-canvas-tier2/3/4` */
+  --star-2: #E9EEF6;
+  --star-3: #F7D774;
+  --star-4: #7EF9FF;
 
-  /* The enamel sign, and the awning above it. The signature motif. ui.css:74-75 */
-  --sign: #c8402f;
-  --sign-dark: #8f2a1d;
+  /* The enamel sign, and the awning above it. The signature motif.
+     `--kt-terracotta`, `--kt-terracotta-deep` */
+  --sign: #B83F28;
+  --sign-dark: #7E3020;
 
-  /* Paper: card and page surfaces, and the ink on them. ui.css:78, 80 */
-  --paper: #fdf6e6;
-  --paper-ink: #2a2114;
+  /* Paper: card and page surfaces, and the ink on them. `--kt-cream-panel`,
+     `--kt-ink` */
+  --paper: #FFF1DA;
+  --paper-ink: #2A2114;
 
-  /* Brass. Mana amber — accents and links. ui.css:84-85 */
-  --brass: #c9973f;
-  --brass-lit: #f0c368;
+  /* Brass. Accents and links — terracotta in the game, where it is the one
+     accent you press. `--kt-terracotta`, `--kt-terracotta-text` */
+  --brass: #B83F28;
+  --brass-lit: #8F4A2E;
 
-  /* Text on dark ground. ui.css:89-90 */
-  --ink: #fdf6e6;
-  --dim: #e0cba4;
+  /* Text: the one ink, and its dimmer secondary. `--kt-ink`, `--kt-ink-dim` */
+  --ink: #2A2114;
+  --dim: #655342;
 
-  /* Type. A serif for names, a mono for counts, system sans for the rest.
-     ui.css:92, 93, 97 */
+  /* Type. A serif for names, system sans for the rest — `--kt-font-display`,
+     `--kt-font-sans`. `--mono` is the site's own and is no longer lifted from
+     the game: ticket 18 retired the game's mono family, whose work was tabular
+     figures rather than a typewriter. Here it sets `<code>`, `<kbd>` and
+     `<samp>`, which want a monospace face for the ordinary reason. */
   --display: Georgia, "Iowan Old Style", "Times New Roman", serif;
-  --mono: Consolas, "SF Mono", ui-monospace, monospace;
-  --sans: "Segoe UI", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Consolas, Menlo, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }

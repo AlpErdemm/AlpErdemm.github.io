@@ -63,21 +63,72 @@ describe('the site skeleton', () => {
 });
 
 /**
- * The tokens the contract names, and the `src/ui/ui.css` line each is lifted
- * from. Line numbers are documentation — the test compares *values*, so it
- * keeps working when `ui.css` grows a paragraph, and fails the day somebody
+ * The tokens the contract names, and the design token in the game each is
+ * lifted from.
+ *
+ * **This used to read `src/ui/ui.css`.** The game's stylesheet carried a
+ * legacy alias layer — `--paper: var(--kt-cream-panel)` and forty more — and
+ * this file resolved one hop of it to reach a hex. Ticket 01 collapsed that
+ * layer onto the token names, so there is no alias left to resolve and the
+ * site's own names are the last place several of them survive. The comparison
+ * is made against `src/ui/tokens.css`, the sheet `src/design/tokens.ts`
+ * generates, which is where those values were coming from all along.
+ *
+ * That makes the mapping below the site's half of the contract, written out:
+ * the site keeps its own vocabulary (it is a marketing page, not the shell,
+ * and `--counter` is its ground) and each name says which of the game's
+ * numbers it is. The test compares *values*, so it fails the day somebody
  * retunes the awning red in the game and forgets the site sitting beside it.
  */
-const CONTRACT_TOKENS = [
-  'counter', 'counter-plank', 'counter-seam',   // ui.css:30-32
-  'wood', 'wood-dark', 'wood-rim', 'wood-lit',  // ui.css:35-38
-  'star-2', 'star-3', 'star-4',                 // ui.css:54, 55, 58
-  'sign', 'sign-dark',                          // ui.css:74-75
-  'paper', 'paper-ink',                         // ui.css:78, 80
-  'brass', 'brass-lit',                         // ui.css:84-85
-  'ink', 'dim',                                 // ui.css:89-90
-  'display', 'mono', 'sans',                    // ui.css:92, 93, 97
-] as const;
+const CONTRACT_TOKENS: Record<string, string> = {
+  'counter': 'kt-cream',
+  'counter-plank': 'kt-cream',
+  'counter-seam': 'kt-cream',
+  'wood': 'kt-cream-well',
+  'wood-dark': 'kt-cream-well',
+  'wood-rim': 'kt-ink',
+  'wood-lit': 'kt-cream-panel',
+  'star-2': 'kt-canvas-tier2',
+  'star-3': 'kt-canvas-tier3',
+  'star-4': 'kt-canvas-tier4',
+  'sign': 'kt-terracotta',
+  'sign-dark': 'kt-terracotta-deep',
+  'paper': 'kt-cream-panel',
+  'paper-ink': 'kt-ink',
+  'brass': 'kt-terracotta',
+  'brass-lit': 'kt-terracotta-text',
+  'ink': 'kt-ink',
+  'dim': 'kt-ink-dim',
+  /*
+   * **`--display` has left the contract too, and for the opposite reason to
+   * `--mono` below** (shell polish T7).
+   *
+   * The game's `--kt-font-display` names a **webfont** now: Baloo 2, two
+   * self-hosted woff2 subsets, with the old Georgia stack still behind it as
+   * the `font-display: swap` fallback (style-bible §2). This page's **binding
+   * rule 6 is that it ships no web font**, and that rule is not this task's to
+   * reverse — the captures were taken in these stacks, and a marketing page
+   * that pulls 59KB of face to set six headings is the trade the rule exists
+   * to refuse.
+   *
+   * So the two strings cannot be equal any more, and forcing them would mean
+   * either naming a face this page does not serve or breaking rule 6. What
+   * replaces the equality is the *true* relationship, asserted below rather
+   * than dropped: the site's stack is the game's stack **with its webfont
+   * taken off the front**. That still fails the day somebody retunes the
+   * serif in `tokens.ts`, which is the whole job this row was doing.
+   */
+  /*
+   * **`--mono` has left the contract, because the game no longer has that
+   * family.** Ticket 18 retired `TYPE.family.mono`: the shell's figures are the
+   * sans with tabular numerals now, and a token that resolves to a face nothing
+   * in the game asks for is exactly the alias layer the note above describes.
+   * The site keeps its own `--mono` — it sets `<code>`, `<kbd>` and `<samp>`,
+   * which is a monospace use in the plain sense and not a game surface — and it
+   * is the site's number to tune from here, like `--counter` already is.
+   */
+  'sans': 'kt-font-sans',
+};
 
 /** Pull `--name: value;` pairs out of the first `:root { … }` block. */
 function rootTokens(css: string): Map<string, string> {
@@ -93,13 +144,40 @@ function rootTokens(css: string): Map<string, string> {
 
 describe('the site palette is the game palette', () => {
   it('every token matches the game', () => {
-    const game = rootTokens(readFileSync(new URL('../src/ui/ui.css', SITE), 'utf8'));
+    const kt = rootTokens(readFileSync(new URL('../src/ui/tokens.css', SITE), 'utf8'));
     const site = rootTokens(readFileSync(new URL('css/tokens.css', SITE), 'utf8'));
-    expect(game.size, 'the ui.css :root scan found nothing — the regex is broken').toBeGreaterThan(20);
-    for (const name of CONTRACT_TOKENS) {
-      expect(game.has(name), `--${name} is not declared in ui.css`).toBe(true);
-      expect(site.get(name), `--${name} disagrees with the game`).toBe(game.get(name));
+    expect(kt.size, 'the tokens.css :root scan found nothing — the regex is broken').toBeGreaterThan(
+      20,
+    );
+    for (const [name, token] of Object.entries(CONTRACT_TOKENS)) {
+      expect(kt.has(token), `--${token} is not declared in the game's tokens.css`).toBe(true);
+      expect(site.get(name), `--${name} disagrees with the game's --${token}`).toBe(kt.get(token));
     }
+  });
+
+  /**
+   * The display stack, which is the one token the site cannot simply copy —
+   * see `CONTRACT_TOKENS`. The game's names a webfont in front; binding rule 6
+   * says this page serves none; so the claim is that the site's stack is the
+   * game's fallback exactly, and that the game's addition is a single face.
+   */
+  it("sets its display stack to the game's, less the webfont rule 6 forbids", () => {
+    const kt = rootTokens(readFileSync(new URL('../src/ui/tokens.css', SITE), 'utf8'));
+    const site = rootTokens(readFileSync(new URL('css/tokens.css', SITE), 'utf8'));
+    const game = kt.get('kt-font-display')!;
+    const here = site.get('display')!;
+    expect(game, "the game's display token is gone").toBeTruthy();
+    expect(
+      game.endsWith(here),
+      `--display is "${here}" and the game's is "${game}" — the site's stack has to be the ` +
+        "game's fallback tail exactly, so a retuned serif still fails here",
+    ).toBe(true);
+    // And the difference is one face, not a divergent stack: the game may put
+    // a webfont in front of the shared fallback and nothing else.
+    const front = game.slice(0, game.length - here.length).replace(/,\s*$/, '').trim();
+    expect(front.split(',').filter(Boolean), `the game adds more than one face: ${front}`)
+      .toHaveLength(1);
+    expect(here, 'this page has grown a face of its own').not.toContain('Baloo');
   });
 
   it('defines no colour outside tokens.css', () => {

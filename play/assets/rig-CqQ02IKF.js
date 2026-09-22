@@ -1,0 +1,81 @@
+const e=`<!-- Yosun (Moss) . Damp Cellar . Spoil . melee, a fistful of growth
+     attackSpeed 1.16 > round(20/1.16) = 17 ticks = 0.85 s
+
+     Archetype \`punch\`, Nem's and the Foam's: nothing is held, so the hand is
+     the whole of it.
+
+     \`WEAPON yosun [114, 91]\` is the front knuckle.
+
+     Silhouette: the tufted crown. A broad mound whose entire top edge is a
+     row of seven upright tufts at seven heights, so it breaks upward along
+     the whole width rather than in one cluster. The Foam's three bubbles are
+     a group over one shoulder; this is a hedge.
+
+     Mass x 16..88, y 28..118. Materials 2 / fills 4: moss 3E5A36 6E8F55
+     A8C583 * brass eye F2C46A. Two growth lines, one gleam (upper left), one
+     crescent (lower right). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="punch" data-unit="yosun" style="--dur-atk:0.85s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="30" ry="6" fill="#2A2114" opacity=".32"/>
+
+  <g class="armB" style="transform-origin:30px 93px">
+    <path d="M30 93 L22 99" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>
+    <path d="M30 93 L22 99" stroke="#3E5A36" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="19" cy="102" r="6.5" fill="#6E8F55" stroke="#2A2114" stroke-width="3"/>
+  </g>
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 108 L41 124" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M44 108 L41 124" stroke="#3E5A36" stroke-width="10" stroke-linecap="round"/>
+    <path d="M31 124 Q26 129 29 134 L44 134 Q46 128 42 123 Z"
+          fill="#6E8F55" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 108 L65 124" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M62 108 L65 124" stroke="#3E5A36" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 123 Q60 128 62 134 L77 134 Q79 129 74 124 Z"
+          fill="#6E8F55" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="body">
+    <!-- The tufts first, so the mound covers where they are seated. Seven at
+         seven heights: a level row would read as a comb. -->
+    <path d="M22 50 L26 30 L32 46 L38 28 L44 44 L50 26 L56 42 L62 30 L68 46 L74 32 L80 50 Z"
+          fill="#A8C583" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- The mound: fill, crescent, the growth lines, a gleam, then the ink. -->
+    <path d="M18 96 Q16 62 40 50 L64 50 Q88 62 86 96 Q88 118 64 118 L40 118 Q16 118 18 96 Z" fill="#6E8F55"/>
+    <path d="M86 96 Q88 118 64 118 L52 118 L52 112 L64 112 Q80 112 80 96 L80 68 Q74 56 62 52 Q86 62 86 96 Z" fill="#3E5A36"/>
+    <path d="M24 86 Q52 92 80 86 M28 102 Q52 108 76 102" fill="none" stroke="#3E5A36" stroke-width="3" stroke-linecap="round"/>
+    <path d="M28 64 Q24 76 28 88" fill="none" stroke="#A8C583" stroke-width="5" stroke-linecap="round"/>
+    <path d="M18 96 Q16 62 40 50 L64 50 Q88 62 86 96 Q88 118 64 118 L40 118 Q16 118 18 96 Z" fill="none" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>
+
+    <path d="M34 74 L46 76 M58 76 L70 74" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="41" cy="86" rx="5.6" ry="6.44" fill="#F2C46A" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="63" cy="86" rx="5.6" ry="6.44" fill="#F2C46A" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="42.4" cy="87" rx="3.05" ry="4.07" fill="#2A2114"/>
+    <ellipse cx="64.4" cy="87" rx="3.05" ry="4.07" fill="#2A2114"/>
+    <circle cx="40" cy="83.4" r="1.6" fill="#FFFFFF"/>
+    <circle cx="62" cy="83.4" r="1.6" fill="#FFFFFF"/>
+    <path d="M46 99 Q52 103 58 99" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path class="crack" d="M38 58 L50 72 L40 86 L52 100 L42 116"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+  <g class="armF" style="transform-origin:78px 93px">
+    <path d="M78 93 L96 91" stroke="#2A2114" stroke-width="16" stroke-linecap="round"/>
+    <path d="M78 93 L96 91" stroke="#6E8F55" stroke-width="12" stroke-linecap="round"/>
+    <!-- The forward fist, with the growth closed inside it. -->
+    <circle cx="104" cy="91" r="10" fill="#6E8F55" stroke="#2A2114" stroke-width="3"/>
+    <path d="M100 83 Q104 91 100 99" fill="none" stroke="#2A2114" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="106" cy="87" r="2.2" fill="#3E5A36"/>
+  </g>
+
+  <g class="fx" style="transform-origin:117px 91px">
+    <path d="M117 79 L135 69 M121 91 L139 91 M117 103 L135 113"
+          stroke="#6E8F55" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+    <path d="M117 79 L129 74 M121 91 L133 91 M117 103 L129 108"
+          stroke="#A8C583" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="133" cy="73" r="2.6" fill="#6E8F55"/>
+    <circle cx="135" cy="107" r="2.4" fill="#A8C583"/>
+  </g>
+</svg>
+`;export{e as default};
