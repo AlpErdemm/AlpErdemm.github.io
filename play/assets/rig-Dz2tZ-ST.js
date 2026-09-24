@@ -1,0 +1,116 @@
+const e=`<!-- Nar (Garnet) · Market 5 · Marksman · range 4, the shot scatters over the
+     target's neighbours
+     attackSpeed 0.83 → round(20/0.83) = 24 ticks = 1.20 s
+
+     Archetype \`stab\`, the Bagel's and the Popcorn's reasoning: a shouldered
+     barrel recoils, it does not throw. There is no \`ammo\` group; \`MUZZLE\` nar
+     fires from \`armF\` at (120, 92), the bell of the seed cannon, so the arils
+     leave the mouth of the gun rather than a held handful.
+
+     Redrawn for ticket 18 against docs/style-bible.md. Mass = one
+     pomegranate, an ellipse rx 33 ry 36 at (52, 78): x 19..85 (66 wide),
+     y 42..114 (72 tall), ratio 1.09; the calyx is the crown (y 25), drawn in
+     the shade value so the silhouette's top reads dark against the red at
+     40 px. The face sits on the red as the Meatball's sits on meat; eye
+     y 84 = 58% of the mass. The arils, the fruit's whole point, live where
+     the Garnet keeps them, in the cannon's hopper: three dots r 2.6 in the
+     pomegranate light on a dark cup, the smallest marks that still show on
+     the Board (§11.3). Materials 3 / fills 8: pomegranate C0392B 8E2A22
+     EE8C7A · leather 6E4A2A 4A3826 C9A66B · steel 8A8F98 C8CCD6 (leather and
+     steel are the cast's shared values: stock, belt, boots, barrel). The
+     belt boss in leather light is the Market's coin, worn by all four Market
+     rigs. One shade crescent (8E2A22, lower right), one gleam (EE8C7A, upper
+     left). Tint lines, one: the barrel glint. The cape, bandolier, apron
+     medallion, pouch and brass barrel bands went; at 40 px they were one
+     red-brown blur around a face that was too small to read. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="stab" data-unit="nar" style="--dur-atk:1.20s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="28" ry="6" fill="#2A2114" opacity=".32"/>
+
+  <g class="armB" style="transform-origin:30px 94px">
+    <path d="M30 94 L24 104" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>
+    <path d="M30 94 L24 104" stroke="#C0392B" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="23" cy="107" r="6" fill="#C0392B" stroke="#2A2114" stroke-width="3"/>
+  </g>
+
+  <!-- Legs and boots are the cast's shared construction (style bible §6):
+       from y 104 to 126 off pivots x 44 / 62, soles flat on 136, boots 16 × 11. -->
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 104 L41 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M44 104 L41 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>
+    <path d="M31 126 Q26 131 29 136 L44 136 Q46 130 42 125 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 104 L65 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M62 104 L65 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 125 Q60 130 62 136 L77 136 Q79 131 74 126 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+
+  <g class="body">
+    <!-- The calyx behind the fruit's top, then the fruit, its crescent and gleam. -->
+    <path d="M40 48 L37 30 L45 37 L52 25 L59 37 L67 30 L64 48 Z"
+          fill="#8E2A22" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <ellipse cx="52" cy="78" rx="33" ry="36" fill="#C0392B" stroke="#2A2114" stroke-width="4"/>
+    <path d="M85 78 A33 36 0 0 1 52 114 A27 30 0 0 0 79 78 Z" fill="#8E2A22"/>
+    <path d="M25 70 Q26 60 32 53" fill="none" stroke="#EE8C7A" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- The cast face (style bible §5), eye y 84. -->
+    <path d="M32 72 L44 74 M60 74 L72 72" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="39" cy="84" rx="6.6" ry="7.6" fill="#FFFFFF" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="65" cy="84" rx="6.6" ry="7.6" fill="#FFFFFF" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="40.4" cy="85" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <ellipse cx="66.4" cy="85" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <circle cx="38" cy="81.4" r="1.6" fill="#FFFFFF"/>
+    <circle cx="64" cy="81.4" r="1.6" fill="#FFFFFF"/>
+    <path d="M44 97 Q52 102 60 97" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- The belt at the hem, with the Market's coin as its boss. -->
+    <path d="M25 103 Q52 112 79 103" fill="none" stroke="#2A2114" stroke-width="8" stroke-linecap="round"/>
+    <path d="M25 103 Q52 112 79 103" fill="none" stroke="#6E4A2A" stroke-width="4.5" stroke-linecap="round"/>
+    <circle cx="52" cy="108" r="4" fill="#C9A66B" stroke="#2A2114" stroke-width="2.3"/>
+
+    <g data-expression="cute">
+      <path d="M32 74 Q38 69 44 74 M60 74 Q66 69 72 74" fill="none" stroke="#C0392B" stroke-width="7" stroke-linecap="round"/>
+      <path d="M32 74 Q38 69 44 74 M60 74 Q66 69 72 74" fill="none" stroke="#2A2114" stroke-width="2.8" stroke-linecap="round"/>
+      <ellipse cx="31" cy="97" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/><ellipse cx="73" cy="97" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/>
+      <path d="M44 96 Q52 104 60 96 Q59 107 52 108 Q45 107 44 96 Z" fill="#3B211C" stroke="#2A2114" stroke-width="2.3"/>
+      <path d="M49 102 Q52 104 55 102" fill="none" stroke="#ED8A74" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <path class="crack" d="M34 52 L46 68 L36 84 L48 98 L38 110"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+
+  <!-- The seed cannon: leather stock, steel barrel, the aril hopper on top,
+       bell mouth at (120, 92). -->
+  <g class="armF" style="transform-origin:76px 94px">
+    <path d="M68 107 L92 99" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>
+    <path d="M68 107 L92 99" stroke="#6E4A2A" stroke-width="8" stroke-linecap="round"/>
+    <path d="M90 99 L118 93" stroke="#2A2114" stroke-width="10" stroke-linecap="round"/>
+    <path d="M90 99 L118 93" stroke="#8A8F98" stroke-width="6" stroke-linecap="round"/>
+    <path d="M96 96.3 L110 93.3" stroke="#C8CCD6" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M93 96 L109 93 L108 84 Q100 79 94 86 Z"
+          fill="#4A3826" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <g fill="#EE8C7A">
+      <circle cx="97.5" cy="90.5" r="2.6"/><circle cx="103.5" cy="89" r="2.6"/><circle cx="100.5" cy="85" r="2.6"/>
+    </g>
+    <ellipse cx="119" cy="92" rx="3.5" ry="8" fill="#8A8F98" stroke="#2A2114" stroke-width="3"/>
+    <path d="M76 94 L88 101" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>
+    <path d="M76 94 L88 101" stroke="#C0392B" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="90" cy="102" r="6" fill="#C0392B" stroke="#2A2114" stroke-width="3"/>
+    <circle cx="72" cy="106" r="6" fill="#C0392B" stroke="#2A2114" stroke-width="3"/>
+  </g>
+
+  <g class="fx" style="transform-origin:120px 92px">
+    <path d="M120 92 L136 85 M120 92 L139 93 M120 92 L135 100 M120 92 L129 79 M120 92 L128 104"
+          stroke="#E24B3B" stroke-width="4.6" stroke-linecap="round" opacity=".9"/>
+    <ellipse cx="121" cy="92" rx="6" ry="9" fill="#FFC9A0" opacity=".9"/>
+    <circle cx="132" cy="86" r="3" fill="#EE8C7A"/>
+    <circle cx="138" cy="96" r="2.6" fill="#EE8C7A"/>
+    <circle cx="130" cy="102" r="2.4" fill="#EE8C7A"/>
+  </g>
+</svg>
+`;export{e as default};

@@ -1,0 +1,133 @@
+const e=`<!-- Çay (Tea) · Treat 4 · Marksman · ranged (range 4)
+     attackSpeed 0.95 → round(20/0.95) = 21 ticks = 1.05 s
+
+     Archetype \`stab\`, not \`throw\`, for the reason the Sunbloom's header gives:
+     the bow arm has to stay planted, and the shared \`ATTACK_COMMON\` track
+     already draws the string (armB +16° back at 24%, -14° forward at 36%).
+     Two archers, one way of building a bow. The armB pivot (58, 86) is the
+     far shoulder, because the nock is right of centre. Bow, string and the
+     spoon arrow are one piece in \`armF\`; the spoon's bowl ends at (120, 80),
+     which is \`MUZZLE\` cay, so unitRig.ts needs no change.
+
+     Redrawn for ticket 19 against docs/style-bible.md. Mass = the tulip
+     glass, the cast's one hourglass: rim 66 wide at y 34, waist 50 at y 64,
+     belly 66 at y 90, foot 32 at y 110 — x 19..85, y 30..110 with the rim
+     ellipse, 66 × 80, ratio 1.21. Two steam ribbons are the crown (y 12).
+     Eye y 80 = 60% of the mass. The glass is drawn as the tea it holds: the
+     body is tea colour, a pale glass band above the tea line and the rim
+     ellipse say "glass". The bandana, the tea cape, the leaf epaulettes and
+     the silver tray went: at 40 px they were what hid the hourglass.
+     Materials 4 / fills 9: tea B84A2A 7E2A18 E08A5A · glass F0EAE0 ·
+     leather 6E4A2A 4A3826 C9A66B (bow, quiver, legs — the cast's shared
+     leather) · gold D9B23C F2D68A (the spoons; gold is the Treat batch's
+     accent, worn by the Tea and the Coffee). One shade crescent (7E2A18,
+     lower right), one gleam (E08A5A, upper left). Tint lines, one: the white
+     bowstring. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="stab" data-unit="cay" style="--dur-atk:1.05s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="28" ry="6" fill="#2A2114" opacity=".32"/>
+
+  <!-- Draw hand: rests on the nock at (78, 80). -->
+  <g class="armB" style="transform-origin:58px 86px">
+    <path d="M58 90 L67 85 L75 81" fill="none" stroke="#2A2114" stroke-width="12"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M58 90 L67 85 L75 81" fill="none" stroke="#B84A2A" stroke-width="8"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="77" cy="80" r="6" fill="#B84A2A" stroke="#2A2114" stroke-width="3"/>
+  </g>
+
+  <!-- Legs and boots are the cast's shared construction (style bible §6):
+       from y 104 to 126 off pivots x 44 / 62, soles flat on 136, boots 16 × 11. -->
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 104 L41 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M44 104 L41 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>
+    <path d="M31 126 Q26 131 29 136 L44 136 Q46 130 42 125 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 104 L65 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M62 104 L65 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 125 Q60 130 62 136 L77 136 Q79 131 74 126 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+
+  <g class="body">
+    <!-- Spoon quiver on the far hip, behind the glass: two gold spoons stand
+         in a leather case. Ink stays inside x ≥ 6. -->
+    <path d="M13 65 L13 52" stroke="#2A2114" stroke-width="7" stroke-linecap="round"/>
+    <path d="M13 65 L13 52" stroke="#D9B23C" stroke-width="3.5" stroke-linecap="round"/>
+    <ellipse cx="13" cy="47" rx="4" ry="5.5" fill="#D9B23C" stroke="#2A2114" stroke-width="2.5"/>
+    <path d="M20 63 L22 50" stroke="#2A2114" stroke-width="7" stroke-linecap="round"/>
+    <path d="M20 63 L22 50" stroke="#D9B23C" stroke-width="3.5" stroke-linecap="round"/>
+    <ellipse cx="22.5" cy="45" rx="4" ry="5.5" fill="#D9B23C" stroke="#2A2114" stroke-width="2.5"/>
+    <path d="M9 66 L23 62 L25 104 Q17 110 11 104 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M9.5 67 L23 63 L23.4 70 L9.9 74 Z" fill="#C9A66B"/>
+
+    <!-- The steam ribbons, the crown item. -->
+    <path d="M42 28 Q37 22 42 16 M62 28 Q67 22 62 16" fill="none" stroke="#2A2114"
+          stroke-width="8" stroke-linecap="round"/>
+    <path d="M42 28 Q37 22 42 16 M62 28 Q67 22 62 16" fill="none" stroke="#F0EAE0"
+          stroke-width="4" stroke-linecap="round"/>
+
+    <!-- The glass: tea mass, crescent, gleam, the glass band above the tea
+         line, then the rim. -->
+    <path d="M19 34 C19 48 27 56 27 64 C27 74 19 80 19 90 C19 102 28 110 36 110 L68 110
+             C76 110 85 102 85 90 C85 80 77 74 77 64 C77 56 85 48 85 34 Z"
+          fill="#B84A2A" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M77 62 C77 74 85 80 85 90 C85 102 76 110 68 110 L58 110 C68 108 79 100 79 90
+             C79 80 71 74 71 62 Z" fill="#7E2A18"/>
+    <path d="M31 50 Q30 57 32 64" fill="none" stroke="#E08A5A" stroke-width="5" stroke-linecap="round"/>
+    <path d="M19 34 C19 42 22 46 23 47 L81 47 C82 46 85 42 85 34 Z" fill="#F0EAE0"/>
+    <ellipse cx="52" cy="34" rx="33" ry="4" fill="#F0EAE0" stroke="#2A2114" stroke-width="3"/>
+    <ellipse cx="52" cy="34" rx="29" ry="2.2" fill="#7E2A18"/>
+
+    <!-- The cast face (style bible §5), eye y 80. -->
+    <path d="M32 68 L44 70 M60 70 L72 68" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="39" cy="80" rx="6.6" ry="7.6" fill="#FFFFFF" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="65" cy="80" rx="6.6" ry="7.6" fill="#FFFFFF" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="40.4" cy="81" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <ellipse cx="66.4" cy="81" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <circle cx="38" cy="77.4" r="1.6" fill="#FFFFFF"/>
+    <circle cx="64" cy="77.4" r="1.6" fill="#FFFFFF"/>
+    <path d="M44 93 Q52 98 60 93" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <g data-expression="cute">
+      <path d="M32 70 Q38 65 44 70 M60 70 Q66 65 72 70" fill="none" stroke="#B84A2A" stroke-width="7" stroke-linecap="round"/>
+      <path d="M32 70 Q38 65 44 70 M60 70 Q66 65 72 70" fill="none" stroke="#2A2114" stroke-width="2.8" stroke-linecap="round"/>
+      <ellipse cx="31" cy="93" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/><ellipse cx="73" cy="93" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/>
+      <path d="M44 92 Q52 100 60 92 Q59 103 52 104 Q45 103 44 92 Z" fill="#3B211C" stroke="#2A2114" stroke-width="2.3"/>
+      <path d="M49 98 Q52 100 55 98" fill="none" stroke="#ED8A74" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <path class="crack" d="M36 40 L48 54 L38 68 L50 82 L40 96"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Bow arm. Bow, string and the spoon arrow move as one; the spoon's bowl
+       ends at (120, 80). -->
+  <g class="armF" style="transform-origin:72px 92px">
+    <path d="M72 92 L98 90" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M72 92 L98 90" stroke="#B84A2A" stroke-width="10" stroke-linecap="round"/>
+
+    <path d="M96 42 C110 60 110 104 96 120" fill="none" stroke="#2A2114" stroke-width="9" stroke-linecap="round"/>
+    <path d="M96 42 C110 60 110 104 96 120" fill="none" stroke="#6E4A2A" stroke-width="5.5" stroke-linecap="round"/>
+    <path d="M96 42 L78 80 L96 120" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+
+    <path d="M78 80 L110 80" stroke="#2A2114" stroke-width="7" stroke-linecap="round"/>
+    <path d="M78 80 L110 80" stroke="#D9B23C" stroke-width="3.5" stroke-linecap="round"/>
+    <ellipse cx="114.5" cy="80" rx="5.5" ry="4" fill="#D9B23C" stroke="#2A2114" stroke-width="3"/>
+    <ellipse cx="114.5" cy="80" rx="2.6" ry="1.8" fill="#F2D68A"/>
+
+    <circle cx="102" cy="90" r="6.5" fill="#B84A2A" stroke="#2A2114" stroke-width="3"/>
+  </g>
+
+  <g class="fx" style="transform-origin:120px 80px">
+    <path d="M118 80 L146 78" stroke="#B84A2A" stroke-width="9" stroke-linecap="round" opacity=".5"/>
+    <path d="M120 80 L142 78.5" stroke="#E08A5A" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="130" cy="72" rx="2.8" ry="2.1" fill="#B84A2A"/>
+    <ellipse cx="136" cy="88" rx="2.6" ry="2" fill="#E08A5A"/>
+  </g>
+</svg>
+`;export{e as default};

@@ -1,0 +1,39 @@
+const n=`<!-- Kiler · Tarif · "Soğuk durur. Hiçbir şey bozulmaz."
+     Kiler kapağı: kalaslı ahşap kapı, üstünde sarkan buz saçağı, ortasında
+     çelik halka kilit.
+     24 px'te üç şey okunuyor — dikey kalaslı kapı, tepesindeki testere dişli
+     buz bandı, ve ortadaki halka.
+     Mühürlü Kazan'la karışmasın diye kap değil mimari: onun ağzı yuvarlak,
+     bunun her kenarı düz. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"
+     class="rig" data-recipe="kiler">
+
+  <!-- kapı gövdesi -->
+  <path d="M24 22 L96 22 L96 104 L24 104 Z"
+        fill="#89592F" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M48 26 L48 100 M72 26 L72 100" stroke="#6E4526" stroke-width="3.6"/>
+
+  <!-- çelik kuşaklar -->
+  <path d="M20 44 L100 44 L100 54 L20 54 Z"
+        fill="#C8CCD6" stroke="#2A2114" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="M20 84 L100 84 L100 94 L20 94 Z"
+        fill="#C8CCD6" stroke="#2A2114" stroke-width="3.2" stroke-linejoin="round"/>
+  <circle cx="28" cy="49" r="2.4" fill="#2A2114" opacity=".6"/>
+  <circle cx="92" cy="49" r="2.4" fill="#2A2114" opacity=".6"/>
+  <circle cx="28" cy="89" r="2.4" fill="#2A2114" opacity=".6"/>
+  <circle cx="92" cy="89" r="2.4" fill="#2A2114" opacity=".6"/>
+
+  <!-- halka kilit -->
+  <circle cx="60" cy="69" r="11" fill="none" stroke="#2A2114" stroke-width="9"/>
+  <circle cx="60" cy="69" r="11" fill="none" stroke="#C8CCD6" stroke-width="5"/>
+
+  <!-- buz saçağı -->
+  <path d="M24 22 L96 22 L96 32 L88 46 L80 32 L71 50 L62 32 L53 44 L44 32 L36 48 L28 32 Z"
+        fill="#D2E7E4" stroke="#2A2114" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="M36 32 L36 42 M62 32 L62 44" stroke="#7EF9FF" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- soğuk kıvılcımları -->
+  <path d="M12 62 L12 74 M6 68 L18 68" stroke="#7EF9FF" stroke-width="3.4" stroke-linecap="round"/>
+  <path d="M108 74 L108 84 M103 79 L113 79" stroke="#7EF9FF" stroke-width="3" stroke-linecap="round"/>
+</svg>
+`;export{n as default};

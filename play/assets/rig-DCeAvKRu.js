@@ -1,0 +1,119 @@
+const e=`<!-- Kahve (Coffee) · Treat 3 · Assassin · melee, twin coffee spoons
+     attackSpeed 0.83 → round(20/0.83) = 24 ticks = 1.20 s
+
+     Archetype \`swing\`, kept: the spoons rest pointing up and \`swing\`'s +56°
+     at contact brings the forward one level with the body it lands on (the
+     Chestnut's and the Okra's arithmetic). The forward spoon's point is
+     authored at (106, 58), which is \`WEAPON\` kahve, so unitRig.ts needs no
+     change; the rear spoon is armB's, reverse-gripped, pointing down and away
+     like the Dumpling's rear knife.
+
+     Redrawn for ticket 19 against docs/style-bible.md. Mass = one coffee cup:
+     rim 66 wide at y 40, tapering to 52 at the foot on y 110 — x 19..85,
+     y 34..110 with the rim ellipse, 66 × 76, ratio 1.15. There is no crown
+     item; the rim is the top. The handle on the right is the silhouette's
+     one asymmetry, the cloak on the left is the Assassin's. Eye y 82 = 63%
+     of the mass. The cup is porcelain, not the old dark-brown cezve body: on
+     a cream ground the ink face reads, and the coffee shows where coffee is,
+     in the cup. The cream body has no gleam (style bible §11.3); the one
+     gleam is spent on the coffee surface. Materials 4 / fills 8: porcelain
+     F1E6D2 CBB89A · coffee 3B1F14 7A4E2C (the coffee and the cloak) · gold
+     D9B23C F2D68A (rim, handle, clasp, spoons — the Treat batch's accent) ·
+     leather 6E4A2A 4A3826 (the cast's shared leather). One shade crescent
+     (CBB89A, lower right). Tint lines, none. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="swing" data-unit="kahve" style="--dur-atk:1.20s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="28" ry="6" fill="#2A2114" opacity=".32"/>
+
+  <!-- Rear arm and reverse-grip spoon; its bowl stops at x 7.5 (ink to 6). -->
+  <g class="armB" style="transform-origin:29px 91px">
+    <path d="M31 88 Q24 92 19 102" fill="none" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M31 88 Q24 92 19 102" fill="none" stroke="#F1E6D2" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="18" cy="104" r="6.5" fill="#F1E6D2" stroke="#2A2114" stroke-width="3"/>
+    <path d="M16 108 L13 118" stroke="#2A2114" stroke-width="8" stroke-linecap="round"/>
+    <path d="M16 108 L13 118" stroke="#D9B23C" stroke-width="4.5" stroke-linecap="round"/>
+    <ellipse cx="12" cy="123" rx="4.5" ry="6" fill="#D9B23C" stroke="#2A2114" stroke-width="3"/>
+  </g>
+
+  <!-- Legs and boots are the cast's shared construction (style bible §6):
+       from y 104 to 126 off pivots x 44 / 62, soles flat on 136, boots 16 × 11. -->
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 104 L41 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M44 104 L41 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>
+    <path d="M31 126 Q26 131 29 136 L44 136 Q46 130 42 125 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 104 L65 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M62 104 L65 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 125 Q60 130 62 136 L77 136 Q79 131 74 126 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+
+  <g class="body">
+    <!-- The cloak flies out behind the cup on the far side, so it is drawn
+         first; the handle too, so the cup covers its ends. -->
+    <path d="M26 52 Q8 66 9 104 Q16 110 25 104 L24 62 Z"
+          fill="#3B1F14" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M83 58 C99 56 99 88 80 88" fill="none" stroke="#2A2114" stroke-width="9" stroke-linecap="round"/>
+    <path d="M83 58 C99 56 99 88 80 88" fill="none" stroke="#D9B23C" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- The cup: mass, crescent, then the gold rim with the coffee in it. -->
+    <path d="M19 40 C20 64 22 82 26 100 C28 108 36 110 52 110 C68 110 76 108 78 100
+             C82 82 84 64 85 40 Z"
+          fill="#F1E6D2" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M84.5 48 C83.5 68 81.5 86 78 100 C76 108 68 110 52 110 L54 104 C64 104 70 102 72 96
+             C75.5 84 78 68 78.5 48 Z" fill="#CBB89A"/>
+    <ellipse cx="52" cy="40" rx="33" ry="6" fill="#D9B23C" stroke="#2A2114" stroke-width="3"/>
+    <ellipse cx="52" cy="40" rx="28" ry="4" fill="#3B1F14"/>
+    <path d="M34 40 Q42 37.5 50 37.5" fill="none" stroke="#7A4E2C" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="25" cy="52" r="4.5" fill="#D9B23C" stroke="#2A2114" stroke-width="3"/>
+
+    <!-- The cast face (style bible §5), eye y 82. -->
+    <path d="M32 70 L44 72 M60 72 L72 70" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="39" cy="82" rx="6.6" ry="7.6" fill="#FFFFFF" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="65" cy="82" rx="6.6" ry="7.6" fill="#FFFFFF" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="40.4" cy="83" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <ellipse cx="66.4" cy="83" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <circle cx="38" cy="79.4" r="1.6" fill="#FFFFFF"/>
+    <circle cx="64" cy="79.4" r="1.6" fill="#FFFFFF"/>
+    <path d="M44 95 Q52 100 60 95" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <g data-expression="cute">
+      <path d="M32 72 Q38 67 44 72 M60 72 Q66 67 72 72" fill="none" stroke="#F1E6D2" stroke-width="7" stroke-linecap="round"/>
+      <path d="M32 72 Q38 67 44 72 M60 72 Q66 67 72 72" fill="none" stroke="#2A2114" stroke-width="2.8" stroke-linecap="round"/>
+      <ellipse cx="31" cy="95" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/><ellipse cx="73" cy="95" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/>
+      <path d="M44 94 Q52 102 60 94 Q59 105 52 106 Q45 105 44 94 Z" fill="#3B211C" stroke="#2A2114" stroke-width="2.3"/>
+      <path d="M49 100 Q52 102 55 100" fill="none" stroke="#ED8A74" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <path class="crack" d="M36 46 L48 60 L38 74 L50 88 L40 104"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Forward arm and the dominant spoon; its point is exactly at (106, 58). -->
+  <g class="armF" style="transform-origin:74px 92px">
+    <path d="M74 92 L84 100" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M74 92 L84 100" stroke="#F1E6D2" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="86" cy="101" r="6.5" fill="#F1E6D2" stroke="#2A2114" stroke-width="3"/>
+    <path d="M88 98 L100 72" stroke="#2A2114" stroke-width="8" stroke-linecap="round"/>
+    <path d="M88 98 L100 72" stroke="#D9B23C" stroke-width="4.5" stroke-linecap="round"/>
+    <ellipse cx="103" cy="65" rx="5" ry="7.5" transform="rotate(24 103 65)"
+             fill="#D9B23C" stroke="#2A2114" stroke-width="3"/>
+    <ellipse cx="103" cy="65" rx="2.4" ry="4" transform="rotate(24 103 65)" fill="#F2D68A"/>
+  </g>
+
+  <g class="fx" style="transform-origin:100px 78px">
+    <path d="M82 42 Q126 76 86 116" fill="none" stroke="#3B1F14" stroke-width="11"
+          stroke-linecap="round" opacity=".4"/>
+    <path d="M84 46 Q122 77 88 112" fill="none" stroke="#7A4E2C" stroke-width="6"
+          stroke-linecap="round" opacity=".85"/>
+    <path d="M87 52 Q116 77 90 106" fill="none" stroke="#D9B23C" stroke-width="2.4"
+          stroke-linecap="round"/>
+    <circle cx="126" cy="64" r="2.8" fill="#3B1F14"/>
+    <circle cx="129" cy="88" r="2.4" fill="#7A4E2C"/>
+    <circle cx="122" cy="102" r="2.2" fill="#3B1F14"/>
+  </g>
+</svg>
+`;export{e as default};

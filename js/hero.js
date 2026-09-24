@@ -17,9 +17,9 @@
 
 import { at, hexToPixel, load } from './replay.js';
 
-/** Board geometry: `src/core/hex.ts` — five wide by eight deep (ADR-0001). */
-const BOARD_WIDTH = 5;
-const BOARD_HEIGHT = 8;
+/** Board geometry: `src/core/hex.ts` — seven wide by six deep (ADR-0027). */
+const BOARD_WIDTH = 7;
+const BOARD_HEIGHT = 6;
 
 /** Used only when `replay.json` cannot be fetched at all (U4). */
 const FALLBACK_HEX_SIZE = 26;

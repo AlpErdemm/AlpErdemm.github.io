@@ -1,0 +1,121 @@
+const t=`<!-- Bostan Korkuluğu (Scarecrow) · summon · melee
+     attackSpeed 0.87 → round(20/0.87) = 23 ticks = 1.15 s
+
+     A summon, not a shop Unit: \`units.ts\` keeps it in \`SUMMONS\` with no
+     origin, no role and no skill; the Garden's trait plants it. It is
+     \`range: 1\` and it walks, so it swings at things like any melee body.
+     Archetype \`swing\`: the staff rests upright at -64° and \`swing\`'s +56° at
+     contact brings its top level with the target. The staff's top is
+     \`WEAPON\` korkuluk [98, 26] and its geometry is unchanged.
+
+     Redrawn for ticket 20 against docs/style-bible.md. §6 says a Unit is a
+     single mass with a face on it and legs under it, and the old rig had
+     left the cast twice over: a separate sack head on a cross-pole torso,
+     with button eyes and a stitched mouth. Mass = one burlap sack, a
+     rounded rectangle x 21..83 (62 wide), y 36..110 (74 tall), ratio 1.19,
+     and the straw hat is the crown (cone top y 12, brim x 14..90). The
+     face is the cast's (§5: one eye set, worn by all): what says
+     "scarecrow" at 40 px is the hat, the crow on its brim, the cloth patch
+     and the straw poking from the hem and cuffs. The lantern and the
+     sunflowers went (a fifth material and marks under the §11.3 floor).
+     The legs are the cast's shared construction rather than straw poles:
+     it walks on the Board beside the rest of the cast. No gleam: burlap's
+     light value is under 40 RGB from its base (§11.3). Eye y 80 = 59% of
+     the mass. Materials 4 / fills 7: burlap C9A87A 9C7A4E · straw D9B86A ·
+     cloth 4A6E8A · leather 6E4A2A 4A3826 C9A66B. One crescent (9C7A4E,
+     lower right). Tint lines, none: the straw tufts are 4-wide bands. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="swing" data-unit="korkuluk" style="--dur-atk:1.15s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="26" ry="6" fill="#2A2114" opacity=".32"/>
+
+  <!-- Rear arm: a straw-stuffed sleeve; the hand stops at x 8 (ink to 6.5). -->
+  <g class="armB" style="transform-origin:28px 74px">
+    <path d="M28 74 L16 78" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>
+    <path d="M28 74 L16 78" stroke="#C9A87A" stroke-width="8" stroke-linecap="round"/>
+    <path d="M18 72 L20 66 M22 72 L26 66" stroke="#D9B86A" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="14" cy="79" r="6" fill="#C9A87A" stroke="#2A2114" stroke-width="3"/>
+  </g>
+
+  <!-- Legs and boots are the cast's shared construction (style bible §6):
+       from y 104 to 126 off pivots x 44 / 62, soles flat on 136, boots 16 × 11. -->
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 104 L41 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M44 104 L41 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>
+    <path d="M31 126 Q26 131 29 136 L44 136 Q46 130 42 125 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 104 L65 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M62 104 L65 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 125 Q60 130 62 136 L77 136 Q79 131 74 126 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+
+  <g class="body">
+    <!-- Straw at the hem first, so the sack covers its roots. -->
+    <path d="M30 108 L26 120 M40 108 L38 121 M64 108 L66 121 M74 108 L78 119"
+          fill="none" stroke="#D9B86A" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- The sack: fill, crescent, patch, then the outline over the lot. -->
+    <path d="M30 36 L74 36 Q83 36 83 46 L83 100 Q83 110 74 110 L30 110 Q21 110 21 100 L21 46 Q21 36 30 36 Z"
+          fill="#C9A87A"/>
+    <path d="M83 60 L83 100 Q83 110 74 110 L52 110 L52 105 L72 105 Q78 105 78 98 L78 60 Z" fill="#9C7A4E"/>
+    <rect x="26" y="94" width="14" height="11" rx="1.5" fill="#4A6E8A" stroke="#2A2114" stroke-width="2.4"/>
+    <path d="M30 36 L74 36 Q83 36 83 46 L83 100 Q83 110 74 110 L30 110 Q21 110 21 100 L21 46 Q21 36 30 36 Z"
+          fill="none" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>
+
+    <!-- The cast face (style bible §5), eye y 80. -->
+    <path d="M32 68 L44 70 M60 70 L72 68" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="39" cy="80" rx="6.6" ry="7.6" fill="#FFFFFF" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="65" cy="80" rx="6.6" ry="7.6" fill="#FFFFFF" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="40.4" cy="81" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <ellipse cx="66.4" cy="81" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <circle cx="38" cy="77.4" r="1.6" fill="#FFFFFF"/>
+    <circle cx="64" cy="77.4" r="1.6" fill="#FFFFFF"/>
+    <path d="M44 93 Q52 98 60 93" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- The straw hat: brim, cone, its cloth band, and the crow on the brim. -->
+    <path d="M14 34 Q52 22 90 34 Q52 42 14 34 Z"
+          fill="#D9B86A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M32 34 Q38 14 52 12 Q66 14 72 34 Z"
+          fill="#D9B86A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M34 30 Q52 25 70 30" fill="none" stroke="#4A6E8A" stroke-width="4" stroke-linecap="round"/>
+    <path d="M22 30 Q16 24 22 22 Q30 20 32 28 Q28 34 22 30 Z" fill="#2A2114"/>
+    <path d="M17 23 L10 25 L17 27 Z" fill="#D9B86A" stroke="#2A2114" stroke-width="2" stroke-linejoin="round"/>
+
+    <g data-expression="cute">
+      <path d="M32 70 Q38 65 44 70 M60 70 Q66 65 72 70" fill="none" stroke="#C9A87A" stroke-width="7" stroke-linecap="round"/>
+      <path d="M32 70 Q38 65 44 70 M60 70 Q66 65 72 70" fill="none" stroke="#2A2114" stroke-width="2.8" stroke-linecap="round"/>
+      <ellipse cx="31" cy="93" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/><ellipse cx="73" cy="93" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/>
+      <path d="M44 92 Q52 100 60 92 Q59 103 52 104 Q45 103 44 92 Z" fill="#3B211C" stroke="#2A2114" stroke-width="2.3"/>
+      <path d="M49 98 Q52 100 55 98" fill="none" stroke="#ED8A74" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <path class="crack" d="M34 46 L46 60 L36 74 L48 88 L38 104"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Forward arm and the staff as one part; the staff's top is at (98, 26). -->
+  <g class="armF" style="transform-origin:76px 72px">
+    <path d="M76 72 L88 76" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>
+    <path d="M76 72 L88 76" stroke="#C9A87A" stroke-width="8" stroke-linecap="round"/>
+    <path d="M80 70 L84 64 M86 72 L90 66" stroke="#D9B86A" stroke-width="4" stroke-linecap="round"/>
+    <path d="M92 112 L98 26" stroke="#2A2114" stroke-width="9" stroke-linecap="round"/>
+    <path d="M92 112 L98 26" stroke="#6E4A2A" stroke-width="5.5" stroke-linecap="round"/>
+    <path d="M97 34 L104 28 M97 34 L91 27 M97.5 40 L104 38" stroke="#D9B86A" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="90" cy="77" r="6" fill="#C9A87A" stroke="#2A2114" stroke-width="3"/>
+  </g>
+
+  <g class="fx" style="transform-origin:98px 74px">
+    <path d="M84 34 Q124 74 88 114" fill="none" stroke="#9C7A4E" stroke-width="11"
+          stroke-linecap="round" opacity=".38"/>
+    <path d="M86 40 Q118 74 90 110" fill="none" stroke="#D9B86A" stroke-width="6"
+          stroke-linecap="round" opacity=".85"/>
+    <path d="M89 48 Q112 74 92 104" fill="none" stroke="#FFFFFF" stroke-width="2.4"
+          stroke-linecap="round"/>
+    <path d="M124 60 L130 56 M126 74 L133 74 M124 90 L130 94"
+          stroke="#D9B86A" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+  </g>
+</svg>
+`;export{t as default};

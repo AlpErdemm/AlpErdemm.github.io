@@ -1,0 +1,97 @@
+const e=`<!-- Eksimis Tursu (Soured Pickle) - Rusted Cupboard - Spoil - the Region wall
+     attackSpeed 0.78 -> round(20/0.78) = 26 ticks = 1.30 s
+
+     Archetype \`swing\`: the widest mass in the family brings its whole
+     shoulder across. Slowest cycle on the board.
+
+     Carries \`kaplama\`, and that verb is why this body is drawn the way it is.
+     The plate breaks every incoming hit by a flat share of its own bulk, so
+     chipping at it does nothing and one large blow does - the lesson is burst
+     it, do not chip. The screw band across the top is the one part of the jar
+     the cupboard reached, and it is drawn in rust rather than glass green so
+     that the thing the player has to break through reads as metal.
+
+     \`WEAPON eksitursu [112, 94]\` is the jar's shoulder, low and close: this
+     body carries nothing, so the Brawler knuckle is the convention, as it is
+     for Yanik Somun and Curuk Patates - the other two Region walls, drawn the
+     same way for the same reason.
+
+     Silhouette: the shouldered jar. Straight sides, a hard angled shoulder and
+     a band squarer and wider than the neck under it, so the outline is a box
+     on a chamfer against the Swollen Can's curve - the Region's two landmarks
+     cannot be taken for each other at 53 px. It is also the only body in the
+     Cupboard whose widest point is below its own face. Green is the family's
+     one non-metal, spent on the single body that is not metal: it is what the
+     metal got into.
+
+     Mass x 14..90, y 36..118. Materials 2 / fills 4: brine 3E4A32 7E8F5E
+     B2C089 * rust B0582C, the band. Brass eye F2C46A, the same size as the
+     spike's - the two landmarks share a face. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="swing" data-unit="eksitursu" style="--dur-atk:1.30s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="35" ry="6" fill="#2A2114" opacity=".32"/>
+
+  <g class="armB" style="transform-origin:30px 94px">
+    <path d="M30 94 L22 100" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>
+    <path d="M30 94 L22 100" stroke="#3E4A32" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="19" cy="103" r="8" fill="#7E8F5E" stroke="#2A2114" stroke-width="3"/>
+  </g>
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 108 L41 124" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M44 108 L41 124" stroke="#3E4A32" stroke-width="10" stroke-linecap="round"/>
+    <path d="M31 124 Q26 129 29 134 L44 134 Q46 128 42 123 Z"
+          fill="#7E8F5E" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 108 L65 124" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M62 108 L65 124" stroke="#3E4A32" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 123 Q60 128 62 134 L77 134 Q79 129 74 124 Z"
+          fill="#7E8F5E" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="body">
+    <!-- The screw band, before the jar, so the shoulders cover its underside.
+         Rust, not glass: the band is the one part of this body the cupboard
+         reached. -->
+    <path d="M28 34 L76 34 L76 52 L28 52 Z" fill="#B0582C" stroke="#2A2114" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M34 39 L34 48 M44 39 L44 48 M52 39 L52 48 M60 39 L60 48 M70 39 L70 48"
+          fill="none" stroke="#2A2114" stroke-width="2.4" stroke-linecap="round"/>
+
+    <!-- The jar: fill, crescent, the brine line, the gleam, then the ink. -->
+    <path d="M30 50 L74 50 L74 62 L90 74 L90 102 Q90 118 72 118 L32 118 Q14 118 14 102 L14 74 L30 62 Z" fill="#7E8F5E"/>
+    <path d="M74 62 L90 74 L90 102 Q90 118 72 118 L52 118 L52 110 L70 110 Q80 110 80 100 L80 78 L66 68 L66 50 L74 50 Z" fill="#3E4A32"/>
+    <path d="M20 82 Q52 92 84 82" fill="none" stroke="#B2C089" stroke-width="3.4" stroke-linecap="round"/>
+    <path d="M22 92 Q24 104 30 110" fill="none" stroke="#B2C089" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="74" cy="98" r="3.2" fill="#B2C089"/>
+    <circle cx="34" cy="70" r="2.6" fill="#B2C089"/>
+    <path d="M30 50 L74 50 L74 62 L90 74 L90 102 Q90 118 72 118 L32 118 Q14 118 14 102 L14 74 L30 62 Z"
+          fill="none" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>
+
+    <path d="M32 82 L44 84 M60 84 L72 82" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="39" cy="94" rx="7" ry="8.05" fill="#F2C46A" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="65" cy="94" rx="7" ry="8.05" fill="#F2C46A" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="40.4" cy="95" rx="3.82" ry="5.09" fill="#2A2114"/>
+    <ellipse cx="66.4" cy="95" rx="3.82" ry="5.09" fill="#2A2114"/>
+    <circle cx="38" cy="91.4" r="1.6" fill="#FFFFFF"/>
+    <circle cx="64" cy="91.4" r="1.6" fill="#FFFFFF"/>
+    <path d="M42 110 Q52 105 62 110" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path class="crack" d="M38 60 L50 74 L40 88 L52 102 L42 118"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+  <g class="armF" style="transform-origin:82px 94px">
+    <path d="M82 94 L96 94" stroke="#2A2114" stroke-width="17" stroke-linecap="round"/>
+    <path d="M82 94 L96 94" stroke="#7E8F5E" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="103" cy="94" r="11" fill="#7E8F5E" stroke="#2A2114" stroke-width="3"/>
+    <path d="M94 87 Q99 94 94 101" fill="none" stroke="#2A2114" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M100 86 L100 102 M107 86 L107 102" fill="none" stroke="#3E4A32" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <g class="fx" style="transform-origin:117px 94px">
+    <path d="M117 82 L135 72 M121 94 L139 94 M117 106 L135 116"
+          stroke="#7E8F5E" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+    <path d="M117 82 L129 77 M121 94 L133 94 M117 106 L129 111"
+          stroke="#B2C089" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="133" cy="76" r="2.6" fill="#7E8F5E"/>
+    <circle cx="135" cy="110" r="2.4" fill="#B2C089"/>
+  </g>
+</svg>
+`;export{e as default};

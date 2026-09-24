@@ -1,0 +1,139 @@
+const e=`<!-- Simit (Bagel) · Dough 2 · Marksman · ranged (range 4)
+     attackSpeed 1.43 → round(20/1.43) = 14 ticks = 0.70 s
+
+     Archetype \`stab\`, for timing rather than theme: armF pulls back 11 and
+     lunges 16 at ±14°, which on a shouldered rifle is the shape of recoil.
+     The muzzle is \`MUZZLE\` \`part: 'armF'\` at (120, 84); no held ammo.
+
+     Redrawn for ticket 15 against docs/style-bible.md, whose §9 is this rig's
+     change list applied line by line. Mass = the ring, outer r 35 at (52, 70),
+     74 × 74. The hole grew r 18 → 22 so the cast's 26-apart eye set (x 39 / 65,
+     eye y 74) fits on the plate; the band narrowed 17 → 13 and the sesame went
+     to one row. Materials 4 / fills 11: crust B5702E 8B5A2B D89A45 · cloth
+     F3E6C6 DCC79C A03830 · leather 6E4A2A 4A3826 C9A66B · steel 8A8F98 C8CCD6.
+     One shade crescent (8B5A2B, lower right), one gleam (D89A45, upper left);
+     alpha only on the ground shadow, the blush and .fx. Tint lines, three:
+     scarf fold, apron stitch, barrel glint. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="stab" data-unit="simit" style="--dur-atk:0.70s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="31" ry="6" fill="#2A2114" opacity=".32"/>
+
+  <g class="armB" style="transform-origin:32px 94px">
+    <path d="M32 94 L28 106" stroke="#2A2114" stroke-width="13" stroke-linecap="round"/>
+    <path d="M32 94 L28 106" stroke="#8B5A2B" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="27" cy="109" r="6" fill="#8B5A2B" stroke="#2A2114" stroke-width="3"/>
+  </g>
+
+  <!-- Legs and boots are the batch's shared construction (style bible §6):
+       from y 104 to 126 off pivots x 44 / 62, soles flat on 136, boots 16 × 11. -->
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 104 L41 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M44 104 L41 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>
+    <path d="M31 126 Q26 131 29 136 L44 136 Q46 130 42 125 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 104 L65 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M62 104 L65 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 125 Q60 130 62 136 L77 136 Q79 131 74 126 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+
+  <g class="body" style="transform-origin:52px 118px">
+    <!-- The scarf's tail comes out from behind the ring, so it is drawn first. -->
+    <path d="M40 30 Q20 24 8 38 Q12 55 26 47 Q34 42 42 41 Z"
+          fill="#F3E6C6" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- The ring: plate, band, crescent, gleam, then the two ink circles on top
+         so the shade never eats the outline. -->
+    <circle cx="52" cy="70" r="22" fill="#D89A45"/>
+    <circle cx="52" cy="70" r="28.5" fill="none" stroke="#B5702E" stroke-width="13"/>
+    <path d="M84.9 72.9 A33 33 0 0 1 54.9 102.9 L56.7 96.6 A27 27 0 0 0 78.6 74.7 Z" fill="#8B5A2B"/>
+    <path d="M23.6 67.5 A28.5 28.5 0 0 1 28.7 53.7" fill="none" stroke="#D89A45"
+          stroke-width="5" stroke-linecap="round"/>
+    <circle cx="52" cy="70" r="35" fill="none" stroke="#2A2114" stroke-width="4"/>
+    <circle cx="52" cy="70" r="22" fill="none" stroke="#2A2114" stroke-width="4"/>
+
+    <!-- Sesame, one row on r 28.5. Cloth cream, so it adds no fill. -->
+    <g fill="#F3E6C6">
+      <ellipse cx="79.5" cy="62.6" rx="2.4" ry="3.3"/>
+      <ellipse cx="80.1" cy="75" rx="2.4" ry="3.3"/>
+      <ellipse cx="75.4" cy="86.4" rx="2.9" ry="2.9"/>
+      <ellipse cx="37.8" cy="94.7" rx="3.3" ry="2.4"/>
+      <ellipse cx="28.6" cy="86.4" rx="2.9" ry="2.9"/>
+      <ellipse cx="23.9" cy="75" rx="2.4" ry="3.3"/>
+      <ellipse cx="24.5" cy="62.6" rx="2.4" ry="3.3"/>
+    </g>
+
+    <!-- The cast face (style bible §5), eye y 74. -->
+    <path d="M32 62 L44 64 M60 64 L72 62" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="39" cy="74" rx="6.6" ry="7.6" fill="#fff" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="65" cy="74" rx="6.6" ry="7.6" fill="#fff" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="40.4" cy="75" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <ellipse cx="66.4" cy="75" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <circle cx="38" cy="71.4" r="1.6" fill="#fff"/>
+    <circle cx="64" cy="71.4" r="1.6" fill="#fff"/>
+    <path d="M44 87 Q52 92 60 87" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Headscarf wrapped over the top of the ring, knot on the left. -->
+    <path d="M23.6 47.8 A36 36 0 0 1 80.4 47.8 L69.5 55.1 A23 23 0 0 0 34.5 55.1 Z"
+          fill="#F3E6C6" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M30 48 Q52 38 74 48" stroke="#DCC79C" stroke-width="2.2" fill="none"/>
+    <ellipse cx="45" cy="31" rx="7.5" ry="6.2" fill="#F3E6C6" stroke="#2A2114" stroke-width="3"/>
+    <ellipse cx="37" cy="27.5" rx="5.2" ry="4.4" fill="#F3E6C6" stroke="#2A2114" stroke-width="3"/>
+
+    <!-- Apron (hem at 120 so the legs show), rope belt, seed pouch. -->
+    <path d="M42 104 L64 104 L62 120 Q52 124 42 120 Z"
+          fill="#F3E6C6" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M52 110 L52 119 M52 113 L48 110 M52 113 L56 110 M52 117 L48 114 M52 117 L56 114"
+          stroke="#A03830" stroke-width="1.9" fill="none" stroke-linecap="round"/>
+    <path d="M28 105 Q52 111 76 105" stroke="#C9A66B" stroke-width="6.5" fill="none"
+          stroke-linecap="round"/>
+    <path d="M16 106 Q24 101 32 106 L30 118 Q23 123 18 118 Z"
+          fill="#8B5A2B" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+
+    <g data-expression="cute">
+      <path d="M32 64 Q38 59 44 64 M60 64 Q66 59 72 64" fill="none" stroke="#D89A45" stroke-width="7" stroke-linecap="round"/>
+      <path d="M32 64 Q38 59 44 64 M60 64 Q66 59 72 64" fill="none" stroke="#2A2114" stroke-width="2.8" stroke-linecap="round"/>
+      <ellipse cx="31" cy="87" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/><ellipse cx="73" cy="87" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/>
+      <path d="M44 86 Q52 94 60 86 Q59 97 52 98 Q45 97 44 86 Z" fill="#3B211C" stroke="#2A2114" stroke-width="2.3"/>
+      <path d="M49 92 Q52 94 55 92" fill="none" stroke="#ED8A74" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <path class="crack" d="M32 52 L44 62 L34 72 L46 84 L36 94"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Front arm + rifle as one part; both hands live here so the grip stays
+       together while \`stab\` moves armF and armB turns on its own. -->
+  <g class="armF" style="transform-origin:70px 96px">
+    <path d="M52 103 L88 93" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M52 103 L88 93" stroke="#6E4A2A" stroke-width="10" stroke-linecap="round"/>
+    <path d="M86 94 L118 85.8" stroke="#2A2114" stroke-width="10" stroke-linecap="round"/>
+    <path d="M86 94 L118 85.8" stroke="#8A8F98" stroke-width="6" stroke-linecap="round"/>
+    <path d="M92 90.8 L111.2 85.9" stroke="#C8CCD6" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M88 96 L92 82" stroke="#2A2114" stroke-width="7.5" stroke-linecap="round"/>
+    <path d="M88 96 L92 82" stroke="#C8CCD6" stroke-width="4.4" stroke-linecap="round"/>
+    <path d="M115 89.2 L119 81.2" stroke="#2A2114" stroke-width="7" stroke-linecap="round"/>
+    <path d="M115 89.2 L119 81.2" stroke="#C8CCD6" stroke-width="4" stroke-linecap="round"/>
+    <path d="M78 99 Q83 105 88 99" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <path d="M70 96 L76 98" stroke="#2A2114" stroke-width="13" stroke-linecap="round"/>
+    <path d="M70 96 L76 98" stroke="#8B5A2B" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="78" cy="98.5" r="6.4" fill="#8B5A2B" stroke="#2A2114" stroke-width="3"/>
+    <path d="M84 100 L98 92" stroke="#2A2114" stroke-width="12" stroke-linecap="round"/>
+    <path d="M84 100 L98 92" stroke="#8B5A2B" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="100" cy="91" r="6.2" fill="#8B5A2B" stroke="#2A2114" stroke-width="3"/>
+  </g>
+
+  <g class="fx" style="transform-origin:120px 84px">
+    <path d="M120 84 L137 78 M120 84 L139 85 M120 84 L136 91 M120 84 L130 72 M120 84 L128 95"
+          stroke="#F0C24A" stroke-width="4.6" stroke-linecap="round" opacity=".9"/>
+    <circle cx="121" cy="84" r="6.4" fill="#F3E6C6" opacity=".95"/>
+    <ellipse cx="133" cy="80" rx="3" ry="2.2" fill="#F3E6C6"/>
+    <ellipse cx="138" cy="88" rx="2.8" ry="2" fill="#F3E6C6"/>
+    <ellipse cx="130" cy="93" rx="2.6" ry="2" fill="#F3E6C6"/>
+  </g>
+</svg>
+`;export{e as default};

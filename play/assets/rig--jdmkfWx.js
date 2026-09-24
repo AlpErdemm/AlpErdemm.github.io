@@ -1,0 +1,115 @@
+const e=`<!-- Kabak (Squash) · Garden 2 · Vanguard · melee, garden-gate shield
+     attackSpeed 1.11 → round(20/1.11) = 18 ticks = 0.90 s
+
+     Archetype \`stab\`, not \`swing\`, for the Flatcake's reason: a shield is
+     shouldered, not swung, and \`swing\` would turn armF 98°. \`stab\` pushes the
+     arm 16 forward and turns it 6°. The gate's leading edge is \`WEAPON\`
+     kabak (118, 90).
+
+     Redrawn for ticket 17 against docs/style-bible.md. The old rig was a
+     small orange globe on a straw-wrapped torso — a separate head, which §6
+     forbids. Now the pumpkin IS the mass: ellipse rx 33 ry 35 at (52, 76),
+     x 19..85, y 41..111 with a 4 stroke: 70 × 74, ratio 1.06 — the squat,
+     wide one beside the Okra's tall pod. Eye y 84 = 58% of the mass. Two
+     ribs either side of the face are 4-wide bands of the rind's shade, the
+     Meatball's furrow construction, not tint lines; the shade crescent sits
+     lower right, the gleam upper left. What tells it from the Flatcake (also
+     a \`stab\` Vanguard with a shield) is the shape of the two: a squat orange
+     globe behind a picket gate, against a tall boat behind a plank.
+     Materials 4 / fills 10: rind E8802A C05F1E F5A94E · leaf 4E7A32 2E4A1E
+     78A54C (stem, collar) · leather 6E4A2A 4A3826 (gate, legs, boots) ·
+     steel 8A8F98 C8CCD6 (straps, knocker). Tint lines, one: the leaf vein.
+     The gate is as tall as the mass, so it takes the \`body\` stroke (§11.1). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-26 -22 212 194"
+     class="rig" data-atk="stab" data-unit="kabak" style="--dur-atk:0.90s">
+
+  <ellipse class="shadow" cx="52" cy="137" rx="29" ry="6" fill="#2A2114" opacity=".32"/>
+
+  <g class="armB" style="transform-origin:28px 88px">
+    <path d="M30 88 L20 100" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M30 88 L20 100" stroke="#E8802A" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="19" cy="103" r="6.5" fill="#E8802A" stroke="#2A2114" stroke-width="3"/>
+  </g>
+
+  <!-- Legs and boots are the cast's shared construction (style bible §6):
+       from y 104 to 126 off pivots x 44 / 62, soles flat on 136, boots 16 × 11. -->
+  <g class="legB" style="transform-origin:44px 114px">
+    <path d="M44 104 L41 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M44 104 L41 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>
+    <path d="M31 126 Q26 131 29 136 L44 136 Q46 130 42 125 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g class="legF" style="transform-origin:62px 114px">
+    <path d="M62 104 L65 126" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M62 104 L65 126" stroke="#4A3826" stroke-width="10" stroke-linecap="round"/>
+    <path d="M63 125 Q60 130 62 136 L77 136 Q79 131 74 126 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+
+  <g class="body">
+    <!-- The pumpkin: rind, crescent, gleam, two ribs, then the outline. -->
+    <ellipse cx="52" cy="76" rx="33" ry="35" fill="#E8802A"/>
+    <path d="M85 76 C85 95 70 111 52 111 L52 105 C67 105 79 92 79 76 Z" fill="#C05F1E"/>
+    <path d="M25 70 Q26 61 30 55" fill="none" stroke="#F5A94E" stroke-width="5" stroke-linecap="round"/>
+    <path d="M33 47 C26 62 26 90 33 105 M71 47 C78 62 78 90 71 105"
+          fill="none" stroke="#C05F1E" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="52" cy="76" rx="33" ry="35" fill="none" stroke="#2A2114" stroke-width="4"/>
+
+    <!-- Curled stem and the leaf collar, the crown. -->
+    <path d="M52 42 C50 34 54 26 60 24" fill="none" stroke="#2A2114" stroke-width="8" stroke-linecap="round"/>
+    <path d="M52 42 C50 34 54 26 60 24" fill="none" stroke="#4E7A32" stroke-width="4.6" stroke-linecap="round"/>
+    <path d="M40 42 C32 38 26 40 24 46 C31 49 38 47 42 44 Z"
+          fill="#4E7A32" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M64 44 C72 40 79 43 80 49 C73 51 66 49 63 46 Z"
+          fill="#2E4A1E" stroke="#2A2114" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M28 44 Q34 43 39 45" fill="none" stroke="#78A54C" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- The cast face (style bible §5), eye y 84. -->
+    <path d="M32 72 L44 74 M60 74 L72 72" stroke="#2A2114" stroke-width="3.4" stroke-linecap="round"/>
+    <ellipse cx="39" cy="84" rx="6.6" ry="7.6" fill="#FFFFFF" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="65" cy="84" rx="6.6" ry="7.6" fill="#FFFFFF" stroke="#2A2114" stroke-width="2.3"/>
+    <ellipse cx="40.4" cy="85" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <ellipse cx="66.4" cy="85" rx="3.6" ry="4.8" fill="#2A2114"/>
+    <circle cx="38" cy="81.4" r="1.6" fill="#FFFFFF"/>
+    <circle cx="64" cy="81.4" r="1.6" fill="#FFFFFF"/>
+    <path d="M44 97 Q52 102 60 97" stroke="#2A2114" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <g data-expression="cute">
+      <path d="M32 74 Q38 69 44 74 M60 74 Q66 69 72 74" fill="none" stroke="#E8802A" stroke-width="7" stroke-linecap="round"/>
+      <path d="M32 74 Q38 69 44 74 M60 74 Q66 69 72 74" fill="none" stroke="#2A2114" stroke-width="2.8" stroke-linecap="round"/>
+      <ellipse cx="31" cy="97" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/><ellipse cx="73" cy="97" rx="3.2" ry="1.9" fill="#E48A76" opacity=".68"/>
+      <path d="M44 96 Q52 104 60 96 Q59 107 52 108 Q45 107 44 96 Z" fill="#3B211C" stroke="#2A2114" stroke-width="2.3"/>
+      <path d="M49 102 Q52 104 55 102" fill="none" stroke="#ED8A74" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+
+    <path class="crack" d="M34 54 L46 70 L36 86 L48 100 L38 108"
+          stroke="#2A2114" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Shield arm and the picket gate as one part. Gate x 90..116, y 54..120. -->
+  <g class="armF" style="transform-origin:78px 88px">
+    <path d="M74 86 L90 88" stroke="#2A2114" stroke-width="14" stroke-linecap="round"/>
+    <path d="M74 86 L90 88" stroke="#E8802A" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="91" cy="88" r="6.5" fill="#E8802A" stroke="#2A2114" stroke-width="3"/>
+    <path d="M90 60 L94.3 54 L98.7 60 L103 54 L107.3 60 L111.7 54 L116 60 L116 120 L90 120 Z"
+          fill="#6E4A2A" stroke="#2A2114" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M98.7 60 L98.7 120 M107.3 60 L107.3 120" stroke="#2A2114" stroke-width="3" stroke-linecap="round"/>
+    <path d="M90 68 L116 68 M90 110 L116 110" stroke="#2A2114" stroke-width="6" stroke-linecap="round"/>
+    <path d="M90 68 L116 68 M90 110 L116 110" stroke="#8A8F98" stroke-width="3.4" stroke-linecap="round"/>
+    <g fill="#C8CCD6">
+      <circle cx="94" cy="68" r="2"/><circle cx="112" cy="68" r="2"/>
+      <circle cx="94" cy="110" r="2"/><circle cx="112" cy="110" r="2"/>
+    </g>
+    <circle cx="103" cy="88" r="5.5" fill="none" stroke="#2A2114" stroke-width="5.5"/>
+    <circle cx="103" cy="88" r="5.5" fill="none" stroke="#8A8F98" stroke-width="2.5"/>
+  </g>
+
+  <g class="fx" style="transform-origin:118px 90px">
+    <path d="M118 62 Q140 92 118 122" fill="none" stroke="#E8802A" stroke-width="8" stroke-linecap="round" opacity=".55"/>
+    <path d="M120 70 Q134 92 120 114" fill="none" stroke="#F5A94E" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="128" cy="120" rx="7" ry="4" fill="#C9A66B" opacity=".6"/>
+    <ellipse cx="136" cy="112" rx="5" ry="3" fill="#C9A66B" opacity=".45"/>
+    <ellipse cx="131" cy="74" rx="4" ry="2.6" fill="#4E7A32" opacity=".6"/>
+  </g>
+</svg>
+`;export{e as default};
